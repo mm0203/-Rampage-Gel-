@@ -37,4 +37,10 @@ public abstract class PlayerManager : MonoBehaviour
             eState = StateEnum.eNormal;
         }
     }
+
+    // ノーマルモードに移行
+    public void GotoNormalState()
+    {
+        eState = StateEnum.eNormal;
+    }
 }
