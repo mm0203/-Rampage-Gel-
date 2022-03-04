@@ -4,6 +4,7 @@ using UnityEngine;
 
 // スフィアコライダーを要求する
 [RequireComponent(typeof(SphereCollider))]
+
 public class GuardBurst : MonoBehaviour
 {
     [SerializeField] private float radius = 5.0f;
