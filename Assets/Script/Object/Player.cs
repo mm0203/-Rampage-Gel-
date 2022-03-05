@@ -17,13 +17,13 @@ using UnityEngine;
 public class Player : PlayerManager
 {
     // 初速倍率
-    [SerializeField] private float Initial = 50.0f;
+    [SerializeField] private float fInitial = 50.0f;
     // 減速率
-    [SerializeField] private float Late = 0.995f;
+    [SerializeField] private float fLate = 0.995f;
 
     // 発射方向
     [SerializeField] private LineRenderer Direction = null;
-    /// 発射方向の力
+    // 発射方向の力
     private Vector3 vCurrentForce = Vector3.zero;
     // ドラッグ開始点
     private Vector3 vDragStart = Vector3.zero;
@@ -75,7 +75,7 @@ public class Player : PlayerManager
         if (Input.GetMouseButtonUp(0))
         {
             // 瞬間的に力を加えてはじく
-            rb.AddForce(vCurrentForce.normalized * StockPower * Initial, ForceMode.Impulse);
+            rb.AddForce(vCurrentForce.normalized * StockPower * fInitial, ForceMode.Impulse);
 
             // 初期化
             StockPower = 0;
@@ -83,7 +83,7 @@ public class Player : PlayerManager
         }
 
         // 減速
-        rb.velocity *= Late;
+        rb.velocity *= fLate;
     }
 
     // マウス座標を3D座標に変換
