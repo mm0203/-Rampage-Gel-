@@ -29,7 +29,9 @@ public class Player : PlayerManager
     private Vector3 vDragStart = Vector3.zero;
 
     // 蓄積時間
-    private float StockPower = 0;
+    private float fStockPower = 0;
+
+    private bool bShot = false;
 
     protected override void Start()
     {
@@ -44,6 +46,16 @@ public class Player : PlayerManager
 
         if (!IsNormal) return;
 
+        PadMove();
+        KeyBoardMove();
+
+        // 減速
+        rb.velocity *= fLate;
+    }
+
+    // キーボード操作
+    private void KeyBoardMove()
+    {
         // 左クリック入力
         if (Input.GetMouseButton(0))
         {
@@ -52,7 +64,7 @@ public class Player : PlayerManager
             {
                 // マウスの初期位置を取得
                 vDragStart = GetMousePosition();
-                StockPower = 0;
+                fStockPower = 0;
             }
             // 動かしたマウス座標の位置を取得
             var position = GetMousePosition();
@@ -67,9 +79,9 @@ public class Player : PlayerManager
             Direction.SetPosition(1, rb.position - vCurrentForce.normalized * 2);
 
             // マウスを押してる間、威力を高める
-            if(StockPower < 2)
+            if (fStockPower < 2)
             {
-                StockPower += Time.deltaTime;
+                fStockPower += Time.deltaTime;
             }
         }
 
@@ -77,15 +89,45 @@ public class Player : PlayerManager
         if (Input.GetMouseButtonUp(0))
         {
             // 瞬間的に力を加えてはじく
-            rb.AddForce(vCurrentForce.normalized * StockPower * fInitial, ForceMode.Impulse);
+            rb.AddForce(vCurrentForce.normalized * fStockPower * fInitial, ForceMode.Impulse);
 
             // 初期化
-            StockPower = 0;
+            fStockPower = 0;
             Direction.enabled = false;
         }
+    }
 
-        // 減速
-        rb.velocity *= fLate;
+    private void PadMove()
+    {
+        float x = Input.GetAxis("Horizontal");
+        float y = Input.GetAxis("Vertical");
+
+        if (Mathf.Abs(x) >= 0.01f || Mathf.Abs(y) >= 0.01f)
+        {
+            bShot = true;
+            vCurrentForce = new Vector3(-x * Time.deltaTime, 0, -y * Time.deltaTime);
+            fStockPower += Time.deltaTime;
+
+            // 矢印の引っ張り処理
+            Direction.enabled = true;
+            // 動く方向と逆に矢印が出るように
+            Direction.SetPosition(0, rb.position);
+            Direction.SetPosition(1, rb.position - vCurrentForce.normalized * 2);
+
+            if (fStockPower < 2)
+            {
+                fStockPower += Time.deltaTime;
+            }
+        }
+        else if (bShot == true)
+        {
+            bShot = false;
+            // 瞬間的に力を加えてはじく
+            rb.AddForce(vCurrentForce.normalized * fStockPower * fInitial, ForceMode.Impulse);
+            // 初期化
+            fStockPower = 0;
+            Direction.enabled = false;
+        }
     }
 
     // マウス座標を3D座標に変換
