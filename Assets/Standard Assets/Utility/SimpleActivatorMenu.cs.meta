@@ -1,9 +1,15 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
+guid: 3fe5f0f5d789ffa46a57a8649ef2100c
+=======
 guid: 69b69a5b0e0a85b4aa97a7edc40c37d1
+>>>>>>> origin/Tamura_notePC
 MonoImporter:
+  externalObjects: {}
   serializedVersion: 2
   defaultReferences: []
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
   assetBundleName: 
+  assetBundleVariant: 
