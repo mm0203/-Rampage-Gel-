@@ -1,17 +1,12 @@
 fileFormatVersion: 2
-guid: bb81c22f097fd1147b74a413511606ba
+guid: fbbc6b777eae30f4b82b9bd703295226
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
   - first:
       74: 1827226128182048838
     second: Take 001
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: phong_defoPlr
-    second: {fileID: 3698598663220926525, guid: fbbc6b777eae30f4b82b9bd703295226, type: 3}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0

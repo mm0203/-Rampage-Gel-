@@ -13,6 +13,7 @@ using UnityEngine;
 
 // 判定コンポーネントアタッチ
 [RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(LineRenderer))]
 
 public class Player : PlayerManager
 {
