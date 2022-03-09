@@ -11,7 +11,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: phong_defoPlr
-    second: {fileID: 3698598663220926525, guid: fbbc6b777eae30f4b82b9bd703295226, type: 3}
+    second: {fileID: 2100000, guid: 4c119cd876455df40a73119021592842, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
