@@ -183,6 +183,7 @@ public class EnemyBase : MonoBehaviour
         // ƒvƒŒƒCƒ„[‚ª”ÍˆÍ‚É“ü‚Á‚½‚ç’Ç‚¤
         if (other.CompareTag("Player"))
         {
+            Debug.Log("Player");
             bFind = true;
         }
     }
