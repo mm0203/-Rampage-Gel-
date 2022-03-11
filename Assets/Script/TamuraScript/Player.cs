@@ -44,7 +44,12 @@ public class Player : PlayerManager
     {
         base.Update();
 
-        if (!IsNormal) return;
+        if (!IsNormal)
+        {
+            fStockPower = 0;
+            Direction.enabled = false;
+            return;
+        }
 
         // “®‚¢‚Ä‚é•ûŒü‚ðŒ©‚é
         if (rb.velocity != new Vector3(0, 0, 0))

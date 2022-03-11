@@ -27,7 +27,15 @@ public abstract class PlayerManager : MonoBehaviour
     protected Rigidbody rb;
 
     // バースト
-    private int nUpCount;
+    //同時離し判定受付時間
+    [SerializeField] private int interbalTime = 3;
+
+    // 同時離し判定
+    private bool b_release = false;
+
+    // 受付用
+    private bool b_receiptA = false, b_receiptB = false;
+    private int n_interbalA = 0, n_interbalB = 0;
 
     // 現在モード取得
     public bool IsNormal => eState == StateEnum.eNormal;
@@ -48,31 +56,70 @@ public abstract class PlayerManager : MonoBehaviour
         {
             GotoHardState();
         }
-
-        // バースト移行
-        if(Input.GetMouseButtonUp(0) || Input.GetMouseButtonUp(1))
-        {
-            nUpCount++;
-            StartCoroutine(IsPossibleBurst());
-        }
-    }
-
-    IEnumerator IsPossibleBurst()
-    {
-        // 0.3秒待機
-        yield return new WaitForSeconds(0.3f);
-
-        if(nUpCount >= 2)
-        {
-            GotoBurstState();
-        }
         else
         {
             GotoNormalState();
         }
-        nUpCount = 0;
 
-        yield break;
+        // バースト移行
+        if (Check(Input.GetMouseButtonUp(0), Input.GetMouseButtonUp(1)))
+        {
+            GotoBurstState();
+        }
+    }
+
+    // 同時離しチェック関数(竹尾作成)
+    bool Check(bool KeyA, bool KeyB)
+    {
+        // KeyA 受付
+        if (KeyA)
+        {
+            b_receiptA = true;
+        }
+
+        if (b_receiptA)
+        {
+            Debug.Log("A受付中" + n_interbalA);
+            n_interbalA++;
+        }
+
+        if (n_interbalA > interbalTime)
+        {
+            Debug.Log("A受付停止");
+            b_receiptA = false;
+            n_interbalA = 0;
+        }
+
+
+        // KeyB 受付
+        if (KeyB)
+        {
+            b_receiptB = true;
+        }
+
+        if (b_receiptB)
+        {
+            Debug.Log("B受付中" + n_interbalB);
+            n_interbalB++;
+        }
+
+        if (n_interbalB > interbalTime)
+        {
+            Debug.Log("B受付停止");
+            b_receiptB = false;
+            n_interbalB = 0;
+        }
+
+        // 判定
+        if (b_receiptA && b_receiptB)
+        {
+            b_release = true;
+            return b_release;
+        }
+
+        b_release = false;
+
+        return b_release;
     }
 
     // ノーマルモードに移行
