@@ -1,12 +1,13 @@
 //======================================================================
-// Player.cs
+// EnemyManager.cs
 //======================================================================
 // 開発履歴
 //
-// 2022/03/02 author：松野将之 〇〇作成
-// 2022/03/03 author：奥田達磨 〇〇の処理追加
+// 2022/03/05 製作開始 敵出現処理追加
+// 2022/03/11 敵生成速度（fCreateTime）の追加
 //
 //======================================================================
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -27,13 +28,13 @@ public class EnemyManager : MonoBehaviour
     // 出現している敵のリスト
     public List<GameObject> NowEnemyList;
 
-
     GameObject player;
-    //public GameObject GetPlayer { get { return player; } }
-
     GameObject enemy;
 
-    // Start is called before the first frame update
+    // 敵生成タイム
+    private float fCreateTime = 1.0f;
+
+
     void Start()
     {
         player = GameObject.Find("Player");
@@ -50,7 +51,13 @@ public class EnemyManager : MonoBehaviour
         // 減ったら新しく生成
         if (NowEnemyList.Count < MaxEnemy)
         {
-            CreateEnemy();
+            // 1秒経過で敵生成
+            fCreateTime -= Time.deltaTime;
+            if(fCreateTime < 0.0f)
+            {
+                CreateEnemy();
+                fCreateTime = 1.0f;
+            }
         }
     }
 
@@ -66,7 +73,6 @@ public class EnemyManager : MonoBehaviour
     private Vector3 CreatePos()
     {
         Vector3 vPos;
-
         vPos = new Vector3(Random.Range(-InstantiateX, InstantiateX), 1.0f, Random.Range(-InstantiateZ, InstantiateZ));
         return vPos;
     }

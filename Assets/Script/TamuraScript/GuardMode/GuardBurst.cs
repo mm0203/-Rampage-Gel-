@@ -57,6 +57,9 @@ public class GuardBurst : MonoBehaviour
         {
             Rigidbody rb = hit.GetComponent<Rigidbody>();
 
+            // “G‚Ì•¨—‰‰Z‚ğON‚É•ÏX
+            rb.isKinematic = false;
+
             if (rb != null)
             {
                 // ‚«”ò‚Î‚·
