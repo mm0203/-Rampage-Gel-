@@ -6,6 +6,7 @@
 // 2022/03/01 author：松野将之 プレイヤーの移動作成(マウス)
 // 2022/03/05 author：田村敏基 画面のどこを操作しても動くように大改造
 // 2022/03/09 author：田村敏基 パッド操作実装
+// 2022/03/09 author：田村敏基 移動方向を向くように変更
 //
 //======================================================================
 using System.Collections;
@@ -14,7 +15,6 @@ using UnityEngine;
 
 // 判定コンポーネントアタッチ
 [RequireComponent(typeof(Rigidbody))]
-[RequireComponent(typeof(LineRenderer))]
 
 public class Player : PlayerManager
 {
@@ -24,7 +24,7 @@ public class Player : PlayerManager
     [SerializeField] private float fLate = 0.995f;
 
     // 発射方向
-    private LineRenderer Direction = null;
+    [SerializeField] private LineRenderer Direction = null;
     // 発射方向の力
     private Vector3 vCurrentForce = Vector3.zero;
     // ドラッグ開始点
@@ -38,8 +38,6 @@ public class Player : PlayerManager
     protected override void Start()
     {
         base.Start();
-
-        Direction = GetComponent<LineRenderer>();
     }
 
     protected override void Update()
@@ -48,9 +46,14 @@ public class Player : PlayerManager
 
         if (!IsNormal) return;
 
+        // 動いてる方向を見る
+        if (rb.velocity != new Vector3(0, 0, 0))
+        {
+            transform.rotation = Quaternion.LookRotation(rb.velocity);
+        }
+
         PadMove();
         KeyBoardMove();
-
         // 減速
         rb.velocity *= fLate;
     }
@@ -73,6 +76,12 @@ public class Player : PlayerManager
 
             // マウスの初期座標と動かした座標の差分を取得
             vCurrentForce = vDragStart - position;
+
+            // 動く方向を見る
+            if (vCurrentForce != new Vector3(0, 0, 0))
+            {
+                transform.rotation = Quaternion.LookRotation(vCurrentForce);
+            }
 
             // 矢印の引っ張り処理
             Direction.enabled = true;
@@ -112,6 +121,9 @@ public class Player : PlayerManager
             // 入力方向を逆にして受け取る
             vCurrentForce = new Vector3(-x * Time.deltaTime, 0, -y * Time.deltaTime);
 
+            // 動く方向を見る
+            transform.rotation = Quaternion.LookRotation(vCurrentForce);
+
             // 矢印の引っ張り処理
             Direction.enabled = true;
             // 動く方向と逆に矢印が出るように
@@ -140,11 +152,5 @@ public class Player : PlayerManager
     private Vector3 GetMousePosition()
     {
         return new Vector3(Input.mousePosition.x, 0, Input.mousePosition.y);
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        // 当たったら少し加速する 要らないなら消してほしい
-        rb.velocity *= 1.2f;
     }
 }
