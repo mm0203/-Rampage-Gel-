@@ -1,3 +1,12 @@
+//======================================================================
+// EnemyBase.cs
+//======================================================================
+// 開発履歴
+//
+// 2022/03/05 製作開始 敵のベース処理（攻撃、移動、死亡）
+//
+//======================================================================
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,6 +32,7 @@ public class EnemyBase : MonoBehaviour
     private SphereCollider SpherCol;
     private Animator animator;
 
+
     private bool bFind = false;
     private bool bAttack = false;
     private float nMoveTime = 2.0f; // 仮
@@ -30,12 +40,12 @@ public class EnemyBase : MonoBehaviour
 
 
     // 基本ステータス
-    [SerializeField] private float HP = 20.0f;
-    [SerializeField] private float Attack = 10.0f;
-    [SerializeField] private float Speed = 1.0f;
+    [SerializeField] private int HP = 20;
+    [SerializeField] private int Attack = 10;
+    [SerializeField] private int Speed = 1;
 
-    [Header("レベルアップ時の上がり幅")] [SerializeField, Range(1.0f, 10.0f)] private float fUpHP = 1;
-    [SerializeField, Range(1.0f, 10.0f)] private float fUpAttack = 1;
+    [Header("レベルアップ時の上がり幅")] [SerializeField, Range(1.0f, 10.0f)] private int nUpHP = 1;
+    [SerializeField, Range(1.0f, 10.0f)] private int nUpAttack = 1;
 
     [Header("ターゲットを見つける距離")] [SerializeField, Range(1.0f, 50.0f)] private float fRadius = 5.0f;
     [Header("ターゲットを見失う距離")] [SerializeField, Range(1.0f, 50.0f)] private float fMissDis = 8.0f;
@@ -44,19 +54,21 @@ public class EnemyBase : MonoBehaviour
     [Header("攻撃頻度")] [SerializeField, Range(0.0f, 10.0f)] private float fAttackTime = 3.0f;
     private float fAttackCount;
 
+    private Rigidbody rb;
+    private float rbTime = 2.0f;
+
     public void SetManager(EnemyManager obj) { manager = obj; }
     public void SetPlayer(GameObject obj) { player = obj; }
 
     public GameObject GetPlayer { get { return player; } }
-
 
     void Start()
     {
         // ステータス初期化
         status = GetComponent<StatusComponent>();
         status.Level = 1;   // TODO:後々Managerで設定する
-        status.HP = HP + (status.Level * fUpHP);
-        status.Attack = Attack + (status.Level * fUpAttack);
+        status.HP = HP + (status.Level * nUpHP);
+        status.Attack = Attack + (status.Level * nUpAttack);
         status.Speed = Speed;
 
         // ナビメッシュ設定
@@ -70,6 +82,8 @@ public class EnemyBase : MonoBehaviour
 
         animator = GetComponent<Animator>();
 
+        rb = GetComponent<Rigidbody>();
+
         bFind = false;
         fAttackCount = fAttackTime;
     }
@@ -79,6 +93,7 @@ public class EnemyBase : MonoBehaviour
     {
         Move();
         Death();
+        Burst();
     }
 
     // 死亡処理
@@ -92,19 +107,11 @@ public class EnemyBase : MonoBehaviour
     }
 
 
-    private bool StartAttack()
-    {
-        fAttackCount -= Time.deltaTime;
 
-        // 攻撃開始
-        if (fAttackCount < 0.0f)
-        {
-            fAttackCount = fAttackTime;
-            return true;
-        }
-        return false;
-    }
 
+    //-------------------
+    // 攻撃開始
+    //-------------------
     private void EnemyAttack()
     {
         myAgent.speed = 0.0f;   
@@ -118,6 +125,9 @@ public class EnemyBase : MonoBehaviour
         }
     }
 
+    //-------------------
+    // 移動
+    //-------------------
     private void Move()
     {
         // 動いているか
@@ -131,7 +141,6 @@ public class EnemyBase : MonoBehaviour
             // 移動モーション
             animator.SetInteger("Parameter", (int)eAnimetion.eMove);
         }
-
 
         // 次の場所を計算
         Vector3 nextPoint = myAgent.steeringTarget;
@@ -154,12 +163,13 @@ public class EnemyBase : MonoBehaviour
             // 敵との距離が一定以下なら攻撃処理
             if ((vDiffPos.x <= fAttackDis && vDiffPos.x >= -fAttackDis) && (vDiffPos.z <= fAttackDis && vDiffPos.z >= -fAttackDis))
             {
+                // 攻撃開始
                 EnemyAttack();
             }
             else if (myAgent.speed == 0.0f)
             {
                 // スピードの再設定
-                myAgent.speed = status.Speed;    
+                myAgent.speed = status.Speed;
             }
         }
         //　設定フレーム毎に、目的地変更
@@ -170,14 +180,32 @@ public class EnemyBase : MonoBehaviour
             {
                 // ランダム移動
                 myAgent.SetDestination(new Vector3(Random.Range(-fRandMove, fRandMove), 0, Random.Range(-fRandMove, fRandMove)));
-                nMoveTime = 2.0f;　// 仮
+                nMoveTime = 2.0f;　// TODO:敵の進路選択カウント（仮）
             }
         }
 
         vOldPos = this.gameObject.transform.position;
     }
 
+    //-------------------
+    // 攻撃
+    //-------------------
+    private bool StartAttack()
+    {
+        fAttackCount -= Time.deltaTime;
 
+        // 攻撃開始
+        if (fAttackCount < 0.0f)
+        {
+            fAttackCount = fAttackTime;
+            return true;
+        }
+        return false;
+    }
+
+    //------------------------------
+    // 範囲にプレイヤーが入った時
+    //-----------------------------
     private void OnTriggerEnter(Collider other)
     {
         // プレイヤーが範囲に入ったら追う
@@ -187,6 +215,9 @@ public class EnemyBase : MonoBehaviour
         }
     }
 
+    //------------------------------
+    // プレイヤーに当たった時
+    //-----------------------------
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.transform.tag == "Player")
@@ -196,7 +227,28 @@ public class EnemyBase : MonoBehaviour
             transform.position += vPush;
 
             // ダメージ処理
-            status.HP -= 10.0f;     // TODO:ここにプレイヤーの攻撃力が入る
+            status.HP -= 10;     // TODO:ここにプレイヤーの攻撃力が入る,下記の通りになるはず（多分）
+            //status.HP -= player.GetComponent<StatusComponent>().Attack;
         }
+    }
+
+    //------------------------------
+    // バーストされたとき
+    //-----------------------------
+    private void Burst()
+    {
+        // 物理演算ONの時（バースト時、プレイヤーのスクリプトにて物理演算がONにされる）
+        if (!rb.isKinematic)
+        {
+            // 2秒後、物理演算をOFFにする
+            rbTime -= Time.deltaTime;
+            if (rbTime < 0.0f)
+            {
+                rbTime = 2.0f;
+                rb.isKinematic = true;
+            }
+        }
+
+
     }
 }
