@@ -1,3 +1,13 @@
+//======================================================================
+// Stop.cs
+//======================================================================
+// 開発履歴
+//
+// 2022/03/1 author：田村敏基 移動速度を0にする
+// 2022/03/5 author：田村敏基 プランナー依頼。徐々に止まるように変更                                                          
+//                             
+//
+//======================================================================
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,6 +28,6 @@ public class Stop : MonoBehaviour
     public void DoStop(Rigidbody rb)
     {
         // 停止可能なら停止する
-        rb.velocity *= 0.99f;
+        rb.velocity *= 0.98f;
     }
 }

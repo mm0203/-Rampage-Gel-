@@ -1,22 +1,28 @@
+//======================================================================
+// GuardBurst.cs
+//======================================================================
+// 開発履歴
+//
+// 2022/03/02 author：田村敏基 生成し、触れたオブジェクトを
+//                             吹き飛ばすスクリプト作成                              
+// 2022/03/11 author：田村敏基 処理が重くなりそうだったため、当たり判定で
+//                             吹き飛ばす方法から、半径を指定する方法に変更
+//                             
+//
+//======================================================================
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-// スフィアコライダーを要求する
-[RequireComponent(typeof(SphereCollider))]
 
 public class GuardBurst : MonoBehaviour
 {
     [SerializeField] private float radius = 5.0f;
     [SerializeField] private float power = 10.0f;
-
-    SphereCollider col;
+    [SerializeField] private float UpandDown = 10.0f;
 
     // Start is called before the first frame update
     void Start()
     {
-        col = GetComponent<SphereCollider>();
-        radius = col.radius;
     }
 
     // Update is called once per frame
@@ -25,18 +31,36 @@ public class GuardBurst : MonoBehaviour
         
     }
 
-    void OnCollisionEnter(Collision col)
+    //void OnCollisionEnter(Collision col)
+    //{
+    //    Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
+
+    //    // 要素の中身分ループする
+    //    foreach (Collider hit in colliders)
+    //    {
+    //        Rigidbody rb = hit.GetComponent<Rigidbody>();
+    //        if (rb != null)
+    //        {
+    //            // 吹き飛ばす
+    //            rb.AddExplosionForce(power, transform.position, radius);
+    //        }
+    //    }
+    //}
+
+    public void Explode()
     {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
+        // 敵を探す
+        GameObject[] enemys = GameObject.FindGameObjectsWithTag("Enemy");
 
         // 要素の中身分ループする
-        foreach (Collider hit in colliders)
+        foreach (GameObject hit in enemys)
         {
             Rigidbody rb = hit.GetComponent<Rigidbody>();
+
             if (rb != null)
             {
                 // 吹き飛ばす
-                rb.AddExplosionForce(power, transform.position, radius);
+                rb.AddExplosionForce(power, transform.position, radius, UpandDown);
             }
         }
     }
