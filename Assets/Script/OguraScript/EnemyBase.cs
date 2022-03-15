@@ -1,3 +1,14 @@
+//======================================================================
+// EnemyBase.cs
+//======================================================================
+// 開発履歴
+//
+// 2022/03/05 author：小椋駿 製作開始　敵のベース処理追加
+// 2022/03/11 author：小椋駿 バースト処理追加
+// 2022/03/15 author：小椋駿 ステータス部分変更
+//
+//======================================================================
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,20 +34,21 @@ public class EnemyBase : MonoBehaviour
     private SphereCollider SpherCol;
     private Animator animator;
 
+    // プレイヤーを見つけているか
     private bool bFind = false;
+
+    // 攻撃中か
     private bool bAttack = false;
+
+    // ランダムに動く時間
     private float nMoveTime = 2.0f; // 仮
     private Vector3 vOldPos;
 
+   // 吹っ飛ばされてから動き出す秒数
+    private float fBurstTime = 2.0f;
+    private Rigidbody rb;
 
-    // 基本ステータス
-    [SerializeField] private float HP = 20.0f;
-    [SerializeField] private float Attack = 10.0f;
-    [SerializeField] private float Speed = 1.0f;
-
-    [Header("レベルアップ時の上がり幅")] [SerializeField, Range(1.0f, 10.0f)] private float fUpHP = 1;
-    [SerializeField, Range(1.0f, 10.0f)] private float fUpAttack = 1;
-
+    [SerializeField] private GameObject DamageObj;
     [Header("ターゲットを見つける距離")] [SerializeField, Range(1.0f, 50.0f)] private float fRadius = 5.0f;
     [Header("ターゲットを見失う距離")] [SerializeField, Range(1.0f, 50.0f)] private float fMissDis = 8.0f;
     [Header("ランダムに動く距離")] [SerializeField, Range(1.0f, 100.0f)] private float fRandMove = 10.0f;
@@ -46,18 +58,19 @@ public class EnemyBase : MonoBehaviour
 
     public void SetManager(EnemyManager obj) { manager = obj; }
     public void SetPlayer(GameObject obj) { player = obj; }
-
     public GameObject GetPlayer { get { return player; } }
 
-
+    //----------------------------
+    // 初期化
+    //----------------------------
     void Start()
     {
         // ステータス初期化
         status = GetComponent<StatusComponent>();
-        status.Level = 1;   // TODO:後々Managerで設定する
-        status.HP = HP + (status.Level * fUpHP);
-        status.Attack = Attack + (status.Level * fUpAttack);
-        status.Speed = Speed;
+        status.Level = 0;   // TODO:後々Managerで設定する??
+        status.HP = status.HP + (status.Level * status.UpHP);
+        status.Attack = status.Attack + (status.Level * status.UpAttack);
+        status.Speed = status.Speed;
 
         // ナビメッシュ設定
         myAgent = GetComponent<NavMeshAgent>();
@@ -69,19 +82,25 @@ public class EnemyBase : MonoBehaviour
         SpherCol.radius = fRadius;
 
         animator = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody>();
 
         bFind = false;
         fAttackCount = fAttackTime;
     }
 
-
+    //----------------------------
+    // 更新
+    //----------------------------
     void Update()
     {
+        Burst();
         Move();
         Death();
     }
 
-    // 死亡処理
+    //----------------------------
+    // 死亡
+    //----------------------------
     private void Death()
     {
         if (status.HP <= 0)
@@ -91,7 +110,9 @@ public class EnemyBase : MonoBehaviour
         }
     }
 
-
+    //----------------------------
+    // 攻撃開始
+    //----------------------------
     private bool StartAttack()
     {
         fAttackCount -= Time.deltaTime;
@@ -105,6 +126,9 @@ public class EnemyBase : MonoBehaviour
         return false;
     }
 
+    //----------------------------
+    // 攻撃
+    //----------------------------
     private void EnemyAttack()
     {
         myAgent.speed = 0.0f;   
@@ -114,14 +138,19 @@ public class EnemyBase : MonoBehaviour
         if (bAttack)
         {
             // 攻撃モーション
-            animator.SetInteger("Parameter", (int)eAnimetion.eAttack);  
+            animator.SetInteger("Parameter", (int)eAnimetion.eAttack);
+
+            Debug.Log("attack");
         }
     }
 
+    //----------------------------
+    // 移動
+    //----------------------------
     private void Move()
     {
         // 動いているか
-        if (vOldPos.x == transform.position.x || vOldPos.z == transform.position.z)
+        if ((vOldPos.x == transform.position.x || vOldPos.z == transform.position.z) && !bAttack)
         {
             // 待機モーション
             animator.SetInteger("Parameter", (int)eAnimetion.eWait);
@@ -177,7 +206,9 @@ public class EnemyBase : MonoBehaviour
         vOldPos = this.gameObject.transform.position;
     }
 
-
+    //----------------------------
+    // プレイヤー追跡
+    //----------------------------
     private void OnTriggerEnter(Collider other)
     {
         // プレイヤーが範囲に入ったら追う
@@ -187,6 +218,9 @@ public class EnemyBase : MonoBehaviour
         }
     }
 
+    //----------------------------
+    // プレイヤーとの衝突時
+    //----------------------------
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.transform.tag == "Player")
@@ -196,7 +230,41 @@ public class EnemyBase : MonoBehaviour
             transform.position += vPush;
 
             // ダメージ処理
-            status.HP -= 10.0f;     // TODO:ここにプレイヤーの攻撃力が入る
+            status.HP -= 10;     // TODO:ここにプレイヤーの攻撃力が入る
+
+            // ダメージ表記
+            ViewDamage(10);      // TODO:ここにプレイヤーの攻撃力が入る
         }
+    }
+
+    //----------------------------
+    // バーストをくらったとき
+    //----------------------------
+    private void Burst()
+    {
+        // 物理演算がONの時（バースト時に物理演算がONになる）
+        if(!rb.isKinematic)
+        {
+            // 2秒後に、物理演算OFFにする(仮)
+            fBurstTime -= Time.deltaTime;
+            if(fBurstTime < 0.0)
+            {
+                fBurstTime = 2.0f;
+                rb.isKinematic = true;
+            }
+        }
+    }
+
+    //----------------------------
+    // ダメージ表記
+    //----------------------------
+    private void ViewDamage(int damage)
+    {
+        // テキストの生成
+        GameObject text = Instantiate(DamageObj);
+        text.GetComponent<TextMesh>().text = damage.ToString();
+
+        // 少しずらした位置に生成(z + 1.0f)
+        text.transform.position = new Vector3(transform.position.x,transform.position.y, transform.position.z + 1.0f) ;
     }
 }

@@ -1,10 +1,9 @@
 //======================================================================
-// Player.cs
+// EnemyManager.cs
 //======================================================================
 // ŠJ”­—š—ğ
 //
-// 2022/03/02 authorF¼–ì«”V ZZì¬
-// 2022/03/03 authorF‰œ“c’B– ZZ‚Ìˆ—’Ç‰Á
+// 2022/03/05 authorF¬–¸x »ìŠJn@“G¶¬ˆ—’Ç‰Á
 //
 //======================================================================
 using System.Collections;
@@ -26,31 +25,36 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] List<GameObject> EnemyList;
     // oŒ»‚µ‚Ä‚¢‚é“G‚ÌƒŠƒXƒg
     public List<GameObject> NowEnemyList;
-
+    // “G¶¬‚ÌŠÔ
+    float fCreateTime = 1.0f;
 
     GameObject player;
-    //public GameObject GetPlayer { get { return player; } }
-
     GameObject enemy;
 
-    // Start is called before the first frame update
+
     void Start()
     {
         player = GameObject.Find("Player");
 
-        for(int i = 0; i < MaxEnemy;i++)
+        // “G¶¬
+        for (int i = 0; i < MaxEnemy;i++)
         {
             CreateEnemy();
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
         // Œ¸‚Á‚½‚çV‚µ‚­¶¬
         if (NowEnemyList.Count < MaxEnemy)
         {
-            CreateEnemy();
+            // 1•b–ˆ‚É¶¬(‰¼)
+            fCreateTime -= Time.deltaTime;
+            if(fCreateTime < 0.0f)
+            {
+                CreateEnemy();
+                fCreateTime = 1.0f;
+            }
         }
     }
 
@@ -65,9 +69,7 @@ public class EnemyManager : MonoBehaviour
 
     private Vector3 CreatePos()
     {
-        Vector3 vPos;
-
-        vPos = new Vector3(Random.Range(-InstantiateX, InstantiateX), 1.0f, Random.Range(-InstantiateZ, InstantiateZ));
+        Vector3 vPos = new Vector3(Random.Range(-InstantiateX, InstantiateX), 1.0f, Random.Range(-InstantiateZ, InstantiateZ));
         return vPos;
     }
 }

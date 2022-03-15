@@ -123,6 +123,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 23800000, guid: 0ce98d4ba7b2b954ea75586e3eb50832, type: 2}
+<<<<<<< HEAD
 --- !u!1 &66567945
 GameObject:
   m_ObjectHideFlags: 0
@@ -235,6 +236,8 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+=======
+>>>>>>> origin/ogura
 --- !u!1 &165708518
 GameObject:
   m_ObjectHideFlags: 0
