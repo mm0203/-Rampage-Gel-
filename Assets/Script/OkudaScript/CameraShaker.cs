@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 //======================================================================
 // CameraShaker.cs
 //======================================================================
@@ -10,6 +6,10 @@ using UnityEngine;
 // 2022/03/05 author：奥田達磨 カメラの揺れ作成
 //
 //======================================================================
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
 
 public class CameraShaker : MonoBehaviour
 {
