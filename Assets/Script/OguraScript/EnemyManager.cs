@@ -3,11 +3,9 @@
 //======================================================================
 // 開発履歴
 //
-// 2022/03/05 製作開始 敵出現処理追加
-// 2022/03/11 敵生成速度（fCreateTime）の追加
+// 2022/03/05 author：小椋駿 製作開始　敵生成処理追加
 //
 //======================================================================
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -27,31 +25,30 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] List<GameObject> EnemyList;
     // 出現している敵のリスト
     public List<GameObject> NowEnemyList;
+    // 敵生成の時間
+    float fCreateTime = 1.0f;
 
     GameObject player;
     GameObject enemy;
-
-    // 敵生成タイム
-    private float fCreateTime = 1.0f;
 
 
     void Start()
     {
         player = GameObject.Find("Player");
 
-        for(int i = 0; i < MaxEnemy;i++)
+        // 敵生成
+        for (int i = 0; i < MaxEnemy;i++)
         {
             CreateEnemy();
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
         // 減ったら新しく生成
         if (NowEnemyList.Count < MaxEnemy)
         {
-            // 1秒経過で敵生成
+            // 1秒毎に生成(仮)
             fCreateTime -= Time.deltaTime;
             if(fCreateTime < 0.0f)
             {
@@ -72,8 +69,7 @@ public class EnemyManager : MonoBehaviour
 
     private Vector3 CreatePos()
     {
-        Vector3 vPos;
-        vPos = new Vector3(Random.Range(-InstantiateX, InstantiateX), 1.0f, Random.Range(-InstantiateZ, InstantiateZ));
+        Vector3 vPos = new Vector3(Random.Range(-InstantiateX, InstantiateX), 1.0f, Random.Range(-InstantiateZ, InstantiateZ));
         return vPos;
     }
 }
