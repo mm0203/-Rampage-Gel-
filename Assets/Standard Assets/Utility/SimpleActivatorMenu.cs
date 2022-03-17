@@ -5,45 +5,45 @@ using UnityEngine.UI;   // ’Ç‰Á
 #pragma warning disable 618
 namespace UnityStandardAssets.Utility
 {
-<<<<<<< HEAD
-    //public class SimpleActivatorMenu : MonoBehaviour
-    //{
-    //    // An incredibly simple menu which, when given references
-    //    // to gameobjects in the scene
-    //    public GUIText camSwitchButton;
-    //    public GameObject[] objects;
-=======
-    public class SimpleActivatorMenu : MonoBehaviour
-    {
-        // An incredibly simple menu which, when given references
-        // to gameobjects in the scene
-        public Text camSwitchButton; // GUIText‚ðText‚É•ÏX
-        public GameObject[] objects;
->>>>>>> main
+//<<<<<<< HEAD
+//    //public class SimpleActivatorMenu : MonoBehaviour
+//    //{
+//    //    // An incredibly simple menu which, when given references
+//    //    // to gameobjects in the scene
+//    //    public GUIText camSwitchButton;
+//    //    public GameObject[] objects;
+//=======
+//    public class SimpleActivatorMenu : MonoBehaviour
+//    {
+//        // An incredibly simple menu which, when given references
+//        // to gameobjects in the scene
+//        public Text camSwitchButton; // GUIText‚ðText‚É•ÏX
+//        public GameObject[] objects;
+//>>>>>>> main
 
 
-    //    private int m_CurrentActiveObject;
+//    //    private int m_CurrentActiveObject;
 
 
-    //    private void OnEnable()
-    //    {
-    //        // active object starts from first in array
-    //        m_CurrentActiveObject = 0;
-    //        camSwitchButton.text = objects[m_CurrentActiveObject].name;
-    //    }
+//    //    private void OnEnable()
+//    //    {
+//    //        // active object starts from first in array
+//    //        m_CurrentActiveObject = 0;
+//    //        camSwitchButton.text = objects[m_CurrentActiveObject].name;
+//    //    }
 
 
-    //    public void NextCamera()
-    //    {
-    //        int nextactiveobject = m_CurrentActiveObject + 1 >= objects.Length ? 0 : m_CurrentActiveObject + 1;
+//    //    public void NextCamera()
+//    //    {
+//    //        int nextactiveobject = m_CurrentActiveObject + 1 >= objects.Length ? 0 : m_CurrentActiveObject + 1;
 
-    //        for (int i = 0; i < objects.Length; i++)
-    //        {
-    //            objects[i].SetActive(i == nextactiveobject);
-    //        }
+//    //        for (int i = 0; i < objects.Length; i++)
+//    //        {
+//    //            objects[i].SetActive(i == nextactiveobject);
+//    //        }
 
-    //        m_CurrentActiveObject = nextactiveobject;
-    //        camSwitchButton.text = objects[m_CurrentActiveObject].name;
-    //    }
-    //}
+//    //        m_CurrentActiveObject = nextactiveobject;
+//    //        camSwitchButton.text = objects[m_CurrentActiveObject].name;
+//    //    }
+//    //}
 }
