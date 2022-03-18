@@ -19,7 +19,7 @@ using UnityEngine;
 [RequireComponent(typeof(UIGauge))]
 [RequireComponent(typeof(GuardBurst))]
 
-public class GuardMode : PlayerManager
+public class GuardMode : MonoBehaviour
 {
     // 停止
     private Stop stop;
@@ -27,6 +27,12 @@ public class GuardMode : PlayerManager
     // バースト
     private UIGauge UIgauge;
     private GuardBurst burst;
+
+    // リジッドボディ
+    private Rigidbody rb;
+
+    // ステート
+    private PlayerState state;
 
     // ガードゲージ
     [SerializeField] private float fMaxGuardGauge;
@@ -40,51 +46,49 @@ public class GuardMode : PlayerManager
     public float GetGuardGauge => fGuardGauge;
 
     // Start is called before the first frame update
-    protected override void Start()
+    void Start()
     {
-        base.Start();
-
         stop = GetComponent<Stop>();
         burst = GetComponent<GuardBurst>();
         UIgauge = GetComponent<UIGauge>();
+        state = GetComponent<PlayerState>();
+        rb = GetComponent<Rigidbody>();
 
         // 体力満タン
         fGuardGauge = fMaxGuardGauge;
     }
 
     // Update is called once per frame
-    protected override void Update()
+    void Update()
     {
-        base.Update();
-
         // UI
         UIgauge.Refresh(fMaxGuardGauge, fGuardGauge);
         // ハードモードじゃないならゲージ回復
-        if (!IsHard)
+        if (!state.IsHard)
         {
             RecoveryGauge();
         }
         // ハードモードならゲージ消費
-        if(IsHard)
+        if(state.IsHard)
         {
             SubtractGauge();
         }
         // バーストモードなら
-        if(IsBurst)
+        if(state.IsBurst)
         {
             // 爆発
             burst.Explode();
-            GotoNormalState();
+            state.GotoNormalState();
         }
 
         // ハードモードかつゲージ残量があるなら停止
-        if(IsHard && fGuardGauge > 0)
+        if(state.IsHard && fGuardGauge > 0)
         {
             stop.DoStop(rb);
         }
         else
         {
-            GotoNormalState();
+            state.GotoNormalState();
         }
     }
 

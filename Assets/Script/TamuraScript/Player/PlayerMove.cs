@@ -1,5 +1,5 @@
 //======================================================================
-// Player.cs
+// PlayerMove.cs
 //======================================================================
 // 開発履歴
 //
@@ -16,12 +16,15 @@ using UnityEngine;
 // 判定コンポーネントアタッチ
 [RequireComponent(typeof(Rigidbody))]
 
-public class Player : PlayerManager
+public class PlayerMove : MonoBehaviour
 {
     // 初速倍率
     [SerializeField] private float fInitial = 50.0f;
     // 減速率
     [SerializeField] private float fLate = 0.995f;
+
+    private PlayerState state;
+    private Rigidbody rb;
 
     // 発射方向
     [SerializeField] private LineRenderer Direction = null;
@@ -35,16 +38,15 @@ public class Player : PlayerManager
 
     private bool bShot = false;
 
-    protected override void Start()
+    void Start()
     {
-        base.Start();
+        state = GetComponent<PlayerState>();
+        rb = GetComponent<Rigidbody>();
     }
 
-    protected override void Update()
+    void Update()
     {
-        base.Update();
-
-        if (!IsNormal)
+        if (!state.IsNormal)
         {
             fStockPower = 0;
             Direction.enabled = false;
