@@ -33,6 +33,8 @@ public class PlayerMove : MonoBehaviour
     // ドラッグ開始点
     private Vector3 vDragStart = Vector3.zero;
 
+    [SerializeField] private Animator anime;
+
     // 蓄積時間
     private float fStockPower = 0;
 
@@ -61,6 +63,9 @@ public class PlayerMove : MonoBehaviour
 
         PadMove();
         KeyBoardMove();
+
+        anime.SetFloat("pull", vCurrentForce.magnitude);
+        anime.SetFloat("blowway", rb.velocity.magnitude);
         // 減速
         rb.velocity *= fLate;
     }
@@ -101,6 +106,7 @@ public class PlayerMove : MonoBehaviour
             {
                 fStockPower += Time.deltaTime;
             }
+
         }
 
         // 左クリック離れたとき
@@ -108,7 +114,7 @@ public class PlayerMove : MonoBehaviour
         {
             // 瞬間的に力を加えてはじく
             rb.AddForce(vCurrentForce.normalized * fStockPower * fInitial, ForceMode.Impulse);
-
+            vCurrentForce = Vector3.zero;
             // 初期化
             fStockPower = 0;
             Direction.enabled = false;
@@ -121,12 +127,12 @@ public class PlayerMove : MonoBehaviour
         float y = Input.GetAxis("Vertical");
 
         // スティックを倒してるなら
-        if (Mathf.Abs(x) >= 0.01f || Mathf.Abs(y) >= 0.01f)
+        if (Mathf.Abs(x) >= 0.5f || Mathf.Abs(y) >= 0.5f)
         {
             // フラグを立てる
             bShot = true;
             // 入力方向を逆にして受け取る
-            vCurrentForce = new Vector3(-x * Time.deltaTime, 0, -y * Time.deltaTime);
+            vCurrentForce = new Vector3(-x * 1000, 0, -y * 1000);
 
             // 動く方向を見る
             transform.rotation = Quaternion.LookRotation(vCurrentForce);
@@ -151,6 +157,7 @@ public class PlayerMove : MonoBehaviour
             rb.AddForce(vCurrentForce.normalized * fStockPower * fInitial, ForceMode.Impulse);
             // 初期化
             fStockPower = 0;
+            vCurrentForce = Vector3.zero;
             Direction.enabled = false;
         }
     }

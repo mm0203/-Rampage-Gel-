@@ -723,6 +723,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8697041806470372638, guid: c0d881320f7728541bc1d3f04742ea83, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8697041806470372639, guid: c0d881320f7728541bc1d3f04742ea83, type: 3}
       propertyPath: m_Name
       value: EnemyManager
@@ -1062,7 +1066,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1191878546}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7074596e2b81d5943bbcc818c5b85efa, type: 3}
   m_Name: 
@@ -1107,9 +1111,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a424f20c4572912428103f476962557d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fInitial: 50
-  fLate: 0.995
+  fInitial: 200
+  fLate: 0.98
   Direction: {fileID: 1790967598}
+  anime: {fileID: 350292369}
 --- !u!54 &1191878552
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -33,6 +33,6 @@ public class UIGauge : MonoBehaviour
 
     public void Refresh(float max,float current)
     {
-        image.fillAmount = current / max;
+        //image.fillAmount = current / max;
     }
 }
