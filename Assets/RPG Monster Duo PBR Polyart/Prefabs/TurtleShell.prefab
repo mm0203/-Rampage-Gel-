@@ -856,7 +856,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1837317425425208}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 9000000, guid: 56dd4edec19a3b04195448769c085dfc, type: 3}
   m_Controller: {fileID: 9100000, guid: 7c1a42292e5e49d4f8364cc73cd50ed3, type: 2}
   m_CullingMode: 1
@@ -908,6 +908,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0df91b21c74d07942973f4026991ba1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nLevel: 1
+  nHp: 20
+  nAttack: 10
+  fSpeed: 1
+  nUpHP: 1
+  nUpAttack: 1
 --- !u!195 &6428905939871964817
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -942,11 +948,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96707ce0b8aa8cf4aa85d80aae2464dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HP: 20
-  Attack: 10
-  Speed: 2.5
-  fUpHP: 1
-  fUpAttack: 1
+  DamageObj: {fileID: 0}
   fRadius: 4.9
   fMissDis: 8
   fRandMove: 10

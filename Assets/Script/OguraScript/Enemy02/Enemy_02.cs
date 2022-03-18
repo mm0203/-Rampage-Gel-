@@ -33,7 +33,7 @@ public class Enemy_02 : MonoBehaviour
         // 弾のサイズ、座標、角度設定
         spher.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
         spher.transform.rotation = this.transform.rotation;
-        spher.transform.position = new Vector3(transform.position.x + transform.forward.x, transform.position.y, transform.position.z + transform.forward.z);
+        spher.transform.position = new Vector3(transform.position.x + transform.forward.x * 0.5f, transform.position.y, transform.position.z + transform.forward.z * 0.5f);
 
         // 弾のコンポーネント調整
         spher.AddComponent<Bullet>();

@@ -77,9 +77,9 @@ public class EnemyBase : MonoBehaviour
         myAgent.speed = status.Speed;        
 
         // SpherCollider追加（プレイヤー探索用）
-        SpherCol = gameObject.AddComponent<SphereCollider>();
-        SpherCol.isTrigger = true;
-        SpherCol.radius = fRadius;
+        //SpherCol = gameObject.AddComponent<SphereCollider>();
+        //SpherCol.isTrigger = true;
+        //SpherCol.radius = fRadius;
 
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
@@ -170,38 +170,53 @@ public class EnemyBase : MonoBehaviour
         Quaternion targetRotation = Quaternion.LookRotation(targetDir);
         transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 120f * Time.deltaTime);
 
-        // 一定の距離離れた場合、見失う
+        
         Vector3 vDiffPos = this.transform.position - player.transform.position;
-        if (vDiffPos.x > fMissDis || vDiffPos.z > fMissDis)
-            bFind = false;
+        // 一定の距離離れた場合、見失う
+        //if (vDiffPos.x > fMissDis || vDiffPos.z > fMissDis)
+        //    bFind = false;
 
-        // 範囲内にプレイヤーがいたら追いかける
-        if (bFind)
-        {
-            myAgent.SetDestination(player.transform.position);
+        // プレイヤーを追いかける
+        myAgent.SetDestination(player.transform.position);
 
-            // 敵との距離が一定以下なら攻撃処理
-            if ((vDiffPos.x <= fAttackDis && vDiffPos.x >= -fAttackDis) && (vDiffPos.z <= fAttackDis && vDiffPos.z >= -fAttackDis))
-            {
-                EnemyAttack();
-            }
-            else if (myAgent.speed == 0.0f)
-            {
-                // スピードの再設定
-                myAgent.speed = status.Speed;    
-            }
-        }
-        //　設定フレーム毎に、目的地変更
-        else if (!bFind)
+        // 敵との距離が一定以下なら攻撃処理
+        if ((vDiffPos.x <= fAttackDis && vDiffPos.x >= -fAttackDis) && (vDiffPos.z <= fAttackDis && vDiffPos.z >= -fAttackDis))
         {
-            nMoveTime -= Time.deltaTime;
-            if (nMoveTime < 0)
-            {
-                // ランダム移動
-                myAgent.SetDestination(new Vector3(Random.Range(-fRandMove, fRandMove), 0, Random.Range(-fRandMove, fRandMove)));
-                nMoveTime = 2.0f;　// 仮
-            }
+            EnemyAttack();
         }
+        // 攻撃終了時動き出す
+        else if (myAgent.speed == 0.0f)
+        {
+            // スピードの再設定
+            myAgent.speed = status.Speed;
+        }
+
+        //if (bFind)
+        //{
+        //    myAgent.SetDestination(player.transform.position);
+
+        //    // 敵との距離が一定以下なら攻撃処理
+        //    if ((vDiffPos.x <= fAttackDis && vDiffPos.x >= -fAttackDis) && (vDiffPos.z <= fAttackDis && vDiffPos.z >= -fAttackDis))
+        //    {
+        //        EnemyAttack();
+        //    }
+        //    else if (myAgent.speed == 0.0f)
+        //    {
+        //        // スピードの再設定
+        //        myAgent.speed = status.Speed;    
+        //    }
+        //}
+        ////　設定フレーム毎に、目的地変更
+        //else if (!bFind)
+        //{
+        //    nMoveTime -= Time.deltaTime;
+        //    if (nMoveTime < 0)
+        //    {
+        //        // ランダム移動
+        //        myAgent.SetDestination(new Vector3(Random.Range(-fRandMove, fRandMove), 0, Random.Range(-fRandMove, fRandMove)));
+        //        nMoveTime = 2.0f;　// 仮
+        //    }
+        //}
 
         vOldPos = this.gameObject.transform.position;
     }
@@ -212,9 +227,16 @@ public class EnemyBase : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // プレイヤーが範囲に入ったら追う
+        // プレイヤーとの衝突時ダメージ
         if (other.CompareTag("Player"))
         {
-            bFind = true;
+            //bFind = true;
+
+            // ダメージ処理
+            status.HP -= 10;     // TODO:ここにプレイヤーの攻撃力が入る
+
+            // ダメージ表記
+            ViewDamage(10);      // TODO:ここにプレイヤーの攻撃力が入る
         }
     }
 
