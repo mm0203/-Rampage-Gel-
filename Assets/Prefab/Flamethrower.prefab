@@ -385,6 +385,7 @@ GameObject:
   - component: {fileID: 94860282860252961}
   - component: {fileID: 6438497320010884201}
   - component: {fileID: 2892741171734620416}
+  - component: {fileID: 1191511687341624095}
   m_Layer: 0
   m_Name: Flamethrower
   m_TagString: Enemy
@@ -440,11 +441,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DamageObj: {fileID: 1599770427430637572, guid: f281449c9f2cf8045930e932567b2b5e, type: 3}
-  fRadius: 5
-  fMissDis: 8
-  fRandMove: 10
-  fAttackDis: 6.5
-  fAttackTime: 3
+  fAttackDis: 4.5
+  fAttackTime: 2.5
 --- !u!54 &5740533042275690165
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -514,6 +512,18 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &1191511687341624095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5032672982941512809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b1dce1a6a8a4ac489f77247708949de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5032743968688217215
 GameObject:
   m_ObjectHideFlags: 0

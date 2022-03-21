@@ -21,7 +21,7 @@ public class Bullet : MonoBehaviour
     public void SetPlayer(GameObject obj) { player = obj; }
     public void SetEnemy(GameObject obj) { enemy = obj; }
 
-    // Update is called once per frame
+    //---------------------------
     void Update()
     {
         // ‘O•û‚Ö”ò‚Î‚·

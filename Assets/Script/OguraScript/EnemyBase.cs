@@ -31,24 +31,21 @@ public class EnemyBase : MonoBehaviour
     private GameObject player;
     private EnemyManager manager;
     private NavMeshAgent myAgent;
-    private SphereCollider SpherCol;
     private Animator animator;
+    private Rigidbody rb;
 
-    // プレイヤーを見つけているか
-    //private bool bFind = false;
-
-    // ランダムに動く時間
-    private float nMoveTime = 2.0f; // 仮
+    // 前フレームの座標
     private Vector3 vOldPos;
 
    // 吹っ飛ばされてから動き出す秒数
     private float fBurstTime = 2.0f;
-    private Rigidbody rb;
 
+    // 攻撃中か
+    private bool bAttack = false;
+   
+    // ダメージUI
     [SerializeField] private GameObject DamageObj;
-    [Header("ターゲットを見つける距離")] [SerializeField, Range(1.0f, 50.0f)] private float fRadius = 5.0f;
-    [Header("ターゲットを見失う距離")] [SerializeField, Range(1.0f, 50.0f)] private float fMissDis = 8.0f;
-    [Header("ランダムに動く距離")] [SerializeField, Range(1.0f, 100.0f)] private float fRandMove = 10.0f;
+
     [Header("攻撃を開始する距離")] [SerializeField, Range(0.0f, 50.0f)] private float fAttackDis = 3.0f;
     [Header("攻撃頻度")] [SerializeField, Range(0.0f, 10.0f)] private float fAttackTime = 3.0f;
     private float fAttackCount;
@@ -56,6 +53,8 @@ public class EnemyBase : MonoBehaviour
     public void SetManager(EnemyManager obj) { manager = obj; }
     public void SetPlayer(GameObject obj) { player = obj; }
     public GameObject GetPlayer { get { return player; } }
+
+    public void SetAttack(bool flag) { bAttack = flag; }
 
     //----------------------------
     // 初期化
@@ -73,15 +72,9 @@ public class EnemyBase : MonoBehaviour
         myAgent = GetComponent<NavMeshAgent>();
         myAgent.speed = status.Speed;        
 
-        // SpherCollider追加（プレイヤー探索用）
-        //SpherCol = gameObject.AddComponent<SphereCollider>();
-        //SpherCol.isTrigger = true;
-        //SpherCol.radius = fRadius;
-
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
 
-        //bFind = false;
         fAttackCount = fAttackTime;
     }
 
@@ -109,8 +102,6 @@ public class EnemyBase : MonoBehaviour
         }
     }
 
-
-
     //----------------------------
     // 攻撃
     //----------------------------
@@ -124,8 +115,6 @@ public class EnemyBase : MonoBehaviour
         {
             // 攻撃モーション
             animator.SetInteger("Parameter", (int)eAnimetion.eAttack);
-
-            Debug.Log("攻撃");
         }
     }
 
@@ -162,23 +151,24 @@ public class EnemyBase : MonoBehaviour
             animator.SetInteger("Parameter", (int)eAnimetion.eMove);
         }
 
+        // 攻撃中でないとき
+        if(!bAttack)
+        {
+            // 次の場所を計算
+            Vector3 nextPoint = myAgent.steeringTarget;
+            Vector3 targetDir = nextPoint - transform.position;
 
-        // 次の場所を計算
-        Vector3 nextPoint = myAgent.steeringTarget;
-        Vector3 targetDir = nextPoint - transform.position;
+            // 回転
+            Quaternion targetRotation = Quaternion.LookRotation(targetDir);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 120f * Time.deltaTime);
 
-        // 回転
-        Quaternion targetRotation = Quaternion.LookRotation(targetDir);
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 120f * Time.deltaTime);
+            // プレイヤーを追いかける
+            myAgent.SetDestination(player.transform.position);
+        }
 
-        
+        // プレイヤーとの距離計算
         Vector3 vDiffPos = this.transform.position - player.transform.position;
-        // 一定の距離離れた場合、見失う
-        //if (vDiffPos.x > fMissDis || vDiffPos.z > fMissDis)
-        //    bFind = false;
 
-        // プレイヤーを追いかける
-        myAgent.SetDestination(player.transform.position);
 
         // 敵との距離が一定以下なら攻撃処理
         if ((vDiffPos.x <= fAttackDis && vDiffPos.x >= -fAttackDis) && (vDiffPos.z <= fAttackDis && vDiffPos.z >= -fAttackDis))
@@ -186,38 +176,11 @@ public class EnemyBase : MonoBehaviour
             EnemyAttack();
         }
         // 攻撃終了時動き出す
-        else if (myAgent.speed == 0.0f)
+        else if (myAgent.speed == 0.0f && !bAttack)
         {
             // スピードの再設定
             myAgent.speed = status.Speed;
         }
-
-        //if (bFind)
-        //{
-        //    myAgent.SetDestination(player.transform.position);
-
-        //    // 敵との距離が一定以下なら攻撃処理
-        //    if ((vDiffPos.x <= fAttackDis && vDiffPos.x >= -fAttackDis) && (vDiffPos.z <= fAttackDis && vDiffPos.z >= -fAttackDis))
-        //    {
-        //        EnemyAttack();
-        //    }
-        //    else if (myAgent.speed == 0.0f)
-        //    {
-        //        // スピードの再設定
-        //        myAgent.speed = status.Speed;    
-        //    }
-        //}
-        ////　設定フレーム毎に、目的地変更
-        //else if (!bFind)
-        //{
-        //    nMoveTime -= Time.deltaTime;
-        //    if (nMoveTime < 0)
-        //    {
-        //        // ランダム移動
-        //        myAgent.SetDestination(new Vector3(Random.Range(-fRandMove, fRandMove), 0, Random.Range(-fRandMove, fRandMove)));
-        //        nMoveTime = 2.0f;　// 仮
-        //    }
-        //}
 
         vOldPos = this.gameObject.transform.position;
     }
@@ -231,27 +194,6 @@ public class EnemyBase : MonoBehaviour
         // プレイヤーとの衝突時ダメージ
         if (other.CompareTag("Player"))
         {
-            //bFind = true;
-
-            // ダメージ処理
-            status.HP -= 10;     // TODO:ここにプレイヤーの攻撃力が入る
-
-            // ダメージ表記
-            ViewDamage(10);      // TODO:ここにプレイヤーの攻撃力が入る
-        }
-    }
-
-    //----------------------------
-    // プレイヤーとの衝突時
-    //----------------------------
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.transform.tag == "Player")
-        {
-            // プレイヤーの正面に押す
-            Vector3 vPush = player.transform.forward;
-            transform.position += vPush;
-
             // ダメージ処理
             status.HP -= 10;     // TODO:ここにプレイヤーの攻撃力が入る
 

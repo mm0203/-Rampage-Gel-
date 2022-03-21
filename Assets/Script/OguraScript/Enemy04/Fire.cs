@@ -54,7 +54,7 @@ public class Fire : MonoBehaviour
         // サークルの透明度を下げる
         AttackCircle.GetComponent<SpriteRenderer>().color -= new Color32(0, 0, 0, 125);
 
-
+        // サークルの大きさ拡大
         fScale = AttackCircle.transform.localScale.x / (fAttackStart * 50.0f);
     }
 
@@ -81,9 +81,6 @@ public class Fire : MonoBehaviour
         if(TimeCircle != null)
             TimeCircle.transform.localScale = new Vector3(TimeCircle.transform.localScale.x + fScale, TimeCircle.transform.localScale.y + fScale, 1.0f);
     }
-
-
-
 
     //----------------------------------
     // 当たり判定
