@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 using System;
 using UnityEngine;
 using UnityEngine.UI;   // ’Ç‰Á
@@ -5,6 +6,15 @@ using UnityEngine.UI;   // ’Ç‰Á
 #pragma warning disable 618
 namespace UnityStandardAssets.Utility
 {
+=======
+//using System;
+//using UnityEngine;
+//using UnityEngine.UI;   // ’Ç‰Á
+
+//#pragma warning disable 618
+//namespace UnityStandardAssets.Utility
+//{
+>>>>>>> aea20fbb7feb2cdb3be5c5250c9e25d229e356d2
 //<<<<<<< HEAD
 //    //public class SimpleActivatorMenu : MonoBehaviour
 //    //{
@@ -46,4 +56,8 @@ namespace UnityStandardAssets.Utility
 //    //        camSwitchButton.text = objects[m_CurrentActiveObject].name;
 //    //    }
 //    //}
+<<<<<<< HEAD
 }
+=======
+//}
+>>>>>>> aea20fbb7feb2cdb3be5c5250c9e25d229e356d2

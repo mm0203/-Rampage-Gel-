@@ -13,9 +13,9 @@ public class moveGround : MonoBehaviour
     {
         Transform a = this.transform;
         Vector3 point = a.position;
-        point.x = Camera.main.transform.position.x;
+        point.x = -Camera.main.transform.position.x;
         point.y = 0f;
-        point.z = Camera.main.transform.position.z;
+        point.z = -Camera.main.transform.position.z;
 
         a.position = point;
     }
