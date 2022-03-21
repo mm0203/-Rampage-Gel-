@@ -35,10 +35,7 @@ public class EnemyBase : MonoBehaviour
     private Animator animator;
 
     // プレイヤーを見つけているか
-    private bool bFind = false;
-
-    // 攻撃中か
-    private bool bAttack = false;
+    //private bool bFind = false;
 
     // ランダムに動く時間
     private float nMoveTime = 2.0f; // 仮
@@ -84,7 +81,7 @@ public class EnemyBase : MonoBehaviour
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
 
-        bFind = false;
+        //bFind = false;
         fAttackCount = fAttackTime;
     }
 
@@ -103,17 +100,39 @@ public class EnemyBase : MonoBehaviour
     //----------------------------
     private void Death()
     {
+        // HP0以下で消滅
         if (status.HP <= 0)
         {
+            // リストから削除
             manager.NowEnemyList.Remove(gameObject);
             Destroy(this.gameObject);
         }
     }
 
+
+
     //----------------------------
-    // 攻撃開始
+    // 攻撃
     //----------------------------
-    private bool StartAttack()
+    private void EnemyAttack()
+    {
+        // 動きを止める
+        myAgent.speed = 0.0f;   
+
+        // 攻撃開始か判定(仮)
+        if (IsAttack())
+        {
+            // 攻撃モーション
+            animator.SetInteger("Parameter", (int)eAnimetion.eAttack);
+
+            Debug.Log("攻撃");
+        }
+    }
+
+    //----------------------------
+    // 攻撃開始か
+    //----------------------------
+    private bool IsAttack()
     {
         fAttackCount -= Time.deltaTime;
 
@@ -127,30 +146,12 @@ public class EnemyBase : MonoBehaviour
     }
 
     //----------------------------
-    // 攻撃
-    //----------------------------
-    private void EnemyAttack()
-    {
-        myAgent.speed = 0.0f;   
-
-        // 攻撃開始(仮)
-        bAttack = StartAttack();
-        if (bAttack)
-        {
-            // 攻撃モーション
-            animator.SetInteger("Parameter", (int)eAnimetion.eAttack);
-
-            Debug.Log("attack");
-        }
-    }
-
-    //----------------------------
     // 移動
     //----------------------------
     private void Move()
     {
         // 動いているか
-        if ((vOldPos.x == transform.position.x || vOldPos.z == transform.position.z) && !bAttack)
+        if ((vOldPos.x == transform.position.x || vOldPos.z == transform.position.z))
         {
             // 待機モーション
             animator.SetInteger("Parameter", (int)eAnimetion.eWait);

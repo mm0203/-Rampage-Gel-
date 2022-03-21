@@ -13,11 +13,11 @@ GameObject:
   - component: {fileID: 8256626213329719320}
   - component: {fileID: 2853013210424789697}
   - component: {fileID: 7596599407815705429}
-  - component: {fileID: 7425337655386721736}
   - component: {fileID: 3560002279587989533}
   - component: {fileID: 4618613774713242996}
+  - component: {fileID: -4927246210752628972}
   m_Layer: 0
-  m_Name: Slime
+  m_Name: Fire
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74,8 +74,8 @@ MonoBehaviour:
   fRadius: 5
   fMissDis: 8
   fRandMove: 10
-  fAttackDis: 3
-  fAttackTime: 0.8
+  fAttackDis: 6.5
+  fAttackTime: 3
 --- !u!54 &2853013210424789697
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -105,18 +105,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0.5, z: 0}
---- !u!114 &7425337655386721736
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3308506822130718749}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2efd879d768b636468776b8486eb9727, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &3560002279587989533
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -157,6 +145,19 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &-4927246210752628972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3308506822130718749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 073dfd6336d8cf747b9f9fbdb4fc0537, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Circle: {fileID: 3745731802580100520, guid: 8f168ae5491e09946bad4712fdb02421, type: 3}
 --- !u!1 &3308577807902666763
 GameObject:
   m_ObjectHideFlags: 0
