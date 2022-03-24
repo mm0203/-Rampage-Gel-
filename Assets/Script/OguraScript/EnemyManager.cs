@@ -1,10 +1,10 @@
 //======================================================================
-// Player.cs
+// EnemyManager.cs
 //======================================================================
 // 開発履歴
 //
-// 2022/03/02 author：松野将之 〇〇作成
-// 2022/03/03 author：奥田達磨 〇〇の処理追加
+// 2022/03/05 author：小椋駿 製作開始　敵生成処理追加
+// 2022/03/18 author：小椋駿 画面外に敵が生成するように
 //
 //======================================================================
 using System.Collections;
@@ -21,36 +21,47 @@ public class EnemyManager : MonoBehaviour
     // 出現範囲
     [Header("敵の出現座標範囲")] [SerializeField, Range(1.0f, 100.0f)] float InstantiateX = 6.5f;
     [SerializeField, Range(1.0f, 100.0f)] float InstantiateZ = 3.5f;
+    // プレイヤーとどれだけ離れて生成するか
+    [Header("生成距離")] [SerializeField] Vector2 vDistance = new Vector2(10.0f, 5.0f);
 
     // 敵の種類
     [SerializeField] List<GameObject> EnemyList;
     // 出現している敵のリスト
     public List<GameObject> NowEnemyList;
+    // 敵生成の時間
+    float fCreateTime = 1.0f;
 
+    
 
     GameObject player;
-    //public GameObject GetPlayer { get { return player; } }
-
     GameObject enemy;
 
-    // Start is called before the first frame update
+    int debug = 0;
+
+
     void Start()
     {
         player = GameObject.Find("Player");
 
-        for(int i = 0; i < MaxEnemy;i++)
+        // 敵生成
+        for (int i = 0; i < MaxEnemy;i++)
         {
             CreateEnemy();
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
         // 減ったら新しく生成
         if (NowEnemyList.Count < MaxEnemy)
         {
-            CreateEnemy();
+            // 1秒毎に生成(仮)
+            fCreateTime -= Time.deltaTime;
+            if(fCreateTime < 0.0f)
+            {
+                CreateEnemy();
+                fCreateTime = 1.0f;
+            }
         }
     }
 
@@ -65,9 +76,28 @@ public class EnemyManager : MonoBehaviour
 
     private Vector3 CreatePos()
     {
-        Vector3 vPos;
+        // 出現位置をランダムに計算
+        Vector3 vPos = new Vector3(Random.Range(-InstantiateX, InstantiateX), 0.5f, Random.Range(-InstantiateZ, InstantiateZ));
 
-        vPos = new Vector3(Random.Range(-InstantiateX, InstantiateX), 1.0f, Random.Range(-InstantiateZ, InstantiateZ));
+        // プレイヤーとの距離を計算
+        Vector3 vCreatePos = vPos - player.transform.position;
+
+        // 画面外でなければ、もう一度計算
+        while ((vCreatePos.x < vDistance.x && vCreatePos.x > -vDistance.x) && (vCreatePos.y < vDistance.y && vCreatePos.y > -vDistance.y))
+        {
+            vPos = new Vector3(Random.Range(-InstantiateX, InstantiateX), 0.5f, Random.Range(-InstantiateZ, InstantiateZ));
+            vCreatePos = vPos - player.transform.position;
+
+            // 強制終了(無限ループに入らないように)
+            debug++;
+            if(debug > 100)
+            {
+                Debug.Log("適生成エラー");
+                debug = 0;
+                return vPos;
+            }
+        }
+
         return vPos;
     }
 }
