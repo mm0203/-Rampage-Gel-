@@ -29,7 +29,11 @@ public class Enemy_01 : MonoBehaviour
         // 当たり判定用キューブ生成
         cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
 
-        cube.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);  // 攻撃範囲
+        // 当たり判定用キューブを透明に
+        cube.GetComponent<MeshRenderer>().material.shader = Shader.Find("Legacy Shaders/Transparent/Diffuse"); ;
+        cube.GetComponent<MeshRenderer>().material.color -= new Color32(255, 255, 255, 255);
+
+        cube.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);  // 攻撃範囲
         cube.transform.rotation = this.transform.rotation;
         cube.transform.position = new Vector3(transform.position.x + transform.forward.x * 1.5f, transform.position.y, transform.position.z + transform.forward.z * 1.5f);
         cube.AddComponent<Scratch>();
@@ -38,5 +42,6 @@ public class Enemy_01 : MonoBehaviour
         cube.AddComponent<Rigidbody>();
         cube.GetComponent<Rigidbody>().useGravity = false;
         cube.GetComponent<Rigidbody>().isKinematic = true;
+        cube.GetComponent<BoxCollider>().isTrigger = true;
     }
 }

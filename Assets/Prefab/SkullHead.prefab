@@ -567,7 +567,7 @@ GameObject:
   - component: {fileID: 3110787205036155474}
   m_Layer: 0
   m_Name: SkullHead
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -618,8 +618,8 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 0.35
+  m_Center: {x: -0.05, y: 0.26, z: 0.01}
 --- !u!95 &3110787205036155485
 Animator:
   serializedVersion: 3
@@ -704,11 +704,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DamageObj: {fileID: 1599770427430637572, guid: f281449c9f2cf8045930e932567b2b5e, type: 3}
-  fRadius: 5
-  fMissDis: 8
-  fRandMove: 10
   fAttackDis: 4
   fAttackTime: 1
+  DeathSE: {fileID: 8300000, guid: 66e800b23cb418341b815161387a7edc, type: 3}
 --- !u!1 &2929289432632238651
 GameObject:
   m_ObjectHideFlags: 0

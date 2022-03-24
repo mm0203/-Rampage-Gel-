@@ -6,6 +6,7 @@
 // 2022/03/05 author：小椋駿 製作開始　敵のベース処理追加
 // 2022/03/11 author：小椋駿 バースト処理追加
 // 2022/03/15 author：小椋駿 ステータス部分変更
+// 2022/03/24 author：小椋駿 効果音処理の追加
 //
 //======================================================================
 
@@ -42,13 +43,19 @@ public class EnemyBase : MonoBehaviour
 
     // 攻撃中か
     private bool bAttack = false;
+
+    // 攻撃範囲に入ってから、一度目の攻撃か
+    private bool bFirstAttack = false;
    
     // ダメージUI
     [SerializeField] private GameObject DamageObj;
 
+    // 効果音
+    [Header("死亡時効果音")] [SerializeField] private AudioClip DeathSE;
+
     [Header("攻撃を開始する距離")] [SerializeField, Range(0.0f, 50.0f)] private float fAttackDis = 3.0f;
     [Header("攻撃頻度")] [SerializeField, Range(0.0f, 10.0f)] private float fAttackTime = 3.0f;
-    private float fAttackCount;
+    private float fAttackCount;  
 
     public void SetManager(EnemyManager obj) { manager = obj; }
     public void SetPlayer(GameObject obj) { player = obj; }
@@ -96,6 +103,9 @@ public class EnemyBase : MonoBehaviour
         // HP0以下で消滅
         if (status.HP <= 0)
         {
+            // 効果音再生
+            AudioSource.PlayClipAtPoint(DeathSE,transform.position);
+
             // リストから削除
             manager.NowEnemyList.Remove(gameObject);
             Destroy(this.gameObject);
@@ -108,13 +118,16 @@ public class EnemyBase : MonoBehaviour
     private void EnemyAttack()
     {
         // 動きを止める
-        myAgent.speed = 0.0f;   
+        myAgent.speed = 0.0f;
+        myAgent.velocity = Vector3.zero;
 
-        // 攻撃開始か判定(仮)
-        if (IsAttack())
+        // 攻撃開始か判定 or 攻撃範囲に入ってから、最初の攻撃の時
+        if (IsAttack() || !bFirstAttack)
         {
             // 攻撃モーション
             animator.SetInteger("Parameter", (int)eAnimetion.eAttack);
+
+            bFirstAttack = true;
         }
     }
 
@@ -149,6 +162,7 @@ public class EnemyBase : MonoBehaviour
         {
             // 移動モーション
             animator.SetInteger("Parameter", (int)eAnimetion.eMove);
+            bFirstAttack = false;
         }
 
         // 攻撃中でないとき
@@ -168,7 +182,7 @@ public class EnemyBase : MonoBehaviour
 
         // プレイヤーとの距離計算
         Vector3 vDiffPos = this.transform.position - player.transform.position;
-
+        Debug.Log(fAttackDis);
 
         // 敵との距離が一定以下なら攻撃処理
         if ((vDiffPos.x <= fAttackDis && vDiffPos.x >= -fAttackDis) && (vDiffPos.z <= fAttackDis && vDiffPos.z >= -fAttackDis))
