@@ -4,6 +4,7 @@
 // 開発履歴
 //
 // 2022/03/05 author：奥田達磨 カメラの揺れ作成
+// 2022/03/24 author：竹尾晃史郎 カメラ飛び修正
 //
 //======================================================================
 using System.Collections;
@@ -21,10 +22,14 @@ public class CameraShaker : MonoBehaviour
     // 揺れの減算値
     public float fShakeDecay = 0.002f;
     // 揺れの強さ係数
-    public float fShakeAmount = 0.2f;       
+    public float fShakeAmount = 0.2f;
 
     private Vector3 VOriginPosition;
     private Quaternion QOriginRotation;
+
+    // 追加_揺らす前のカメラ座標
+    private Vector3 VoldPos;
+    private Quaternion QoldQuater;
 
     void Start()
     {
@@ -35,7 +40,7 @@ public class CameraShaker : MonoBehaviour
     protected void Update()
     {
         // キーボード移動 
-        if (Input.GetMouseButton(0))
+        if (Input.GetKeyDown(KeyCode.Q))
         {
             Do();
         }
@@ -49,9 +54,17 @@ public class CameraShaker : MonoBehaviour
 
     public IEnumerator Shake()
     {
+        // 揺らす前のカメラ座標取得
+        VoldPos = ShakeObject.localPosition;
+        QoldQuater = ShakeObject.localRotation;
+
         float shakeIntensity = fShakeIntensity;
         while (shakeIntensity > 0)
         {
+            // 揺らしている最中のカメラ座標取得
+            VOriginPosition = ShakeObject.localPosition;
+            QOriginRotation = ShakeObject.localRotation;
+
             ShakeObject.localPosition = VOriginPosition + Random.insideUnitSphere * shakeIntensity;
             ShakeObject.localRotation = new Quaternion(
                 QOriginRotation.x + Random.Range(-shakeIntensity, shakeIntensity) * fShakeAmount,
@@ -61,7 +74,9 @@ public class CameraShaker : MonoBehaviour
             shakeIntensity -= fShakeDecay;
             yield return false;
         }
-        ShakeObject.localPosition = VOriginPosition;
-        ShakeObject.localRotation = QOriginRotation;
+
+        // 揺らす前のカメラ座標に戻す
+        ShakeObject.localPosition = VoldPos;
+        ShakeObject.localRotation = QoldQuater;
     }
 }

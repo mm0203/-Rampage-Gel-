@@ -44,7 +44,7 @@ public class Flamethrower : MonoBehaviour
         fLifeTime -= Time.deltaTime;
         if(fLifeTime <= 0.0f)
         {
-            enemy.GetComponent<EnemyBase>().SetAttack(false);
+            //enemy.GetComponent<EnemyBase>().SetAttack(false);
             Destroy(gameObject);        
         }
 

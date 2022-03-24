@@ -30,7 +30,7 @@ public class Enemy_05 : MonoBehaviour
         cube.GetComponent<Flamethrower>().SetEnemy(gameObject);
         cube.GetComponent<BoxCollider>().isTrigger = true;
         //enemy.GetComponent<EnemyBase>().SetAttack(true);
-        enemyBase.SetAttack(true);
+        //enemyBase.SetAttack(true);
 
         // 当たり判定用キューブを透明に(デバッグ用)
         cube.GetComponent<MeshRenderer>().material.shader = Shader.Find("Legacy Shaders/Transparent/Diffuse"); ;
