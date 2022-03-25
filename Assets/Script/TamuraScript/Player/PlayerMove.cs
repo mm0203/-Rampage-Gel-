@@ -15,6 +15,7 @@ using UnityEngine;
 
 // 判定コンポーネントアタッチ
 [RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(CameraShaker))]
 
 public class PlayerMove : MonoBehaviour
 {
@@ -40,10 +41,14 @@ public class PlayerMove : MonoBehaviour
 
     private bool bShot = false;
 
+    // 画面揺れ
+    CameraShaker shaker;
+
     void Start()
     {
         state = GetComponent<PlayerState>();
         rb = GetComponent<Rigidbody>();
+        shaker = GetComponent<CameraShaker>();
     }
 
     void Update()
@@ -166,5 +171,10 @@ public class PlayerMove : MonoBehaviour
     private Vector3 GetMousePosition()
     {
         return new Vector3(Input.mousePosition.x, 0, Input.mousePosition.y);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+
     }
 }

@@ -50,7 +50,8 @@ public class PlayerState : MonoBehaviour
     void Update()
     {
         // キーボード移動 
-        if (Input.GetMouseButton(0) && Input.GetMouseButton(1))
+        if (Input.GetMouseButton(0) && Input.GetMouseButton(1) ||
+            Input.GetAxis("LTrigger") >= 0.3f && Input.GetAxis("RTrigger") >= 0.3f)
         {
             GotoHardState();
         }

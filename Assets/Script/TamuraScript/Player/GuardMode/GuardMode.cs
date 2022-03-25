@@ -16,7 +16,6 @@ using UnityEngine;
 
 // 判定コンポーネントアタッチ
 [RequireComponent(typeof(Stop))]
-[RequireComponent(typeof(UIGauge))]
 [RequireComponent(typeof(GuardBurst))]
 
 public class GuardMode : MonoBehaviour
@@ -35,15 +34,9 @@ public class GuardMode : MonoBehaviour
     private PlayerState state;
 
     // ガードゲージ
-    [SerializeField] private float fMaxGuardGauge;
-    private float fGuardGauge;
-    private bool bGuardGauge;
-    [SerializeField] private float fRecovery;
-    [SerializeField] private float cost;
-
-    // ゲージ取得
-    public float GetMaxGuardGauge => fMaxGuardGauge;
-    public float GetGuardGauge => fGuardGauge;
+    private PlayerStatus status;
+    [SerializeField] private int nRecovery = 2;
+    [SerializeField] private int nCost = 1;
 
     // Start is called before the first frame update
     void Start()
@@ -53,16 +46,12 @@ public class GuardMode : MonoBehaviour
         UIgauge = GetComponent<UIGauge>();
         state = GetComponent<PlayerState>();
         rb = GetComponent<Rigidbody>();
-
-        // 体力満タン
-        fGuardGauge = fMaxGuardGauge;
+        status = GetComponent<PlayerStatus>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        // UI
-        UIgauge.Refresh(fMaxGuardGauge, fGuardGauge);
         // ハードモードじゃないならゲージ回復
         if (!state.IsHard)
         {
@@ -82,7 +71,7 @@ public class GuardMode : MonoBehaviour
         }
 
         // ハードモードかつゲージ残量があるなら停止
-        if(state.IsHard && fGuardGauge > 0)
+        if(state.IsHard && status.Stamina > 0)
         {
             stop.DoStop(rb);
         }
@@ -96,20 +85,20 @@ public class GuardMode : MonoBehaviour
     private void RecoveryGauge()
     {
         // ゲージ量回復
-        fGuardGauge += fRecovery;
-        if(fGuardGauge >= fMaxGuardGauge)
+        status.Stamina += nRecovery;
+        if(status.Stamina >= status.MaxStamina)
         {
-            fGuardGauge = fMaxGuardGauge;
+            status.Stamina = status.MaxStamina;
         }
     }
 
     // ゲージ消費
     private void SubtractGauge()
     {
-        fGuardGauge -= cost;
-        if (fGuardGauge < 0)
+        status.Stamina -= nCost;
+        if (status.Stamina < 0)
         {
-            fGuardGauge = 0;
+            status.Stamina = 0;
         }
     }
 }

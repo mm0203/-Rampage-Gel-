@@ -17,8 +17,8 @@ public class PlayerUIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ImageList[0].value = status.MaxHP / status.HP;
-        ImageList[1].value = status.MaxGuard / status.Guard;
-        ImageList[2].value = status.MaxExp / status.Exp;
+        ImageList[0].value = (float)status.HP / (float)status.MaxHP;
+        ImageList[1].value = (float)status.Stamina / (float)status.MaxStamina;
+        ImageList[2].value = (float)status.Exp / (float)status.MaxExp;
     }
 }
