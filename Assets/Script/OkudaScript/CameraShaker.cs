@@ -4,6 +4,7 @@
 // 開発履歴
 //
 // 2022/03/05 author：奥田達磨 カメラの揺れ作成
+// 2022/03/24 author：竹尾晃史郎 カメラ飛び修正
 //
 //======================================================================
 using System.Collections;
@@ -21,21 +22,25 @@ public class CameraShaker : MonoBehaviour
     // 揺れの減算値
     public float fShakeDecay = 0.002f;
     // 揺れの強さ係数
-    public float fShakeAmount = 0.2f;       
+    public float fShakeAmount = 0.2f;
 
-    private Vector3 VOriginPosition;
-    private Quaternion QOriginRotation;
+    private Vector3 vOriginPosition;
+    private Quaternion qOriginRotation;
+
+    // 追加_揺らす前のカメラ座標
+    private Vector3 vOldPos;
+    private Quaternion qOldQuater;
 
     void Start()
     {
-        VOriginPosition = ShakeObject.localPosition;
-        QOriginRotation = ShakeObject.localRotation;
+        vOriginPosition = ShakeObject.localPosition;
+        qOriginRotation = ShakeObject.localRotation;
     }
 
     protected void Update()
     {
         // キーボード移動 
-        if (Input.GetMouseButton(0))
+        if (Input.GetKeyDown(KeyCode.Q))
         {
             Do();
         }
@@ -49,19 +54,29 @@ public class CameraShaker : MonoBehaviour
 
     public IEnumerator Shake()
     {
+        // 揺らす前のカメラ座標取得
+        vOldPos = ShakeObject.localPosition;
+        qOldQuater = ShakeObject.localRotation;
+
         float shakeIntensity = fShakeIntensity;
         while (shakeIntensity > 0)
         {
-            ShakeObject.localPosition = VOriginPosition + Random.insideUnitSphere * shakeIntensity;
+            // 揺らしている最中のカメラ座標取得
+            vOriginPosition = ShakeObject.localPosition;
+            qOriginRotation = ShakeObject.localRotation;
+
+            ShakeObject.localPosition = vOriginPosition + Random.insideUnitSphere * shakeIntensity;
             ShakeObject.localRotation = new Quaternion(
-                QOriginRotation.x + Random.Range(-shakeIntensity, shakeIntensity) * fShakeAmount,
-                QOriginRotation.y + Random.Range(-shakeIntensity, shakeIntensity) * fShakeAmount,
-                QOriginRotation.z + Random.Range(-shakeIntensity, shakeIntensity) * fShakeAmount,
-                QOriginRotation.w + Random.Range(-shakeIntensity, shakeIntensity) * fShakeAmount);
+                qOriginRotation.x + Random.Range(-shakeIntensity, shakeIntensity) * fShakeAmount,
+                qOriginRotation.y + Random.Range(-shakeIntensity, shakeIntensity) * fShakeAmount,
+                qOriginRotation.z + Random.Range(-shakeIntensity, shakeIntensity) * fShakeAmount,
+                qOriginRotation.w + Random.Range(-shakeIntensity, shakeIntensity) * fShakeAmount);
             shakeIntensity -= fShakeDecay;
             yield return false;
         }
-        ShakeObject.localPosition = VOriginPosition;
-        ShakeObject.localRotation = QOriginRotation;
+
+        // 揺らす前のカメラ座標に戻す
+        ShakeObject.localPosition = vOldPos;
+        ShakeObject.localRotation = qOldQuater;
     }
 }

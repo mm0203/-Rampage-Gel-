@@ -1,8 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Rendering.PostProcessing;
-
 //======================================================================
 // PostProcessControl.cs
 //======================================================================
@@ -11,6 +6,12 @@ using UnityEngine.Rendering.PostProcessing;
 // 2022/03/05 author：奥田達磨 ダメージ表現オンオフ実装
 //
 //======================================================================
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
+
+
 
 public class PostProcessControl : MonoBehaviour
 {
