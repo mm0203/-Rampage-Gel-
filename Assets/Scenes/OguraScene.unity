@@ -572,6 +572,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b51361171d67e140a2854055fb52894, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interbalTime: 3
   fMaxGuardGauge: 600
   fRecovery: 1
   cost: 0.5
@@ -599,6 +600,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a424f20c4572912428103f476962557d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interbalTime: 3
   fInitial: 50
   fLate: 0.995
   Direction: {fileID: 1361524033}
