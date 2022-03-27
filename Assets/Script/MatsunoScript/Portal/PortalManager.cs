@@ -8,6 +8,7 @@ public class PortalManager : MonoBehaviour
     public GameObject PortalA;
     public GameObject PortalB;
 
+
     void Start()
     {
 
@@ -26,6 +27,7 @@ public class PortalManager : MonoBehaviour
     {
         if (Portal1.gameObject != null)
         {
+            
             if (Portal2.GetComponentInChildren<PortalBarrier>() == null)
             {
                 Destroy(Portal1.gameObject);
