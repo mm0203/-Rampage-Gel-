@@ -8,6 +8,7 @@
 // 2022/03/03 author：田村敏基 ガードゲージなどのガードに必要な機能実装
 // 2022/03/11 author：田村敏基 UI機能実装(時間がなかっため、作り直したい)
 //                             爆発実装(敵に効果なし...)
+// 2022/03/27 author：田村敏基 爆発の威力を蓄える機能実装
 //
 //======================================================================
 using System.Collections;
@@ -16,7 +17,6 @@ using UnityEngine;
 
 // 判定コンポーネントアタッチ
 [RequireComponent(typeof(Stop))]
-[RequireComponent(typeof(UIGauge))]
 [RequireComponent(typeof(GuardBurst))]
 
 public class GuardMode : MonoBehaviour
@@ -25,7 +25,6 @@ public class GuardMode : MonoBehaviour
     private Stop stop;
 
     // バースト
-    private UIGauge UIgauge;
     private GuardBurst burst;
 
     // リジッドボディ
@@ -35,54 +34,51 @@ public class GuardMode : MonoBehaviour
     private PlayerState state;
 
     // ガードゲージ
-    [SerializeField] private float fMaxGuardGauge;
-    private float fGuardGauge;
-    private bool bGuardGauge;
-    [SerializeField] private float fRecovery;
-    [SerializeField] private float cost;
+    private PlayerStatus status;
+    [SerializeField] private int nRecovery = 2;
+    [SerializeField] private int nCost = 1;
 
-    // ゲージ取得
-    public float GetMaxGuardGauge => fMaxGuardGauge;
-    public float GetGuardGauge => fGuardGauge;
+    // 爆発威力を収納
+    private float fStockBurst = 0.0f;
 
     // Start is called before the first frame update
     void Start()
     {
         stop = GetComponent<Stop>();
         burst = GetComponent<GuardBurst>();
-        UIgauge = GetComponent<UIGauge>();
         state = GetComponent<PlayerState>();
         rb = GetComponent<Rigidbody>();
-
-        // 体力満タン
-        fGuardGauge = fMaxGuardGauge;
+        status = GetComponent<PlayerStatus>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        // UI
-        UIgauge.Refresh(fMaxGuardGauge, fGuardGauge);
         // ハードモードじゃないならゲージ回復
         if (!state.IsHard)
         {
             RecoveryGauge();
+            this.transform.localScale = new Vector3(1, 1, 1);
+            fStockBurst = 0.0f;
         }
         // ハードモードならゲージ消費
         if(state.IsHard)
         {
             SubtractGauge();
+            this.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
         }
         // バーストモードなら
         if(state.IsBurst)
         {
             // 爆発
-            burst.Explode();
+            burst.Explode(fStockBurst);
+            // 瞬間的に力を加えてはじく
+            rb.AddForce(transform.forward * fStockBurst, ForceMode.Impulse);
             state.GotoNormalState();
         }
 
         // ハードモードかつゲージ残量があるなら停止
-        if(state.IsHard && fGuardGauge > 0)
+        if(state.IsHard && status.Stamina > 0)
         {
             stop.DoStop(rb);
         }
@@ -96,20 +92,25 @@ public class GuardMode : MonoBehaviour
     private void RecoveryGauge()
     {
         // ゲージ量回復
-        fGuardGauge += fRecovery;
-        if(fGuardGauge >= fMaxGuardGauge)
+        status.Stamina += nRecovery;
+        if(status.Stamina >= status.MaxStamina)
         {
-            fGuardGauge = fMaxGuardGauge;
+            status.Stamina = status.MaxStamina;
         }
     }
 
     // ゲージ消費
     private void SubtractGauge()
     {
-        fGuardGauge -= cost;
-        if (fGuardGauge < 0)
+        status.Stamina -= nCost;
+        if (status.Stamina < 0)
         {
-            fGuardGauge = 0;
+            status.Stamina = 0;
         }
+    }
+
+    public void AddStockExplode(float damage)
+    {
+        fStockBurst += damage;
     }
 }

@@ -37,7 +37,7 @@ public class CameraShaker : MonoBehaviour
         qOriginRotation = ShakeObject.localRotation;
     }
 
-    protected void Update()
+    void Update()
     {
         // キーボード移動 
         if (Input.GetKeyDown(KeyCode.Q))

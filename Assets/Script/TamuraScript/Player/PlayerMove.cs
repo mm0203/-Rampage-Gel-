@@ -7,6 +7,8 @@
 // 2022/03/05 author：田村敏基 画面のどこを操作しても動くように大改造
 // 2022/03/09 author：田村敏基 パッド操作実装
 // 2022/03/09 author：田村敏基 移動方向を向くように変更
+// 2022/03/25 author：田村敏基 アニメーション実装
+// 2022/03/27 author：田村敏基 updateの最初にアニメーションを持ってくるよう変更
 //
 //======================================================================
 using System.Collections;
@@ -15,6 +17,7 @@ using UnityEngine;
 
 // 判定コンポーネントアタッチ
 [RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(CameraShaker))]
 
 public class PlayerMove : MonoBehaviour
 {
@@ -40,14 +43,21 @@ public class PlayerMove : MonoBehaviour
 
     private bool bShot = false;
 
+    // 画面揺れ
+    CameraShaker shaker;
+
     void Start()
     {
         state = GetComponent<PlayerState>();
         rb = GetComponent<Rigidbody>();
+        shaker = GetComponent<CameraShaker>();
     }
 
     void Update()
     {
+        anime.SetFloat("pull", vCurrentForce.magnitude);
+        anime.SetFloat("blowway", rb.velocity.magnitude);
+
         if (!state.IsNormal)
         {
             fStockPower = 0;
@@ -64,8 +74,6 @@ public class PlayerMove : MonoBehaviour
         PadMove();
         KeyBoardMove();
 
-        anime.SetFloat("pull", vCurrentForce.magnitude);
-        anime.SetFloat("blowway", rb.velocity.magnitude);
         // 減速
         rb.velocity *= fLate;
     }
@@ -166,5 +174,10 @@ public class PlayerMove : MonoBehaviour
     private Vector3 GetMousePosition()
     {
         return new Vector3(Input.mousePosition.x, 0, Input.mousePosition.y);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+
     }
 }
