@@ -11,6 +11,4 @@ public class PortalData : ScriptableObject
     // ƒ|[ƒ^ƒ‹‚ªŠ„‚ê‚é‚Ü‚Å‚Ì‰ñ”
     [System.NonSerialized]
     public int Hp = 2;
-
-    public List<int> PortalNum;
 }
