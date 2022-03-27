@@ -8,6 +8,7 @@
 // 2022/03/03 author：田村敏基 ガードゲージなどのガードに必要な機能実装
 // 2022/03/11 author：田村敏基 UI機能実装(時間がなかっため、作り直したい)
 //                             爆発実装(敵に効果なし...)
+// 2022/03/27 author：田村敏基 爆発の威力を蓄える機能実装
 //
 //======================================================================
 using System.Collections;
@@ -24,7 +25,6 @@ public class GuardMode : MonoBehaviour
     private Stop stop;
 
     // バースト
-    private UIGauge UIgauge;
     private GuardBurst burst;
 
     // リジッドボディ
@@ -38,12 +38,14 @@ public class GuardMode : MonoBehaviour
     [SerializeField] private int nRecovery = 2;
     [SerializeField] private int nCost = 1;
 
+    // 爆発威力を収納
+    private float fStockBurst = 0.0f;
+
     // Start is called before the first frame update
     void Start()
     {
         stop = GetComponent<Stop>();
         burst = GetComponent<GuardBurst>();
-        UIgauge = GetComponent<UIGauge>();
         state = GetComponent<PlayerState>();
         rb = GetComponent<Rigidbody>();
         status = GetComponent<PlayerStatus>();
@@ -56,17 +58,22 @@ public class GuardMode : MonoBehaviour
         if (!state.IsHard)
         {
             RecoveryGauge();
+            this.transform.localScale = new Vector3(1, 1, 1);
+            fStockBurst = 0.0f;
         }
         // ハードモードならゲージ消費
         if(state.IsHard)
         {
             SubtractGauge();
+            this.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
         }
         // バーストモードなら
         if(state.IsBurst)
         {
             // 爆発
-            burst.Explode();
+            burst.Explode(fStockBurst);
+            // 瞬間的に力を加えてはじく
+            rb.AddForce(transform.forward * fStockBurst, ForceMode.Impulse);
             state.GotoNormalState();
         }
 
@@ -100,5 +107,10 @@ public class GuardMode : MonoBehaviour
         {
             status.Stamina = 0;
         }
+    }
+
+    public void AddStockExplode(float damage)
+    {
+        fStockBurst += damage;
     }
 }

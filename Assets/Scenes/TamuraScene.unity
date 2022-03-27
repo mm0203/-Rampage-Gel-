@@ -1498,8 +1498,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: bb81c22f097fd1147b74a413511606ba, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: bb81c22f097fd1147b74a413511606ba, type: 3}
       propertyPath: m_Name
       value: idle
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: bb81c22f097fd1147b74a413511606ba, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb81c22f097fd1147b74a413511606ba, type: 3}
@@ -1683,8 +1691,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b1dc29510b223547a00faa1b39f1d77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 100
-  power: 500
   UpandDown: 0
 --- !u!114 &1637378029
 MonoBehaviour:
