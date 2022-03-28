@@ -104,9 +104,10 @@ public class Boss01 : MonoBehaviour
     //-------------------------
     void Update()
     {
-        Death();
         Move();
         Attack();
+        Death();
+
     }
 
     //----------------------------
