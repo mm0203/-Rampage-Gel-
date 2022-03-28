@@ -6,11 +6,8 @@
 // 2022/03/05 author：小椋駿 製作開始　敵のベース処理追加
 // 2022/03/11 author：小椋駿 バースト処理追加
 // 2022/03/15 author：小椋駿 ステータス部分変更
-<<<<<<< HEAD:Assets/08_Script/OguraScript/EnemyBase.cs
 // 2022/03/28 auther：竹尾　応急　経験値機能追加
-=======
 // 2022/03/24 author：小椋駿 効果音処理の追加
->>>>>>> 8709684d4e54354a91684949987394adf606b0ff:Assets/Script/OguraScript/EnemyBase.cs
 //
 //======================================================================
 
@@ -108,14 +105,13 @@ public class EnemyBase : MonoBehaviour
         // HP0以下で消滅
         if (status.HP <= 0)
         {
-<<<<<<< HEAD:Assets/08_Script/OguraScript/EnemyBase.cs
             //*応急*
             player.GetComponent<PlayerExp>().AddExp(10);
             
-=======
+
             // 効果音再生
             AudioSource.PlayClipAtPoint(DeathSE,transform.position);
->>>>>>> 8709684d4e54354a91684949987394adf606b0ff:Assets/Script/OguraScript/EnemyBase.cs
+
 
             // リストから削除
             manager.NowEnemyList.Remove(gameObject);

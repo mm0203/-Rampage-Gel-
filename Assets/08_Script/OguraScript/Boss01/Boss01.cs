@@ -4,7 +4,7 @@
 // 開発履歴
 //
 // 2022/03/27 author：小椋駿 製作開始　ボスベース処理
-//
+// 2022/03/28 author：竹尾　応急　ポータル出現、リスト消去機能コメントアウト
 //======================================================================
 
 using System.Collections;
@@ -32,6 +32,9 @@ public class Boss01 : MonoBehaviour
     private Animator animator;
     private Rigidbody rb;
 
+    //*応急*
+    [SerializeField] GameObject Portals;
+    bool bPortal = false;
 
     // 前フレームの座標
     private Vector3 vOldPos;
@@ -114,12 +117,24 @@ public class Boss01 : MonoBehaviour
         // HP0以下で消滅
         if (status.HP <= 0)
         {
-            // 効果音再生
-            AudioSource.PlayClipAtPoint(DeathSE, transform.position);
+            
+
+            //*応急*
+            if(bPortal == false)
+            {
+                // 効果音再生
+                AudioSource.PlayClipAtPoint(DeathSE, transform.position);
+
+                Instantiate(Portals, this.gameObject.transform.position, Quaternion.identity);
+                bPortal = true;
+
+               
+            }
 
             // リストから削除
-            manager.NowEnemyList.Remove(gameObject);
+            //manager.NowEnemyList.Remove(gameObject); //3/28 死なないためコメントアウト
             Destroy(this.gameObject);
+
         }
     }
 
@@ -208,10 +223,12 @@ public class Boss01 : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             // ダメージ処理
-            status.HP -= 10;     // TODO:ここにプレイヤーの攻撃力が入る
+            //status.HP -= 10;     // TODO:ここにプレイヤーの攻撃力が入る
+            status.HP -= player.GetComponent<PlayerStatus>().Attack;
 
             // ダメージ表記
-            ViewDamage(10);      // TODO:ここにプレイヤーの攻撃力が入る
+            //ViewDamage(10);      // TODO:ここにプレイヤーの攻撃力が入る
+            ViewDamage(player.GetComponent<PlayerStatus>().Attack);      
         }
     }
 

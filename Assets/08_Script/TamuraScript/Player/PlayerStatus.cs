@@ -15,18 +15,18 @@ public class PlayerStatus : MonoBehaviour
 {
     // 基本ステータス(最大)
     private int nMaxLevel = 1;
-    private int nMaxHp = 20;
+    private int nMaxHp = 40;
     private int nMaxStamina = 450;
-    private int nMaxAttack = 10;
+    private int nMaxAttack = 22;
     private int nMaxExp = 10;
     private float fMaxBurstPower = 5;
     private float fMaxBurstRadius = 1;
 
     // 基本ステータス(現在)
     private int nLevel = 1;
-    private int nHp = 20;
+    private int nHp = 40;
     private int nStamina = 450;
-    private int nAttack = 13;
+    private int nAttack = 22;
     private float fSpeed = 1.0f;
     private int nExp = 0;
     private float fBurstPower = 5;
@@ -36,7 +36,7 @@ public class PlayerStatus : MonoBehaviour
     private int nUpHP = 10;
     private int nUpStamina = 10;
     private int nUpExp = 20;
-    private int nUpAttack = 3;
+    private int nUpAttack = 6;
 
     // 最大ステータスを参照
     public int MaxLevel { get { return nMaxLevel; } set { nMaxLevel = value; } }

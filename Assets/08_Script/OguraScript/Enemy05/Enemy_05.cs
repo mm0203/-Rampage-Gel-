@@ -1,19 +1,17 @@
-<<<<<<< HEAD:Assets/08_Script/OguraScript/Enemy05/Enemy_05.cs
+
 //======================================================================
 // Enemy_05.cs
 //======================================================================
 // 開発履歴
 //
 // 2022/03/28 author：竹尾　応急 エフェクト発生組み込み
-=======
-
 //======================================================================
 // Flamethrower.cs
 //======================================================================
 // 開発履歴
 //
 // 2022/03/21 author：小椋駿 製作開始　敵の火炎放射
->>>>>>> 8709684d4e54354a91684949987394adf606b0ff:Assets/Script/OguraScript/Enemy05/Enemy_05.cs
+
 //
 //======================================================================
 using System.Collections;
@@ -25,13 +23,10 @@ public class Enemy_05 : MonoBehaviour
     GameObject cube;
     EnemyBase enemyBase;
 
-<<<<<<< HEAD:Assets/08_Script/OguraScript/Enemy05/Enemy_05.cs
     //*応急* エフェクトスクリプト
     [SerializeField] AID_PlayerEffect effect;
 
-=======
-    // 火炎放射距離
->>>>>>> 8709684d4e54354a91684949987394adf606b0ff:Assets/Script/OguraScript/Enemy05/Enemy_05.cs
+
     float fDistance = 3.0f;
 
     private void Start()

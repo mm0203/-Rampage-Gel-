@@ -2285,7 +2285,7 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 0
-  m_Acceleration: 8
+  m_Acceleration: 4
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 0
@@ -2309,7 +2309,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nLevel: 1
-  nHp: 20
+  nHp: 30
   nAttack: 10
   fSpeed: 3
   nUpHP: 3
@@ -2339,7 +2339,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DamageObj: {fileID: 1599770427430637572, guid: f281449c9f2cf8045930e932567b2b5e, type: 3}
-  DeathSE: {fileID: 8300000, guid: 66e800b23cb418341b815161387a7edc, type: 3}
+  DeathSE: {fileID: 8300000, guid: da24daa9fcff69c4d884496fda891063, type: 3}
   fAttackDis: 1.3
   fAttackTime: 3
 --- !u!95 &1518576576450875897
