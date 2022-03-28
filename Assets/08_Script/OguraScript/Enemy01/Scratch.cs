@@ -33,19 +33,24 @@ public class Scratch : MonoBehaviour
     {
         Destroy(gameObject, 0.5f);
     }
-
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
+<<<<<<< HEAD:Assets/08_Script/OguraScript/Enemy01/Scratch.cs
         if (collision.transform.tag == "Player")
+=======
+        if (other.transform.tag == "Player")
+>>>>>>> 8709684d4e54354a91684949987394adf606b0ff:Assets/Script/OguraScript/Enemy01/Scratch.cs
         {
             // É_ÉÅÅ[ÉWèàóù
             //player.GetComponent<StatusComponent>().HP -= enemy.GetComponent<StatusComponent>().Attack;
             //Debug.Log(player.GetComponent<StatusComponent>().HP);
+<<<<<<< HEAD:Assets/08_Script/OguraScript/Enemy01/Scratch.cs
 
             //*âûã}*
             player.GetComponent<PlayerHP>().OnDamage(enemy.GetComponent<StatusComponent>().Attack);
+=======
+            Destroy(gameObject);
+>>>>>>> 8709684d4e54354a91684949987394adf606b0ff:Assets/Script/OguraScript/Enemy01/Scratch.cs
         }
-
-       Destroy(gameObject);
     }
 }

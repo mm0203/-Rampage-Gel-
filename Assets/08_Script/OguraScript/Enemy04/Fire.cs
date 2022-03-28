@@ -36,6 +36,7 @@ public class Fire : MonoBehaviour
     public void SetEnemy(GameObject obj) { enemy = obj; }
     public void SetCircle(GameObject obj) { AttackCircle = obj; }
 
+
     //----------------------------------
     // ‰Šú‰»
     //----------------------------------

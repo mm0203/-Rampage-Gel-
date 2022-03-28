@@ -35,6 +35,7 @@ public class Enemy_03 : MonoBehaviour
         spher.AddComponent<Rush>();
         spher.GetComponent<Rush>().SetPlayer(enemyBase.GetComponent<EnemyBase>().GetPlayer);
         spher.GetComponent<Rush>().SetEnemy(this.gameObject);
+        spher.GetComponent<BoxCollider>().isTrigger = true;
             
         spher.AddComponent<Rigidbody>();
         spher.GetComponent<Rigidbody>().useGravity = false;

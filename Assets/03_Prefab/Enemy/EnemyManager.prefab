@@ -49,7 +49,7 @@ MonoBehaviour:
   vDistance: {x: 10, y: 5}
   EnemyList:
   - {fileID: 2876346242041339717, guid: 21c8bf3978b42034ab1c94fc3dc93b7c, type: 3}
-  - {fileID: 6363082445805715465, guid: 31fbfe1f7dd05b142817c4279d4a3118, type: 3}
+  - {fileID: 8943500349344443402, guid: d6761f7fc7c990946bdb28fab140fa1a, type: 3}
   - {fileID: 2430088365750963577, guid: 9afe7bc1ce51a2b46891ca258baf00a5, type: 3}
   - {fileID: 3308506822130718749, guid: 99905d3c860ddaa4d906b5b403bf9b36, type: 3}
   - {fileID: 5032672982941512809, guid: 8634aee754798724fbcb47be9198d4e5, type: 3}
