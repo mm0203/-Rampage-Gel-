@@ -57,6 +57,8 @@ public class EnemyBase : MonoBehaviour
     [Header("攻撃頻度")] [SerializeField, Range(0.0f, 10.0f)] private float fAttackTime = 3.0f;
     private float fAttackCount;  
 
+
+    // ゲッター、セッター
     public void SetManager(EnemyManager obj) { manager = obj; }
     public void SetPlayer(GameObject obj) { player = obj; }
     public GameObject GetPlayer { get { return player; } }
@@ -70,7 +72,6 @@ public class EnemyBase : MonoBehaviour
     {
         // ステータス初期化
         status = GetComponent<StatusComponent>();
-        status.Level = 0;   // TODO:後々Managerで設定する??
         status.HP = status.HP + (status.Level * status.UpHP);
         status.Attack = status.Attack + (status.Level * status.UpAttack);
         status.Speed = status.Speed;
@@ -182,7 +183,6 @@ public class EnemyBase : MonoBehaviour
 
         // プレイヤーとの距離計算
         Vector3 vDiffPos = this.transform.position - player.transform.position;
-        Debug.Log(fAttackDis);
 
         // 敵との距離が一定以下なら攻撃処理
         if ((vDiffPos.x <= fAttackDis && vDiffPos.x >= -fAttackDis) && (vDiffPos.z <= fAttackDis && vDiffPos.z >= -fAttackDis))
@@ -200,11 +200,10 @@ public class EnemyBase : MonoBehaviour
     }
 
     //----------------------------
-    // プレイヤー追跡
+    // プレイヤーとの接触時
     //----------------------------
     private void OnTriggerEnter(Collider other)
     {
-        // プレイヤーが範囲に入ったら追う
         // プレイヤーとの衝突時ダメージ
         if (other.CompareTag("Player"))
         {

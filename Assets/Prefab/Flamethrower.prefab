@@ -488,9 +488,9 @@ MonoBehaviour:
   nLevel: 1
   nHp: 20
   nAttack: 10
-  fSpeed: 1
-  nUpHP: 1
-  nUpAttack: 1
+  fSpeed: 1.5
+  nUpHP: 3
+  nUpAttack: 3
 --- !u!195 &2892741171734620416
 NavMeshAgent:
   m_ObjectHideFlags: 0

@@ -1,3 +1,12 @@
+
+//======================================================================
+// Flamethrower.cs
+//======================================================================
+// 開発履歴
+//
+// 2022/03/21 author：小椋駿 製作開始　敵の火炎放射
+//
+//======================================================================
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +16,7 @@ public class Enemy_05 : MonoBehaviour
     GameObject cube;
     EnemyBase enemyBase;
 
+    // 火炎放射距離
     float fDistance = 3.0f;
 
     private void Start()
@@ -17,7 +27,6 @@ public class Enemy_05 : MonoBehaviour
 
     private void AttackEnemy05()
     {
-        // 弾を生成して飛ばす
         cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
 
 
@@ -28,16 +37,12 @@ public class Enemy_05 : MonoBehaviour
 
         cube.AddComponent<Flamethrower>();
         cube.GetComponent<Flamethrower>().SetEnemy(gameObject);
+        cube.GetComponent<Flamethrower>().SetDiss(fDistance);
         cube.GetComponent<BoxCollider>().isTrigger = true;
-        //enemy.GetComponent<EnemyBase>().SetAttack(true);
         enemyBase.SetAttack(true);
 
         // 当たり判定用キューブを透明に(デバッグ用)
         cube.GetComponent<MeshRenderer>().material.shader = Shader.Find("Legacy Shaders/Transparent/Diffuse"); ;
         cube.GetComponent<MeshRenderer>().material.color -= new Color32(255, 255, 255, 255);
-
-        
-
-
     }
 }

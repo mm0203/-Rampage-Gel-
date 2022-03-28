@@ -28,12 +28,18 @@ public class BossTimer : MonoBehaviour
     // ボス出現時間
     [Header("ボス出現時間")][SerializeField]float fCount = 60.0f;
 
+    // 出現するボス
+    [Header("出現するボス")][SerializeField]GameObject Boss;
+
+    GameObject Player;
+
     void Start()
     {
         // 初期化
         slider = GetComponent<Slider>();
         textMesh = GetComponentInChildren<TextMeshProUGUI>();
         fTimer = fCount;
+        Player = GameObject.Find("Player");
     }
 
     void Update()
@@ -45,7 +51,11 @@ public class BossTimer : MonoBehaviour
         {
             fTimer = 0.0f;
 
-            // ボスの出現処理？？
+            // ボスの出現処理(座標は適当)
+            Instantiate(Boss, new Vector3(0.0f, 0.0f, 0.0f), Boss.transform.rotation);
+
+            // 消滅（仮）
+            Destroy(gameObject);
         }
 
         // ゲージ減少
