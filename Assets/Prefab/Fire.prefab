@@ -71,9 +71,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DamageObj: {fileID: 1599770427430637572, guid: f281449c9f2cf8045930e932567b2b5e, type: 3}
-  fRadius: 5
-  fMissDis: 8
-  fRandMove: 10
+  DeathSE: {fileID: 8300000, guid: 66e800b23cb418341b815161387a7edc, type: 3}
   fAttackDis: 6.5
   fAttackTime: 3
 --- !u!54 &2853013210424789697
@@ -121,8 +119,8 @@ MonoBehaviour:
   nHp: 20
   nAttack: 10
   fSpeed: 1
-  nUpHP: 1
-  nUpAttack: 1
+  nUpHP: 3
+  nUpAttack: 3
 --- !u!195 &4618613774713242996
 NavMeshAgent:
   m_ObjectHideFlags: 0

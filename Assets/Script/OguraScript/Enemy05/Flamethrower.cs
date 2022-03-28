@@ -14,8 +14,11 @@ using UnityEngine;
 
 public class Flamethrower : MonoBehaviour
 {
-    // 火柱の時間
+    // 火炎放射の時間
     float fLifeTime = 2.0f;
+
+    // 火炎放射の長さ
+    float fDis;
 
     // ダメージを与える間隔
     float fInterval = 0.5f;
@@ -27,24 +30,25 @@ public class Flamethrower : MonoBehaviour
     public void SetPlayer(GameObject obj) { player = obj; }
     public void SetEnemy(GameObject obj) { enemy = obj; }
 
+    public void SetDiss(float dis) { fDis = dis; }
 
     void Start()
     {
         gameObject.GetComponent<MeshRenderer>().material.color += new Color32(255, 0, 0, 122);
-
- 
-
-        
     }
 
 
     void Update()
     {
+
         // 設定時間後、攻撃終了
         fLifeTime -= Time.deltaTime;
         if(fLifeTime <= 0.0f)
         {
-            enemy.GetComponent<EnemyBase>().SetAttack(false);
+            if(enemy.GetComponent<EnemyBase>() != null)
+            {
+                enemy.GetComponent<EnemyBase>().SetAttack(false);
+            }
             Destroy(gameObject);        
         }
 
@@ -54,9 +58,14 @@ public class Flamethrower : MonoBehaviour
             Destroy(gameObject);
         }
 
+        if(enemy != null)
+        {
+            // 角度、座標が追従するように
+            transform.rotation = enemy.transform.rotation;
+            transform.position = new Vector3(enemy.transform.position.x + transform.forward.x * fDis, transform.position.y, enemy.transform.position.z + transform.forward.z * fDis);
+        }
 
     }
-
 
     //----------------------------------
     // 当たり判定

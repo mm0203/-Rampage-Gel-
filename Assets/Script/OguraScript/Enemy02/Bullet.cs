@@ -21,7 +21,7 @@ public class Bullet : MonoBehaviour
     public void SetPlayer(GameObject obj) { player = obj; }
     public void SetEnemy(GameObject obj) { enemy = obj; }
 
-    //---------------------------
+
     void Update()
     {
         // 前方へ飛ばす
@@ -30,17 +30,16 @@ public class Bullet : MonoBehaviour
         Destroy(gameObject, 3.0f);
     }
 
-    private void OnCollisionEnter(Collision collision)
+
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.transform.tag == "Player")
+        if (other.transform.tag == "Player")
         {
             // ダメージ処理
             //player.GetComponent<StatusComponent>().HP -= enemy.GetComponent<StatusComponent>().Attack;
             //Debug.Log(player.GetComponent<StatusComponent>().HP);
+            Destroy(gameObject);
         }
-
-        Destroy(gameObject);
     }
 
-    
 }

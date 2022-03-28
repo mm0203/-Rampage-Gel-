@@ -32,16 +32,14 @@ public class Scratch : MonoBehaviour
     {
         Destroy(gameObject, 0.5f);
     }
-
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.transform.tag == "Player")
-        {           
+        if (other.transform.tag == "Player")
+        {
             // É_ÉÅÅ[ÉWèàóù
             //player.GetComponent<StatusComponent>().HP -= enemy.GetComponent<StatusComponent>().Attack;
             //Debug.Log(player.GetComponent<StatusComponent>().HP);
+            Destroy(gameObject);
         }
-
-       Destroy(gameObject);
     }
 }

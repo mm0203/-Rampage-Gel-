@@ -46,6 +46,7 @@ public class Enemy_04 : MonoBehaviour
         cube.GetComponent<BoxCollider>().isTrigger = true;
 
         // 必要な情報をセット
+        Circle.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
         cube.AddComponent<Fire>();
         cube.GetComponent<Fire>().SetCircle(Circle);
         cube.GetComponent<Fire>().SetEnemy(gameObject);
