@@ -3,19 +3,12 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - Enemy
-<<<<<<< HEAD
-  - Item
-  - AID_Effect
-=======
-  - OBject
->>>>>>> 8709684d4e54354a91684949987394adf606b0ff
+  tags: []
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Player
+  - 
   - Water
   - UI
   - 
