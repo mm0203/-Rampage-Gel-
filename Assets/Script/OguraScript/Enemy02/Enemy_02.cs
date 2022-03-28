@@ -43,5 +43,6 @@ public class Enemy_02 : MonoBehaviour
         spher.AddComponent<Rigidbody>();
         spher.GetComponent<Rigidbody>().useGravity = false;
         spher.GetComponent<Rigidbody>().isKinematic = true;
+        spher.GetComponent<SphereCollider>().isTrigger = true;
     }
 }
