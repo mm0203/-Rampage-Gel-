@@ -56,7 +56,9 @@ public class EnemyBase : MonoBehaviour
 
     [Header("攻撃を開始する距離")] [SerializeField, Range(0.0f, 50.0f)] private float fAttackDis = 3.0f;
     [Header("攻撃頻度")] [SerializeField, Range(0.0f, 10.0f)] private float fAttackTime = 3.0f;
-    private float fAttackCount;  
+    private float fAttackCount;
+
+    [Header("エフェクトシステム")] [SerializeField] EnemyEffect effect;
 
 
     // ゲッター、セッター
@@ -65,6 +67,8 @@ public class EnemyBase : MonoBehaviour
     public GameObject GetPlayer { get { return player; } }
 
     public void SetAttack(bool flag) { bAttack = flag; }
+
+    public EnemyEffect GetEffect { get { return effect; } }
 
     //----------------------------
     // 初期化
