@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9bc43e142692db4e92eef81e1903ca4, type: 3}
   m_Name: MapMagic Graph
   m_EditorClassIdentifier: 
-  changeVersion: 1580
+  changeVersion: 1589
   serializedVersion: 0
-  instanceId: 17248
+  instanceId: 34820
   guiShowDependent: 0
   guiShowShared: 0
   guiShowExposed: 0
@@ -131,9 +131,9 @@ MonoBehaviour:
       - t: 11
         v: -1185052532905345023
       - t: 9
-        v: 4590313736035738478
+        v: 4623141318144572155
       - t: 9
-        v: 4616511963198087443
+        v: 4628280009761894905
       - t: 255
         v: 10
       - t: 255
@@ -304,9 +304,9 @@ MonoBehaviour:
       - t: 11
         v: -1037185811155517439
       - t: 9
-        v: 4605235963041067880
+        v: 4612985081739902924
       - t: 9
-        v: 4630753062981023564
+        v: 4632807253287309096
       - t: 255
         v: 15
       - t: 255
@@ -395,9 +395,9 @@ MonoBehaviour:
       - t: 11
         v: -1027938918365921278
       - t: 9
-        v: 4571139210262245854
+        v: 4612046081217596175
       - t: 9
-        v: 4577955858658233837
+        v: 4569986288757639007
       - t: 255
         v: 18
       - t: 255
@@ -470,7 +470,7 @@ MonoBehaviour:
       - t: 9
         v: 0
       - t: 9
-        v: 4564560351926583034
+        v: 4561440258104740754
       - t: 255
         v: 27
       - t: 255

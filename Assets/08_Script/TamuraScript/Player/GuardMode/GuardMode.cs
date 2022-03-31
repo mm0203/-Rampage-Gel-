@@ -58,7 +58,8 @@ public class GuardMode : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(fStockBurst);
+        Debug.Log("バースト回数:" + fStockBurst);
+
         // ハードモードじゃないならゲージ回復
         if (!state.IsHard)
         {
