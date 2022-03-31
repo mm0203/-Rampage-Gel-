@@ -31,7 +31,7 @@ ModelImporter:
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 1
+    animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -85,7 +85,117 @@ ModelImporter:
   humanDescription:
     serializedVersion: 3
     human: []
-    skeleton: []
+    skeleton:
+    - name: idle(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: DefoPlayer_Group
+      parentName: idle(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: defoPlayer
+      parentName: DefoPlayer_Group
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: slimeBottom
+      parentName: DefoPlayer_Group
+      position: {x: -0, y: 0.017127419, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: slimeTop
+      parentName: slimeBottom
+      position: {x: -0, y: 0.2828726, z: 0}
+      rotation: {x: 0.1085245, y: -0, z: -0.60089636, w: 0.79192555}
+      scale: {x: 1, y: 1, z: 1}
+    - name: right_earRoot
+      parentName: slimeTop
+      position: {x: 0.13546708, y: -0.035699643, z: -0.02430022}
+      rotation: {x: -0.25445768, y: 0.96242076, z: 0.024246043, w: -0.09170442}
+      scale: {x: 1, y: 1, z: 1}
+    - name: right_ear00
+      parentName: right_earRoot
+      position: {x: -0.016573757, y: 0, z: 3.330669e-18}
+      rotation: {x: -0.0005038032, y: 0.0016907933, z: 0.22541142, w: 0.9742621}
+      scale: {x: 1, y: 1, z: 1}
+    - name: right_ear01
+      parentName: right_ear00
+      position: {x: -0.04789938, y: -1.0658141e-16, z: -1.3877787e-18}
+      rotation: {x: 0.0009789073, y: -0.0039215097, z: -0.18138823, w: 0.98340327}
+      scale: {x: 1, y: 1, z: 1}
+    - name: right_ear02
+      parentName: right_ear01
+      position: {x: -0.0449501, y: 4.760081e-17, z: -2.220446e-18}
+      rotation: {x: -0.21098386, y: 0.9730947, z: 0.019618837, w: 0.090485536}
+      scale: {x: 1, y: 1, z: 1}
+    - name: right_antennaRoot
+      parentName: slimeTop
+      position: {x: 0.07333093, y: -0.0411762, z: 0.10086288}
+      rotation: {x: -0.48503187, y: 0.78179336, z: -0.29232857, w: 0.26093528}
+      scale: {x: 1, y: 1, z: 1}
+    - name: right_antenna00
+      parentName: right_antennaRoot
+      position: {x: -0.01674079, y: -1.5543122e-17, z: -1.2212453e-17}
+      rotation: {x: -0.058414213, y: 0.060240336, z: -0.16396855, w: 0.98289025}
+      scale: {x: 1, y: 1, z: 1}
+    - name: right_antenna01
+      parentName: right_antenna00
+      position: {x: -0.034889463, y: -1.3322676e-17, z: 2.220446e-18}
+      rotation: {x: 0.007203608, y: -0.008737705, z: -0.0021958156, w: 0.99993354}
+      scale: {x: 1, y: 1, z: 1}
+    - name: right_antenna02
+      parentName: right_antenna01
+      position: {x: -0.032509137, y: 1.2212453e-17, z: -2.1094237e-17}
+      rotation: {x: -0.5026753, y: 0.7683838, z: -0.21685322, w: -0.3314794}
+      scale: {x: 1, y: 1, z: 1}
+    - name: left_antennaRoot
+      parentName: slimeTop
+      position: {x: -0.073330894, y: -0.041176, z: 0.100862995}
+      rotation: {x: 0.3364246, y: -0.22693999, z: 0.80609214, w: -0.4307344}
+      scale: {x: 1, y: 1, z: 1}
+    - name: left_antenna00
+      parentName: left_antennaRoot
+      position: {x: 0.016740726, y: 0.00000020850591, z: -0.000000018567263}
+      rotation: {x: -0.044048656, y: 0.02069723, z: 0.11413838, w: 0.992272}
+      scale: {x: 1, y: 1, z: 1}
+    - name: left_antenna01
+      parentName: left_antenna00
+      position: {x: 0.034889407, y: 0.0000001394693, z: 0.00000003799334}
+      rotation: {x: 0.00785178, y: -0.0046504256, z: -0.015270689, w: 0.9998418}
+      scale: {x: 1, y: 1, z: 1}
+    - name: left_antenna02
+      parentName: left_antenna01
+      position: {x: 0.032509334, y: -0.0000000023154088, z: -0.0000000023837974}
+      rotation: {x: -0.5026753, y: 0.7683838, z: -0.21685322, w: -0.3314794}
+      scale: {x: 1, y: 1, z: 1}
+    - name: left_earRoot
+      parentName: slimeTop
+      position: {x: -0.135467, y: -0.035699997, z: -0.0243002}
+      rotation: {x: -0.09170442, y: -0.024246043, z: 0.96242076, w: 0.25445768}
+      scale: {x: 1, y: 1, z: 1}
+    - name: left_ear00
+      parentName: left_earRoot
+      position: {x: 0.0165743, y: -0.00000041039846, z: -0.000000014602157}
+      rotation: {x: -0.0005038032, y: 0.0016907933, z: 0.22541142, w: 0.9742621}
+      scale: {x: 1, y: 1, z: 1}
+    - name: left_ear01
+      parentName: left_ear00
+      position: {x: 0.047899093, y: 0.00000066526485, z: 0.000000009150638}
+      rotation: {x: 0.0009789073, y: -0.0039215097, z: -0.18138823, w: 0.98340327}
+      scale: {x: 1, y: 1, z: 1}
+    - name: left_ear02
+      parentName: left_ear01
+      position: {x: 0.044950027, y: -0.0000002991876, z: -0.000000054224035}
+      rotation: {x: -0.21098386, y: 0.9730947, z: 0.019618837, w: 0.090485536}
+      scale: {x: 1, y: 1, z: 1}
+    - name: DeformTarget
+      parentName: idle(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
     armTwist: 0.5
     foreArmTwist: 0.5
     upperLegTwist: 0.5
@@ -94,9 +204,9 @@ ModelImporter:
     legStretch: 0.05
     feetSpacing: 0
     globalScale: 1
-    rootMotionBoneName: 
+    rootMotionBoneName: DefoPlayer_Group
     hasTranslationDoF: 0
-    hasExtraRoot: 0
+    hasExtraRoot: 1
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   autoGenerateAvatarMappingIfUnspecified: 1

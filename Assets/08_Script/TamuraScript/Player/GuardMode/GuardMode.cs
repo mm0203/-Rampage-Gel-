@@ -39,6 +39,10 @@ public class GuardMode : PlayerManager
     //*応急* エフェクトスクリプト
     [SerializeField] AID_PlayerEffect effect;
 
+    // ガードモデルとデフォルトモデル
+    [SerializeField] private GameObject DefaultModel;
+    [SerializeField] private GameObject GuardModel;
+
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -61,6 +65,7 @@ public class GuardMode : PlayerManager
     // Update is called once per frame
     protected override void Update()
     {
+<<<<<<< HEAD
 <<<<<<< HEAD:Assets/08_Script/TamuraScript/GuardMode/GuardMode.cs
         base.Update();
 
@@ -71,16 +76,28 @@ public class GuardMode : PlayerManager
 >>>>>>> d2f65eada7be6604d61b693afd0e28d3b8accd2c:Assets/08_Script/TamuraScript/Player/GuardMode/GuardMode.cs
         // ハードモードじゃないならゲージ回復
         if (!IsHard)
+=======
+        // ハードモードじゃない
+        if (!state.IsHard)
+>>>>>>> 68d270aaeb83160bd5b19f520e97cbc3b59f9431
         {
+            // ゲージ回復
             RecoveryGauge();
-            this.transform.localScale = new Vector3(1, 1, 1);
-            //fStockBurst = 0.0f;
+            DefaultModel.SetActive(true);
+            GuardModel.SetActive(false);
         }
+<<<<<<< HEAD
         // ハードモードならゲージ消費
         if(IsHard)
+=======
+        // ハードモードなら
+        if(state.IsHard)
+>>>>>>> 68d270aaeb83160bd5b19f520e97cbc3b59f9431
         {
+            // ゲージ消費
             SubtractGauge();
-            this.transform.localScale = new Vector3(0.75f, 0.75f, 0.75f);
+            DefaultModel.SetActive(false);
+            GuardModel.SetActive(true);
         }
         // バーストモードなら
         if(IsBurst)
