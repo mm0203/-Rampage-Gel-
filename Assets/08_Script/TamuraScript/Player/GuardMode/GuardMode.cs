@@ -45,6 +45,10 @@ public class GuardMode : MonoBehaviour
     //*応急* エフェクトスクリプト
     [SerializeField] AID_PlayerEffect effect;
 
+    // ガードモデルとデフォルトモデル
+    [SerializeField] private GameObject DefaultModel;
+    [SerializeField] private GameObject GuardModel;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -58,19 +62,21 @@ public class GuardMode : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(fStockBurst);
-        // ハードモードじゃないならゲージ回復
+        // ハードモードじゃない
         if (!state.IsHard)
         {
+            // ゲージ回復
             RecoveryGauge();
-            this.transform.localScale = new Vector3(1, 1, 1);
-            //fStockBurst = 0.0f;
+            DefaultModel.SetActive(true);
+            GuardModel.SetActive(false);
         }
-        // ハードモードならゲージ消費
+        // ハードモードなら
         if(state.IsHard)
         {
+            // ゲージ消費
             SubtractGauge();
-            this.transform.localScale = new Vector3(0.75f, 0.75f, 0.75f);
+            DefaultModel.SetActive(false);
+            GuardModel.SetActive(true);
         }
         // バーストモードなら
         if(state.IsBurst)
