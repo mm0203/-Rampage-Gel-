@@ -74,6 +74,7 @@ MonoBehaviour:
   DeathSE: {fileID: 8300000, guid: da24daa9fcff69c4d884496fda891063, type: 3}
   fAttackDis: 6.5
   fAttackTime: 3
+  effect: {fileID: 707058587186697454, guid: d63d43aa85bc2c4469259fbe60af9c97, type: 3}
 --- !u!54 &2853013210424789697
 Rigidbody:
   m_ObjectHideFlags: 0
