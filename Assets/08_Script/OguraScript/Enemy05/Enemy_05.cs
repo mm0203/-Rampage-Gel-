@@ -56,7 +56,7 @@ public class Enemy_05 : MonoBehaviour
         // 火炎放射のコンポーネントを追加
         cube.AddComponent<Flamethrower>();
 
-        // 火炎放射コンポーネントに情報セット
+        // 情報セット
         cube.GetComponent<Flamethrower>().SetEnemy(gameObject);
         cube.GetComponent<Flamethrower>().SetPlayer(enemyBase.GetPlayer);
         cube.GetComponent<Flamethrower>().SetDiss(fDistance);
@@ -65,12 +65,13 @@ public class Enemy_05 : MonoBehaviour
         objEffect = enemyEffect.CreateEffect(EnemyEffect.eEffect.eFlame, gameObject);
         cube.GetComponent<Flamethrower>().SetEffect(objEffect);
 
+        // すり抜ける判定に
         cube.GetComponent<BoxCollider>().isTrigger = true;
+
+        // 攻撃フラグをON（敵が動かなくなる）
         enemyBase.SetAttack(true);
 
-        // 当たり判定用キューブを透明に(デバッグ用)
-        cube.GetComponent<MeshRenderer>().enabled = false; // 3/28 MeshRendererをオフ
-        //cube.GetComponent<MeshRenderer>().material.shader = Shader.Find("Legacy Shaders/Transparent/Diffuse");
-        //cube.GetComponent<MeshRenderer>().material.color -= new Color32(255, 255, 255, 255);
+        // 当たり判定キューブを非表示
+        cube.GetComponent<MeshRenderer>().enabled = false; 
     }
 }

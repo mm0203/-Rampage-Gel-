@@ -18,14 +18,29 @@ public class EnemyEffect : MonoBehaviour
     {
         eFireBall = 0,
         eFlame,
+        eScratch,
 
         eMax_Effect
     }
 
-
+    //--------------------------------
+    // エフェクト生成
+    //--------------------------------
     public GameObject CreateEffect(eEffect num, GameObject obj, float time = 5.0f)
     {
         GameObject Effect = Instantiate(EffectList[(int)num], obj.transform.position, obj.transform.rotation);
+        Destroy(Effect, time);
+
+        return Effect;
+    }
+
+
+    //--------------------------------
+    // エフェクト生成（Pos変更Ver）
+    //--------------------------------
+    public GameObject CreateEffect(eEffect num, Vector3 pos ,GameObject obj, float time = 5.0f)
+    {
+        GameObject Effect = Instantiate(EffectList[(int)num], pos, obj.transform.rotation);
         Destroy(Effect, time);
 
         return Effect;

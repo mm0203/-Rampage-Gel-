@@ -68,6 +68,10 @@ public class Flamethrower : MonoBehaviour
             // 角度、座標が追従するように
             transform.rotation = enemy.transform.rotation;
             transform.position = new Vector3(enemy.transform.position.x + transform.forward.x * fDis, transform.position.y, enemy.transform.position.z + transform.forward.z * fDis);
+            
+            // エフェクトも追従するように
+            effect.transform.rotation = transform.rotation;
+            effect.transform.position = enemy.transform.position;
         }
 
     }
