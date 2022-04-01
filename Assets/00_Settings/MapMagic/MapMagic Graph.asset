@@ -10,17 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c9bc43e142692db4e92eef81e1903ca4, type: 3}
-  m_Name: Stage1_MapMagic Graph
+  m_Name: MapMagic Graph
   m_EditorClassIdentifier: 
-<<<<<<< HEAD:Assets/00_Settings/MapMagic/Stage1_MapMagic Graph.asset
-  changeVersion: 2049
+  changeVersion: 1609
   serializedVersion: 0
-  instanceId: 8468
-=======
-  changeVersion: 1606
-  serializedVersion: 0
-  instanceId: 20058
->>>>>>> 100f1304b459dea0e566cf0d07e90eec19b20d7a:Assets/MapMagic Graph.asset
+  instanceId: 58148
   guiShowDependent: 0
   guiShowShared: 0
   guiShowExposed: 0
@@ -137,15 +131,9 @@ MonoBehaviour:
       - t: 11
         v: -1185052532905345023
       - t: 9
-<<<<<<< HEAD:Assets/00_Settings/MapMagic/Stage1_MapMagic Graph.asset
-        v: 4597562729995954029
+        v: 4591365776908692226
       - t: 9
-        v: 4616726109360368910
-=======
-        v: 4590926225585060866
-      - t: 9
-        v: 4619196558935962996
->>>>>>> 100f1304b459dea0e566cf0d07e90eec19b20d7a:Assets/MapMagic Graph.asset
+        v: 4620254004128469588
       - t: 255
         v: 10
       - t: 255
@@ -201,7 +189,7 @@ MonoBehaviour:
       - t: 3
         v: 0
       - t: 3
-        v: 1
+        v: 0
       - t: 255
         v: 9
       - t: 1
@@ -272,7 +260,7 @@ MonoBehaviour:
       - t: 2
         v: 1125515264
       - t: 2
-        v: 1136263168
+        v: 1133543424
       special: 
       uniObj: {fileID: 0}
     - refId: 12
@@ -304,7 +292,7 @@ MonoBehaviour:
       - t: 2
         v: 1065353216
       - t: 2
-        v: 1101004800
+        v: 1128792064
       - t: 2
         v: 1056964608
       - t: 2
@@ -316,15 +304,9 @@ MonoBehaviour:
       - t: 11
         v: -1037185811155517439
       - t: 9
-<<<<<<< HEAD:Assets/00_Settings/MapMagic/Stage1_MapMagic Graph.asset
-        v: 4604489266222849851
+        v: 4606944628739692246
       - t: 9
-        v: 4627584851011912598
-=======
-        v: 4603542609581176573
-      - t: 9
-        v: 4629959050219220474
->>>>>>> 100f1304b459dea0e566cf0d07e90eec19b20d7a:Assets/MapMagic Graph.asset
+        v: 4630652111980626287
       - t: 255
         v: 15
       - t: 255
@@ -413,15 +395,9 @@ MonoBehaviour:
       - t: 11
         v: -1027938918365921278
       - t: 9
-<<<<<<< HEAD:Assets/00_Settings/MapMagic/Stage1_MapMagic Graph.asset
-        v: 4616913796874839576
-      - t: 9
         v: 4573682843331784711
-=======
-        v: 4564560351926583034
       - t: 9
-        v: 4571261708172110332
->>>>>>> 100f1304b459dea0e566cf0d07e90eec19b20d7a:Assets/MapMagic Graph.asset
+        v: 4573336966880402656
       - t: 255
         v: 18
       - t: 255
@@ -482,7 +458,7 @@ MonoBehaviour:
       - t: 255
         v: 21
       - t: 2
-        v: 1065353216
+        v: 1073741824
       - t: 255
         v: 22
       - t: 255
@@ -494,11 +470,7 @@ MonoBehaviour:
       - t: 9
         v: 0
       - t: 9
-<<<<<<< HEAD:Assets/00_Settings/MapMagic/Stage1_MapMagic Graph.asset
-        v: 4563638014722897556
-=======
-        v: 4562254508917369340
->>>>>>> 100f1304b459dea0e566cf0d07e90eec19b20d7a:Assets/MapMagic Graph.asset
+        v: 4565021520528425773
       - t: 255
         v: 27
       - t: 255
@@ -547,15 +519,15 @@ MonoBehaviour:
       - t: 255
         v: 25
       - t: 2
-        v: 1056964608
-      - t: 2
-        v: 1065353216
-      - t: 2
-        v: 1028443341
-      - t: 2
-        v: 1036831949
-      - t: 2
         v: 0
+      - t: 2
+        v: 1073741824
+      - t: 2
+        v: 1050253722
+      - t: 2
+        v: 1050253722
+      - t: 2
+        v: 1025758986
       - t: 2
         v: 0
       - t: 1
@@ -583,11 +555,11 @@ MonoBehaviour:
       - a
       values:
       - t: 2
-        v: 1050983168
+        v: 1052518439
       - t: 2
-        v: 1065353216
+        v: 1065036665
       - t: 2
-        v: 0
+        v: 1033969850
       - t: 2
         v: 1065353216
       special: 

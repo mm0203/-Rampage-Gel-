@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c9bc43e142692db4e92eef81e1903ca4, type: 3}
-  m_Name: Stage3_MapMagic Graph
+  m_Name: Planet5_MapMagic Graph
   m_EditorClassIdentifier: 
-  changeVersion: 2067
+  changeVersion: 2095
   serializedVersion: 0
-  instanceId: 84132
+  instanceId: 35886
   guiShowDependent: 0
   guiShowShared: 0
   guiShowExposed: 0
@@ -131,9 +131,9 @@ MonoBehaviour:
       - t: 11
         v: -1185052532905345023
       - t: 9
-        v: 4590299324516930893
+        v: 4590616377930697776
       - t: 9
-        v: 4619830102813543340
+        v: 4616624553188771706
       - t: 255
         v: 10
       - t: 255
@@ -207,7 +207,7 @@ MonoBehaviour:
       fields: []
       values: []
       special: 
-      uniObj: {fileID: 8574412962073106934, guid: ed58adfb5ac840849b177a27f87a058a, type: 2}
+      uniObj: {fileID: 8574412962073106934, guid: 4c4035b4429296047a447dd96db29248, type: 2}
     - refId: 8
       type: UnityEngine.Color, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
@@ -304,9 +304,9 @@ MonoBehaviour:
       - t: 11
         v: -1037185811155517439
       - t: 9
-        v: 4600571134547037520
+        v: 4600562127347782779
       - t: 9
-        v: 4627994340808031260
+        v: 4628929794745631454
       - t: 255
         v: 15
       - t: 255
@@ -395,9 +395,9 @@ MonoBehaviour:
       - t: 11
         v: -1027938918365921278
       - t: 9
-        v: 4565943857732111250
+        v: 4564560351926583034
       - t: 9
-        v: 4575181641287773612
+        v: 4574259304084088134
       - t: 255
         v: 18
       - t: 255
@@ -433,7 +433,7 @@ MonoBehaviour:
       - t: 2
         v: 1125515264
       - t: 2
-        v: 1118306304
+        v: 1118830592
       special: 
       uniObj: {fileID: 0}
     - refId: 20
@@ -470,7 +470,7 @@ MonoBehaviour:
       - t: 9
         v: 0
       - t: 9
-        v: 4572068753225335125
+        v: 4563638014722897556
       - t: 255
         v: 26
       - t: 255
@@ -612,7 +612,7 @@ MonoBehaviour:
       - t: 2
         v: 1125515264
       - t: 2
-        v: 1130627072
+        v: 1132855296
       special: 
       uniObj: {fileID: 0}
     - refId: 28

@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c9bc43e142692db4e92eef81e1903ca4, type: 3}
-  m_Name: Stage7_MapMagic Graph
+  m_Name: Planet6_MapMagic Graph
   m_EditorClassIdentifier: 
-  changeVersion: 2091
+  changeVersion: 2075
   serializedVersion: 0
-  instanceId: 84148
+  instanceId: 36046
   guiShowDependent: 0
   guiShowShared: 0
   guiShowExposed: 0
@@ -131,9 +131,9 @@ MonoBehaviour:
       - t: 11
         v: -1185052532905345023
       - t: 9
-        v: 4594377784339477614
+        v: 4590724464321754667
       - t: 9
-        v: 4617558374571506978
+        v: 4620751370412317318
       - t: 255
         v: 10
       - t: 255
@@ -207,7 +207,7 @@ MonoBehaviour:
       fields: []
       values: []
       special: 
-      uniObj: {fileID: 8574412962073106934, guid: 630526f594c11b34196947e39addf186, type: 2}
+      uniObj: {fileID: 8574412962073106934, guid: 54892ecdba355f54f996d94cfcff41a2, type: 2}
     - refId: 8
       type: UnityEngine.Color, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
@@ -304,9 +304,9 @@ MonoBehaviour:
       - t: 11
         v: -1037185811155517439
       - t: 9
-        v: 4600918812438270522
+        v: 4601981661950329959
       - t: 9
-        v: 4633190678500584351
+        v: 4627811382073169333
       - t: 255
         v: 15
       - t: 255
@@ -395,9 +395,9 @@ MonoBehaviour:
       - t: 11
         v: -1027938918365921278
       - t: 9
-        v: 4570447457359481746
+        v: 4565943857732111250
       - t: 9
-        v: 4575642809889616350
+        v: 4575938246025171855
       - t: 255
         v: 18
       - t: 255
@@ -470,7 +470,7 @@ MonoBehaviour:
       - t: 9
         v: 0
       - t: 9
-        v: 4563638014722897556
+        v: 4564099183324740295
       - t: 255
         v: 26
       - t: 255
