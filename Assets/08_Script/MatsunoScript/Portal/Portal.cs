@@ -10,13 +10,22 @@ public class Portal : MonoBehaviour
 
     void Start()
     {
+
+    }
+
+    void Update()
+    {
+        if(Input.GetKey(KeyCode.F))
+        {
+            FadeManager.Instance.LoadScene("TesrScene", 1.0f);
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.transform.tag == "Player")
         {
-            SceneManager.LoadScene("SceneTest");
+            FadeManager.Instance.LoadScene("TesrScene", 1.0f);
         }
     }
 }
