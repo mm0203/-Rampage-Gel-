@@ -19,29 +19,52 @@ public class Enemy_01 : MonoBehaviour
     GameObject cube;
     EnemyBase enemyBase;
 
+    // エフェクト関連
+    EnemyEffect enemyEffect;
+    GameObject objEffect;
+
+    //------------------------
+    // 初期化
+    //------------------------
     private void Start()
     {
         enemyBase = GetComponent<EnemyBase>();
+
+        // エフェクト取得（EnemyBase.csより）
+        enemyEffect = enemyBase.GetEffect;
     }
 
+    //----------------------------------------------
+    // ひっかき処理(アニメーションに合わせて呼び出す)
+    //----------------------------------------------
     private void AttackEnemy01()
     {
         // 当たり判定用キューブ生成
         cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
 
-        // 当たり判定用キューブを透明に
-        cube.GetComponent<MeshRenderer>().material.shader = Shader.Find("Legacy Shaders/Transparent/Diffuse"); ;
-        cube.GetComponent<MeshRenderer>().material.color -= new Color32(255, 255, 255, 255);
+        // キューブを非表示に
+        cube.GetComponent<MeshRenderer>().enabled = false;
 
-        cube.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);  // 攻撃範囲
+        // キューブのサイズ、回転、位置を設定
+        cube.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
         cube.transform.rotation = this.transform.rotation;
         cube.transform.position = new Vector3(transform.position.x + transform.forward.x * 1.5f, transform.position.y, transform.position.z + transform.forward.z * 1.5f);
+        
+        // Scratchコンポーネント追加
         cube.AddComponent<Scratch>();
+
+        // 情報をセット
         cube.GetComponent<Scratch>().SetPlayer(enemyBase.GetComponent<EnemyBase>().GetPlayer);
         cube.GetComponent<Scratch>().SetEnemy(this.gameObject);
+
+        // その他コンポーネント調整
         cube.AddComponent<Rigidbody>();
         cube.GetComponent<Rigidbody>().useGravity = false;
         cube.GetComponent<Rigidbody>().isKinematic = true;
         cube.GetComponent<BoxCollider>().isTrigger = true;
+
+        // エフェクト生成
+        //Vector3 pos = new Vector3(transform.position.x)
+        objEffect = enemyEffect.CreateEffect(EnemyEffect.eEffect.eScratch, gameObject,1.5f);
     }
 }

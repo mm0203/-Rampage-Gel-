@@ -6,6 +6,7 @@ public class PortalBarrier : MonoBehaviour
 {
     // ポータルデータ
     public PortalData PortalData;
+    int nHp = 2;
 
     void Start()
     {
@@ -13,7 +14,7 @@ public class PortalBarrier : MonoBehaviour
 
     void Update()
     {
-       // Debug.Log(PortalData.Hp);
+       Debug.Log("あと" + nHp + "回で割れる");
     }
 
     // バリアの当たり判定
@@ -24,8 +25,9 @@ public class PortalBarrier : MonoBehaviour
         {
             // バリア残量減らす
             PortalData.Hp--;
+            nHp--;
 
-            if (PortalData.Hp <= 0)
+            if (nHp <= 0)
             {
                 Destroy(this.gameObject);
             }

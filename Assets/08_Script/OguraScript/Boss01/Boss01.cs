@@ -39,12 +39,6 @@ public class Boss01 : MonoBehaviour
     // 前フレームの座標
     private Vector3 vOldPos;
 
-    // 攻撃中か
-    private bool bAttack = false;
-
-    // 攻撃範囲に入ってから、一度目の攻撃か
-    private bool bFirstAttack = false;
-
     // ダメージUI
     [SerializeField] private GameObject DamageObj;
 
@@ -52,24 +46,16 @@ public class Boss01 : MonoBehaviour
     [Header("死亡時効果音")] [SerializeField] private AudioClip DeathSE;
 
     // 攻撃関連
-    [Header("攻撃を開始する距離")] [SerializeField, Range(0.0f, 50.0f)] private float fAttackDis = 3.0f;
+    [Header("攻撃を開始する距離")] [SerializeField, Range(0.0f, 50.0f)] private float fAttackDis = 5.0f;
     [Header("攻撃頻度")] [SerializeField, Range(0.0f, 10.0f)] private float fAttackTime = 3.0f;
     private float fAttackCount;
     int nAttackType;
 
-    // ランダムで動く距離
-    [SerializeField] private float fRangeDiff = 10.0f;
-
-    // 目的地変更する時間
-    [SerializeField] private float fRangeTime = 2.0f;
-    private float fRangeCount;
-
-    // 次の目的地用
-    Vector3 vRandomPos;
+    // エフェクト
+    [Header("エフェクトシステム")] [SerializeField] EnemyEffect effect;
 
 
-    public void SetAttack(bool flag) { bAttack = flag; }
-
+    public EnemyEffect GetEffect { get { return effect; } }
 
     //-------------------------
     // 初期化
@@ -96,7 +82,7 @@ public class Boss01 : MonoBehaviour
         bossAttack.SetPlayer(player);
 
         fAttackCount = fAttackTime;
-        fRangeCount = fRangeTime;
+        //fRangeCount = fRangeTime;
     }
 
     //-------------------------
@@ -144,24 +130,30 @@ public class Boss01 : MonoBehaviour
     //----------------------------
     void Move()
     {
-        fRangeCount -= Time.deltaTime;
-        if(fRangeCount < 0.0f)
-        {
-            // 次の目的地を計算
-            vRandomPos = new Vector3(Random.Range(-fRangeDiff, fRangeDiff), 0, Random.Range(-fRangeDiff, fRangeDiff));
-            fRangeCount = fRangeTime;
-        }
+        // 次の場所を計算
+        Vector3 nextPoint = myAgent.steeringTarget;
+        Vector3 targetDir = nextPoint - transform.position;
 
+        // 回転
+        Quaternion targetRotation = Quaternion.LookRotation(targetDir);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 120f * Time.deltaTime);
 
-        if(!bAttack)
+        // プレイヤーを追いかける
+        myAgent.SetDestination(player.transform.position);
+
+        // プレイヤーとの距離計算
+        Vector3 vDiffPos = this.transform.position - player.transform.position;
+
+        // 一定距離以下なら止まる
+        if ((vDiffPos.x <= fAttackDis && vDiffPos.x >= -fAttackDis) && (vDiffPos.z <= fAttackDis && vDiffPos.z >= -fAttackDis))
         {
-            // 目的地へ移動
-            myAgent.SetDestination(vRandomPos);
+            myAgent.speed = 0.0f;
         }
-        else if(bAttack)
+        // プレイヤーが離れると動き出す
+        else if (myAgent.speed == 0.0f)
         {
-            myAgent.speed = 0;
-            myAgent.velocity = Vector3.zero;
+            // スピードの再設定
+            myAgent.speed = status.Speed;
         }
 
 
