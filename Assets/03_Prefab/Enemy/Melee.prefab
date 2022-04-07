@@ -1226,7 +1226,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -7829856306270965470, guid: 0c32e399ae7c0a3439d0c6f599aed9a3, type: 3}
+  - {fileID: 2100000, guid: cd08c3cc11647124892f1cbe22adb2e6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1320,7 +1320,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -7829856306270965470, guid: 0c32e399ae7c0a3439d0c6f599aed9a3, type: 3}
+  - {fileID: 2100000, guid: cd08c3cc11647124892f1cbe22adb2e6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2004,7 +2004,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -7829856306270965470, guid: 0c32e399ae7c0a3439d0c6f599aed9a3, type: 3}
+  - {fileID: 2100000, guid: cd08c3cc11647124892f1cbe22adb2e6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2309,9 +2309,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nLevel: 1
-  nHp: 30
-  nAttack: 10
-  fSpeed: 3
+  nHp: 23
+  nAttack: 5
+  fSpeed: 1
   nUpHP: 3
   nUpAttack: 3
 --- !u!114 &6057131830715300600
@@ -2342,6 +2342,7 @@ MonoBehaviour:
   DeathSE: {fileID: 8300000, guid: da24daa9fcff69c4d884496fda891063, type: 3}
   fAttackDis: 1.3
   fAttackTime: 3
+  effect: {fileID: 707058587186697454, guid: d63d43aa85bc2c4469259fbe60af9c97, type: 3}
 --- !u!95 &1518576576450875897
 Animator:
   serializedVersion: 3

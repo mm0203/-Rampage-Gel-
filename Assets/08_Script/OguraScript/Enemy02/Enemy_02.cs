@@ -4,10 +4,9 @@
 // 開発履歴
 //
 // 2022/03/05 author：小椋駿 製作開始　敵の遠距離攻撃処理
+// 2022/03/30 author：小椋駿 エフェクト処理追加
 //
 //======================================================================
-
-
 
 using System.Collections;
 using System.Collections.Generic;
@@ -20,14 +19,29 @@ public class Enemy_02 : MonoBehaviour
     GameObject spher;
     EnemyBase enemyBase;
 
+    // エフェクト関連
+    EnemyEffect enemyEffect;
+    GameObject objEffect;
+
+    [Header("火球速度")][SerializeField] float fSpeed = 5.0f;
+
+    //------------------------
+    // 初期化
+    //------------------------
     private void Start()
     {
         enemyBase = GetComponent<EnemyBase>();
+
+        // エフェクト取得（EnemyBase.csより）
+        enemyEffect = enemyBase.GetEffect;
     }
 
+    //----------------------------------------------
+    // 火球処理(アニメーションに合わせて呼び出す)
+    //----------------------------------------------
     private void AttackEnemy02()
     {
-        // 弾を生成して飛ばす
+        // 弾を生成
         spher = GameObject.CreatePrimitive(PrimitiveType.Sphere);
 
         // 弾のサイズ、座標、角度設定
@@ -35,11 +49,20 @@ public class Enemy_02 : MonoBehaviour
         spher.transform.rotation = this.transform.rotation;
         spher.transform.position = new Vector3(transform.position.x + transform.forward.x, transform.position.y, transform.position.z + transform.forward.z);
 
-        // 弾のコンポーネント調整
+        // 弾にコンポーネント追加
         spher.AddComponent<Bullet>();
-        spher.GetComponent<Bullet>().Speed = 3.0f;
-        spher.GetComponent<Bullet>().SetPlayer(enemyBase.GetComponent<EnemyBase>().GetPlayer);
-        spher.GetComponent<Bullet>().SetEnemy(this.gameObject);
+
+        // 弾のコンポーネントに情報をセット
+        Bullet bullet = spher.GetComponent<Bullet>();
+        bullet.Speed = fSpeed;
+        bullet.SetPlayer(enemyBase.GetComponent<EnemyBase>().GetPlayer);
+        bullet.SetEnemy(gameObject);
+
+        // エフェクト生成
+        objEffect = enemyEffect.CreateEffect(EnemyEffect.eEffect.eFireBall, gameObject);
+        bullet.SetEffect(objEffect);
+
+        // その他コンポーネント調整
         spher.AddComponent<Rigidbody>();
         spher.GetComponent<Rigidbody>().useGravity = false;
         spher.GetComponent<Rigidbody>().isKinematic = true;

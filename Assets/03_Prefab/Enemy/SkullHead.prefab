@@ -115,7 +115,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 7684154400013159260, guid: aaddb49ae85efda49baf71182560b9fa, type: 3}
+  - {fileID: 2100000, guid: 879c6bf7c3a867f4aab8d22cc5cb1d44, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -452,7 +452,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 7684154400013159260, guid: aaddb49ae85efda49baf71182560b9fa, type: 3}
+  - {fileID: 2100000, guid: 879c6bf7c3a867f4aab8d22cc5cb1d44, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -674,9 +674,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nLevel: 1
-  nHp: 20
-  nAttack: 10
-  fSpeed: 2
+  nHp: 15
+  nAttack: 3
+  fSpeed: 1
   nUpHP: 3
   nUpAttack: 3
 --- !u!114 &3110787205036155473
@@ -691,6 +691,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2efd879d768b636468776b8486eb9727, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fSpeed: 5
 --- !u!114 &3110787205036155474
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -707,6 +708,7 @@ MonoBehaviour:
   DeathSE: {fileID: 8300000, guid: da24daa9fcff69c4d884496fda891063, type: 3}
   fAttackDis: 4
   fAttackTime: 1
+  effect: {fileID: 707058587186697454, guid: d63d43aa85bc2c4469259fbe60af9c97, type: 3}
 --- !u!1 &2929289432632238651
 GameObject:
   m_ObjectHideFlags: 0
@@ -820,7 +822,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 7684154400013159260, guid: aaddb49ae85efda49baf71182560b9fa, type: 3}
+  - {fileID: 2100000, guid: 879c6bf7c3a867f4aab8d22cc5cb1d44, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1064,7 +1066,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 7684154400013159260, guid: aaddb49ae85efda49baf71182560b9fa, type: 3}
+  - {fileID: 2100000, guid: 879c6bf7c3a867f4aab8d22cc5cb1d44, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

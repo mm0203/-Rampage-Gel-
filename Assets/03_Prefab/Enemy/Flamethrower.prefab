@@ -449,8 +449,13 @@ MonoBehaviour:
 =======
   DeathSE: {fileID: 8300000, guid: da24daa9fcff69c4d884496fda891063, type: 3}
   fAttackDis: 4.5
+<<<<<<< HEAD
   fAttackTime: 2.5
 >>>>>>> d2f65eada7be6604d61b693afd0e28d3b8accd2c:Assets/03_Prefab/Enemy/Flamethrower.prefab
+=======
+  fAttackTime: 4
+  effect: {fileID: 707058587186697454, guid: d63d43aa85bc2c4469259fbe60af9c97, type: 3}
+>>>>>>> e2853f8ad6986fc67b6af3dfd7a583e04154f030
 --- !u!54 &5740533042275690165
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -494,10 +499,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nLevel: 1
   nHp: 20
-  nAttack: 10
+  nAttack: 5
   fSpeed: 1.5
   nUpHP: 3
-  nUpAttack: 3
+  nUpAttack: 2
 --- !u!195 &2892741171734620416
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -534,8 +539,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b1dce1a6a8a4ac489f77247708949de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
   effect: {fileID: 0}
 >>>>>>> d2f65eada7be6604d61b693afd0e28d3b8accd2c:Assets/03_Prefab/Enemy/Flamethrower.prefab
+=======
+  fDistance: 3
+>>>>>>> e2853f8ad6986fc67b6af3dfd7a583e04154f030
 --- !u!1 &5032743968688217215
 GameObject:
   m_ObjectHideFlags: 0

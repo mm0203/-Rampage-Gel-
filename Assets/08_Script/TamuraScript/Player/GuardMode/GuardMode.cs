@@ -66,6 +66,7 @@ public class GuardMode : PlayerManager
     protected override void Update()
     {
 <<<<<<< HEAD
+<<<<<<< HEAD
 <<<<<<< HEAD:Assets/08_Script/TamuraScript/GuardMode/GuardMode.cs
         base.Update();
 
@@ -77,7 +78,15 @@ public class GuardMode : PlayerManager
         // ハードモードじゃないならゲージ回復
         if (!IsHard)
 =======
+=======
+//<<<<<<< HEAD
+>>>>>>> e2853f8ad6986fc67b6af3dfd7a583e04154f030
         // ハードモードじゃない
+//=======
+        Debug.Log("バースト回数:" + fStockBurst);
+
+        // ハードモードじゃないならゲージ回復
+//>>>>>>> f691fcfffdd2bac8e0e6608715070ea534b60237
         if (!state.IsHard)
 >>>>>>> 68d270aaeb83160bd5b19f520e97cbc3b59f9431
         {

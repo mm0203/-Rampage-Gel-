@@ -52,7 +52,9 @@ public class BossTimer : MonoBehaviour
             fTimer = 0.0f;
 
             // ボスの出現処理(座標は適当)
-            Instantiate(Boss, new Vector3(0.0f, 0.0f, 0.0f), Boss.transform.rotation);
+            // プレイヤーの上方向に出現
+            Vector3 pos = new Vector3(Player.transform.position.x, Player.transform.position.y, Player.transform.position.z + 20.0f);
+            Instantiate(Boss, pos, Boss.transform.rotation);
 
             // 消滅（仮）
             Destroy(gameObject);

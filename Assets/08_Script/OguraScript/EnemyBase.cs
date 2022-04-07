@@ -8,6 +8,7 @@
 // 2022/03/15 author：小椋駿 ステータス部分変更
 // 2022/03/28 auther：竹尾　応急　経験値機能追加
 // 2022/03/24 author：小椋駿 効果音処理の追加
+// 2022/03/31 author：小椋駿 一定距離離れると敵が消滅するように
 //
 //======================================================================
 
@@ -68,17 +69,34 @@ public class EnemyBase : MonoBehaviour
     // 効果音
     [Header("死亡時効果音")] [SerializeField] private AudioClip DeathSE;
 
+<<<<<<< HEAD
 >>>>>>> d2f65eada7be6604d61b693afd0e28d3b8accd2c:Assets/08_Script/OguraScript/EnemyBase.cs
+=======
+    // 攻撃関連
+>>>>>>> e2853f8ad6986fc67b6af3dfd7a583e04154f030
     [Header("攻撃を開始する距離")] [SerializeField, Range(0.0f, 50.0f)] private float fAttackDis = 3.0f;
     [Header("攻撃頻度")] [SerializeField, Range(0.0f, 10.0f)] private float fAttackTime = 3.0f;
-    private float fAttackCount;  
+    private float fAttackCount;
 
+    // エフェクト
+    [Header("エフェクトシステム")] [SerializeField] EnemyEffect effect;
 
+    // 消滅距離
+    float fDistance = 20.0f;
+
+    //------------------------
     // ゲッター、セッター
+    //------------------------
     public void SetManager(EnemyManager obj) { manager = obj; }
     public void SetPlayer(GameObject obj) { player = obj; }
     public GameObject GetPlayer { get { return player; } }
 
+<<<<<<< HEAD
+=======
+    public void SetAttack(bool flag) { bAttack = flag; }
+    public EnemyEffect GetEffect { get { return effect; } }
+
+>>>>>>> e2853f8ad6986fc67b6af3dfd7a583e04154f030
     //----------------------------
     // 初期化
     //----------------------------
@@ -114,6 +132,7 @@ public class EnemyBase : MonoBehaviour
         Burst();
         Move();
         Death();
+        DistanceDeth();
     }
 
     //----------------------------
@@ -123,15 +142,37 @@ public class EnemyBase : MonoBehaviour
     {
         if (status.HP <= 0)
         {
+<<<<<<< HEAD
 <<<<<<< HEAD:Assets/Script/OguraScript/EnemyBase.cs
 =======
             //*応急*
+=======
+            // 経験値処理
+>>>>>>> e2853f8ad6986fc67b6af3dfd7a583e04154f030
             player.GetComponent<PlayerExp>().AddExp(10);
-            
 
             // 効果音再生
             AudioSource.PlayClipAtPoint(DeathSE,transform.position);
 
+            // リストから削除
+            manager.NowEnemyList.Remove(gameObject);
+            Destroy(this.gameObject);
+        }
+    }
+
+    //----------------------------
+    //  一定距離離れたら消滅
+    //----------------------------
+    private void DistanceDeth()
+    {
+        // プレイヤーとの差を計算
+        Vector2 vdistance = new Vector2(transform.position.x - player.transform.position.x, transform.position.z - player.transform.position.z);
+
+        // 消滅処理
+        if(vdistance.x > fDistance || vdistance.x < -fDistance ||
+           vdistance.y > fDistance || vdistance.y < -fDistance)
+        {
+            Debug.Log("消滅");
 
             // リストから削除
 >>>>>>> d2f65eada7be6604d61b693afd0e28d3b8accd2c:Assets/08_Script/OguraScript/EnemyBase.cs
@@ -139,6 +180,7 @@ public class EnemyBase : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+
 
     //----------------------------
     // 攻撃開始

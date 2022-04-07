@@ -42,7 +42,7 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 1.2
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
@@ -203,8 +203,13 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
+<<<<<<< HEAD
+    globalScale: 0.012
+    rootMotionBoneName: 
+=======
     globalScale: 1
     rootMotionBoneName: DefoPlayer_Group
+>>>>>>> 68d270aaeb83160bd5b19f520e97cbc3b59f9431
     hasTranslationDoF: 0
     hasExtraRoot: 1
     skeletonHasParents: 1
