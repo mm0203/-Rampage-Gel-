@@ -29,6 +29,8 @@ public class PlayerStatus : MonoBehaviour
     private int nAttack = 22;
     private float fSpeed = 1.0f;
     private int nExp = 0;
+    private float fBurstStock = 5.0f;
+    private float fBurstDamage = 1.0f;
     private float fBurstPower = 5;
     private float fBurstRadius = 1;
 
@@ -54,6 +56,8 @@ public class PlayerStatus : MonoBehaviour
     public int Attack { get { return nAttack; } set { nAttack = value; } }
     public float Speed { get { return fSpeed; } set { fSpeed = value; } }
     public int Exp { get { return nExp; } set { nExp = value; } }
+    public float BurstStock { get { return fBurstStock; } set { fBurstStock = value; } }
+    public float BurstDamage { get { return fBurstDamage; } set { fBurstDamage = value; } }
     public float BurstPower { get { return fBurstPower; } set { fBurstPower = value; } }
     public float BurstRadisu { get { return fBurstRadius; } set { fBurstRadius = value; } }
 

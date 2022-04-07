@@ -48,9 +48,11 @@ public class PlayerHP : MonoBehaviour
             effect.StartEffect(6, this.gameObject, 0.5f);
 
             // damageをストックする
-            this.GetComponent<GuardMode>().AddStockExplode(damage);
+            this.GetComponent<GuardMode>().AddStockExplode(status.BurstStock);
             return;
         }
+        if (state.IsArmor) return;
+
         //*応急*
         else
         {
