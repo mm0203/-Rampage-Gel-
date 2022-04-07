@@ -116,6 +116,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6007306612887967351}
     m_Modifications:
+    - target: {fileID: 2278465258743351948, guid: 9959a86023e717c468b2969539dc5f50, type: 3}
+      propertyPath: m_nextScene.m_SceneName
+      value: TesrScene
+      objectReference: {fileID: 0}
     - target: {fileID: 5989245679783999047, guid: 9959a86023e717c468b2969539dc5f50, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -183,6 +187,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6007306612887967351}
     m_Modifications:
+    - target: {fileID: 2278465258743351948, guid: 9959a86023e717c468b2969539dc5f50, type: 3}
+      propertyPath: m_nextScene.m_SceneName
+      value: TesrScene
+      objectReference: {fileID: 0}
     - target: {fileID: 5989245679783999047, guid: 9959a86023e717c468b2969539dc5f50, type: 3}
       propertyPath: m_RootOrder
       value: 1
