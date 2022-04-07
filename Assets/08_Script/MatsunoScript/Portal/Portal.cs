@@ -5,8 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Portal : MonoBehaviour
 {
-    [SerializeField]
-    int sceneIndex = 0;
+    public SceneObject m_nextScene;
 
     void Start()
     {
