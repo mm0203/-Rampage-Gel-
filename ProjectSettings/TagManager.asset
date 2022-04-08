@@ -7,6 +7,8 @@ TagManager:
   - AID_Effect
   - Enemy
   - Item
+  - OBject
+  - CircleEventSwitch
   layers:
   - Default
   - TransparentFX

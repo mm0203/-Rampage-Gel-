@@ -1,5 +1,5 @@
 //======================================================================
-// SceneObject.cs
+// ObjectData.cs
 //======================================================================
 // ŠJ”­—š—ð
 //
@@ -10,8 +10,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-
 
 [CreateAssetMenu(menuName = "MatsunoScript/MyScriptable/Create ObjectDData")]
 
