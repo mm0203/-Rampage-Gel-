@@ -16,7 +16,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 18
   m_IsActive: 1
 --- !u!4 &7876785530036980698
 Transform:
@@ -97,7 +97,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 18
   m_IsActive: 1
 --- !u!4 &4927186923856116127
 Transform:
@@ -178,7 +178,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 18
   m_IsActive: 1
 --- !u!4 &3952747592656507031
 Transform:
@@ -259,7 +259,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 18
   m_IsActive: 1
 --- !u!4 &3509046238781077778
 Transform:
@@ -340,7 +340,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 18
   m_IsActive: 1
 --- !u!4 &8747683130146236006
 Transform:
@@ -427,7 +427,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 18
   m_IsActive: 1
 --- !u!4 &8692740125085554865
 Transform:
@@ -585,10 +585,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c8c0164ed6f4a24d8d0df115b9b9ef0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Portals: {fileID: 0}
   DamageObj: {fileID: 1599770427430637572, guid: f281449c9f2cf8045930e932567b2b5e, type: 3}
   DeathSE: {fileID: 8300000, guid: 66e800b23cb418341b815161387a7edc, type: 3}
   fAttackDis: 3
   fAttackTime: 3
+  effect: {fileID: 0}
 --- !u!114 &8528678836646320582
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -601,6 +603,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5bf3ff3346495548ab6c9c959d2d2a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fDistance: 3
   Circle: {fileID: 3745731802580100520, guid: 8f168ae5491e09946bad4712fdb02421, type: 3}
 --- !u!1001 &9162688252154202303
 PrefabInstance:
@@ -665,9 +668,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -5224795703018096920, guid: 8c6277e360af1874989bcec29ee054c8, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: -4819223349682164798, guid: 8c6277e360af1874989bcec29ee054c8, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 18
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 8c6277e360af1874989bcec29ee054c8, type: 3}
       propertyPath: m_Name
       value: meanderBody00
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8c6277e360af1874989bcec29ee054c8, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 4867315238631309857, guid: 8c6277e360af1874989bcec29ee054c8, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 6615044931916762078, guid: 8c6277e360af1874989bcec29ee054c8, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 18
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c6277e360af1874989bcec29ee054c8, type: 3}
@@ -809,9 +832,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7858138411053132168, guid: 9f01c6c92719a194a9fe2bc66c61b00d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 18
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 9f01c6c92719a194a9fe2bc66c61b00d, type: 3}
       propertyPath: m_Name
       value: meanderTail00
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9f01c6c92719a194a9fe2bc66c61b00d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 1063315180472956762, guid: 9f01c6c92719a194a9fe2bc66c61b00d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 18
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9f01c6c92719a194a9fe2bc66c61b00d, type: 3}

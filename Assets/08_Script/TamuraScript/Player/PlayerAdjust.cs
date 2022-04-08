@@ -18,6 +18,6 @@ public class PlayerAdjust : MonoBehaviour
         transform.localRotation = Quaternion.Euler(Mathf.Cos(parent.transform.localEulerAngles.y * Mathf.Deg2Rad) * 20.0f, 
             0, 
             Mathf.Sin(parent.transform.localEulerAngles.y * Mathf.Deg2Rad) * 20.0f);
-        Debug.Log(Mathf.Cos(parent.transform.localEulerAngles.y * Mathf.Deg2Rad));
+        //Debug.Log(Mathf.Cos(parent.transform.localEulerAngles.y * Mathf.Deg2Rad));
     }
 }
