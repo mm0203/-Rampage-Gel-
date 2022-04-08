@@ -24,8 +24,6 @@ public class GenerateCircleObject : MonoBehaviour
     // ”¼Œa
     public float distance = 5.0f;
 
-<<<<<<< HEAD
-=======
     void Start()
     {
 
@@ -44,7 +42,6 @@ public class GenerateCircleObject : MonoBehaviour
         }
     }
 
->>>>>>> matsuno
     public void GenerateCircle(GameObject prefab, int count, GameObject center, float distance, bool isLookAtCenter)
     {
         for (int i = 0; i < count; i++)
