@@ -24,6 +24,27 @@ public class GenerateCircleObject : MonoBehaviour
     // 半径
     public float distance = 5.0f;
 
+<<<<<<< HEAD
+=======
+    void Start()
+    {
+
+    }
+
+    void Update()
+    {
+        if(Input.GetKey(KeyCode.Z))
+        {
+            GenerateCircle(CircleObject,   // 生成するオブジェクト
+                           ObjecCount,     // 生成する数
+                           CenterObject,   // 中心のオブジェクト
+                           distance,       // 各オブジェクトの距離
+                           true            // 中央に向けるかどうか
+                           );                                  
+        }
+    }
+
+>>>>>>> matsuno
     public void GenerateCircle(GameObject prefab, int count, GameObject center, float distance, bool isLookAtCenter)
     {
         for (int i = 0; i < count; i++)
