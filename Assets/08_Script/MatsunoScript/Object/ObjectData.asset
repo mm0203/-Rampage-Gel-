@@ -14,9 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FieldObjectList:
   - {fileID: 2121095346983632847, guid: ab8a81fb53fbac644b3174c5f0c53af8, type: 3}
-  - {fileID: 7680952708002821122, guid: 2cd5fb8e011c2524a9504916522b6f69, type: 3}
-  - {fileID: 675886700703884843, guid: ff50b2ee71be6ec45bd25629ec3310a0, type: 3}
-  - {fileID: 4809228438737816737, guid: 4b5ad08bb1de8674289e1b21e773fbdb, type: 3}
-  - {fileID: 7975918556954420785, guid: 6fb121a3a27e9f6488fbd92eff8dedd8, type: 3}
-  - {fileID: 1615636719468441049, guid: 81b9d2654e6c0d248a901a63d01dd95c, type: 3}
   GenerateTime: 5
