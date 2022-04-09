@@ -46,10 +46,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ObjectData: {fileID: 11400000, guid: 60d015e0f15708a41ab6ae4ba96022b1, type: 2}
-  createPrefab: {fileID: 2121095346983632847, guid: ab8a81fb53fbac644b3174c5f0c53af8, type: 3}
   rangeA: {fileID: 5662392770616983196}
   rangeB: {fileID: 5662392769873953843}
-  nGenereteTime: 5
 --- !u!1001 &970523220504126668
 PrefabInstance:
   m_ObjectHideFlags: 0
