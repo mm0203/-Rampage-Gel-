@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/07_Scenes/GameScene.unity
+    guid: db5b38f97f0ed3c4db1242bb2f747a6a
+  - enabled: 1
+    path: Assets/07_Scenes/TesrScene.unity
+    guid: 9899463c399799b4fb180ba897068dfb
   m_configObjects: {}

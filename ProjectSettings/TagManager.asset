@@ -3,14 +3,20 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - AID_Effect
+  - Enemy
+  - Item
+  - OBject
+  - CircleEventSwitch
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Volume
   - Water
   - UI
+  - Postprocessing
   - 
   - 
   - 
@@ -25,8 +31,7 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
+  - PostProcessing
   - 
   - 
   - 
