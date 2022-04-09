@@ -20,6 +20,8 @@ public abstract class PlayerManager : MonoBehaviour
         eNormal = 0,
         eHard,
         eBurst,
+        eArmor,
+        eDie,
     }
     static protected StateEnum eState = StateEnum.eNormal;
 
@@ -41,6 +43,8 @@ public abstract class PlayerManager : MonoBehaviour
     public bool IsNormal => eState == StateEnum.eNormal;
     public bool IsHard => eState == StateEnum.eHard;
     public bool IsBurst => eState == StateEnum.eBurst;
+    public bool IsArmor => eState == StateEnum.eArmor;
+    public bool IsDie => eState == StateEnum.eDie;
 
     // Start is called before the first frame update
     protected virtual void Start()
@@ -51,9 +55,11 @@ public abstract class PlayerManager : MonoBehaviour
     // Update is called once per frame
     protected virtual void Update()
     {
+        if (IsDie) return;
+
         // キーボード移動 
         if (IsDoubleTrigger(Input.GetMouseButtonDown(0),Input.GetMouseButtonDown(1)) ||
-            Input.GetAxis("LTrigger") >= 0.3f && Input.GetAxis("RTrigger") >= 0.3f)
+        Input.GetAxis("LTrigger") >= 0.3f && Input.GetAxis("RTrigger") >= 0.3f)
         {
             GotoHardState();
         }
@@ -122,18 +128,32 @@ public abstract class PlayerManager : MonoBehaviour
     // ノーマルモードに移行
     public void GotoNormalState()
     {
-        eState = StateEnum.eNormal;
+        if (!IsDie)
+            eState = StateEnum.eNormal;
     }
 
     // ハードモードに移行
     public void GotoHardState()
     {
-        eState = StateEnum.eHard;
+        if (!IsDie)
+            eState = StateEnum.eHard;
     }
 
     // バーストモードに移行
     public void GotoBurstState()
     {
-        eState = StateEnum.eBurst;
+        if (!IsDie)
+            eState = StateEnum.eBurst;
+    }
+    public void GotoArmorState()
+    {
+        if (!IsDie)
+            eState = StateEnum.eArmor;
+        // TODO スタート子ルーチン
+    }
+
+    public void GotoDieState()
+    {
+        eState = StateEnum.eDie;
     }
 }

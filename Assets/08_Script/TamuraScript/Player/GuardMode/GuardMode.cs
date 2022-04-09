@@ -126,7 +126,7 @@ public class GuardMode : PlayerManager
             burst.Explode(fStockBurst);
             // uŠÔ“I‚É—Í‚ğ‰Á‚¦‚Ä‚Í‚¶‚­
             rb.AddForce(transform.forward * fStockBurst, ForceMode.Impulse);
-            state.GotoNormalState();
+            state.GotoArmorState();
             fStockBurst = 0.0f;
         }
 
