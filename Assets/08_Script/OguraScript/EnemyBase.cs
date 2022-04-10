@@ -34,46 +34,28 @@ public class EnemyBase : MonoBehaviour
     private GameObject player;
     private EnemyManager manager;
     private NavMeshAgent myAgent;
-    private SphereCollider SpherCol;
     private Animator animator;
-
-    // プレイヤーを見つけているか
-    private bool bFind = false;
-
-    // 攻撃中か
-    private bool bAttack = false;
-
-    // ランダムに動く時間
-    private float nMoveTime = 2.0f; // 仮
-    private Vector3 vOldPos;
-
-   // 吹っ飛ばされてから動き出す秒数
-    private float fBurstTime = 2.0f;
     private Rigidbody rb;
 
-<<<<<<< HEAD:Assets/Script/OguraScript/EnemyBase.cs
-    [SerializeField] private GameObject DamageObj;
-    [Header("ターゲットを見つける距離")] [SerializeField, Range(1.0f, 50.0f)] private float fRadius = 5.0f;
-    [Header("ターゲットを見失う距離")] [SerializeField, Range(1.0f, 50.0f)] private float fMissDis = 8.0f;
-    [Header("ランダムに動く距離")] [SerializeField, Range(1.0f, 100.0f)] private float fRandMove = 10.0f;
-=======
+    // 前フレームの座標
+    private Vector3 vOldPos;
+
+    // 吹っ飛ばされてから動き出す秒数
+    private float fBurstTime = 2.0f;
+
     // 攻撃中か
     private bool bAttack = false;
 
     // 攻撃範囲に入ってから、一度目の攻撃か
     private bool bFirstAttack = false;
-   
+
     // ダメージUI
     [SerializeField] private GameObject DamageObj;
 
     // 効果音
     [Header("死亡時効果音")] [SerializeField] private AudioClip DeathSE;
 
-<<<<<<< HEAD
->>>>>>> d2f65eada7be6604d61b693afd0e28d3b8accd2c:Assets/08_Script/OguraScript/EnemyBase.cs
-=======
     // 攻撃関連
->>>>>>> e2853f8ad6986fc67b6af3dfd7a583e04154f030
     [Header("攻撃を開始する距離")] [SerializeField, Range(0.0f, 50.0f)] private float fAttackDis = 3.0f;
     [Header("攻撃頻度")] [SerializeField, Range(0.0f, 10.0f)] private float fAttackTime = 3.0f;
     private float fAttackCount;
@@ -91,12 +73,9 @@ public class EnemyBase : MonoBehaviour
     public void SetPlayer(GameObject obj) { player = obj; }
     public GameObject GetPlayer { get { return player; } }
 
-<<<<<<< HEAD
-=======
     public void SetAttack(bool flag) { bAttack = flag; }
     public EnemyEffect GetEffect { get { return effect; } }
 
->>>>>>> e2853f8ad6986fc67b6af3dfd7a583e04154f030
     //----------------------------
     // 初期化
     //----------------------------
@@ -110,17 +89,11 @@ public class EnemyBase : MonoBehaviour
 
         // ナビメッシュ設定
         myAgent = GetComponent<NavMeshAgent>();
-        myAgent.speed = status.Speed;        
-
-        // SpherCollider追加（プレイヤー探索用）
-        SpherCol = gameObject.AddComponent<SphereCollider>();
-        SpherCol.isTrigger = true;
-        SpherCol.radius = fRadius;
+        myAgent.speed = status.Speed;
 
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
 
-        bFind = false;
         fAttackCount = fAttackTime;
     }
 
@@ -140,19 +113,14 @@ public class EnemyBase : MonoBehaviour
     //----------------------------
     private void Death()
     {
+        // HP0以下で消滅
         if (status.HP <= 0)
         {
-<<<<<<< HEAD
-<<<<<<< HEAD:Assets/Script/OguraScript/EnemyBase.cs
-=======
-            //*応急*
-=======
             // 経験値処理
->>>>>>> e2853f8ad6986fc67b6af3dfd7a583e04154f030
             player.GetComponent<PlayerExp>().AddExp(10);
 
             // 効果音再生
-            AudioSource.PlayClipAtPoint(DeathSE,transform.position);
+            AudioSource.PlayClipAtPoint(DeathSE, transform.position);
 
             // リストから削除
             manager.NowEnemyList.Remove(gameObject);
@@ -169,13 +137,12 @@ public class EnemyBase : MonoBehaviour
         Vector2 vdistance = new Vector2(transform.position.x - player.transform.position.x, transform.position.z - player.transform.position.z);
 
         // 消滅処理
-        if(vdistance.x > fDistance || vdistance.x < -fDistance ||
+        if (vdistance.x > fDistance || vdistance.x < -fDistance ||
            vdistance.y > fDistance || vdistance.y < -fDistance)
         {
             Debug.Log("消滅");
 
             // リストから削除
->>>>>>> d2f65eada7be6604d61b693afd0e28d3b8accd2c:Assets/08_Script/OguraScript/EnemyBase.cs
             manager.NowEnemyList.Remove(gameObject);
             Destroy(this.gameObject);
         }
@@ -183,19 +150,10 @@ public class EnemyBase : MonoBehaviour
 
 
     //----------------------------
-    // 攻撃開始
+    // 攻撃
     //----------------------------
-    private bool StartAttack()
+    private void EnemyAttack()
     {
-<<<<<<< HEAD:Assets/Script/OguraScript/EnemyBase.cs
-        fAttackCount -= Time.deltaTime;
-
-        // 攻撃開始
-        if (fAttackCount < 0.0f)
-        {
-            fAttackCount = fAttackTime;
-            return true;
-=======
         // 動きを止める
         myAgent.speed = 0.0f;
         myAgent.velocity = Vector3.zero;
@@ -207,27 +165,23 @@ public class EnemyBase : MonoBehaviour
             animator.SetInteger("Parameter", (int)eAnimetion.eAttack);
 
             bFirstAttack = true;
->>>>>>> d2f65eada7be6604d61b693afd0e28d3b8accd2c:Assets/08_Script/OguraScript/EnemyBase.cs
         }
-        return false;
     }
 
     //----------------------------
-    // 攻撃
+    // 攻撃開始か
     //----------------------------
-    private void EnemyAttack()
+    private bool IsAttack()
     {
-        myAgent.speed = 0.0f;   
+        fAttackCount -= Time.deltaTime;
 
-        // 攻撃開始(仮)
-        bAttack = StartAttack();
-        if (bAttack)
+        // 攻撃開始
+        if (fAttackCount < 0.0f)
         {
-            // 攻撃モーション
-            animator.SetInteger("Parameter", (int)eAnimetion.eAttack);
-
-            Debug.Log("attack");
+            fAttackCount = fAttackTime;
+            return true;
         }
+        return false;
     }
 
     //----------------------------
@@ -236,7 +190,7 @@ public class EnemyBase : MonoBehaviour
     private void Move()
     {
         // 動いているか
-        if ((vOldPos.x == transform.position.x || vOldPos.z == transform.position.z) && !bAttack)
+        if ((vOldPos.x == transform.position.x || vOldPos.z == transform.position.z))
         {
             // 待機モーション
             animator.SetInteger("Parameter", (int)eAnimetion.eWait);
@@ -248,51 +202,34 @@ public class EnemyBase : MonoBehaviour
             bFirstAttack = false;
         }
 
+        // 攻撃中でないとき
+        if (!bAttack)
+        {
+            // 次の場所を計算
+            Vector3 nextPoint = myAgent.steeringTarget;
+            Vector3 targetDir = nextPoint - transform.position;
 
-        // 次の場所を計算
-        Vector3 nextPoint = myAgent.steeringTarget;
-        Vector3 targetDir = nextPoint - transform.position;
+            // 回転
+            Quaternion targetRotation = Quaternion.LookRotation(targetDir);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 120f * Time.deltaTime);
 
-        // 回転
-        Quaternion targetRotation = Quaternion.LookRotation(targetDir);
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 120f * Time.deltaTime);
+            // プレイヤーを追いかける
+            myAgent.SetDestination(player.transform.position);
+        }
 
-        // 一定の距離離れた場合、見失う
+        // プレイヤーとの距離計算
         Vector3 vDiffPos = this.transform.position - player.transform.position;
-        if (vDiffPos.x > fMissDis || vDiffPos.z > fMissDis)
-            bFind = false;
 
-<<<<<<< HEAD:Assets/Script/OguraScript/EnemyBase.cs
-        // 範囲内にプレイヤーがいたら追いかける
-        if (bFind)
-=======
         // 敵との距離が一定以下なら攻撃処理
         if ((vDiffPos.x <= fAttackDis && vDiffPos.x >= -fAttackDis) && (vDiffPos.z <= fAttackDis && vDiffPos.z >= -fAttackDis))
->>>>>>> d2f65eada7be6604d61b693afd0e28d3b8accd2c:Assets/08_Script/OguraScript/EnemyBase.cs
         {
-            myAgent.SetDestination(player.transform.position);
-
-            // 敵との距離が一定以下なら攻撃処理
-            if ((vDiffPos.x <= fAttackDis && vDiffPos.x >= -fAttackDis) && (vDiffPos.z <= fAttackDis && vDiffPos.z >= -fAttackDis))
-            {
-                EnemyAttack();
-            }
-            else if (myAgent.speed == 0.0f)
-            {
-                // スピードの再設定
-                myAgent.speed = status.Speed;    
-            }
+            EnemyAttack();
         }
-        //　設定フレーム毎に、目的地変更
-        else if (!bFind)
+        // 攻撃終了時動き出す
+        else if (myAgent.speed == 0.0f && !bAttack)
         {
-            nMoveTime -= Time.deltaTime;
-            if (nMoveTime < 0)
-            {
-                // ランダム移動
-                myAgent.SetDestination(new Vector3(Random.Range(-fRandMove, fRandMove), 0, Random.Range(-fRandMove, fRandMove)));
-                nMoveTime = 2.0f;　// 仮
-            }
+            // スピードの再設定
+            myAgent.speed = status.Speed;
         }
 
         vOldPos = this.gameObject.transform.position;
@@ -303,28 +240,9 @@ public class EnemyBase : MonoBehaviour
     //----------------------------
     private void OnTriggerEnter(Collider other)
     {
-<<<<<<< HEAD:Assets/Script/OguraScript/EnemyBase.cs
-        // プレイヤーが範囲に入ったら追う
-=======
         // プレイヤーとの衝突時ダメージ
->>>>>>> d2f65eada7be6604d61b693afd0e28d3b8accd2c:Assets/08_Script/OguraScript/EnemyBase.cs
         if (other.CompareTag("Player"))
         {
-            bFind = true;
-        }
-    }
-
-    //----------------------------
-    // プレイヤーとの衝突時
-    //----------------------------
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.transform.tag == "Player")
-        {
-            // プレイヤーの正面に押す
-            Vector3 vPush = player.transform.forward;
-            transform.position += vPush;
-
             // ダメージ処理
             status.HP -= player.GetComponent<PlayerStatus>().Attack;     // TODO:ここにプレイヤーの攻撃力が入る
 
@@ -339,11 +257,11 @@ public class EnemyBase : MonoBehaviour
     private void Burst()
     {
         // 物理演算がONの時（バースト時に物理演算がONになる）
-        if(!rb.isKinematic)
+        if (!rb.isKinematic)
         {
             // 2秒後に、物理演算OFFにする(仮)
             fBurstTime -= Time.deltaTime;
-            if(fBurstTime < 0.0)
+            if (fBurstTime < 0.0)
             {
                 fBurstTime = 2.0f;
                 rb.isKinematic = true;
@@ -361,6 +279,6 @@ public class EnemyBase : MonoBehaviour
         text.GetComponent<TextMesh>().text = damage.ToString();
 
         // 少しずらした位置に生成(z + 1.0f)
-        text.transform.position = new Vector3(transform.position.x,transform.position.y, transform.position.z + 1.0f) ;
+        text.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + 1.0f);
     }
 }

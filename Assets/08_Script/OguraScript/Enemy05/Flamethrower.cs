@@ -44,25 +44,15 @@ public class Flamethrower : MonoBehaviour
 
         // 設定時間後、攻撃終了
         fLifeTime -= Time.deltaTime;
-        if(fLifeTime <= 0.0f)
+        if (fLifeTime <= 0.0f)
         {
-<<<<<<< HEAD
-<<<<<<< HEAD:Assets/Script/OguraScript/Enemy05/Flamethrower.cs
-            //enemy.GetComponent<EnemyBase>().SetAttack(false);
-=======
-=======
             // 敵の攻撃フラグをおろす（移動可能状態へ）
->>>>>>> e2853f8ad6986fc67b6af3dfd7a583e04154f030
-            if(enemy.GetComponent<EnemyBase>() != null)
+            if (enemy.GetComponent<EnemyBase>() != null)
             {
                 enemy.GetComponent<EnemyBase>().SetAttack(false);
             }
-<<<<<<< HEAD
->>>>>>> d2f65eada7be6604d61b693afd0e28d3b8accd2c:Assets/08_Script/OguraScript/Enemy05/Flamethrower.cs
-=======
             Destroy(effect);
->>>>>>> e2853f8ad6986fc67b6af3dfd7a583e04154f030
-            Destroy(gameObject);        
+            Destroy(gameObject);
         }
 
         // 敵が死亡したとき、一緒に消える
@@ -73,12 +63,12 @@ public class Flamethrower : MonoBehaviour
         }
 
         // 敵が生きているとき
-        if(enemy != null)
+        if (enemy != null)
         {
             // 角度、座標が追従するように
             transform.rotation = enemy.transform.rotation;
             transform.position = new Vector3(enemy.transform.position.x + transform.forward.x * fDis, transform.position.y, enemy.transform.position.z + transform.forward.z * fDis);
-            
+
             // エフェクトも追従するように
             effect.transform.rotation = transform.rotation;
             effect.transform.position = enemy.transform.position;

@@ -27,7 +27,7 @@ public class Enemy_05 : MonoBehaviour
     EnemyEffect enemyEffect;
     GameObject objEffect;
 
-    [Header("火炎放射の距離")][SerializeField]float fDistance = 3.0f;
+    [Header("火炎放射の距離")] [SerializeField] float fDistance = 3.0f;
 
     //------------------------
     // 初期化
@@ -67,19 +67,11 @@ public class Enemy_05 : MonoBehaviour
 
         // すり抜ける判定に
         cube.GetComponent<BoxCollider>().isTrigger = true;
-<<<<<<< HEAD
-<<<<<<< HEAD:Assets/Script/OguraScript/Enemy05/Enemy_05.cs
-        //enemy.GetComponent<EnemyBase>().SetAttack(true);
-        //enemyBase.SetAttack(true);
-=======
-=======
 
         // 攻撃フラグをON（敵が動かなくなる）
->>>>>>> e2853f8ad6986fc67b6af3dfd7a583e04154f030
         enemyBase.SetAttack(true);
->>>>>>> d2f65eada7be6604d61b693afd0e28d3b8accd2c:Assets/08_Script/OguraScript/Enemy05/Enemy_05.cs
 
         // 当たり判定キューブを非表示
-        cube.GetComponent<MeshRenderer>().enabled = false; 
+        cube.GetComponent<MeshRenderer>().enabled = false;
     }
 }

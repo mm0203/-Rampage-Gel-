@@ -1,5 +1,5 @@
 //======================================================================
-// Player.cs
+// PlayerMove.cs
 //======================================================================
 // 開発履歴
 //
@@ -20,12 +20,15 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(CameraShaker))]
 
-public class Player : PlayerManager
+public class PlayerMove : MonoBehaviour
 {
     // 初速倍率
     [SerializeField] private float fInitial = 30.0f;
     // 減速率
     [SerializeField] private float fLate = 0.97f;
+
+    private PlayerState state;
+    private Rigidbody rb;
 
     // 発射方向
     [SerializeField] private LineRenderer Direction = null;
@@ -34,16 +37,13 @@ public class Player : PlayerManager
     // ドラッグ開始点
     private Vector3 vDragStart = Vector3.zero;
 
+    [SerializeField] private Animator anime;
+
     // 蓄積時間
     private float fStockPower = 0;
 
     private bool bShot = false;
 
-<<<<<<< HEAD:Assets/08_Script/TamuraScript/Player.cs
-    protected override void Start()
-    {
-        base.Start();
-=======
     // 画面揺れ
     CameraShaker shaker;
 
@@ -56,21 +56,14 @@ public class Player : PlayerManager
         rb = GetComponent<Rigidbody>();
         shaker = GetComponent<CameraShaker>();
 
->>>>>>> d2f65eada7be6604d61b693afd0e28d3b8accd2c:Assets/08_Script/TamuraScript/Player/PlayerMove.cs
     }
 
-    protected override void Update()
+    void Update()
     {
-<<<<<<< HEAD:Assets/08_Script/TamuraScript/Player.cs
-        base.Update();
-
-        if (!IsNormal)
-=======
         anime.SetFloat("pull", vCurrentForce.magnitude);
         anime.SetFloat("blowway", rb.velocity.magnitude);
 
         if (!state.IsNormal)
->>>>>>> d2f65eada7be6604d61b693afd0e28d3b8accd2c:Assets/08_Script/TamuraScript/Player/PlayerMove.cs
         {
             fStockPower = 0;
             Direction.enabled = false;
@@ -85,10 +78,7 @@ public class Player : PlayerManager
 
         PadMove();
         KeyBoardMove();
-<<<<<<< HEAD:Assets/08_Script/TamuraScript/Player.cs
-=======
 
->>>>>>> d2f65eada7be6604d61b693afd0e28d3b8accd2c:Assets/08_Script/TamuraScript/Player/PlayerMove.cs
         // 減速
         rb.velocity *= fLate;
     }
@@ -129,6 +119,7 @@ public class Player : PlayerManager
             {
                 fStockPower += Time.deltaTime;
             }
+
         }
 
         // 左クリック離れたとき
@@ -136,7 +127,7 @@ public class Player : PlayerManager
         {
             // 瞬間的に力を加えてはじく
             rb.AddForce(vCurrentForce.normalized * fStockPower * fInitial, ForceMode.Impulse);
-
+            vCurrentForce = Vector3.zero;
             // 初期化
             fStockPower = 0;
             Direction.enabled = false;
@@ -152,12 +143,12 @@ public class Player : PlayerManager
         float y = Input.GetAxis("Vertical");
 
         // スティックを倒してるなら
-        if (Mathf.Abs(x) >= 0.01f || Mathf.Abs(y) >= 0.01f)
+        if (Mathf.Abs(x) >= 0.5f || Mathf.Abs(y) >= 0.5f)
         {
             // フラグを立てる
             bShot = true;
             // 入力方向を逆にして受け取る
-            vCurrentForce = new Vector3(-x * Time.deltaTime, 0, -y * Time.deltaTime);
+            vCurrentForce = new Vector3(-x * 1000, 0, -y * 1000);
 
             // 動く方向を見る
             transform.rotation = Quaternion.LookRotation(vCurrentForce);
@@ -182,6 +173,7 @@ public class Player : PlayerManager
             rb.AddForce(vCurrentForce.normalized * fStockPower * fInitial, ForceMode.Impulse);
             // 初期化
             fStockPower = 0;
+            vCurrentForce = Vector3.zero;
             Direction.enabled = false;
 
             //*応急*
@@ -203,10 +195,10 @@ public class Player : PlayerManager
     //*応急*
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Enemy")
+        if (other.tag == "Enemy")
         {
             shaker.Do();
         }
-      
+
     }
 }

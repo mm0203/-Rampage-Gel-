@@ -25,13 +25,6 @@ public class Bullet : MonoBehaviour
     public void SetPlayer(GameObject obj) { player = obj; }
     public void SetEnemy(GameObject obj) { enemy = obj; }
 
-<<<<<<< HEAD
-<<<<<<< HEAD:Assets/Script/OguraScript/Enemy02/Bullet.cs
-    // Update is called once per frame
-=======
-
->>>>>>> d2f65eada7be6604d61b693afd0e28d3b8accd2c:Assets/08_Script/OguraScript/Enemy02/Bullet.cs
-=======
     public void SetEffect(GameObject obj) { effect = obj; }
 
 
@@ -49,7 +42,6 @@ public class Bullet : MonoBehaviour
     //---------------------------
     // 更新
     //---------------------------
->>>>>>> e2853f8ad6986fc67b6af3dfd7a583e04154f030
     void Update()
     {
         // 前方へ飛ばす(エフェクトを回転させたため、「-」を付けて計算する)

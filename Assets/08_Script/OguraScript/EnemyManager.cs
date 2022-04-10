@@ -4,11 +4,8 @@
 // 開発履歴
 //
 // 2022/03/05 author：小椋駿 製作開始　敵生成処理追加
-<<<<<<< HEAD:Assets/Script/OguraScript/EnemyManager.cs
-=======
 // 2022/03/18 author：小椋駿 画面外に敵が生成するように
 // 2022/03/28 author：小椋駿 敵のレベルアップ処理追加
->>>>>>> d2f65eada7be6604d61b693afd0e28d3b8accd2c:Assets/08_Script/OguraScript/EnemyManager.cs
 //
 //======================================================================
 using System.Collections;
@@ -23,17 +20,6 @@ public class EnemyManager : MonoBehaviour
     // 敵の最大数
     [Header("敵の数のMAX")] [SerializeField] int MaxEnemy = 2;
 
-<<<<<<< HEAD
-    // 出現範囲
-    [Header("敵の出現座標範囲")] [SerializeField, Range(1.0f, 100.0f)] float InstantiateX = 6.5f;
-    [SerializeField, Range(1.0f, 100.0f)] float InstantiateZ = 3.5f;
-<<<<<<< HEAD:Assets/Script/OguraScript/EnemyManager.cs
-=======
-
-    // プレイヤーとどれだけ離れて生成するか
-    [Header("生成距離")] [SerializeField] Vector2 vDistance = new Vector2(10.0f, 5.0f);
->>>>>>> d2f65eada7be6604d61b693afd0e28d3b8accd2c:Assets/08_Script/OguraScript/EnemyManager.cs
-=======
     //// 出現範囲
     //[Header("敵の出現座標範囲")] [SerializeField, Range(1.0f, 100.0f)] float InstantiateX = 6.5f;
     //[SerializeField, Range(1.0f, 100.0f)] float InstantiateZ = 3.5f;
@@ -41,23 +27,21 @@ public class EnemyManager : MonoBehaviour
     // プレイヤーとどれだけ離れて生成するか
     [Header("生成距離")] [SerializeField] Vector2 vDistance = new Vector2(15.0f, 8.0f);
     Vector2 vInstantePos;
->>>>>>> e2853f8ad6986fc67b6af3dfd7a583e04154f030
 
     // 敵の種類
     [SerializeField] List<GameObject> EnemyList;
     // 出現している敵のリスト
     public List<GameObject> NowEnemyList;
 
-<<<<<<< HEAD:Assets/Script/OguraScript/EnemyManager.cs
-=======
     // 敵のレベルアップ関連
-    [Header("敵のレベルアップ秒数")][SerializeField]float fLevelUpTime = 20.0f;
+    [Header("敵のレベルアップ秒数")] [SerializeField] float fLevelUpTime = 20.0f;
     float fLevelUpCount;
     int nEnemyLevel = 0;
 
->>>>>>> d2f65eada7be6604d61b693afd0e28d3b8accd2c:Assets/08_Script/OguraScript/EnemyManager.cs
     GameObject player;
     GameObject enemy;
+
+    int debug = 0;
 
 
     //---------------
@@ -72,7 +56,7 @@ public class EnemyManager : MonoBehaviour
         vInstantePos = new Vector2(vDistance.x * 1.5f, vDistance.y * 1.5f);
 
         // 敵生成
-        for (int i = 0; i < MaxEnemy;i++)
+        for (int i = 0; i < MaxEnemy; i++)
         {
             CreateEnemy();
         }
@@ -91,7 +75,7 @@ public class EnemyManager : MonoBehaviour
 
         // 時間に応じて敵のレベルアップ
         fLevelUpCount -= Time.deltaTime;
-        if(fLevelUpCount < 0.0f)
+        if (fLevelUpCount < 0.0f)
         {
             // 初期化
             fLevelUpCount = fLevelUpTime;
@@ -125,11 +109,8 @@ public class EnemyManager : MonoBehaviour
     //---------------
     private Vector3 CreatePos()
     {
-<<<<<<< HEAD
-        Vector3 vPos = new Vector3(Random.Range(-InstantiateX, InstantiateX), 1.0f, Random.Range(-InstantiateZ, InstantiateZ));
-=======
         // プレイヤーの左端の位置を求める
-        Vector2 tmpPos = new Vector2(player.transform.position.x - vInstantePos.x,player.transform.position.z - vInstantePos.y);
+        Vector2 tmpPos = new Vector2(player.transform.position.x - vInstantePos.x, player.transform.position.z - vInstantePos.y);
 
         // 出現位置をランダムに計算（プレイヤーの左端から右端の間で生成）
         Vector3 vPos = new Vector3(Random.Range(tmpPos.x, tmpPos.x + (vInstantePos.x * 2)), 0.5f, Random.Range(tmpPos.y, tmpPos.y + (vInstantePos.y * 2)));
@@ -145,7 +126,7 @@ public class EnemyManager : MonoBehaviour
 
             // 強制終了(無限ループに入らないように)
             debug++;
-            if(debug > 100)
+            if (debug > 100)
             {
                 Debug.Log("適生成エラー");
                 debug = 0;
@@ -153,7 +134,6 @@ public class EnemyManager : MonoBehaviour
             }
         }
 
->>>>>>> e2853f8ad6986fc67b6af3dfd7a583e04154f030
         return vPos;
     }
 }

@@ -20,13 +20,19 @@ using UnityEngine;
 [RequireComponent(typeof(Stop))]
 [RequireComponent(typeof(GuardBurst))]
 
-public class GuardMode : PlayerManager
+public class GuardMode : MonoBehaviour
 {
     // 停止
     private Stop stop;
 
     // バースト
     private GuardBurst burst;
+
+    // リジッドボディ
+    private Rigidbody rb;
+
+    // ステート
+    private PlayerState state;
 
     // ガードゲージ
     private PlayerStatus status;
@@ -44,64 +50,34 @@ public class GuardMode : PlayerManager
     [SerializeField] private GameObject GuardModel;
 
     // Start is called before the first frame update
-    protected override void Start()
+    void Start()
     {
-        base.Start();
-
         stop = GetComponent<Stop>();
         burst = GetComponent<GuardBurst>();
-<<<<<<< HEAD:Assets/08_Script/TamuraScript/GuardMode/GuardMode.cs
-        UIgauge = GetComponent<UIGauge>();
-
-        // 体力満タン
-        fGuardGauge = fMaxGuardGauge;
-=======
         state = GetComponent<PlayerState>();
         rb = GetComponent<Rigidbody>();
         status = GetComponent<PlayerStatus>();
->>>>>>> d2f65eada7be6604d61b693afd0e28d3b8accd2c:Assets/08_Script/TamuraScript/Player/GuardMode/GuardMode.cs
     }
 
     // Update is called once per frame
-    protected override void Update()
+    void Update()
     {
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD:Assets/08_Script/TamuraScript/GuardMode/GuardMode.cs
-        base.Update();
-
-        // UI
-        UIgauge.Refresh(fMaxGuardGauge, fGuardGauge);
-=======
-        Debug.Log(fStockBurst);
->>>>>>> d2f65eada7be6604d61b693afd0e28d3b8accd2c:Assets/08_Script/TamuraScript/Player/GuardMode/GuardMode.cs
-        // ハードモードじゃないならゲージ回復
-        if (!IsHard)
-=======
-=======
-//<<<<<<< HEAD
->>>>>>> e2853f8ad6986fc67b6af3dfd7a583e04154f030
+        //<<<<<<< HEAD
         // ハードモードじゃない
-//=======
+        //=======
         Debug.Log("バースト回数:" + fStockBurst);
 
         // ハードモードじゃないならゲージ回復
-//>>>>>>> f691fcfffdd2bac8e0e6608715070ea534b60237
+        //>>>>>>> f691fcfffdd2bac8e0e6608715070ea534b60237
         if (!state.IsHard)
->>>>>>> 68d270aaeb83160bd5b19f520e97cbc3b59f9431
         {
             // ゲージ回復
             RecoveryGauge();
             DefaultModel.SetActive(true);
             GuardModel.SetActive(false);
         }
-<<<<<<< HEAD
-        // ハードモードならゲージ消費
-        if(IsHard)
-=======
         // ハードモードなら
-        if(state.IsHard)
->>>>>>> 68d270aaeb83160bd5b19f520e97cbc3b59f9431
+        if (state.IsHard)
         {
             // ゲージ消費
             SubtractGauge();
@@ -109,30 +85,21 @@ public class GuardMode : PlayerManager
             GuardModel.SetActive(true);
         }
         // バーストモードなら
-        if(IsBurst)
+        if (state.IsBurst)
         {
             //*応急*
             effect.StartEffect(1, this.gameObject, 1.0f);
 
             // 爆発
-<<<<<<< HEAD:Assets/08_Script/TamuraScript/GuardMode/GuardMode.cs
-            burst.Explode();
-            GotoNormalState();
-        }
-
-        // ハードモードかつゲージ残量があるなら停止
-        if(IsHard && fGuardGauge > 0)
-=======
             burst.Explode(fStockBurst);
             // 瞬間的に力を加えてはじく
             rb.AddForce(transform.forward * fStockBurst, ForceMode.Impulse);
-            state.GotoArmorState();
+            state.GotoNormalState();
             fStockBurst = 0.0f;
         }
 
         // ハードモードかつゲージ残量があるなら停止
-        if(state.IsHard && status.Stamina > 0)
->>>>>>> d2f65eada7be6604d61b693afd0e28d3b8accd2c:Assets/08_Script/TamuraScript/Player/GuardMode/GuardMode.cs
+        if (state.IsHard && status.Stamina > 0)
         {
             stop.DoStop(rb);
 
@@ -141,7 +108,7 @@ public class GuardMode : PlayerManager
         }
         else
         {
-            GotoNormalState();
+            state.GotoNormalState();
         }
     }
 
@@ -150,7 +117,7 @@ public class GuardMode : PlayerManager
     {
         // ゲージ量回復
         status.Stamina += nRecovery;
-        if(status.Stamina >= status.MaxStamina)
+        if (status.Stamina >= status.MaxStamina)
         {
             status.Stamina = status.MaxStamina;
         }
