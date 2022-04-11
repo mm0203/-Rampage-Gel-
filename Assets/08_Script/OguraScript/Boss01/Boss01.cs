@@ -27,10 +27,8 @@ public class Boss01 : MonoBehaviour
     private BossAttack bossAttack;
     private StatusComponent status;
     private GameObject player;
-    private EnemyManager manager;
     private NavMeshAgent myAgent;
     private Animator animator;
-    private Rigidbody rb;
 
     //*応急*
     [SerializeField] GameObject Portals;
@@ -54,8 +52,19 @@ public class Boss01 : MonoBehaviour
     // エフェクト
     [Header("エフェクトシステム")] [SerializeField] EnemyEffect effect;
 
+    // ボスの体
+    [Header("体")] [SerializeField] GameObject body;
+    [Header("尾")] [SerializeField] GameObject tail;
 
     public EnemyEffect GetEffect { get { return effect; } }
+
+    // ボスの前面に当たり判定用意
+    GameObject FrontCube;
+
+    // 突進中か
+    bool bRush = false;
+    float fRushTime = 1.0f;
+    float fRushCount = 0.0f;
 
     //-------------------------
     // 初期化
@@ -77,12 +86,33 @@ public class Boss01 : MonoBehaviour
 
         // その他初期化
         animator = GetComponent<Animator>();
-        rb = GetComponent<Rigidbody>();
         bossAttack = GetComponent<BossAttack>();
         bossAttack.SetPlayer(player);
-
         fAttackCount = fAttackTime;
-        //fRangeCount = fRangeTime;
+
+
+        // ボスの体、尾を生成
+        body = Instantiate(body, transform.position, transform.rotation);
+        tail = Instantiate(tail, transform.position, transform.rotation);
+
+        // サイズを全て同じにする
+        body.transform.localScale = tail.transform.localScale = transform.localScale;
+
+        // 体にスクリプトを追加する
+        body.AddComponent<Boss01_body>();
+        tail.AddComponent<Boss01_body>();
+
+        // 情報をセット
+        body.GetComponent<Boss01_body>().SetBossFront(gameObject);
+        body.GetComponent<Boss01_body>().SetBossHead(gameObject);
+        tail.GetComponent<Boss01_body>().SetBossFront(body);
+        tail.GetComponent<Boss01_body>().SetBossHead(gameObject);
+
+
+        BossRush rush = gameObject.GetComponentInChildren<BossRush>();
+        rush.SetPlayer(player);
+        rush.SetEnemy(gameObject);
+
     }
 
     //-------------------------
@@ -114,12 +144,11 @@ public class Boss01 : MonoBehaviour
 
                 Instantiate(Portals, this.gameObject.transform.position, Quaternion.identity);
                 bPortal = true;
-
-               
             }
 
-            // リストから削除
-            //manager.NowEnemyList.Remove(gameObject); //3/28 死なないためコメントアウト
+            // 全て消滅
+            Destroy(tail);
+            Destroy(body);
             Destroy(this.gameObject);
 
         }
@@ -138,37 +167,25 @@ public class Boss01 : MonoBehaviour
         Quaternion targetRotation = Quaternion.LookRotation(targetDir);
         transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 120f * Time.deltaTime);
 
-        // プレイヤーを追いかける
-        myAgent.SetDestination(player.transform.position);
 
-        // プレイヤーとの距離計算
-        Vector3 vDiffPos = this.transform.position - player.transform.position;
-
-        // 一定距離以下なら止まる
-        if ((vDiffPos.x <= fAttackDis && vDiffPos.x >= -fAttackDis) && (vDiffPos.z <= fAttackDis && vDiffPos.z >= -fAttackDis))
+        // プレイヤーを追いかける（一定秒数ごとに敵めがけて移動）
+        if (!bRush)
         {
-            myAgent.speed = 0.0f;
+            // 現在のプレイヤーの位置を目指す
+            myAgent.SetDestination(player.transform.position);
+
+            // 初期化
+            bRush = true;
+            fRushCount = fRushTime;
         }
-        // プレイヤーが離れると動き出す
-        else if (myAgent.speed == 0.0f)
+        
+        // 移動のカウント処理
+        fRushCount -= Time.deltaTime;
+        if(fRushCount < 0.0f)
         {
-            // スピードの再設定
-            myAgent.speed = status.Speed;
+            bRush = false;
         }
-
-
-        //// 動いているか
-        //if ((vOldPos.x == transform.position.x || vOldPos.z == transform.position.z))
-        //{
-        //    // 待機モーション
-        //    //animator.SetInteger("Parameter", (int)eAnimetion.eWait);
-        //}
-        //else
-        //{
-        //    // 移動モーション
-        //    //animator.SetInteger("Parameter", (int)eAnimetion.eMove);
-        //    bFirstAttack = false;
-        //}
+        
 
         vOldPos = gameObject.transform.position;
     }
@@ -216,13 +233,20 @@ public class Boss01 : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             // ダメージ処理
-            //status.HP -= 10;     // TODO:ここにプレイヤーの攻撃力が入る
-            status.HP -= player.GetComponent<PlayerStatus>().Attack;
-
-            // ダメージ表記
-            //ViewDamage(10);      // TODO:ここにプレイヤーの攻撃力が入る
-            ViewDamage(player.GetComponent<PlayerStatus>().Attack);      
+            Damege();
         }
+    }
+
+    //------------------------------------------------------
+    // ダメージの処理(ボスの体、尾でも使えるようにpublic)
+    //------------------------------------------------------
+    public void Damege()
+    {
+        // ダメージ処理
+        status.HP -= player.GetComponent<PlayerStatus>().Attack;
+
+        // ダメージ表記
+        ViewDamage(player.GetComponent<PlayerStatus>().Attack);
     }
 
     //----------------------------
