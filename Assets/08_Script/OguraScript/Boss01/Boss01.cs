@@ -121,7 +121,7 @@ public class Boss01 : MonoBehaviour
     void Update()
     {
         Move();
-        Attack();
+        //Attack();
         Death();
 
     }

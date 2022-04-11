@@ -38,4 +38,21 @@ public class BossRush : MonoBehaviour
 
         }
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.transform.tag == "Player")
+        {
+            // É_ÉÅÅ[ÉWèàóù
+            player.GetComponent<PlayerHP>().OnDamage(enemy.GetComponent<StatusComponent>().Attack);
+
+            //Vector3 vec = new Vector3(Mathf.Abs(enemy.transform.forward.x * 10), 0.0f, Mathf.Abs(enemy.transform.forward.z * 10));
+            //Debug.Log(vec);
+
+            rb.AddForce(0, 0, 100);
+
+            Debug.Log("kore");
+
+        }
+    }
 }
