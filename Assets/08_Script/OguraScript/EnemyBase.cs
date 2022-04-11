@@ -9,6 +9,7 @@
 // 2022/03/28 auther：竹尾　応急　経験値機能追加
 // 2022/03/24 author：小椋駿 効果音処理の追加
 // 2022/03/31 author：小椋駿 一定距離離れると敵が消滅するように
+// 2022/04/04 author：小椋駿 中ボス用に少し改良
 //
 //======================================================================
 
@@ -95,6 +96,7 @@ public class EnemyBase : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 
         fAttackCount = fAttackTime;
+
     }
 
     //----------------------------
@@ -122,8 +124,8 @@ public class EnemyBase : MonoBehaviour
             // 効果音再生
             AudioSource.PlayClipAtPoint(DeathSE,transform.position);
 
-            // リストから削除
-            manager.NowEnemyList.Remove(gameObject);
+            // リストから削除(中ボスはEnemyManagerのリストに入ってないため処理しない)
+            if(manager != null) manager.NowEnemyList.Remove(gameObject);
             Destroy(this.gameObject);
         }
     }
@@ -133,6 +135,9 @@ public class EnemyBase : MonoBehaviour
     //----------------------------
     private void DistanceDeth()
     {
+        // 中ボスは離れても消滅しないため処理しない
+        if (manager == null) return;
+
         // プレイヤーとの差を計算
         Vector2 vdistance = new Vector2(transform.position.x - player.transform.position.x, transform.position.z - player.transform.position.z);
 
