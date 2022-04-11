@@ -34,8 +34,6 @@ public class BossRush : MonoBehaviour
 
             //rb.AddForce(0,0,100);
 
-            Debug.Log("kore");
-
         }
     }
 
@@ -50,8 +48,6 @@ public class BossRush : MonoBehaviour
             //Debug.Log(vec);
 
             rb.AddForce(0, 0, 100);
-
-            Debug.Log("kore");
 
         }
     }
