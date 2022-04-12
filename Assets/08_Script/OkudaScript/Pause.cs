@@ -5,6 +5,7 @@
 //
 // 2022/03/23 author：奥田達磨 ポーズ機能実装
 // 2022/03/25 author：奥田達磨 ポーズメニュー・レベルアップメニュー機能追加 
+// 2022/04/25 author：奥田達磨 ポーズバグ修正 
 //
 //======================================================================
 using UnityEngine;
@@ -51,13 +52,10 @@ public class Pause : MonoBehaviour
         //ポーズメニュー
         if (bPause)
         {
-            Stop();
             PauseMenu(bPause);
-            
         }
         else
         {
-            Resume();
             PauseMenu(bPause);
         }
         //-------------------------------------
@@ -78,17 +76,22 @@ public class Pause : MonoBehaviour
         //レベルアップ時のポーズメニュー
         if(bLevelUpPause)
         {
-            Stop();
             levelUpPause(bLevelUpPause);
         }
         else
         {
-            Resume();
             levelUpPause(bLevelUpPause);
         }
         //------------------------------------------ 
 
-
+        if (bLevelUpPause || bPause)
+        {
+            Stop();
+        }
+        else
+        {
+            Resume();
+        }
 
         //============================================
         //バグ防止（2つのフラグが同じになることを防ぐ）
