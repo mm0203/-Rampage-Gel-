@@ -66,6 +66,8 @@ public class Boss01 : MonoBehaviour
     float fRushTime = 1.0f;
     float fRushCount = 0.0f;
 
+    bool bVisible = false;
+
     //-------------------------
     // èâä˙âª
     //-------------------------
@@ -121,7 +123,7 @@ public class Boss01 : MonoBehaviour
     void Update()
     {
         Move();
-        Attack();
+        //Attack();
         Death();
 
     }
@@ -261,4 +263,5 @@ public class Boss01 : MonoBehaviour
         // è≠ÇµÇ∏ÇÁÇµÇΩà íuÇ…ê∂ê¨(z + 1.0f)
         text.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + 1.0f);
     }
+
 }
