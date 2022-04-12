@@ -51,14 +51,5 @@ public class Enemy_04 : MonoBehaviour
         cube.GetComponent<Fire>().SetCircle(Circle);
         cube.GetComponent<Fire>().SetEnemy(gameObject);
         cube.GetComponent<Fire>().SetPlayer(player);
-
-        //// 弾のコンポーネント調整
-        //spher.AddComponent<Bullet>();
-        //spher.GetComponent<Bullet>().Speed = 3.0f;
-        //spher.GetComponent<Bullet>().SetPlayer(enemyBase.GetComponent<EnemyBase>().GetPlayer);
-        //spher.GetComponent<Bullet>().SetEnemy(this.gameObject);
-        //spher.AddComponent<Rigidbody>();
-        //spher.GetComponent<Rigidbody>().useGravity = false;
-        //spher.GetComponent<Rigidbody>().isKinematic = true;
     }
 }

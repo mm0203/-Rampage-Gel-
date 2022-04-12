@@ -90,7 +90,7 @@ public class EnemyBase : MonoBehaviour
 
         // ナビメッシュ設定
         myAgent = GetComponent<NavMeshAgent>();
-        myAgent.speed = status.Speed;        
+        myAgent.speed = status.Speed;
 
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
@@ -210,12 +210,12 @@ public class EnemyBase : MonoBehaviour
         // 攻撃中でないとき
         if(!bAttack)
         {
-            // 次の場所を計算
-            Vector3 nextPoint = myAgent.steeringTarget;
+           // 次の場所を計算
+           Vector3 nextPoint = myAgent.steeringTarget;
             Vector3 targetDir = nextPoint - transform.position;
 
-            // 回転
-            Quaternion targetRotation = Quaternion.LookRotation(targetDir);
+           // 回転
+           Quaternion targetRotation = Quaternion.LookRotation(targetDir);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 120f * Time.deltaTime);
 
             // プレイヤーを追いかける
