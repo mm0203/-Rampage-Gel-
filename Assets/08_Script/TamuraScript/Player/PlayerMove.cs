@@ -49,12 +49,14 @@ public class PlayerMove : MonoBehaviour
 
     //*応急* エフェクトスクリプト
     [SerializeField] AID_PlayerEffect effect;
+    [SerializeField] GameObject effectmove;
 
     void Start()
     {
         state = GetComponent<PlayerState>();
         rb = GetComponent<Rigidbody>();
         shaker = GetComponent<CameraShaker>();
+        effectmove.SetActive(false);
 
     }
 
@@ -67,6 +69,7 @@ public class PlayerMove : MonoBehaviour
         {
             fStockPower = 0;
             Direction.enabled = false;
+            effectmove.SetActive(false);
             return;
         }
 
@@ -128,6 +131,7 @@ public class PlayerMove : MonoBehaviour
             // 瞬間的に力を加えてはじく
             rb.AddForce(vCurrentForce.normalized * fStockPower * fInitial, ForceMode.Impulse);
             vCurrentForce = Vector3.zero;
+            effectmove.SetActive(true);
             // 初期化
             fStockPower = 0;
             Direction.enabled = false;
@@ -171,6 +175,7 @@ public class PlayerMove : MonoBehaviour
             bShot = false;
             // 瞬間的に力を加えてはじく
             rb.AddForce(vCurrentForce.normalized * fStockPower * fInitial, ForceMode.Impulse);
+            effectmove.SetActive(true);
             // 初期化
             fStockPower = 0;
             vCurrentForce = Vector3.zero;
