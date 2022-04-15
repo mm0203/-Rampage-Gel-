@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 925803496465340926}
   - component: {fileID: 925803496465340925}
   - component: {fileID: 925803496465340924}
-  - component: {fileID: 925803496465340915}
+  - component: {fileID: 7841494925595876323}
   m_Layer: 0
   m_Name: Item
   m_TagString: Item
@@ -96,7 +96,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &925803496465340915
+--- !u!114 &7841494925595876323
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -105,31 +105,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 925803496465340914}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 729ef9686800b804dbac726e597e4a61, type: 3}
+  m_Script: {fileID: 11500000, guid: 3600a6968098cad488cfd8f027d5b355, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InstantiateX: 5
-  InstantiateZ: 5
-  ItemObjectList:
-  - {fileID: 925803496465340914}
-  - {fileID: 925803496465340914}
-  - {fileID: 925803496465340914}
-  - {fileID: 925803496465340914}
-  - {fileID: 925803496465340914}
-  - {fileID: 925803496465340914}
-  - {fileID: 925803496465340914}
-  - {fileID: 925803496465340914}
-  - {fileID: 925803496465340914}
-  - {fileID: 925803496465340914}
-  - {fileID: 925803496465340914}
-  - {fileID: 925803496465340914}
-  - {fileID: 925803496465340914}
-  - {fileID: 925803496465340914}
-  - {fileID: 925803496465340914}
-  - {fileID: 925803496465340914}
-  - {fileID: 925803496465340914}
-  - {fileID: 925803496465340914}
-  - {fileID: 925803496465340914}
-  - {fileID: 925803496465340914}
-  CountList: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-  nStatus: 0
+  itemManager: {fileID: 5848887316850502762, guid: 5e73d594ebde7de4abc03bdc2a5082b0, type: 3}

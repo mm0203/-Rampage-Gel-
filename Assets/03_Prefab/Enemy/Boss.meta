@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+<<<<<<< HEAD
+<<<<<<< HEAD:Assets/03_Prefab/Enemy/Boss.meta
+guid: 5be561e3e774beb408bc25841219fd22
+=======
+guid: 17e90c0643d2b1c45bde87f9ed8ea525
+>>>>>>> e1df4cb016f39562fd97159dc9d3631947208442:Assets/05_Model/Enemy/Enemy03/Model.meta
+=======
+guid: 5be561e3e774beb408bc25841219fd22
+>>>>>>> e1df4cb016f39562fd97159dc9d3631947208442
+folderAsset: yes
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
