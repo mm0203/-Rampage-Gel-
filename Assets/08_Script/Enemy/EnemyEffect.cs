@@ -19,13 +19,15 @@ public class EnemyEffect : MonoBehaviour
         eFireBall = 0,
         eFlame,
         eScratch,
+        eFirePiller,
 
         eMax_Effect
     }
 
-    //--------------------------------
+    //--------------------------------------------------
     // エフェクト生成
-    //--------------------------------
+    // 引数：エフェクト番号, 敵オブジェクト, 消滅時間
+    //--------------------------------------------------
     public GameObject CreateEffect(eEffect num, GameObject obj, float time = 5.0f)
     {
         GameObject Effect = Instantiate(EffectList[(int)num], obj.transform.position, obj.transform.rotation);
@@ -33,7 +35,6 @@ public class EnemyEffect : MonoBehaviour
 
         return Effect;
     }
-
 
     //--------------------------------
     // エフェクト生成（Pos変更Ver）
