@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EffectList:
-  - {fileID: 7459329192734169272, guid: f01739e76e7156947ba98f248bec4821, type: 3}
-  - {fileID: 2365966739339037635, guid: f1cfc440921ee3246a2003d6460650cc, type: 3}
-  - {fileID: 3197226220344567370, guid: 7b7acffc3d7cfe34782bb3d073e6f628, type: 3}
+  - {fileID: 7459329192734169272, guid: 463b98ad1a9f8df4ab73c2910532d03f, type: 3}
+  - {fileID: 2365966739339037635, guid: 217d4fc968490de468fa40ac218ed734, type: 3}
+  - {fileID: 3197226220344567370, guid: 6c8cb428e880e5b43811dbcaf1108f1d, type: 3}
+  - {fileID: 9075650012993910734, guid: 888a591b345901445a1682ac1cec37a7, type: 3}
