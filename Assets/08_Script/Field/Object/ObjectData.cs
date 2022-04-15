@@ -11,7 +11,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "MatsunoScript/MyScriptable/Create ObjectDData")]
+[CreateAssetMenu(menuName = "Scriptable/CreateObjectData")]
 
 public class ObjectData : ScriptableObject
 {

@@ -16,6 +16,7 @@ using UnityEngine;
 
 public class StatusComponent : MonoBehaviour
 {
+    public int Hp { get; set; } = 1;
     // 基本ステータス
     [SerializeField] private int nLevel    = 1;
     [SerializeField] private int nHp       = 20;

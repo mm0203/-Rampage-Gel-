@@ -10,6 +10,7 @@
 // 2022/03/24 author：小椋駿 効果音処理の追加
 // 2022/03/31 author：小椋駿 一定距離離れると敵が消滅するように
 // 2022/04/04 author：小椋駿 中ボス用に少し改良
+// 2022/04/15 author：松野将之 マスターデータからステータスを取得
 //
 //======================================================================
 
@@ -31,12 +32,19 @@ public class EnemyBase : MonoBehaviour
         eAttack,
     }
 
-    private StatusComponent status;
+    // 敵のマスターデータ
+    [SerializeField] private EnemyData enemyData;
+
+    //private StatusComponent status;
     private GameObject player;
     private EnemyManager manager;
     private NavMeshAgent myAgent;
     private Animator animator;
     private Rigidbody rb;
+
+    // HPと攻撃力
+    private float nHp;
+    private float nAttack;
 
     // 前フレームの座標
     private Vector3 vOldPos;
@@ -83,14 +91,16 @@ public class EnemyBase : MonoBehaviour
     void Start()
     {
         // ステータス初期化
-        status = GetComponent<StatusComponent>();
-        status.HP = status.HP + (status.Level * status.UpHP);
-        status.Attack = status.Attack + (status.Level * status.UpAttack);
-        status.Speed = status.Speed;
+        //status = GetComponent<StatusComponent>();
+
+        //status.HP = enemyData.nHp + (enemyData.nLevel * enemyData.nUpHP);
+        nHp = enemyData.nHp + (enemyData.nLevel * enemyData.nUpHP);
+        nAttack = enemyData.nAttack + (enemyData.nLevel * enemyData.nUpAttack);
+        //status.Speed = enemyData.fSpeed;
 
         // ナビメッシュ設定
         myAgent = GetComponent<NavMeshAgent>();
-        myAgent.speed = status.Speed;
+        myAgent.speed = enemyData.fSpeed;
 
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
@@ -116,7 +126,7 @@ public class EnemyBase : MonoBehaviour
     private void Death()
     {
         // HP0以下で消滅
-        if (status.HP <= 0)
+        if (nHp <= 0)
         {
             // 経験値処理
             player.GetComponent<PlayerExp>().AddExp(10);
@@ -234,7 +244,7 @@ public class EnemyBase : MonoBehaviour
         else if (myAgent.speed == 0.0f && !bAttack)
         {
             // スピードの再設定
-            myAgent.speed = status.Speed;
+            myAgent.speed = enemyData.fSpeed;
         }
 
         vOldPos = this.gameObject.transform.position;
@@ -249,7 +259,7 @@ public class EnemyBase : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             // ダメージ処理
-            status.HP -= player.GetComponent<PlayerStatus>().Attack;     // TODO:ここにプレイヤーの攻撃力が入る
+            nHp -= player.GetComponent<PlayerStatus>().Attack;     // TODO:ここにプレイヤーの攻撃力が入る
 
             // ダメージ表記
             ViewDamage(player.GetComponent<PlayerStatus>().Attack);      // TODO:ここにプレイヤーの攻撃力が入る

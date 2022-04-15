@@ -10,7 +10,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "MatsunoScript/MyScriptable/Create CircleObjectData")]
+[CreateAssetMenu(menuName = "Scriptable/CreateCircleObjectData")]
 
 public class CircleObjectData : ScriptableObject
 {

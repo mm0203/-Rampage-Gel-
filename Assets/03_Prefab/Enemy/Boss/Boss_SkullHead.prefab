@@ -979,6 +979,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96707ce0b8aa8cf4aa85d80aae2464dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyData: {fileID: 11400000, guid: 4570e7ccf9be7b24e9040c4161085551, type: 2}
   DamageObj: {fileID: 1599770427430637572, guid: f281449c9f2cf8045930e932567b2b5e, type: 3}
   DeathSE: {fileID: 8300000, guid: da24daa9fcff69c4d884496fda891063, type: 3}
   fAttackDis: 8

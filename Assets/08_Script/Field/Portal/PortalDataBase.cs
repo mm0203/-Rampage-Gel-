@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "MatsunoScript/MyScriptable/Create PortaDataBase")]
+[CreateAssetMenu(menuName = "Scriptable/CreatePortaDataBase")]
 
 public class PortalDataBase : ScriptableObject
 {
