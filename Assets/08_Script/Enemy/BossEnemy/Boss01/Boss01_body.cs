@@ -51,7 +51,7 @@ public class Boss01_body : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             // ƒ_ƒ[ƒWˆ—
-            HeadObject.GetComponent<Boss01>().Damege();
+            HeadObject.GetComponent<BossBase>().Damege();
         }
     }
 }

@@ -3,28 +3,17 @@
 //======================================================================
 // 開発履歴
 //
-// 2022/03/27 author：小椋駿 製作開始　ボスベース処理
-// 2022/03/28 author：竹尾　応急　ポータル出現、リスト消去機能コメントアウト
+// 2022/04/15 author：松野将之 ボスの基底クラス実装
+//
 //======================================================================
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-[DisallowMultipleComponent]
-
-public class Boss01 : MonoBehaviour
+public class BossBase : MonoBehaviour
 {
-    enum eAttackType
-    { 
-        eFire = 0,
-        eFlame,
-        
-        eAttackMax
-    }
-
-    private BossAttack bossAttack;
+    //private BossAttack bossAttack;
     private StatusComponent status;
     private GameObject player;
     private NavMeshAgent myAgent;
@@ -41,20 +30,21 @@ public class Boss01 : MonoBehaviour
     [SerializeField] private GameObject DamageObj;
 
     // 効果音
-    [Header("死亡時効果音")] [SerializeField] private AudioClip DeathSE;
+    [Header("死亡時効果音")]
+    [SerializeField] private AudioClip DeathSE;
 
     // 攻撃関連
-    [Header("攻撃を開始する距離")] [SerializeField, Range(0.0f, 50.0f)] private float fAttackDis = 5.0f;
-    [Header("攻撃頻度")] [SerializeField, Range(0.0f, 10.0f)] private float fAttackTime = 3.0f;
+    [Header("攻撃を開始する距離")]
+    [SerializeField, Range(0.0f, 50.0f)] private float fAttackDis = 5.0f;
+
+    [Header("攻撃頻度")]
+    [SerializeField, Range(0.0f, 10.0f)] private float fAttackTime = 3.0f;
+
     private float fAttackCount;
     int nAttackType;
 
     // エフェクト
     [Header("エフェクトシステム")] [SerializeField] EnemyEffect effect;
-
-    // ボスの体
-    [Header("体")] [SerializeField] GameObject body;
-    [Header("尾")] [SerializeField] GameObject tail;
 
     public EnemyEffect GetEffect { get { return effect; } }
 
@@ -88,29 +78,11 @@ public class Boss01 : MonoBehaviour
 
         // その他初期化
         animator = GetComponent<Animator>();
-        bossAttack = GetComponent<BossAttack>();
-        bossAttack.SetPlayer(player);
+        //bossAttack = GetComponent<BossAttack>();
+        //bossAttack.SetPlayer(player);
         fAttackCount = fAttackTime;
 
-
-        // ボスの体、尾を生成
-        body = Instantiate(body, transform.position, transform.rotation);
-        tail = Instantiate(tail, transform.position, transform.rotation);
-
-        // サイズを全て同じにする
-        body.transform.localScale = tail.transform.localScale = transform.localScale;
-
-        // 体にスクリプトを追加する
-        body.AddComponent<Boss01_body>();
-        tail.AddComponent<Boss01_body>();
-
-        // 情報をセット
-        body.GetComponent<Boss01_body>().SetBossFront(gameObject);
-        body.GetComponent<Boss01_body>().SetBossHead(gameObject);
-        tail.GetComponent<Boss01_body>().SetBossFront(body);
-        tail.GetComponent<Boss01_body>().SetBossHead(gameObject);
-
-
+        // ダメージ処理
         BossRush rush = gameObject.GetComponentInChildren<BossRush>();
         rush.SetPlayer(player);
         rush.SetEnemy(gameObject);
@@ -131,15 +103,13 @@ public class Boss01 : MonoBehaviour
     //----------------------------
     // 死亡
     //----------------------------
-    private void Death()
+    public bool Death()
     {
         // HP0以下で消滅
         if (status.HP <= 0)
         {
-            
-
             //*応急*
-            if(bPortal == false)
+            if (bPortal == false)
             {
                 // 効果音再生
                 AudioSource.PlayClipAtPoint(DeathSE, transform.position);
@@ -149,17 +119,17 @@ public class Boss01 : MonoBehaviour
             }
 
             // 全て消滅
-            Destroy(tail);
-            Destroy(body);
             Destroy(this.gameObject);
 
+            return true;
         }
+        return false;
     }
 
     //----------------------------
     // 移動
     //----------------------------
-    void Move()
+    public void Move()
     {
         // 次の場所を計算
         Vector3 nextPoint = myAgent.steeringTarget;
@@ -180,50 +150,16 @@ public class Boss01 : MonoBehaviour
             bRush = true;
             fRushCount = fRushTime;
         }
-        
+
         // 移動のカウント処理
         fRushCount -= Time.deltaTime;
-        if(fRushCount < 0.0f)
+        if (fRushCount < 0.0f)
         {
             bRush = false;
         }
-        
 
+        // 過去座標を更新
         vOldPos = gameObject.transform.position;
-    }
-
-    //----------------------------
-    // 攻撃
-    //----------------------------
-    void Attack()
-    {
-        // 一定時間毎に攻撃
-        fAttackCount -= Time.deltaTime;
-        if(fAttackCount < 0.0f)
-        {
-            // 攻撃種類をランダムで
-            nAttackType = Random.Range(0, (int)eAttackType.eAttackMax) % (int)eAttackType.eAttackMax;
-
-            // 攻撃の分岐
-            switch (nAttackType)
-            {
-                // 火柱生成
-                case (int)eAttackType.eFire:
-                    bossAttack.CreateFire(player.transform.position);
-                    break;
-
-                // 火炎放射生成
-                case (int)eAttackType.eFlame:
-                    bossAttack.CreateFlame(player.transform.position);
-                    break;
-
-                default:
-                    break;
-            }
-
-            // タイマー初期化
-            fAttackCount = fAttackTime;
-        }
     }
 
     //----------------------------
@@ -263,5 +199,4 @@ public class Boss01 : MonoBehaviour
         // 少しずらした位置に生成(z + 1.0f)
         text.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + 1.0f);
     }
-
 }

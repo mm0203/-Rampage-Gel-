@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 8944647305687876598}
   - component: {fileID: 2408482496719567575}
   - component: {fileID: 2645006530656392778}
+  - component: {fileID: -9186063581271690245}
   m_Layer: 0
   m_Name: meanderHead00
   m_TagString: Untagged
@@ -165,6 +166,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fDistance: 3
   Circle: {fileID: 3745731802580100520, guid: 8f168ae5491e09946bad4712fdb02421, type: 3}
+--- !u!114 &-9186063581271690245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2379597016144334215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e18d693c62377f544914da7faa7c905b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Portals: {fileID: 2108885355349615795, guid: 3b15cef950eda504dad4e58240b093bd, type: 3}
+  DamageObj: {fileID: 1599770427430637572, guid: f281449c9f2cf8045930e932567b2b5e, type: 3}
+  DeathSE: {fileID: 8300000, guid: da24daa9fcff69c4d884496fda891063, type: 3}
+  fAttackDis: 5
+  fAttackTime: 3
+  effect: {fileID: 0}
+  body: {fileID: 0}
+  tail: {fileID: 0}
 --- !u!1 &4534157978803181989
 GameObject:
   m_ObjectHideFlags: 0
