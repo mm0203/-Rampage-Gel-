@@ -6,6 +6,7 @@ EditorUserSettings:
   serializedVersion: 4
   m_ConfigSettings:
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 =======
@@ -17,6 +18,11 @@ EditorUserSettings:
       flags: 0
 >>>>>>> e1df4cb016f39562fd97159dc9d3631947208442
 >>>>>>> c5099150563365bf4cd3a72dd4115260c7d89dbc
+=======
+    RecentlyUsedScenePath-0:
+      value: 224247031146460b5a313f21152d5a0359381f3f3e2915332827187df7ee3d2cfb
+      flags: 0
+>>>>>>> b4b90e0915fafa6b14670031a402b8d9eae4a0d2
     vcSharedLogLevel:
       value: 0d5e400f0650
       flags: 0

@@ -141,7 +141,11 @@ ModelImporter:
       curves: []
       events:
       - time: 0.4007421
+<<<<<<< HEAD
         functionName: AttackEnemy02
+=======
+        functionName: SkullDragonAttack
+>>>>>>> b4b90e0915fafa6b14670031a402b8d9eae4a0d2
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
