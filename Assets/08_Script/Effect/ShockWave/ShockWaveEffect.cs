@@ -57,12 +57,19 @@ public class ShockWaveEffect : MonoBehaviour
         material.SetFloat("_AspectRatio", sourceTexture.width / (float)sourceTexture.height);
         Graphics.Blit(sourceTexture, destTexture, material);
     }
+
+    private void Start()
+    {
+        startEffectTest();
+    }
     void Update()
     {
         // 時間経過で速度を調整
         timer += Time.deltaTime * (1.0f / duration);
+        
         if (timer > 1.0f)
         {
+            
             enabled = false;
         }
     }
@@ -85,6 +92,7 @@ public class ShockWaveEffect : MonoBehaviour
     [ContextMenu("startEffectTest")]
     private void startEffectTest()
     {
+        Debug.Log("と");
         StartEffect(Vector3.zero);
     }
 }

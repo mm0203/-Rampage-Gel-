@@ -1,5 +1,21 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
+<<<<<<< HEAD
 guid: d32317e63f63baa40b21876d2e5690c3
+=======
+<<<<<<< HEAD:Assets/03_Prefab/FieldObject/PortalObject.meta
+guid: 76724caf8ef9e594a8d79b8e6c2c242a
+=======
+guid: d32317e63f63baa40b21876d2e5690c3
+>>>>>>> e1df4cb016f39562fd97159dc9d3631947208442:Assets/03_Prefab/Enemy/Bybyen.meta
+>>>>>>> e1df4cb016f39562fd97159dc9d3631947208442
+=======
+<<<<<<< HEAD:Assets/04_Material/Enemy/Hurtle.meta
+guid: ac033e20662dba24b97957ea278ebb14
+=======
+guid: d32317e63f63baa40b21876d2e5690c3
+>>>>>>> e1df4cb016f39562fd97159dc9d3631947208442:Assets/03_Prefab/Enemy/Bybyen.meta
+>>>>>>> e1df4cb016f39562fd97159dc9d3631947208442
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
