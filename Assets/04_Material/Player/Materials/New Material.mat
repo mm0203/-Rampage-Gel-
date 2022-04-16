@@ -36,11 +36,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _1st_ShadeMap:
-        m_Texture: {fileID: 2800000, guid: 49bdc4c1232d18f4eb3e61d7a2515dc5, type: 3}
+        m_Texture: {fileID: 2800000, guid: 28f7622499847374ea6ada12cd6e3a78, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _2nd_ShadeMap:
-        m_Texture: {fileID: 2800000, guid: 49bdc4c1232d18f4eb3e61d7a2515dc5, type: 3}
+        m_Texture: {fileID: 2800000, guid: 28f7622499847374ea6ada12cd6e3a78, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _AngelRing_Sampler:
@@ -88,7 +88,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 49bdc4c1232d18f4eb3e61d7a2515dc5, type: 3}
+        m_Texture: {fileID: 2800000, guid: 28f7622499847374ea6ada12cd6e3a78, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MatCap_Sampler:
@@ -286,7 +286,7 @@ Material:
     - _Tweak_MatcapMaskLevel: 0
     - _Tweak_RimLightMaskLevel: 0
     - _Tweak_ShadingGradeMapLevel: 0
-    - _Tweak_SystemShadowsLevel: 0
+    - _Tweak_SystemShadowsLevel: 0.32
     - _Tweak_transparency: 0
     - _UVSec: 0
     - _Unlit_Intensity: 1

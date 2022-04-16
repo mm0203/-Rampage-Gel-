@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: e18d693c62377f544914da7faa7c905b
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - EnemyData: {fileID: 11400000, guid: 4570e7ccf9be7b24e9040c4161085551, type: 2}
+  - Portals: {instanceID: 0}
+  - DamageObj: {instanceID: 0}
+  - DeathSE: {instanceID: 0}
+  - effect: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

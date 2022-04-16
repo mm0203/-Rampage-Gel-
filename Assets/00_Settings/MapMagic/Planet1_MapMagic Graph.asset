@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9bc43e142692db4e92eef81e1903ca4, type: 3}
   m_Name: Planet1_MapMagic Graph
   m_EditorClassIdentifier: 
-  changeVersion: 1622
+  changeVersion: 1625
   serializedVersion: 0
-  instanceId: 20126
+  instanceId: 22848
   guiShowDependent: 0
   guiShowShared: 0
   guiShowExposed: 0
@@ -131,9 +131,9 @@ MonoBehaviour:
       - t: 11
         v: -1185052532905345023
       - t: 9
-        v: 4591221661720616370
+        v: 4593794117827770397
       - t: 9
-        v: 4621194693500636601
+        v: 4623983434979895096
       - t: 255
         v: 10
       - t: 255
@@ -304,9 +304,9 @@ MonoBehaviour:
       - t: 11
         v: -1037185811155517439
       - t: 9
-        v: 4605300814875702015
+        v: 4605692628043283248
       - t: 9
-        v: 4631004687536454055
+        v: 4632720981206947280
       - t: 255
         v: 15
       - t: 255
@@ -395,9 +395,9 @@ MonoBehaviour:
       - t: 11
         v: -1027938918365921278
       - t: 9
-        v: 4571722876773953071
+        v: 4615410270139241936
       - t: 9
-        v: 4613629997206542379
+        v: 4628673033271875994
       - t: 255
         v: 18
       - t: 255
@@ -470,7 +470,7 @@ MonoBehaviour:
       - t: 9
         v: 0
       - t: 9
-        v: 4568141614350268052
+        v: 4571953461074874440
       - t: 255
         v: 27
       - t: 255
@@ -521,11 +521,11 @@ MonoBehaviour:
       - t: 2
         v: 0
       - t: 2
-        v: 1065353216
+        v: 0
       - t: 2
-        v: 1028443341
+        v: 0
       - t: 2
-        v: 1045220557
+        v: 0
       - t: 2
         v: 1025758986
       - t: 2
