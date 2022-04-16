@@ -20,16 +20,13 @@ public class EnemyManager : MonoBehaviour
     // 敵の最大数
     [Header("敵の数のMAX")] [SerializeField] int MaxEnemy = 2;
 
-    //// 出現範囲
-    //[Header("敵の出現座標範囲")] [SerializeField, Range(1.0f, 100.0f)] float InstantiateX = 6.5f;
-    //[SerializeField, Range(1.0f, 100.0f)] float InstantiateZ = 3.5f;
-
     // プレイヤーとどれだけ離れて生成するか
     [Header("生成距離")] [SerializeField] Vector2 vDistance = new Vector2(15.0f, 8.0f);
     Vector2 vInstantePos;
 
     // 敵の種類
     [SerializeField] List<GameObject> EnemyList;
+
     // 出現している敵のリスト
     public List<GameObject> NowEnemyList;
 
@@ -118,7 +115,7 @@ public class EnemyManager : MonoBehaviour
         // プレイヤーとの距離を計算
         Vector3 vCreatePos = vPos - player.transform.position;
 
-        // 画面外でなければ、もう一度計算
+        // 画面外でなければ、もう一度計算  （TODO:あまりよくない。改善の余地あり）
         while ((vCreatePos.x < vDistance.x && vCreatePos.x > -vDistance.x) && (vCreatePos.y < vDistance.y && vCreatePos.y > -vDistance.y))
         {
             vPos = new Vector3(Random.Range(tmpPos.x, tmpPos.x + (vInstantePos.x * 2)), 0.5f, Random.Range(tmpPos.y, tmpPos.y + (vInstantePos.y * 2)));

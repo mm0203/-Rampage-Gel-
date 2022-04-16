@@ -5,6 +5,7 @@
 //
 // 2022/03/24 author：小椋駿 製作開始　ボス出現タイマー処理追加。
 //                           テキストの反映、ゲージ減少。
+// 2022/04/04 author：小椋駿 中ボス用に少し改良
 //
 //======================================================================
 
@@ -53,8 +54,12 @@ public class BossTimer : MonoBehaviour
 
             // ボスの出現処理(座標は適当)
             // プレイヤーの上方向に出現
-            Vector3 pos = new Vector3(Player.transform.position.x, Player.transform.position.y, Player.transform.position.z + 20.0f);
-            Instantiate(Boss, pos, Boss.transform.rotation);
+            Vector3 pos = new Vector3(Player.transform.position.x, Player.transform.position.y, Player.transform.position.z + 20.0f);   
+            Boss = Instantiate(Boss, pos, Boss.transform.rotation);
+
+            // 中ボスにプレイヤー情報セット
+            if(Boss.GetComponent<EnemyBase>())
+                Boss.GetComponent<EnemyBase>().SetPlayer(Player);
 
             // 消滅（仮）
             Destroy(gameObject);
