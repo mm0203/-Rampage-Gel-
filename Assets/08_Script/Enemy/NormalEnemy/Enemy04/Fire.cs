@@ -65,12 +65,9 @@ public class Fire : MonoBehaviour
         // サークルの透明度を下げる
         AttackCircle.GetComponent<SpriteRenderer>().color -= new Color32(0, 0, 0, 125);
 
-<<<<<<< HEAD:Assets/08_Script/Enemy/NormalEnemy/Enemy04/Fire.cs
 
-        fScale = AttackCircle.transform.localScale.x / (fAttackStart * 50.0f);
-=======
         enemyEffect = enemy.GetComponent<EnemyBase>().GetEffect;
->>>>>>> b4b90e0915fafa6b14670031a402b8d9eae4a0d2:Assets/08_Script/Enemy/FirePillar/Fire.cs
+
     }
 
     //----------------------------------

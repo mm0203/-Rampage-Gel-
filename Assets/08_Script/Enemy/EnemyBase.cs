@@ -100,11 +100,9 @@ public class EnemyBase : MonoBehaviour
 
         // ナビメッシュ設定
         myAgent = GetComponent<NavMeshAgent>();
-<<<<<<< HEAD:Assets/08_Script/OguraScript/EnemyBase.cs
-        myAgent.speed = status.Speed;
-=======
+
         myAgent.speed = enemyData.fSpeed;
->>>>>>> c5099150563365bf4cd3a72dd4115260c7d89dbc:Assets/08_Script/Enemy/EnemyBase.cs
+
 
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
