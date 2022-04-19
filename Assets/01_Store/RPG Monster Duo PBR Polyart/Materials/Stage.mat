@@ -1,6 +1,10 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+<<<<<<< HEAD:Assets/RPG Monster Duo PBR Polyart/Materials/Stage.mat
+--- !u!114 &-6053660537743554380
+=======
 --- !u!114 &-3276550130923491293
+>>>>>>> d2f65eada7be6604d61b693afd0e28d3b8accd2c:Assets/01_Store/RPG Monster Duo PBR Polyart/Materials/Stage.mat
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
