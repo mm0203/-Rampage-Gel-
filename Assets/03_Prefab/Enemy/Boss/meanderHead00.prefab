@@ -144,10 +144,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c8c0164ed6f4a24d8d0df115b9b9ef0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Portals: {fileID: 2108885355349615795, guid: 3b15cef950eda504dad4e58240b093bd, type: 3}
-  DamageObj: {fileID: 1599770427430637572, guid: f281449c9f2cf8045930e932567b2b5e, type: 3}
-  DeathSE: {fileID: 8300000, guid: da24daa9fcff69c4d884496fda891063, type: 3}
-  fAttackDis: 4.5
   fAttackTime: 3
   effect: {fileID: 707058587186697454, guid: d63d43aa85bc2c4469259fbe60af9c97, type: 3}
   body: {fileID: 8529943048718830661, guid: c291895b6a32f4a439fc57463608ef7f, type: 3}
@@ -178,14 +174,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e18d693c62377f544914da7faa7c905b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyData: {fileID: 11400000, guid: 4570e7ccf9be7b24e9040c4161085551, type: 2}
   Portals: {fileID: 2108885355349615795, guid: 3b15cef950eda504dad4e58240b093bd, type: 3}
   DamageObj: {fileID: 1599770427430637572, guid: f281449c9f2cf8045930e932567b2b5e, type: 3}
   DeathSE: {fileID: 8300000, guid: da24daa9fcff69c4d884496fda891063, type: 3}
-  fAttackDis: 5
-  fAttackTime: 3
   effect: {fileID: 0}
-  body: {fileID: 0}
-  tail: {fileID: 0}
 --- !u!1 &4534157978803181989
 GameObject:
   m_ObjectHideFlags: 0

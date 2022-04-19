@@ -5,7 +5,7 @@
 //
 // 2022/03/27 author：小椋駿 製作開始　ボスベース処理
 // 2022/03/28 author：竹尾　応急　ポータル出現、リスト消去機能コメントアウト
-// 2022/04/16 author：松野将之 ボス1の設計変更 コンポーネントを細分化
+// 2022/04/16 author：松野将之 設計変更 コンポーネントを細分化
 //
 //======================================================================
 
@@ -37,8 +37,8 @@ public class Boss01 : MonoBehaviour
     private Vector3 vOldPos;
 
     // 攻撃関連
-    [Header("攻撃を開始する距離")]
-    [SerializeField, Range(0.0f, 50.0f)] private float fAttackDis = 5.0f;
+    //[Header("攻撃を開始する距離")]
+    //[SerializeField, Range(0.0f, 50.0f)] private float fAttackDis = 5.0f;
 
     [Header("攻撃頻度")]
     [SerializeField, Range(0.0f, 10.0f)] private float fAttackTime = 3.0f;

@@ -62,13 +62,13 @@ public class GuardMode : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-//<<<<<<< HEAD
+        //<<<<<<< HEAD
         // ハードモードじゃない
-//=======
+        //=======
         Debug.Log("バースト回数:" + fStockBurst);
 
         // ハードモードじゃないならゲージ回復
-//>>>>>>> f691fcfffdd2bac8e0e6608715070ea534b60237
+        //>>>>>>> f691fcfffdd2bac8e0e6608715070ea534b60237
         if (!state.IsHard)
         {
             // ゲージ回復
@@ -77,7 +77,7 @@ public class GuardMode : MonoBehaviour
             GuardModel.SetActive(false);
         }
         // ハードモードなら
-        if(state.IsHard)
+        if (state.IsHard)
         {
             // ゲージ消費
             SubtractGauge();
@@ -85,7 +85,7 @@ public class GuardMode : MonoBehaviour
             GuardModel.SetActive(true);
         }
         // バーストモードなら
-        if(state.IsBurst)
+        if (state.IsBurst)
         {
             //*応急*
             effect.StartEffect(1, this.gameObject, 1.0f);
@@ -94,12 +94,12 @@ public class GuardMode : MonoBehaviour
             burst.Explode(fStockBurst);
             // 瞬間的に力を加えてはじく
             rb.AddForce(transform.forward * fStockBurst, ForceMode.Impulse);
-            state.GotoArmorState();
+            state.GotoNormalState();
             fStockBurst = 0.0f;
         }
 
         // ハードモードかつゲージ残量があるなら停止
-        if(state.IsHard && status.Stamina > 0)
+        if (state.IsHard && status.Stamina > 0)
         {
             stop.DoStop(rb);
 
@@ -117,7 +117,7 @@ public class GuardMode : MonoBehaviour
     {
         // ゲージ量回復
         status.Stamina += nRecovery;
-        if(status.Stamina >= status.MaxStamina)
+        if (status.Stamina >= status.MaxStamina)
         {
             status.Stamina = status.MaxStamina;
         }

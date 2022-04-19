@@ -4,9 +4,9 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - EnemyData: {fileID: 11400000, guid: 4570e7ccf9be7b24e9040c4161085551, type: 2}
-  - Portals: {instanceID: 0}
-  - DamageObj: {instanceID: 0}
+  - enemyData: {fileID: 11400000, guid: 4570e7ccf9be7b24e9040c4161085551, type: 2}
+  - Portals: {fileID: 2108885355349615795, guid: 3b15cef950eda504dad4e58240b093bd, type: 3}
+  - DamageObj: {fileID: 1599770427430637572, guid: f281449c9f2cf8045930e932567b2b5e, type: 3}
   - DeathSE: {instanceID: 0}
   - effect: {instanceID: 0}
   executionOrder: 0

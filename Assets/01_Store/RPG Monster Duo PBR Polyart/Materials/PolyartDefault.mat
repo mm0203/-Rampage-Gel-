@@ -111,7 +111,11 @@ Material:
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
+<<<<<<< HEAD:Assets/RPG Monster Duo PBR Polyart/Materials/PolyartDefault.mat
+--- !u!114 &5610764555485585231
+=======
 --- !u!114 &2806862215247445013
+>>>>>>> d2f65eada7be6604d61b693afd0e28d3b8accd2c:Assets/01_Store/RPG Monster Duo PBR Polyart/Materials/PolyartDefault.mat
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
