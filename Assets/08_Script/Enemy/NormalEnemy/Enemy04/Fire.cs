@@ -23,8 +23,13 @@ public class Fire : MonoBehaviour
 
     // 攻撃サークルが出てから火柱が出る時間
     float fAttackStart = 1.0f;
-
+    
+    // 火柱が出てきているか
     bool bAttackStart = false;
+
+    // エフェクト関連
+    EnemyEffect enemyEffect;
+    GameObject ObjEffect;
 
     GameObject player;
     GameObject enemy;
@@ -47,17 +52,22 @@ public class Fire : MonoBehaviour
 
         // 広がるサークル生成
         TimeCircle = Instantiate(AttackCircle, new Vector3(player.transform.position.x, 0.1f, player.transform.position.z), AttackCircle.transform.rotation);
+        
         // 大きさはゼロ
         TimeCircle.transform.localScale = new Vector3(0.0f, 0.0f, 0.0f);
 
+        // サークルの大きさ拡大
+        fScale = AttackCircle.transform.localScale.x / (fAttackStart * 50.0f);
 
         // 攻撃サークル生成
         AttackCircle = Instantiate(AttackCircle, new Vector3(player.transform.position.x, 0.1f, player.transform.position.z), AttackCircle.transform.rotation);
+        
         // サークルの透明度を下げる
         AttackCircle.GetComponent<SpriteRenderer>().color -= new Color32(0, 0, 0, 125);
 
-        // サークルの大きさ拡大
-        fScale = AttackCircle.transform.localScale.x / (fAttackStart * 50.0f);
+
+        enemyEffect = enemy.GetComponent<EnemyBase>().GetEffect;
+
     }
 
     //----------------------------------
@@ -65,24 +75,31 @@ public class Fire : MonoBehaviour
     //----------------------------------
     void Update()
     {
+       // サークルが消えた & まだ火柱が出ていない
+        if(AttackCircle == null && !bAttackStart)
+        {
+            bAttackStart = true;
+
+            // エフェクト生成
+            ObjEffect = enemyEffect.CreateEffect(EnemyEffect.eEffect.eFirePiller, gameObject, fLifeTime - fAttackStart);
+        }
+
         Destroy(gameObject, fLifeTime);
+
+        // 一定時間後、予測サークル消滅
         Destroy(AttackCircle, fAttackStart);
         Destroy(TimeCircle, fAttackStart);
-
-       // 当たり判定用キューブを不透明に(デバッグ用)
-        fAttackStart -= Time.deltaTime;
-        if(fAttackStart < 0.0f && !bAttackStart)
-        {
-            gameObject.GetComponent<MeshRenderer>().material.color += new Color32(255, 255, 255, 122);
-            bAttackStart = true;
-        }
     }
 
     private void FixedUpdate()
     {
+        // サークルサイズ拡大
         if(TimeCircle != null)
             TimeCircle.transform.localScale = new Vector3(TimeCircle.transform.localScale.x + fScale, TimeCircle.transform.localScale.y + fScale, 1.0f);
     }
+
+
+
 
     //----------------------------------
     // 当たり判定
@@ -94,13 +111,7 @@ public class Fire : MonoBehaviour
         if (other.tag == "Player" && bAttackStart)
         {
             // ダメージ処理
-            //player.GetComponent<StatusComponent>().HP -= enemy.GetComponent<StatusComponent>().Attack;
-
-            //*応急*
             player.GetComponent<PlayerHP>().OnDamage(enemy.GetComponent<StatusComponent>().Attack);
-
-            Debug.Log("ダメージ");
-
         }
     }
 
@@ -116,12 +127,8 @@ public class Fire : MonoBehaviour
             if (fTime < 0.0f)
             {
                 // ダメージ処理
-                //player.GetComponent<StatusComponent>().HP -= enemy.GetComponent<StatusComponent>().Attack;
-
-                //*応急* (初撃より少なく)
                 player.GetComponent<PlayerHP>().OnDamage(enemy.GetComponent<StatusComponent>().Attack / 10);
 
-                Debug.Log("ダメージ");
                 fTime = fInterval;
             }
 

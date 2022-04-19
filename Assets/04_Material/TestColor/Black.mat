@@ -1,6 +1,10 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+<<<<<<< HEAD:Assets/Material/Black.mat
+--- !u!114 &-6865868935659700644
+=======
 --- !u!114 &-7285817912433577656
+>>>>>>> d2f65eada7be6604d61b693afd0e28d3b8accd2c:Assets/04_Material/TestColor/Black.mat
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}

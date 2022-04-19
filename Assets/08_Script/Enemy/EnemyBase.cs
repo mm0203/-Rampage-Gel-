@@ -49,7 +49,7 @@ public class EnemyBase : MonoBehaviour
     // 前フレームの座標
     private Vector3 vOldPos;
 
-   // 吹っ飛ばされてから動き出す秒数
+    // 吹っ飛ばされてから動き出す秒数
     private float fBurstTime = 2.0f;
 
     // 攻撃中か
@@ -57,7 +57,7 @@ public class EnemyBase : MonoBehaviour
 
     // 攻撃範囲に入ってから、一度目の攻撃か
     private bool bFirstAttack = false;
-   
+
     // ダメージUI
     [SerializeField] private GameObject DamageObj;
 
@@ -100,7 +100,9 @@ public class EnemyBase : MonoBehaviour
 
         // ナビメッシュ設定
         myAgent = GetComponent<NavMeshAgent>();
+
         myAgent.speed = enemyData.fSpeed;
+
 
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
@@ -132,7 +134,7 @@ public class EnemyBase : MonoBehaviour
             player.GetComponent<PlayerExp>().AddExp(10);
 
             // 効果音再生
-            AudioSource.PlayClipAtPoint(DeathSE,transform.position);
+            AudioSource.PlayClipAtPoint(DeathSE, transform.position);
 
             // リストから削除(中ボスはEnemyManagerのリストに入ってないため処理しない)
             if(manager != null) manager.NowEnemyList.Remove(gameObject);
@@ -152,7 +154,7 @@ public class EnemyBase : MonoBehaviour
         Vector2 vdistance = new Vector2(transform.position.x - player.transform.position.x, transform.position.z - player.transform.position.z);
 
         // 消滅処理
-        if(vdistance.x > fDistance || vdistance.x < -fDistance ||
+        if (vdistance.x > fDistance || vdistance.x < -fDistance ||
            vdistance.y > fDistance || vdistance.y < -fDistance)
         {
             Debug.Log("消滅");
@@ -218,7 +220,7 @@ public class EnemyBase : MonoBehaviour
         }
 
         // 攻撃中でないとき
-        if(!bAttack)
+        if (!bAttack)
         {
            // 次の場所を計算
            Vector3 nextPoint = myAgent.steeringTarget;
@@ -272,11 +274,11 @@ public class EnemyBase : MonoBehaviour
     private void Burst()
     {
         // 物理演算がONの時（バースト時に物理演算がONになる）
-        if(!rb.isKinematic)
+        if (!rb.isKinematic)
         {
             // 2秒後に、物理演算OFFにする(仮)
             fBurstTime -= Time.deltaTime;
-            if(fBurstTime < 0.0)
+            if (fBurstTime < 0.0)
             {
                 fBurstTime = 2.0f;
                 rb.isKinematic = true;
@@ -294,6 +296,6 @@ public class EnemyBase : MonoBehaviour
         text.GetComponent<TextMesh>().text = damage.ToString();
 
         // 少しずらした位置に生成(z + 1.0f)
-        text.transform.position = new Vector3(transform.position.x,transform.position.y, transform.position.z + 1.0f) ;
+        text.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + 1.0f);
     }
 }

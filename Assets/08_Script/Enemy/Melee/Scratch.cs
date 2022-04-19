@@ -1,0 +1,42 @@
+//======================================================================
+// Scratch.cs
+//======================================================================
+// 開発履歴
+//
+// 2022/03/05 author：小椋駿 製作開始　敵のひっかき攻撃処理
+// 2022/03/28 author：竹尾　応急　プレイヤーへのダメージ判定
+//
+//======================================================================
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Scratch : MonoBehaviour
+{
+    GameObject player;
+    GameObject enemy;
+
+    public void SetPlayer (GameObject obj) { player = obj; }
+    public void SetEnemy(GameObject obj) { enemy = obj; }
+
+
+    
+    void Update()
+    {
+        Destroy(gameObject, 0.5f);
+        
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.transform.tag == "Player")
+
+        {
+            // ダメージ処理
+            player.GetComponent<PlayerHP>().OnDamage(enemy.GetComponent<StatusComponent>().Attack);
+
+            Destroy(gameObject);
+
+        }
+    }
+}

@@ -28,6 +28,6 @@ public class Stop : MonoBehaviour
     public void DoStop(Rigidbody rb)
     {
         // ’âŽ~‰Â”\‚È‚ç’âŽ~‚·‚é
-        rb.velocity *= 0.9f;
+        rb.velocity *= 0.98f;
     }
 }

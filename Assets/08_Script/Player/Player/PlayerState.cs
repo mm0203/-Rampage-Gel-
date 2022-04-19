@@ -56,7 +56,7 @@ public class PlayerState : MonoBehaviour
         if (IsDie) return;
 
         // キーボード移動 
-        if (IsDoubleTrigger(Input.GetMouseButtonDown(0),Input.GetMouseButtonDown(1)) ||
+        if (IsDoubleTrigger(Input.GetMouseButtonDown(0), Input.GetMouseButtonDown(1)) ||
         Input.GetAxis("LTrigger") >= 0.3f && Input.GetAxis("RTrigger") >= 0.3f)
         {
             GotoHardState();
@@ -74,20 +74,20 @@ public class PlayerState : MonoBehaviour
         if (LB) bLflg = true;
         if (RB) bRflg = true;
 
-        if(bLflg || bRflg)
+        if (bLflg || bRflg)
         {
             time += Time.deltaTime;
 
-            if(time <= fInterbalTime)
+            if (time <= fInterbalTime)
             {
-                if(LB && bRflg)
+                if (LB && bRflg)
                 {
                     bLflg = false;
                     bRflg = false;
                     time = 0.0f;
                     return true;
                 }
-                if(RB && bLflg)
+                if (RB && bLflg)
                 {
                     bLflg = false;
                     bRflg = false;
