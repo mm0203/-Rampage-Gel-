@@ -13,11 +13,14 @@ using UnityEngine.AI;
 
 public class BossBase : MonoBehaviour
 {
-    //private BossAttack bossAttack;
+    [SerializeField] private EnemyData enemyData;
     private StatusComponent status;
-    private GameObject player;
+    public GameObject player { get; set; }
     private NavMeshAgent myAgent;
     private Animator animator;
+
+    // HP
+    private float nHp;
 
     //*応急*
     [SerializeField] GameObject Portals;
@@ -33,18 +36,9 @@ public class BossBase : MonoBehaviour
     [Header("死亡時効果音")]
     [SerializeField] private AudioClip DeathSE;
 
-    // 攻撃関連
-    [Header("攻撃を開始する距離")]
-    [SerializeField, Range(0.0f, 50.0f)] private float fAttackDis = 5.0f;
-
-    [Header("攻撃頻度")]
-    [SerializeField, Range(0.0f, 10.0f)] private float fAttackTime = 3.0f;
-
-    private float fAttackCount;
-    int nAttackType;
-
     // エフェクト
-    [Header("エフェクトシステム")] [SerializeField] EnemyEffect effect;
+    [Header("エフェクトシステム")]
+    [SerializeField] EnemyEffect effect;
 
     public EnemyEffect GetEffect { get { return effect; } }
 
@@ -58,29 +52,18 @@ public class BossBase : MonoBehaviour
 
     bool bVisible = false;
 
-    //-------------------------
-    // 初期化
-    //-------------------------
     void Start()
     {
         player = GameObject.Find("Player");
 
-        // ステータス初期化
-        status = GetComponent<StatusComponent>();
-        status.Level = 0;
-        status.HP = status.HP + (status.Level * status.UpHP);
-        status.Attack = status.Attack + (status.Level * status.UpAttack);
-        status.Speed = status.Speed;
+        nHp = enemyData.nBossHp + (enemyData.nLevel * enemyData.nUpHP);
 
         // ナビメッシュ初期化（ステータスからスピードを取得）
         myAgent = GetComponent<NavMeshAgent>();
-        myAgent.speed = status.Speed;
+        myAgent.speed = enemyData.fSpeed;
 
         // その他初期化
         animator = GetComponent<Animator>();
-        //bossAttack = GetComponent<BossAttack>();
-        //bossAttack.SetPlayer(player);
-        fAttackCount = fAttackTime;
 
         // ダメージ処理
         BossRush rush = gameObject.GetComponentInChildren<BossRush>();
@@ -89,24 +72,18 @@ public class BossBase : MonoBehaviour
 
     }
 
-    //-------------------------
-    // 更新
-    //-------------------------
     void Update()
     {
         Move();
-        //Attack();
         Death();
 
     }
 
-    //----------------------------
     // 死亡
-    //----------------------------
     public bool Death()
     {
         // HP0以下で消滅
-        if (status.HP <= 0)
+        if (nHp <= 0)
         {
             //*応急*
             if (bPortal == false)
@@ -126,9 +103,7 @@ public class BossBase : MonoBehaviour
         return false;
     }
 
-    //----------------------------
     // 移動
-    //----------------------------
     public void Move()
     {
         // 次の場所を計算
@@ -138,7 +113,6 @@ public class BossBase : MonoBehaviour
         // 回転
         Quaternion targetRotation = Quaternion.LookRotation(targetDir);
         transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 120f * Time.deltaTime);
-
 
         // プレイヤーを追いかける（一定秒数ごとに敵めがけて移動）
         if (!bRush)
@@ -162,9 +136,7 @@ public class BossBase : MonoBehaviour
         vOldPos = gameObject.transform.position;
     }
 
-    //----------------------------
     // プレイヤーとの接触時
-    //----------------------------
     private void OnTriggerEnter(Collider other)
     {
         // プレイヤーとの衝突時ダメージ
@@ -175,21 +147,17 @@ public class BossBase : MonoBehaviour
         }
     }
 
-    //------------------------------------------------------
-    // ダメージの処理(ボスの体、尾でも使えるようにpublic)
-    //------------------------------------------------------
+    // ダメージの処理
     public void Damege()
     {
         // ダメージ処理
-        status.HP -= player.GetComponent<PlayerStatus>().Attack;
+        nHp -= player.GetComponent<PlayerStatus>().Attack;
 
         // ダメージ表記
         ViewDamage(player.GetComponent<PlayerStatus>().Attack);
     }
 
-    //----------------------------
     // ダメージ表記
-    //----------------------------
     private void ViewDamage(int damage)
     {
         // テキストの生成

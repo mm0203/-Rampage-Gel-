@@ -21,6 +21,7 @@ public class BossRush : MonoBehaviour
 
     void Start()
     {
+        player = GameObject.Find("Player");
         rb = player.GetComponent<Rigidbody>();
     }
 
