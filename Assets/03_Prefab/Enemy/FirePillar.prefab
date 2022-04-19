@@ -342,6 +342,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96707ce0b8aa8cf4aa85d80aae2464dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyData: {fileID: 11400000, guid: 4570e7ccf9be7b24e9040c4161085551, type: 2}
   DamageObj: {fileID: 1599770427430637572, guid: f281449c9f2cf8045930e932567b2b5e, type: 3}
   DeathSE: {fileID: 8300000, guid: da24daa9fcff69c4d884496fda891063, type: 3}
   fAttackDis: 6.5
@@ -425,10 +426,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1054541111543390759}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 073dfd6336d8cf747b9f9fbdb4fc0537, type: 3}
+  m_Script: {fileID: 11500000, guid: 3819de8f7da32e9469d0d3c8ce59ca25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Circle: {fileID: 3745731802580100520, guid: 8f168ae5491e09946bad4712fdb02421, type: 3}
+  Circle: {fileID: 1199865174811731554, guid: e635dad1e48884b4b94f8f348ed4abe3, type: 3}
+  vCircleSize: {x: 0.5, y: 0.5, z: 0.5}
+  vFireSize: {x: 0.5, y: 3, z: 0.5}
 --- !u!1 &1396298650181788993
 GameObject:
   m_ObjectHideFlags: 0
