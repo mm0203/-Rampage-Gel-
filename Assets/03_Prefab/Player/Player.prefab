@@ -353,13 +353,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 8653902471880294848}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a424f20c4572912428103f476962557d, type: 3}
+  m_Script: {fileID: 11500000, guid: 42db7d45404c37742a0dc4acd7afd2c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fInitial: 200
-  fLate: 0.98
+  fInitial: 20
+  fLate: 0.94
   Direction: {fileID: 8653902473288582500}
   anime: {fileID: 8653902472783900674}
+  effect: {fileID: 0}
+  effectmove: {fileID: 0}
 --- !u!114 &8653902471880294856
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -369,7 +371,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8653902471880294848}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b2ab557a6799d44d8674914de581abf, type: 3}
+  m_Script: {fileID: 11500000, guid: 1f047cf9e8b434f43814e4eb8a086b43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &8653902471880294857
@@ -381,11 +383,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 8653902471880294848}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b51361171d67e140a2854055fb52894, type: 3}
+  m_Script: {fileID: 11500000, guid: 628fd401c6b43984fbc8cbeb13b216cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   nRecovery: 2
   nCost: 1
+  effect: {fileID: 0}
+  DefaultModel: {fileID: 8653902472744644067}
+  GuardModel: {fileID: 919132149155446097, guid: 77e62f97092d5a140a555db7dd055dc8, type: 3}
 --- !u!114 &8653902471880294862
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -395,10 +400,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 8653902471880294848}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b1dc29510b223547a00faa1b39f1d77, type: 3}
+  m_Script: {fileID: 11500000, guid: f70c07306316cb84faba020be414db87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UpandDown: 0
+  UpandDown: 10
 --- !u!114 &8653902471880294863
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -408,7 +413,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8653902471880294848}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21e5b6edd6a66d24b94d38294ed5d53d, type: 3}
+  m_Script: {fileID: 11500000, guid: e30be40872121114f9901d9575b9c2d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   fInterbalTime: 3
@@ -440,6 +445,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad1c1ea7b58c9d4418c5c69543e4410c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  effect: {fileID: 0}
 --- !u!114 &8653902471880294850
 MonoBehaviour:
   m_ObjectHideFlags: 0
