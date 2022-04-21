@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<< HEAD:Assets/03_Prefab/Enemy/EnemyEffect.prefab.meta
-guid: cab41441e89bb5c478e31befdd923ffe
-=======
 guid: 8ad696e21e4db31429ba8402a66d472b
->>>>>>> e1c90e72ad26b7520ccd4ea35efcfd731723ec2f:Assets/03_Prefab/Enemy/Fire.prefab.meta
 PrefabImporter:
   externalObjects: {}
   userData: 
