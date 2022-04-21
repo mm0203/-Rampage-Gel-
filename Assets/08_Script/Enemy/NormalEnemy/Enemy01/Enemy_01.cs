@@ -62,7 +62,7 @@ public class Enemy_01 : MonoBehaviour
         cube.AddComponent<Scratch>();
 
         // 情報をセット
-        cube.GetComponent<Scratch>().SetPlayer(enemyBase.GetComponent<EnemyBase>().GetPlayer);
+        cube.GetComponent<Scratch>().SetPlayer(enemyBase.GetComponent<EnemyBase>().player);
         cube.GetComponent<Scratch>().SetEnemy(this.gameObject);
 
         // その他コンポーネント調整

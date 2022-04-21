@@ -14,7 +14,6 @@ using UnityEngine.AI;
 public class BossBase : MonoBehaviour
 {
     [SerializeField] private EnemyData enemyData;
-    private StatusComponent status;
     public GameObject player { get; set; }
     private NavMeshAgent myAgent;
     private Animator animator;

@@ -661,7 +661,6 @@ GameObject:
   - component: {fileID: 6535151810148196115}
   - component: {fileID: 89026613756711121}
   - component: {fileID: -5511113279981360778}
-  - component: {fileID: 4366160397991314250}
   - component: {fileID: -8971009324805824560}
   - component: {fileID: 2203727814211496611}
   - component: {fileID: 7048890038659655708}
@@ -719,24 +718,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &4366160397991314250
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5907127726947567017}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0df91b21c74d07942973f4026991ba1c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nLevel: 1
-  nHp: 20
-  nAttack: 10
-  fSpeed: 2.5
-  nUpHP: 3
-  nUpAttack: 3
 --- !u!195 &-8971009324805824560
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -776,7 +757,7 @@ MonoBehaviour:
   DeathSE: {fileID: 8300000, guid: da24daa9fcff69c4d884496fda891063, type: 3}
   fAttackDis: 5
   fAttackTime: 1
-  effect: {fileID: 707058587186697454, guid: d63d43aa85bc2c4469259fbe60af9c97, type: 3}
+  effect: {fileID: 4654835053005618983, guid: 8ad696e21e4db31429ba8402a66d472b, type: 3}
 --- !u!95 &7048890038659655708
 Animator:
   serializedVersion: 3
@@ -787,7 +768,7 @@ Animator:
   m_GameObject: {fileID: 5907127726947567017}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 53a13c42a6be15644b0ced7d16cd6a6d, type: 2}
+  m_Controller: {fileID: 9100000, guid: 5076fed5fd320e54f9524128382cd023, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

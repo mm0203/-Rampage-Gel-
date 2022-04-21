@@ -4,7 +4,7 @@
 // 開発履歴
 //
 // 2022/03/05 author：小椋駿 製作開始　
-// 2022/03/28 author：竹尾　応急　プレイヤーへのダメージ判定
+// 2022/04/21 author：小椋　敵の攻撃力をEnemyDataから参照するように変更
 //
 //======================================================================
 
@@ -46,7 +46,7 @@ public class Rush : MonoBehaviour
         if (other.tag == "Player")
         {
             // ダメージ処理
-            player.GetComponent<PlayerHP>().OnDamage(enemy.GetComponent<StatusComponent>().Attack);
+            player.GetComponent<PlayerHP>().OnDamage(enemy.GetComponent<EnemyBase>().GetEnemyData.nAttack);
 
             Destroy(gameObject);
         }
