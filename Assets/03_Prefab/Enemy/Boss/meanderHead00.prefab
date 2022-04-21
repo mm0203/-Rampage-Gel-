@@ -145,7 +145,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fAttackTime: 3
-  effect: {fileID: 707058587186697454, guid: d63d43aa85bc2c4469259fbe60af9c97, type: 3}
+  effect: {fileID: 658653411954554665, guid: cab41441e89bb5c478e31befdd923ffe, type: 3}
   body: {fileID: 8529943048718830661, guid: c291895b6a32f4a439fc57463608ef7f, type: 3}
   tail: {fileID: 4408414568023588543, guid: 2a946ed9aadeee248acd7d3d12def9c9, type: 3}
 --- !u!114 &2645006530656392778
