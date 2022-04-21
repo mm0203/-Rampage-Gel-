@@ -58,6 +58,9 @@ public class EnemyManager : MonoBehaviour
         {
             CreateEnemy();
         }
+
+        
+        //DontDestroyOnLoad(this.gameObject);
     }
 
     //---------------
