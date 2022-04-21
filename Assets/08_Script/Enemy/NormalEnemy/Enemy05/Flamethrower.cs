@@ -6,6 +6,7 @@
 //
 // 2022/03/21 author：小椋駿 製作開始　敵の火炎放射
 // 2022/03/28 author：竹尾　応急　プレイヤーへのダメージ判定（エラー）
+// 2022/04/21 author：小椋　敵の攻撃力をEnemyDataから参照するように変更
 //
 //======================================================================
 
@@ -86,7 +87,7 @@ public class Flamethrower : MonoBehaviour
         if (other.tag == "Player")
         {
             // ダメージ処理
-            player.GetComponent<PlayerHP>().OnDamage(enemy.GetComponent<StatusComponent>().Attack);
+            player.GetComponent<PlayerHP>().OnDamage(enemy.GetComponent<EnemyBase>().GetEnemyData.nAttack);
         }
     }
 
@@ -102,7 +103,7 @@ public class Flamethrower : MonoBehaviour
             if (fTime < 0.0f)
             {
                 // ダメージ処理（ダメージを少なく）
-                player.GetComponent<PlayerHP>().OnDamage(enemy.GetComponent<StatusComponent>().Attack / 5);
+                player.GetComponent<PlayerHP>().OnDamage(enemy.GetComponent<EnemyBase>().GetEnemyData.nAttack / 10);
 
                 fTime = fInterval;
             }

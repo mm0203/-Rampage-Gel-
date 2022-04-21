@@ -7,6 +7,7 @@
 // 2022/03/05 author：小椋駿 製作開始　敵の遠距離攻撃処理
 // 2022/03/28 author：竹尾　応急　プレイヤーへのダメージ判定
 // 2022/03/30 author：小椋　エフェクト処理の追加
+// 2022/04/21 author：小椋　敵の攻撃力をEnemyDataから参照するように変更
 //
 //======================================================================
 
@@ -61,7 +62,7 @@ public class Bullet : MonoBehaviour
         if (other.transform.tag == "Player")
         {
             // ダメージ処理
-            player.GetComponent<PlayerHP>().OnDamage(enemy.GetComponent<StatusComponent>().Attack);
+            player.GetComponent<PlayerHP>().OnDamage(enemy.GetComponent<EnemyBase>().GetEnemyData.nAttack);
 
             Destroy(effect);
             Destroy(gameObject);

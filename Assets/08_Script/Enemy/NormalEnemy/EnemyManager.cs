@@ -80,8 +80,6 @@ public class EnemyManager : MonoBehaviour
 
             // “G‚ÌƒŒƒxƒ‹‚ğã‚°‚é
             nEnemyLevel++;
-
-            Debug.Log(nEnemyLevel);
         }
 
     }

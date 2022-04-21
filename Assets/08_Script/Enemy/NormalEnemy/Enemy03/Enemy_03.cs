@@ -21,7 +21,7 @@ public class Enemy_03 : MonoBehaviour
         enemyBase = GetComponent<EnemyBase>();
     }
 
-    private void AttackEnemy03()
+    private void HurtleAttack()
     {
         // 当たり判定用スフィア生成
         spher = GameObject.CreatePrimitive(PrimitiveType.Cube);

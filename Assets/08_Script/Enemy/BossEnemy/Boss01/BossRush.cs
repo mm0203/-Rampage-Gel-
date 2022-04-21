@@ -36,7 +36,7 @@ public class BossRush : MonoBehaviour
         if (other.tag == "Player")
         {
             // ダメージ処理
-            player.GetComponent<PlayerHP>().OnDamage(enemy.GetComponent<StatusComponent>().Attack);
+            //player.GetComponent<PlayerHP>().OnDamage(enemy.GetComponent<StatusComponent>().Attack);
 
             //Vector3 vec = new Vector3(Mathf.Abs(enemy.transform.forward.x * 10), 0.0f, Mathf.Abs(enemy.transform.forward.z * 10));
             //Debug.Log(vec);
@@ -51,7 +51,7 @@ public class BossRush : MonoBehaviour
         if (collision.transform.tag == "Player")
         {
             // ダメージ処理
-            player.GetComponent<PlayerHP>().OnDamage(enemy.GetComponent<StatusComponent>().Attack);
+            //player.GetComponent<PlayerHP>().OnDamage(enemy.GetComponent<StatusComponent>().Attack);
 
             //Vector3 vec = new Vector3(Mathf.Abs(enemy.transform.forward.x * 10), 0.0f, Mathf.Abs(enemy.transform.forward.z * 10));
             //Debug.Log(vec);
