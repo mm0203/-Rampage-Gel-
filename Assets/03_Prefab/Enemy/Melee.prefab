@@ -2343,7 +2343,7 @@ MonoBehaviour:
   DeathSE: {fileID: 8300000, guid: da24daa9fcff69c4d884496fda891063, type: 3}
   fAttackDis: 1.3
   fAttackTime: 3
-  effect: {fileID: 707058587186697454, guid: d63d43aa85bc2c4469259fbe60af9c97, type: 3}
+  effect: {fileID: 658653411954554665, guid: cab41441e89bb5c478e31befdd923ffe, type: 3}
 --- !u!95 &1518576576450875897
 Animator:
   serializedVersion: 3

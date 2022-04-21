@@ -5,7 +5,7 @@
 //
 // 2022/03/09 author：畠山大輝 実装開始(種類,生成の仮実装)
 // 2022/03/15                  アイテム追加分の実装(分岐を増やすだけ)
-// 2022/04/21 author：竹尾晃史郎 nItemCount修正
+// 2022/04/21 author：竹尾晃史郎 nItemCount修正、他β用に調整
 //
 //======================================================================
 using System.Collections;
@@ -18,26 +18,26 @@ public class ItemManager : MonoBehaviour
     // アイテムの種類
     enum eItem
     {
-        eHp = 0,
-        eStamina,
-        eAttack,
-        eSpeed,
-        eTelescopic,
-        eBurst,
-        eGuard,
-        eHighBound,
-        eFire,
-        eWater,
-        eThunder,
-        eDivision,
-        eAutoHeal,
-        eStaminaHeal,
-        eCombo,
-        eDrain,
-        eReborn,
-        eWall,
-        eAura,
-        eSonicBoom,
+        eHp = 0,     // nHp
+        eStamina,    // nStamina
+        eAttack,     // nAttack
+        eSpeed,      // fSpeed
+        eBurstRange, // バースト範囲
+        eBurstDamage,// バーストダメージ
+        //eGuard,      // ※未使用
+        //eHighBound,  // ※未使用
+        eFire,       // 火属性
+        eWater,      // 水属性
+        eThunder,    // 雷属性
+        eDivision,   // 分裂
+        eAutoHeal,   // オート回復
+        eStaminaHeal,// スタミナ回復速度
+        //eCombo,      // ※未使用
+        eDrain,      // HP吸収
+        eReborn,     // 残機
+        //eWall,       // ※未使用
+        //eAura,       // ※未使用
+        eSonicBoom,  // 無敵時間
 
         eMax
     }
