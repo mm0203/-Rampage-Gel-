@@ -5,6 +5,7 @@
 //
 // 2022/03/21 author：小椋駿 製作開始　火柱処理
 // 2022/03/28 author：竹尾　応急　プレイヤーへのダメージ判定
+// 2022/04/21 author：小椋　敵の攻撃力をEnemyDataから参照するように変更
 //
 //======================================================================
 
@@ -67,7 +68,11 @@ public class Fire : MonoBehaviour
 
         Debug.Log(enemy.GetComponent<BossBase>());
 
-        enemyEffect = enemy.GetComponent<BossBase>().GetEffect;
+        // ボス用?
+        //enemyEffect = enemy.GetComponent<BossBase>().GetEffect;
+
+        // ザコ用
+        enemyEffect = enemy.GetComponent<EnemyBase>().GetEffect;
 
     }
 
@@ -112,7 +117,7 @@ public class Fire : MonoBehaviour
         if (other.tag == "Player" && bAttackStart)
         {
             // ダメージ処理
-            player.GetComponent<PlayerHP>().OnDamage(enemy.GetComponent<StatusComponent>().Attack);
+            player.GetComponent<PlayerHP>().OnDamage(enemy.GetComponent<EnemyBase>().GetEnemyData.nAttack);
         }
     }
 
@@ -128,7 +133,7 @@ public class Fire : MonoBehaviour
             if (fTime < 0.0f)
             {
                 // ダメージ処理
-                player.GetComponent<PlayerHP>().OnDamage(enemy.GetComponent<StatusComponent>().Attack / 10);
+                player.GetComponent<PlayerHP>().OnDamage(enemy.GetComponent<EnemyBase>().GetEnemyData.nAttack / 10);
 
                 fTime = fInterval;
             }

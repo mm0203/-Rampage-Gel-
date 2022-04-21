@@ -58,7 +58,7 @@ public class Enemy_02 : MonoBehaviour
         // 弾のコンポーネントに情報をセット
         Bullet bullet = spher.GetComponent<Bullet>();
         bullet.Speed = fSpeed;
-        bullet.SetPlayer(enemyBase.GetComponent<EnemyBase>().GetPlayer);
+        bullet.SetPlayer(enemyBase.GetComponent<EnemyBase>().player);
         bullet.SetEnemy(gameObject);
 
         // エフェクト生成

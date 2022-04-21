@@ -11,6 +11,7 @@
 // 2022/03/31 author：小椋駿 一定距離離れると敵が消滅するように
 // 2022/04/04 author：小椋駿 中ボス用に少し改良
 // 2022/04/15 author：松野将之 マスターデータからステータスを取得
+// 2022/04/21 author：小椋駿 GetEnemyDataを作成(EnamyManager.csにて使用)
 //
 //======================================================================
 
@@ -34,10 +35,10 @@ public class EnemyBase : MonoBehaviour
 
     // 敵のマスターデータ
     [SerializeField] private EnemyData enemyData;
+    public EnemyData GetEnemyData { get { return enemyData; } }
 
-    //private StatusComponent status;
-    private GameObject player;
-    private EnemyManager manager;
+    public GameObject player{ get; set; }
+    public EnemyManager manager { get; set; }
     private NavMeshAgent myAgent;
     private Animator animator;
     private Rigidbody rb;
@@ -53,7 +54,7 @@ public class EnemyBase : MonoBehaviour
     private float fBurstTime = 2.0f;
 
     // 攻撃中か
-    private bool bAttack = false;
+    public bool bAttack { get; set; }
 
     // 攻撃範囲に入ってから、一度目の攻撃か
     private bool bFirstAttack = false;
@@ -61,16 +62,20 @@ public class EnemyBase : MonoBehaviour
     // ダメージUI
     [SerializeField] private GameObject DamageObj;
 
-    // 効果音
-    [Header("死亡時効果音")] [SerializeField] private AudioClip DeathSE;
 
-    // 攻撃関連
-    [Header("攻撃を開始する距離")] [SerializeField, Range(0.0f, 50.0f)] private float fAttackDis = 3.0f;
-    [Header("攻撃頻度")] [SerializeField, Range(0.0f, 10.0f)] private float fAttackTime = 3.0f;
+    [Header("死亡時効果音")]
+    [SerializeField] private AudioClip DeathSE;
+
+    [Header("攻撃を開始する距離")]
+    [SerializeField, Range(0.0f, 50.0f)] private float fAttackDis = 3.0f;
+
+    [Header("攻撃頻度")]
+    [SerializeField, Range(0.0f, 10.0f)] private float fAttackTime = 3.0f;
     private float fAttackCount;
 
-    // エフェクト
-    [Header("エフェクトシステム")] [SerializeField] EnemyEffect effect;
+    [Header("エフェクトシステム")]
+    [SerializeField] EnemyEffect effect;
+    public EnemyEffect GetEffect { get { return effect; }}
 
     // 消滅距離
     float fDistance = 20.0f;
@@ -78,12 +83,6 @@ public class EnemyBase : MonoBehaviour
     //------------------------
     // ゲッター、セッター
     //------------------------
-    public void SetManager(EnemyManager obj) { manager = obj; }
-    public void SetPlayer(GameObject obj) { player = obj; }
-    public GameObject GetPlayer { get { return player; } }
-
-    public void SetAttack(bool flag) { bAttack = flag; }
-    public EnemyEffect GetEffect { get { return effect; } }
 
     //----------------------------
     // 初期化
@@ -91,19 +90,15 @@ public class EnemyBase : MonoBehaviour
     void Start()
     {
         // ステータス初期化
-        //status = GetComponent<StatusComponent>();
-
-        //status.HP = enemyData.nHp + (enemyData.nLevel * enemyData.nUpHP);
         nHp = enemyData.nHp + (enemyData.nLevel * enemyData.nUpHP);
         nAttack = enemyData.nAttack + (enemyData.nLevel * enemyData.nUpAttack);
-        //status.Speed = enemyData.fSpeed;
 
         // ナビメッシュ設定
         myAgent = GetComponent<NavMeshAgent>();
-
+   
+        // スピード設定
         myAgent.speed = enemyData.fSpeed;
-
-
+    
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
 

@@ -6,6 +6,7 @@
 // 2022/03/05 author：小椋駿 製作開始　敵生成処理追加
 // 2022/03/18 author：小椋駿 画面外に敵が生成するように
 // 2022/03/28 author：小椋駿 敵のレベルアップ処理追加
+// 2022/04/21 author：小椋駿 レベルをEnemyDataから取得するように変更
 //
 //======================================================================
 using System.Collections;
@@ -57,6 +58,9 @@ public class EnemyManager : MonoBehaviour
         {
             CreateEnemy();
         }
+
+        
+        //DontDestroyOnLoad(this.gameObject);
     }
 
     //---------------
@@ -79,8 +83,6 @@ public class EnemyManager : MonoBehaviour
 
             // 敵のレベルを上げる
             nEnemyLevel++;
-
-            Debug.Log(nEnemyLevel);
         }
 
     }
@@ -94,10 +96,15 @@ public class EnemyManager : MonoBehaviour
         enemy = Instantiate(EnemyList[Random.Range(0, EnemyList.Count)], CreatePos(), Quaternion.identity);
 
         // 敵レベルセット
-        enemy.GetComponent<StatusComponent>().Level = nEnemyLevel;
+        enemy.GetComponent<EnemyBase>().GetEnemyData.nLevel = nEnemyLevel;
 
-        enemy.GetComponent<EnemyBase>().SetManager(gameObject.GetComponent<EnemyManager>());
-        enemy.GetComponent<EnemyBase>().SetPlayer(player);
+        // マネージャ情報セット
+        enemy.GetComponent<EnemyBase>().manager = gameObject.GetComponent<EnemyManager>();
+
+        // プレイヤー情報セット
+        enemy.GetComponent<EnemyBase>().player = player;
+
+        // リストに追加
         NowEnemyList.Add(enemy);
     }
 
