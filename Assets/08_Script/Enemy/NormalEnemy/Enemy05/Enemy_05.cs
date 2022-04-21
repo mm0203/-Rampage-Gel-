@@ -50,7 +50,7 @@ public class Enemy_05 : MonoBehaviour
 
         // 情報セット
         cube.GetComponent<Flamethrower>().SetEnemy(gameObject);
-        cube.GetComponent<Flamethrower>().SetPlayer(enemyBase.GetPlayer);
+        cube.GetComponent<Flamethrower>().SetPlayer(enemyBase.player);
         cube.GetComponent<Flamethrower>().SetDiss(fDistance);
 
         // エフェクト生成
@@ -61,7 +61,7 @@ public class Enemy_05 : MonoBehaviour
         cube.GetComponent<BoxCollider>().isTrigger = true;
 
         // 攻撃フラグをON（敵が動かなくなる）
-        enemyBase.SetAttack(true);
+        enemyBase.bAttack = true;
 
         // 当たり判定キューブを非表示
         cube.GetComponent<MeshRenderer>().enabled = false;

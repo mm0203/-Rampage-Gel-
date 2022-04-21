@@ -32,7 +32,7 @@ public class Enemy_04 : MonoBehaviour
     private void Start()
     {
         enemyBase = GetComponent<EnemyBase>();
-        player = enemyBase.GetPlayer;
+        player = enemyBase.player;
     }
 
     private void FirePillarAttack()

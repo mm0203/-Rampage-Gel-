@@ -49,7 +49,7 @@ public class Flamethrower : MonoBehaviour
             // 敵の攻撃フラグをおろす（移動可能状態へ）
             if (enemy.GetComponent<EnemyBase>() != null)
             {
-                enemy.GetComponent<EnemyBase>().SetAttack(false);
+                enemy.GetComponent<EnemyBase>().bAttack = false;
             }
             Destroy(effect);
             Destroy(gameObject);

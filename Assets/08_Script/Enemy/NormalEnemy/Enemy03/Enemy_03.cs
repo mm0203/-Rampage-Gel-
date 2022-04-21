@@ -33,7 +33,7 @@ public class Enemy_03 : MonoBehaviour
 
         // コンポーネント調整
         spher.AddComponent<Rush>();
-        spher.GetComponent<Rush>().SetPlayer(enemyBase.GetComponent<EnemyBase>().GetPlayer);
+        spher.GetComponent<Rush>().SetPlayer(enemyBase.GetComponent<EnemyBase>().player);
         spher.GetComponent<Rush>().SetEnemy(this.gameObject);
         spher.GetComponent<BoxCollider>().isTrigger = true;
             
