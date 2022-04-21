@@ -24,7 +24,13 @@ public class SoundData : ScriptableObject
     [Header("System")]
     public List<AudioClip> SystemSoundList = new List<AudioClip>();
 
-    [Header("BGM")]
-    public List<AudioClip> BGMSoundList = new List<AudioClip>();
-    
+    [Header("StageBGM")]
+    public List<AudioClip> StageBGMSoundList = new List<AudioClip>();
+
+    [Header("BossBGM")]
+    public List<AudioClip> BossBGMSoundList = new List<AudioClip>();
+
+    [Header("Environmental")]
+    public List<AudioClip> EnvSoundList = new List<AudioClip>();
+
 }

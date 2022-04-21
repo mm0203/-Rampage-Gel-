@@ -32,4 +32,8 @@ MonoBehaviour:
   SystemSoundList:
   - {fileID: 8300000, guid: c3d67e4988dd2244b8f8c913e55098a8, type: 3}
   - {fileID: 8300000, guid: 91b2a05146f432147a78e31f4ffd0755, type: 3}
-  BGMSoundList: []
+  StageBGMSoundList:
+  - {fileID: 8300000, guid: 013d043e505be574a9ad95c1b5c0dde8, type: 3}
+  - {fileID: 8300000, guid: 67ae40c654bcfb1458947ae1d08e857d, type: 3}
+  BossBGMSoundList: []
+  EnvSoundList: []
