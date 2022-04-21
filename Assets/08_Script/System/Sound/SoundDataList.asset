@@ -33,7 +33,33 @@ MonoBehaviour:
   - {fileID: 8300000, guid: c3d67e4988dd2244b8f8c913e55098a8, type: 3}
   - {fileID: 8300000, guid: 91b2a05146f432147a78e31f4ffd0755, type: 3}
   StageBGMSoundList:
+  - {fileID: 8300000, guid: 559981e9705e6bd49be7c26dd2ea67d2, type: 3}
+  - {fileID: 8300000, guid: cc097e5e68f6cbf44a897c2c359092a4, type: 3}
+  - {fileID: 8300000, guid: 4c5cd76605dca984a99c49e7a7f10404, type: 3}
+  - {fileID: 8300000, guid: 8658eb27a6732dd4ab0d1f36b9007683, type: 3}
+  - {fileID: 8300000, guid: 715d4574d004ddb44804e20b2f50d2b5, type: 3}
+  - {fileID: 8300000, guid: 6bec840c1494d54478106c9a8ccb4de2, type: 3}
+  - {fileID: 8300000, guid: 164affbca80adb448a5210428f2a790b, type: 3}
+  - {fileID: 8300000, guid: b88db0e4ee83cf5418e9a1e67d9649d4, type: 3}
+  - {fileID: 8300000, guid: 3dd8385ec95930547a6df393064ba990, type: 3}
+  - {fileID: 8300000, guid: b901b4a6fa08d7145b50d991649ca135, type: 3}
+  - {fileID: 8300000, guid: 713a823ba06f2374b94c57db24d6a03f, type: 3}
+  - {fileID: 8300000, guid: 4d2623816882623418d8301b2c98e195, type: 3}
+  - {fileID: 8300000, guid: a98ba79bea9425747b7f7e210f6256de, type: 3}
+  - {fileID: 8300000, guid: 5885ac3ae43bf2d43b3185528bfd28bb, type: 3}
+  BossBGMSoundList:
   - {fileID: 8300000, guid: 013d043e505be574a9ad95c1b5c0dde8, type: 3}
   - {fileID: 8300000, guid: 67ae40c654bcfb1458947ae1d08e857d, type: 3}
-  BossBGMSoundList: []
+  - {fileID: 8300000, guid: 6b63769a55968c34e9ed5e5402c2d4a2, type: 3}
+  - {fileID: 8300000, guid: d525632852ed42340ba266477ccdbb3a, type: 3}
+  - {fileID: 8300000, guid: 4c7a1ddf638a06d4f8393a82ee53e464, type: 3}
+  - {fileID: 8300000, guid: 1690aa7060b9a0749a6b8d20e48078d3, type: 3}
+  - {fileID: 8300000, guid: fa830ee0ac106f84099b0fdca732eff9, type: 3}
+  - {fileID: 8300000, guid: 1f3c382af62d4e446a129eae527264e3, type: 3}
+  - {fileID: 8300000, guid: 5feef8e230770984a9470786416c5b71, type: 3}
+  - {fileID: 8300000, guid: 1fb859d464eb57a4383eaa9ad26f5e60, type: 3}
+  - {fileID: 8300000, guid: d95134a5b821ac148ac33116618a7b71, type: 3}
+  - {fileID: 8300000, guid: 527898043ac9f474c9f3df53cfdbff51, type: 3}
+  - {fileID: 8300000, guid: ff2ac031b7ad26b479a564af996d750d, type: 3}
+  - {fileID: 8300000, guid: 6c7dc3d8ffda6df43a48e718fe457cd2, type: 3}
   EnvSoundList: []
