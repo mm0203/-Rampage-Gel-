@@ -19,7 +19,11 @@ public class SkullDragon : MonoBehaviour
     EnemyEffect enemyEffect;
     GameObject objEffect;
 
-    [Header("火炎放射の距離")] [SerializeField] float fDistance = 3.0f;
+    [Header("火炎放射の距離")]
+    [SerializeField] float fDistance = 3.0f;
+
+    [Header("火炎放射の時間")]
+    [SerializeField] float fFlameTime = 1.0f;
 
     //------------------------
     // 初期化
@@ -48,14 +52,20 @@ public class SkullDragon : MonoBehaviour
         // 火炎放射のコンポーネントを追加
         cube.AddComponent<Flamethrower>();
 
-        // 情報セット
-        cube.GetComponent<Flamethrower>().SetEnemy(gameObject);
-        cube.GetComponent<Flamethrower>().SetPlayer(enemyBase.player);
-        cube.GetComponent<Flamethrower>().SetDiss(fDistance);
+        // 敵セット
+        cube.GetComponent<Flamethrower>().enemy = gameObject;
+
+        // プレイヤーセット
+        cube.GetComponent<Flamethrower>().player = enemyBase.player;
+
+        // 火炎放射距離セット
+        cube.GetComponent<Flamethrower>().fDis = fDistance;
 
         // エフェクト生成
         objEffect = enemyEffect.CreateEffect(EnemyEffect.eEffect.eFlame, gameObject);
-        cube.GetComponent<Flamethrower>().SetEffect(objEffect);
+
+        // エフェクトセット
+        cube.GetComponent<Flamethrower>().effect = objEffect;
 
         // すり抜ける判定に
         cube.GetComponent<BoxCollider>().isTrigger = true;
@@ -65,5 +75,8 @@ public class SkullDragon : MonoBehaviour
 
         // 当たり判定キューブを非表示
         cube.GetComponent<MeshRenderer>().enabled = false;
+
+        // 火炎放射時間設定
+        cube.GetComponent<Flamethrower>().fLifeTime = fFlameTime;
     }
 }

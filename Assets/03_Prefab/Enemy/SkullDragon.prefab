@@ -637,7 +637,7 @@ GameObject:
   - component: {fileID: -2180020361647052322}
   - component: {fileID: 2530851985402437326}
   - component: {fileID: -4122562151513363477}
-  - component: {fileID: -8595209030900461549}
+  - component: {fileID: -3012846782059012025}
   m_Layer: 0
   m_Name: SkullDragon
   m_TagString: Untagged
@@ -751,7 +751,7 @@ MonoBehaviour:
   fAttackDis: 5
   fAttackTime: 3
   effect: {fileID: 4654835053005618983, guid: 8ad696e21e4db31429ba8402a66d472b, type: 3}
---- !u!114 &-8595209030900461549
+--- !u!114 &-3012846782059012025
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -764,6 +764,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fDistance: 3
+  fFlameTime: 3
 --- !u!1 &2169818141231038566
 GameObject:
   m_ObjectHideFlags: 0
