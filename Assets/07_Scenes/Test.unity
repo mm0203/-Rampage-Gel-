@@ -250,6 +250,7 @@ MonoBehaviour:
   ItemObjectList: []
   CountList: 
   nStatus: 0
+  itemImage: {fileID: 0}
 --- !u!4 &1190214010
 Transform:
   m_ObjectHideFlags: 0
