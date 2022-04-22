@@ -41,8 +41,7 @@ public class Pause : MonoBehaviour
         bLevelUpPause = false;
         bResume = true;
 
-        // 4/21 ’Ç‰Á
-        itemManager = GameObject.FindWithTag("ItemManager").GetComponent<ItemManager>();
+        
         
     }
     void Update()
