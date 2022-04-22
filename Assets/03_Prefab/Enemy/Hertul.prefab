@@ -659,11 +659,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6535151810148196115}
-  - component: {fileID: 89026613756711121}
   - component: {fileID: -5511113279981360778}
+  - component: {fileID: 89026613756711121}
   - component: {fileID: -8971009324805824560}
-  - component: {fileID: 2203727814211496611}
   - component: {fileID: 7048890038659655708}
+  - component: {fileID: 2203727814211496611}
   - component: {fileID: -7944734423978635915}
   m_Layer: 0
   m_Name: Hertul
@@ -689,19 +689,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &89026613756711121
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5907127726947567017}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.3, y: 0.5, z: 0.68}
-  m_Center: {x: 0, y: 0.27, z: 0}
 --- !u!54 &-5511113279981360778
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -718,6 +705,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &89026613756711121
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5907127726947567017}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.3, y: 0.5, z: 0.68}
+  m_Center: {x: 0, y: 0.27, z: 0}
 --- !u!195 &-8971009324805824560
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -740,24 +740,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &2203727814211496611
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5907127726947567017}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 96707ce0b8aa8cf4aa85d80aae2464dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyData: {fileID: 11400000, guid: 4570e7ccf9be7b24e9040c4161085551, type: 2}
-  DamageObj: {fileID: 1599770427430637572, guid: f281449c9f2cf8045930e932567b2b5e, type: 3}
-  DeathSE: {fileID: 8300000, guid: da24daa9fcff69c4d884496fda891063, type: 3}
-  fAttackDis: 5
-  fAttackTime: 1
-  effect: {fileID: 4654835053005618983, guid: 8ad696e21e4db31429ba8402a66d472b, type: 3}
 --- !u!95 &7048890038659655708
 Animator:
   serializedVersion: 3
@@ -777,6 +759,24 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &2203727814211496611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5907127726947567017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96707ce0b8aa8cf4aa85d80aae2464dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyData: {fileID: 11400000, guid: 4570e7ccf9be7b24e9040c4161085551, type: 2}
+  DamageObj: {fileID: 1599770427430637572, guid: f281449c9f2cf8045930e932567b2b5e, type: 3}
+  DeathSE: {fileID: 8300000, guid: da24daa9fcff69c4d884496fda891063, type: 3}
+  fAttackDis: 5
+  fAttackTime: 1
+  effect: {fileID: 4654835053005618983, guid: 8ad696e21e4db31429ba8402a66d472b, type: 3}
 --- !u!114 &-7944734423978635915
 MonoBehaviour:
   m_ObjectHideFlags: 0

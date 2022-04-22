@@ -56,10 +56,14 @@ public class BossAttack : MonoBehaviour
         // 火柱コンポーネント追加
         cube.AddComponent<Fire>();
 
-        // 情報セット
+        // 予測サークルセット
         cube.GetComponent<Fire>().SetCircle(Circle);
-        cube.GetComponent<Fire>().SetEnemy(gameObject);
-        cube.GetComponent<Fire>().SetPlayer(player);
+
+        // 敵情報セット
+        cube.GetComponent<Fire>().enemy = gameObject;
+
+        // プレイヤー情報セット
+        cube.GetComponent<Fire>().player = player;
     }
 
     //-------------------------

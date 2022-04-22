@@ -2215,9 +2215,9 @@ GameObject:
   - component: {fileID: 1190152648616746721}
   - component: {fileID: 526330452846050414}
   - component: {fileID: 5897768259895310885}
-  - component: {fileID: 6057131830715300600}
-  - component: {fileID: 3516257054420902481}
   - component: {fileID: 1518576576450875897}
+  - component: {fileID: 3516257054420902481}
+  - component: {fileID: 6057131830715300600}
   m_Layer: 0
   m_Name: Melee
   m_TagString: Enemy
@@ -2295,36 +2295,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &6057131830715300600
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8943500349344443402}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8adbadb8f11b0304b8c800ccc9600286, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &3516257054420902481
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8943500349344443402}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 96707ce0b8aa8cf4aa85d80aae2464dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyData: {fileID: 11400000, guid: 4570e7ccf9be7b24e9040c4161085551, type: 2}
-  DamageObj: {fileID: 1599770427430637572, guid: f281449c9f2cf8045930e932567b2b5e, type: 3}
-  DeathSE: {fileID: 8300000, guid: da24daa9fcff69c4d884496fda891063, type: 3}
-  fAttackDis: 1.3
-  fAttackTime: 3
-  effect: {fileID: 4654835053005618983, guid: 8ad696e21e4db31429ba8402a66d472b, type: 3}
 --- !u!95 &1518576576450875897
 Animator:
   serializedVersion: 3
@@ -2344,6 +2314,36 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &3516257054420902481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8943500349344443402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96707ce0b8aa8cf4aa85d80aae2464dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyData: {fileID: 11400000, guid: 4570e7ccf9be7b24e9040c4161085551, type: 2}
+  DamageObj: {fileID: 1599770427430637572, guid: f281449c9f2cf8045930e932567b2b5e, type: 3}
+  DeathSE: {fileID: 8300000, guid: da24daa9fcff69c4d884496fda891063, type: 3}
+  fAttackDis: 1.3
+  fAttackTime: 3
+  effect: {fileID: 4654835053005618983, guid: 8ad696e21e4db31429ba8402a66d472b, type: 3}
+--- !u!114 &6057131830715300600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8943500349344443402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8adbadb8f11b0304b8c800ccc9600286, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9073493185649808588
 GameObject:
   m_ObjectHideFlags: 0
