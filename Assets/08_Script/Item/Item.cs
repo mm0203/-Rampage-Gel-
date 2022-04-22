@@ -33,7 +33,7 @@ public class Item : MonoBehaviour
         if (collision.transform.tag == "Player")
         {
             // アイテム取得個数をカウント
-            if(itemManager.nItemCount() == 1) itemUI.CreateItemUI();
+            if(itemManager.nItemCount(1) == 1) itemUI.CreateItemUI();
 
             // オブジェクトを削除し、新しいオブジェクトを生成(仮)
             Destroy(this.gameObject);

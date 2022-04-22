@@ -5,37 +5,39 @@
 //
 // 2022/03/09 author：畠山大輝 実装開始(種類,生成の仮実装)
 // 2022/03/15                  アイテム追加分の実装(分岐を増やすだけ)
+// 2022/04/21 author：竹尾晃史郎 nItemCount修正、他β用に調整
 //
 //======================================================================
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ItemManager : MonoBehaviour
 {
     // アイテムの種類
     enum eItem
     {
-        eHp = 0,
-        eStamina,
-        eAttack,
-        eSpeed,
-        eTelescopic,
-        eBurst,
-        eGuard,
-        eHighBound,
-        eFire,
-        eWater,
-        eThunder,
-        eDivision,
-        eAutoHeal,
-        eStaminaHeal,
-        eCombo,
-        eDrain,
-        eReborn,
-        eWall,
-        eAura,
-        eSonicBoom,
+        eHp = 0,     // nHp
+        eStamina,    // nStamina
+        eAttack,     // nAttack
+        eSpeed,      // fSpeed
+        eBurstRange, // バースト範囲
+        eBurstDamage,// バーストダメージ
+        //eGuard,      // ※未使用
+        //eHighBound,  // ※未使用
+        eFire,       // 火属性
+        eWater,      // 水属性
+        eThunder,    // 雷属性
+        eDivision,   // 分裂
+        eAutoHeal,   // オート回復
+        eStaminaHeal,// スタミナ回復速度
+        //eCombo,      // ※未使用
+        eDrain,      // HP吸収
+        eReborn,     // 残機
+        //eWall,       // ※未使用
+        //eAura,       // ※未使用
+        eSonicBoom,  // 無敵時間
 
         eMax
     }
@@ -47,6 +49,9 @@ public class ItemManager : MonoBehaviour
     public List<int> CountList;
     public int nStatus;
 
+    // アイテム画像データ（竹）
+    public ItemImage itemImage;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -55,15 +60,17 @@ public class ItemManager : MonoBehaviour
             CountList.Add(0);
         }
 
-        // 仮
-        nStatus = Random.Range(0, (int)eItem.eMax - 1);
-        CreateItem();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(Input.GetKeyDown(KeyCode.A))
+        {
+            nStatus = Random.Range(0, (int)eItem.eMax - 1);
+            nItemCount(nStatus);
+        }
     }
 
     // 新規オブジェクトの生成関数
@@ -77,11 +84,27 @@ public class ItemManager : MonoBehaviour
     }
 
     // オブジェクトの取得個数をカウント
-    public int nItemCount()
+    public int nItemCount(int itemID)
     {
-        CountList[nStatus]++;
-        Debug.Log(nStatus + "番アイテム：" + CountList[nStatus] + "個");
+        CountList[itemID]++;
+        Debug.Log(itemID + "番アイテム：" + CountList[itemID] + "個");
 
         return CountList[nStatus];
+    }
+
+    // アイテム抽選（竹尾）
+    public int nItemGacha()
+    {
+        int nItemID = 0;
+        nItemID = Random.Range(0, (int)eItem.eMax - 1);
+        return nItemID;
+    }
+
+    // アイテム画像渡し（竹）
+    public Sprite setItemIcon(int itemID)
+    {
+        Sprite image;
+        image =  itemImage.ItemImageList[itemID];
+        return image;
     }
 }

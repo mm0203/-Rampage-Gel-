@@ -22,7 +22,7 @@ public class Portal : MonoBehaviour
         if (collision.transform.tag == "Player")
         {
             // ƒV[ƒ“ŠÔ@1•b
-            FadeManager.Instance.LoadScene("TesrScene", 1.0f);
+            FadeManager.Instance.LoadScene(m_nextScene, 1.0f);
         }
     }
 }

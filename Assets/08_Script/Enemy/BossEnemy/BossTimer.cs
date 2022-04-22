@@ -59,7 +59,7 @@ public class BossTimer : MonoBehaviour
 
             // 中ボスにプレイヤー情報セット
             if(Boss.GetComponent<EnemyBase>())
-                Boss.GetComponent<EnemyBase>().SetPlayer(Player);
+                Player = Boss.GetComponent<EnemyBase>().player;
 
             // 消滅（仮）
             Destroy(gameObject);
