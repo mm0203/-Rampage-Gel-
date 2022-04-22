@@ -1645,7 +1645,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Circle: {fileID: 1567581828387049091, guid: 44b55e868d11eb84e903048b711a6bd2, type: 3}
   vCircleSize: {x: 0.5, y: 0.5, z: 0.5}
-  vFireSize: {x: 0.5, y: 3, z: 0.5}
+  vFireSize: {x: 1, y: 3, z: 1}
+  fIceTime: 6
 --- !u!1 &6733513146064114487
 GameObject:
   m_ObjectHideFlags: 0

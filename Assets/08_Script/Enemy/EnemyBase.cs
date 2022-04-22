@@ -28,7 +28,6 @@ public class EnemyBase : MonoBehaviour
     // アニメーションの種類
     enum eAnimetion
     {
-        eWait = 0,
         eMove,
         eAttack,
     }
@@ -204,14 +203,14 @@ public class EnemyBase : MonoBehaviour
         // 動いているか
         if ((vOldPos.x == transform.position.x || vOldPos.z == transform.position.z))
         {
-            // 待機モーション
-            animator.SetInteger("Parameter", (int)eAnimetion.eWait);
+            Debug.Log("notmove");
         }
         else
         {
             // 移動モーション
             animator.SetInteger("Parameter", (int)eAnimetion.eMove);
             bFirstAttack = false;
+            Debug.Log("move");
         }
 
         // 攻撃中でないとき

@@ -26,7 +26,8 @@ public class SkullHead : MonoBehaviour
     GameObject objEffect;
 
     // ‰Î‹…‚Ì‘¬“x
-    [Header("‰Î‹…‘¬“x")][SerializeField] float fSpeed = 5.0f;
+    [Header("‰Î‹…‘¬“x")]
+    [SerializeField] float fSpeed = 5.0f;
 
     //------------------------
     // ‰Šú‰»

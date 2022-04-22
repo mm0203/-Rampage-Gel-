@@ -17,25 +17,19 @@ using UnityEngine;
 public class Flamethrower : MonoBehaviour
 {
     // 火炎放射の時間
-    float fLifeTime = 3.0f;
+    public float fLifeTime { get; set; }
 
     // 火炎放射の長さ
-    float fDis;
+    public float fDis { get; set; }
 
     // ダメージを与える間隔
     float fInterval = 0.5f;
     float fTime;
 
-    GameObject player;
-    GameObject enemy;
-    GameObject effect;
+    public GameObject player { get; set; }
+    public GameObject enemy { get; set; }
+    public GameObject effect { get; set; }
 
-    public void SetPlayer(GameObject obj) { player = obj; }
-    public void SetEnemy(GameObject obj) { enemy = obj; }
-
-    public void SetDiss(float dis) { fDis = dis; }
-
-    public void SetEffect(GameObject obj) { effect = obj; }
 
     //---------------------------
     // 更新
@@ -52,6 +46,8 @@ public class Flamethrower : MonoBehaviour
             {
                 enemy.GetComponent<EnemyBase>().bAttack = false;
             }
+
+            // 削除
             Destroy(effect);
             Destroy(gameObject);
         }

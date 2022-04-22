@@ -13,8 +13,8 @@ using UnityEngine;
 
 public class Ice : MonoBehaviour
 {
-    // 氷柱の時間
-    float fLifeTime = 6.0f;
+    // 氷柱の時間(IcePillar.csで設定)
+    public float fLifeTime { get; set; }
 
     // 攻撃サークルが出てから氷柱が出る時間
     float fAttackStart = 1.0f;
@@ -56,14 +56,8 @@ public class Ice : MonoBehaviour
         // サークルの透明度を下げる
         AttackCircle.GetComponent<SpriteRenderer>().color -= new Color32(0, 0, 0, 125);
 
-        Debug.Log(enemy.GetComponent<BossBase>());
-
-        // ボス用?
-        //enemyEffect = enemy.GetComponent<BossBase>().GetEffect;
-
         // ザコ用
         enemyEffect = enemy.GetComponent<EnemyBase>().GetEffect;
-
     }
 
     //----------------------------------
@@ -76,8 +70,11 @@ public class Ice : MonoBehaviour
         {
             bAttackStart = true;
 
+            gameObject.GetComponent<CapsuleCollider>().isTrigger = false;
+            gameObject.GetComponent<MeshRenderer>().enabled = true;
+
             // エフェクト生成
-            ObjEffect = enemyEffect.CreateEffect(EnemyEffect.eEffect.eFirePiller, gameObject, fLifeTime - fAttackStart);
+            //ObjEffect = enemyEffect.CreateEffect(EnemyEffect.eEffect.eFirePiller, gameObject, fLifeTime - fAttackStart);
         }
 
         Destroy(gameObject, fLifeTime);
