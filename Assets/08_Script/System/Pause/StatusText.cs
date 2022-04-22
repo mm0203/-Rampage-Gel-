@@ -7,7 +7,6 @@ public class StatusText : MonoBehaviour
 {
     [SerializeField] GameObject Ogura;
     [SerializeField] GameObject PlayerObj;
-    [SerializeField] int nOgura;
     // Start is called before the first frame update
     void Start()
     {

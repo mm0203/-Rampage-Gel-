@@ -473,6 +473,7 @@ GameObject:
   - component: {fileID: 1433144990208541285}
   - component: {fileID: 6500470090135876248}
   - component: {fileID: 3178281918287935644}
+  - component: {fileID: 6047555628957623515}
   m_Layer: 5
   m_Name: PlayerStatusWindow
   m_TagString: Untagged
@@ -538,6 +539,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &6047555628957623515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3341168072790706405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55b14c759e1229e4193ba14384a2e262, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Ogura: {fileID: 6286944694024586222}
+  PlayerObj: {fileID: 0}
 --- !u!1 &3380787409803698499
 GameObject:
   m_ObjectHideFlags: 0
