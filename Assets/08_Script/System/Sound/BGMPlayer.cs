@@ -18,7 +18,8 @@ public class BGMPlayer : MonoBehaviour
 
     public AudioSource Intro;
     public AudioSource Loop;
-    public AudioSource EnvSound;
+    public AudioSource EnvSound_L;
+    public AudioSource EnvSound_R;
 
 
     private void Start()
@@ -26,13 +27,15 @@ public class BGMPlayer : MonoBehaviour
         DontDestroyOnLoad(this);
 
         //ämîFóp
-        Stage1();
+        Stage2();
     }
 
+    // Planet1 *************************************************
     void Stage1()
     {
         int num = 0;
         StartIntro(SoundData.StageBGMSoundList[num], num);
+        PlayEnvSound(SoundData.EnvSoundList[num]);
     }
 
     void Stage1_Boss()
@@ -40,11 +43,14 @@ public class BGMPlayer : MonoBehaviour
         int num = 0;
         StartIntro_Boss(SoundData.BossBGMSoundList[num], num);
     }
+    //**********************************************************
 
+    // Planet2 *************************************************
     void Stage2()
     {
         int num = 2;
         StartIntro(SoundData.StageBGMSoundList[num], num);
+        PlayEnvSound(SoundData.EnvSoundList[num / 2]);
     }
 
     void Stage2_Boss()
@@ -52,11 +58,14 @@ public class BGMPlayer : MonoBehaviour
         int num = 2;
         StartIntro_Boss(SoundData.BossBGMSoundList[num], num);
     }
+    //**********************************************************
 
+    // Planet3 *************************************************
     void Stage3()
     {
         int num = 4;
         StartIntro(SoundData.StageBGMSoundList[num], num);
+        PlayEnvSound(SoundData.EnvSoundList[num / 2]);
     }
 
     void Stage3_Boss()
@@ -64,11 +73,14 @@ public class BGMPlayer : MonoBehaviour
         int num = 4;
         StartIntro_Boss(SoundData.BossBGMSoundList[num], num);
     }
+    //**********************************************************
 
+    // Planet4 *************************************************
     void Stage4()
     {
         int num = 6;
         StartIntro(SoundData.StageBGMSoundList[num], num);
+        PlayEnvSound(SoundData.EnvSoundList[num / 2]);
     }
 
     void Stage4_Boss()
@@ -76,11 +88,14 @@ public class BGMPlayer : MonoBehaviour
         int num = 6;
         StartIntro_Boss(SoundData.BossBGMSoundList[num], num);
     }
+    //**********************************************************
 
+    // Planet5 *************************************************
     void Stage5()
     {
         int num = 8;
         StartIntro(SoundData.StageBGMSoundList[num], num);
+        PlayEnvSound(SoundData.EnvSoundList[num / 2]);
     }
 
     void Stage5_Boss()
@@ -88,11 +103,15 @@ public class BGMPlayer : MonoBehaviour
         int num = 8;
         StartIntro_Boss(SoundData.BossBGMSoundList[num], num);
     }
+    //**********************************************************
 
+
+    // Planet6 *************************************************
     void Stage6()
     {
         int num = 10;
         StartIntro(SoundData.StageBGMSoundList[num], num);
+        PlayEnvSound(SoundData.EnvSoundList[num / 2]);
     }
 
     void Stage6_Boss()
@@ -100,11 +119,14 @@ public class BGMPlayer : MonoBehaviour
         int num = 10;
         StartIntro_Boss(SoundData.BossBGMSoundList[num], num);
     }
+    //**********************************************************
 
+    // Planet7 *************************************************
     void Stage7()
     {
         int num = 12;
         StartIntro(SoundData.StageBGMSoundList[num], num);
+        PlayEnvSound(SoundData.EnvSoundList[num / 2]);
     }
 
     void Stage7_Boss()
@@ -112,11 +134,15 @@ public class BGMPlayer : MonoBehaviour
         int num = 12;
         StartIntro_Boss(SoundData.BossBGMSoundList[num], num);
     }
+    //**********************************************************
 
     // BGNçƒê∂ *************************************************
-    void PlayEnvSound()
+    void PlayEnvSound(AudioClip clip)
     {
-        EnvSound.clip = null;
+        EnvSound_L.clip = EnvSound_R.clip = null;
+        EnvSound_L.clip = EnvSound_R.clip = clip;
+        EnvSound_L.loop = EnvSound_R.loop = true;
+        EnvSound_L.Play(); EnvSound_R.Play();
     }
 
     void StartIntro(AudioClip clip, int listnum)
