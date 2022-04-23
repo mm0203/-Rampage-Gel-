@@ -41,7 +41,8 @@ public class EnemyManager : MonoBehaviour
 
     int debug = 0;
 
-
+    
+    
     //---------------
     // ‰Šú‰»
     //---------------

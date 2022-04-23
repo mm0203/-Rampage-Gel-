@@ -4,6 +4,7 @@
 // 開発履歴
 //
 // 2022/04/07 author：松野将之 シーンをオブジェクト化(インスペクターに割り当て可能)
+// 2022/04/23 author：竹尾晃史郎　m_SceneNameをprivateからpublicに
 //
 //======================================================================
 using UnityEngine;
@@ -15,7 +16,7 @@ using UnityEditor;
 public class SceneObject
 {
     [SerializeField]
-    private string m_SceneName;
+    public string m_SceneName;
 
     public static implicit operator string(SceneObject sceneObject)
     {
