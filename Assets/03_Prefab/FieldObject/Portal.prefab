@@ -221,6 +221,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_nextScene:
     m_SceneName: Stage1
+  SceneData: {fileID: 11400000, guid: 8cd85850103a12f46b72aac0f8947289, type: 2}
+  sNowScene: "\u73FE\u5728\u306E\u30B7\u30FC\u30F3"
 --- !u!1 &7889288712703657429
 GameObject:
   m_ObjectHideFlags: 0
