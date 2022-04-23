@@ -11,6 +11,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BGMPlayer : MonoBehaviour
 {
@@ -22,12 +23,25 @@ public class BGMPlayer : MonoBehaviour
     public AudioSource EnvSound_R;
 
 
-    private void Start()
+    private void Awake()
     {
-        DontDestroyOnLoad(this);
+        DontDestroyOnLoad(this.gameObject);
+       
+    }
 
-        //Šm”F—p
-        Stage2();
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            Stage1();
+        }
+
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            SceneManager.LoadScene("Stage2");
+        }
+
+        
     }
 
     // Planet1 *************************************************

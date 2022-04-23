@@ -13,114 +13,44 @@ MonoBehaviour:
   m_Name: GenerateEnemyData
   m_EditorClassIdentifier: 
   Planet1:
-  - MaxEnemy: 10
-    EnemyList: []
-    BossEnemy: {fileID: 0}
-  - MaxEnemy: 10
-    EnemyList: []
-    BossEnemy: {fileID: 0}
-  - MaxEnemy: 10
-    EnemyList: []
-    BossEnemy: {fileID: 0}
-  - MaxEnemy: 10
-    EnemyList: []
-    BossEnemy: {fileID: 0}
-  - MaxEnemy: 10
-    EnemyList: []
-    BossEnemy: {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   Planet2:
-  - MaxEnemy: 10
-    EnemyList: []
-    BossEnemy: {fileID: 0}
-  - MaxEnemy: 10
-    EnemyList: []
-    BossEnemy: {fileID: 0}
-  - MaxEnemy: 10
-    EnemyList: []
-    BossEnemy: {fileID: 0}
-  - MaxEnemy: 10
-    EnemyList: []
-    BossEnemy: {fileID: 0}
-  - MaxEnemy: 10
-    EnemyList: []
-    BossEnemy: {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   Planet3:
-  - MaxEnemy: 10
-    EnemyList: []
-    BossEnemy: {fileID: 0}
-  - MaxEnemy: 10
-    EnemyList: []
-    BossEnemy: {fileID: 0}
-  - MaxEnemy: 10
-    EnemyList: []
-    BossEnemy: {fileID: 0}
-  - MaxEnemy: 10
-    EnemyList: []
-    BossEnemy: {fileID: 0}
-  - MaxEnemy: 10
-    EnemyList: []
-    BossEnemy: {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   Planet4:
-  - MaxEnemy: 10
-    EnemyList: []
-    BossEnemy: {fileID: 0}
-  - MaxEnemy: 10
-    EnemyList: []
-    BossEnemy: {fileID: 0}
-  - MaxEnemy: 10
-    EnemyList: []
-    BossEnemy: {fileID: 0}
-  - MaxEnemy: 10
-    EnemyList: []
-    BossEnemy: {fileID: 0}
-  - MaxEnemy: 10
-    EnemyList: []
-    BossEnemy: {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   Planet5:
-  - MaxEnemy: 10
-    EnemyList: []
-    BossEnemy: {fileID: 0}
-  - MaxEnemy: 10
-    EnemyList: []
-    BossEnemy: {fileID: 0}
-  - MaxEnemy: 10
-    EnemyList: []
-    BossEnemy: {fileID: 0}
-  - MaxEnemy: 10
-    EnemyList: []
-    BossEnemy: {fileID: 0}
-  - MaxEnemy: 10
-    EnemyList: []
-    BossEnemy: {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   Planet6:
-  - MaxEnemy: 10
-    EnemyList: []
-    BossEnemy: {fileID: 0}
-  - MaxEnemy: 10
-    EnemyList: []
-    BossEnemy: {fileID: 0}
-  - MaxEnemy: 10
-    EnemyList: []
-    BossEnemy: {fileID: 0}
-  - MaxEnemy: 10
-    EnemyList: []
-    BossEnemy: {fileID: 0}
-  - MaxEnemy: 10
-    EnemyList: []
-    BossEnemy: {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   Planet7:
-  - MaxEnemy: 10
-    EnemyList: []
-    BossEnemy: {fileID: 0}
-  - MaxEnemy: 10
-    EnemyList: []
-    BossEnemy: {fileID: 0}
-  - MaxEnemy: 10
-    EnemyList: []
-    BossEnemy: {fileID: 0}
-  - MaxEnemy: 10
-    EnemyList: []
-    BossEnemy: {fileID: 0}
-  - MaxEnemy: 10
-    EnemyList: []
-    BossEnemy: {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
