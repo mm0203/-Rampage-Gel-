@@ -15,15 +15,13 @@ using UnityEngine.SceneManagement;
 public class Portal : MonoBehaviour
 {
     // 次のシーン
-    public SceneObject m_nextScene;
-
-    // 0423 シーン管理
-    public SceneData SceneData;
-    [SerializeField] string sNowScene = "現在のシーン";
+    public SceneObject m_nextScene;   
+    public SceneData SceneData;        // 0423追加
+    string sNowScene = "現在のシーン"; // 0423追加
 
     private void Start()
     {
-        DecideNextScene();
+        DecideNextScene(); // 0423追加
     }
 
     // プレイヤーと接触でシーン遷移
@@ -36,22 +34,25 @@ public class Portal : MonoBehaviour
         }
     }
 
+
+
     // 0423 シーン決定 *****************************************
     void DecideNextScene()
     {
-        m_nextScene = null;
-        sNowScene = SceneManager.GetActiveScene().name;
+        m_nextScene = null;                             // 前のデータが残らないよう消す
+        sNowScene = SceneManager.GetActiveScene().name; // 今のシーンの名前をとる
 
         for(int i = 0; i <= SceneData.GameScene.Count; i++)
         {
-            Debug.Log(SceneData.GameScene[i].m_SceneName);
             if(sNowScene == SceneData.GameScene[i].m_SceneName)
             {
-                m_nextScene = SceneData.GameScene[i + 1];
-                break;
+                m_nextScene = SceneData.GameScene[i + 1]; // 次のシーンを当てる
+                break;                                    // 次のシーンが解れば後はいい
             }
         }
-        if (m_nextScene == null) Debug.LogError("次に遷移するシーンがありません");
+
+        if (m_nextScene == null) 
+            Debug.LogError("これは最終ステージ？");
     }
     //**********************************************************
 }
