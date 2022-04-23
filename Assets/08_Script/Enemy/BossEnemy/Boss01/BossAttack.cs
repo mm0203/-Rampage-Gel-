@@ -56,10 +56,14 @@ public class BossAttack : MonoBehaviour
         // 火柱コンポーネント追加
         cube.AddComponent<Fire>();
 
-        // 情報セット
+        // 予測サークルセット
         cube.GetComponent<Fire>().SetCircle(Circle);
-        cube.GetComponent<Fire>().SetEnemy(gameObject);
-        cube.GetComponent<Fire>().SetPlayer(player);
+
+        // 敵情報セット
+        cube.GetComponent<Fire>().enemy = gameObject;
+
+        // プレイヤー情報セット
+        cube.GetComponent<Fire>().player = player;
     }
 
     //-------------------------
@@ -67,30 +71,30 @@ public class BossAttack : MonoBehaviour
     //-------------------------
     public void CreateFlame(Vector3 vpos)
     {
-        // 判定用キューブ生成
-        cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        //// 判定用キューブ生成
+        //cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
 
-        // サイズ、座標、角度設定
-        cube.transform.localScale = new Vector3(1.5f, 1.0f, 5.0f);
-        cube.transform.rotation = this.transform.rotation;
-        cube.transform.position = new Vector3(transform.position.x + transform.forward.x * fDistance, transform.position.y, transform.position.z + transform.forward.z * fDistance);
+        //// サイズ、座標、角度設定
+        //cube.transform.localScale = new Vector3(1.5f, 1.0f, 5.0f);
+        //cube.transform.rotation = this.transform.rotation;
+        //cube.transform.position = new Vector3(transform.position.x + transform.forward.x * fDistance, transform.position.y, transform.position.z + transform.forward.z * fDistance);
 
-        // 火炎放射コンポーネント追加
-        cube.AddComponent<Flamethrower>();
+        //// 火炎放射コンポーネント追
+        //cube.AddComponent<Flamethrower>();
 
-        // 情報セット
-        cube.GetComponent<Flamethrower>().SetEnemy(gameObject);
-        cube.GetComponent<Flamethrower>().SetPlayer(player);
-        cube.GetComponent<Flamethrower>().SetDiss(fDistance);
+        //// 情報セット
+        //cube.GetComponent<Flamethrower>().SetEnemy(gameObject);
+        //cube.GetComponent<Flamethrower>().SetPlayer(player);
+        //cube.GetComponent<Flamethrower>().SetDiss(fDistance);
 
-        // すり抜ける設定
-        cube.GetComponent<BoxCollider>().isTrigger = true;
+        //// すり抜ける設定
+        //cube.GetComponent<BoxCollider>().isTrigger = true;
 
-        // キューブを非表示
-        cube.GetComponent<MeshRenderer>().enabled = false;
+        //// キューブを非表示
+        //cube.GetComponent<MeshRenderer>().enabled = false;
 
-        // エフェクト生成
-        objEffect = enemyEffect.CreateEffect(EnemyEffect.eEffect.eFlame, gameObject);
-        cube.GetComponent<Flamethrower>().SetEffect(objEffect);
+        //// エフェクト生成
+        //objEffect = enemyEffect.CreateEffect(EnemyEffect.eEffect.eFlame, gameObject);
+        //cube.GetComponent<Flamethrower>().SetEffect(objEffect);
     }
 }

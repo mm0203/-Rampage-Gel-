@@ -96,14 +96,7 @@ public class Pause : MonoBehaviour
         }
         //------------------------------------------ 
 
-        if (bLevelUpPause || bPause)
-        {
-            Stop();
-        }
-        else
-        {
-            Resume();
-        }
+        
 
         //============================================
         //バグ防止（2つのフラグが同じになることを防ぐ）
@@ -121,6 +114,14 @@ public class Pause : MonoBehaviour
         //if (!bPause && !bLevelUpPause)
         //    SetbResume(true);
         //--------------------------------------------
+        if (bLevelUpPause || bPause)
+        {
+            Stop();
+        }
+        else
+        {
+            Resume();
+        }
 
     }
     

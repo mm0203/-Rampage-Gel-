@@ -90,7 +90,7 @@ public class Boss01 : MonoBehaviour
     void Update()
     {
         // 攻撃
-        Attack();
+        //Attack();
 
         // ボスが死んだら子オブジェクトも破壊
         if(BossBase.Death())
