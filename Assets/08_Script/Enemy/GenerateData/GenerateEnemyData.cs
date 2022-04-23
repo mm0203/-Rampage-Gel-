@@ -17,7 +17,7 @@ using System;
 
 public class GenerateEnemyData : ScriptableObject
 {
-    [Serializable] public class StageData : MonoBehaviour
+    [Serializable] public class StageData 
     {
         [Header("-Å‘å“G”-")]
         [SerializeField] public int MaxEnemy = 10;
