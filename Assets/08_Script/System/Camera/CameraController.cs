@@ -58,8 +58,11 @@ public class CameraController : MonoBehaviour
     void Update()
     {
         // プレイヤー追従
-        if(bOnDirection == false)
-        transform.position = Player.transform.position + Offset;
+        if(bOnDirection == false) // 0425 追加
+        {
+            transform.position = Player.transform.position + Offset;
+        }
+        
 
         //カメラの回転
         // CameraRotationMouseControl();
