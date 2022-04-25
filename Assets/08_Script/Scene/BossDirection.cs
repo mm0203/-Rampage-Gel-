@@ -18,6 +18,7 @@ public class BossDirection : MonoBehaviour
     GameObject Bossobj = null;
     GameObject UIobj = null;
     EffectPlayer effectPlayer = null;
+    BGMPlayer BGMPlayer = null;
     [SerializeField] AnimationCurve Zoomcurve;
     [SerializeField] AnimationCurve Returncurve;
 
@@ -43,6 +44,7 @@ public class BossDirection : MonoBehaviour
         Cameraobj = GameObject.FindWithTag("MainCamera");
         Bossobj = GameObject.FindWithTag("Boss");
         UIobj = GameObject.FindWithTag("UI");
+        BGMPlayer = GameObject.FindWithTag("SoundPlayer").gameObject.GetComponent<BGMPlayer>();
         effectPlayer = Cameraobj.GetComponent<EffectPlayer>();
 
         nZoomTime = nZoomTime * nToFlame;
@@ -62,6 +64,10 @@ public class BossDirection : MonoBehaviour
 
     IEnumerator CameraMan()
     {
+        BGMPlayer.Stage7();
+        BGMPlayer.StopBGM();
+        
+
         float percentPos;
         // 近寄る ==============================================
         for (int i = 0; i <= nZoomTime; i++)
@@ -72,6 +78,10 @@ public class BossDirection : MonoBehaviour
         }
         // 止まる ==============================================
         StartCoroutine(effectPlayer.BlackFogAnimaion(1));
+
+        // ステージに応じたBGMを鳴らす
+        BGMPlayer.Stage7_Boss();
+
         for (int n = 0; n <= nShowTime; n++)
         {
             yield return null;

@@ -12,6 +12,7 @@ TagManager:
   - ItemManager
   - Boss
   - UI
+  - SoundPlayer
   layers:
   - Default
   - TransparentFX
