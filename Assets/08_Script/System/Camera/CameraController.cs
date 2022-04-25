@@ -5,6 +5,7 @@
 //
 // 2022/03/14 author：松野将之 カメラのプレイヤー追従機能実装
 //                             フリーカメラ機能実装
+// 2022/04/25 author：竹尾晃史郎　カメラ演出用のスイッチ仮追加
 //
 //======================================================================
 using System.Collections;
@@ -37,6 +38,9 @@ public class CameraController : MonoBehaviour
     // 相対距離取得用
     private Vector3 Offset;
 
+    // 0425 カメラ演出オンオフ
+    public bool bOnDirection = false;
+
     // カメラの状態
     // private bool bCameraMode = false;
 
@@ -54,6 +58,7 @@ public class CameraController : MonoBehaviour
     void Update()
     {
         // プレイヤー追従
+        if(bOnDirection == false)
         transform.position = Player.transform.position + Offset;
 
         //カメラの回転

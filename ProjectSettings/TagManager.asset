@@ -10,6 +10,8 @@ TagManager:
   - OBject
   - CircleEventSwitch
   - ItemManager
+  - Boss
+  - UI
   layers:
   - Default
   - TransparentFX

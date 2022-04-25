@@ -27,6 +27,17 @@ public class EffectPlayer : MonoBehaviour
     [SerializeField] Volume BurstShotVolume = null;
     public int nBurstShotInterbal = 30;
 
+    [SerializeField] Volume BlackFogVolume = null;
+    public int nClearInterbal = 50;
+    public bool bCompBlackFog = false;
+    enum BlackFogComand
+    {
+        Start,
+        Play,
+        
+        MAX
+    }
+
 
     private void Start()
     {
@@ -36,6 +47,8 @@ public class EffectPlayer : MonoBehaviour
         if (GuardVolume == null) Debug.LogError("[GuardVolume] is null!");
 
         if (BurstShotVolume == null) Debug.LogError("[BurstShotVolume] is null!");
+
+        if (BlackFogVolume == null) Debug.LogError("[BlackFogVolume] is null!");
     }
 
     // 確認用
@@ -52,6 +65,11 @@ public class EffectPlayer : MonoBehaviour
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            StartCoroutine(BurstShotEffect(nBurstShotInterbal));
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha4))
         {
             StartCoroutine(BurstShotEffect(nBurstShotInterbal));
         }
@@ -109,7 +127,7 @@ public class EffectPlayer : MonoBehaviour
     }
     // ************************************************************************
 
-    // バーストショット演出　**********************************************************
+    // バーストショット演出　**************************************************
     public IEnumerator BurstShotEffect(int armorflame) // 無敵時間中に発動
     {
         BurstShotVolume.weight = 1;
@@ -124,4 +142,26 @@ public class EffectPlayer : MonoBehaviour
         BurstShotVolume.weight = 0;
     }
     // ************************************************************************
+
+    // 黒い霧演出 *************************************************************
+    public IEnumerator BlackFogAnimaion(int comand)
+    {
+        if(comand == 0)
+        {
+            BlackFogVolume.weight = 1;
+        }
+        else if(comand == 1)
+        {
+            for (int n = nClearInterbal; n > 0; n--)
+            {
+                BlackFogVolume.weight = (float)n / nClearInterbal;
+                yield return new WaitForSeconds(0.01f);
+            }
+            BlackFogVolume.weight = 0;
+            bCompBlackFog = true;
+            
+        }
+       
+    }
+    //*************************************************************************
 }
