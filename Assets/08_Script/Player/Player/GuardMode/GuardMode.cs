@@ -49,6 +49,10 @@ public class GuardMode : MonoBehaviour
     [SerializeField] private GameObject DefaultModel;
     [SerializeField] private GameObject GuardModel;
 
+    // ガード中に向き変えるための変数
+    private Vector3 vStartPos = Vector3.zero;
+    private Vector3 vCurrentForce = Vector3.zero;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -62,13 +66,11 @@ public class GuardMode : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //<<<<<<< HEAD
-        // ハードモードじゃない
-        //=======
-        Debug.Log("バースト回数:" + fStockBurst);
+        if (Input.GetMouseButtonDown(0) && Input.GetMouseButtonDown(1))
+        {
+            vStartPos = GetMousePosition();
+        }
 
-        // ハードモードじゃないならゲージ回復
-        //>>>>>>> f691fcfffdd2bac8e0e6608715070ea534b60237
         if (!state.IsHard)
         {
             // ゲージ回復
@@ -83,6 +85,19 @@ public class GuardMode : MonoBehaviour
             SubtractGauge();
             DefaultModel.SetActive(false);
             GuardModel.SetActive(true);
+
+            // 動かしたマウス座標の位置を取得
+            var position = GetMousePosition();
+            // マウスの初期座標と動かした座標の差分を取得
+            vCurrentForce = vStartPos - position;
+
+            Debug.Log(vStartPos);
+
+            // 動く方向を見る
+            if (vCurrentForce != new Vector3(0, 0, 0))
+            {
+                transform.rotation = Quaternion.LookRotation(vCurrentForce);
+            }
         }
         // バーストモードなら
         if (state.IsBurst)
@@ -94,6 +109,7 @@ public class GuardMode : MonoBehaviour
             burst.Explode(fStockBurst);
             // 瞬間的に力を加えてはじく
             rb.AddForce(transform.forward * fStockBurst, ForceMode.Impulse);
+            status.bArmor = true;
             status.fBreakTime = 0.0f;
             state.GotoNormalState();
             fStockBurst = 0.0f;
@@ -103,7 +119,6 @@ public class GuardMode : MonoBehaviour
         if (state.IsHard && status.Stamina > 0)
         {
             stop.DoStop(rb);
-
             //*応急*
             effect.StartEffect(2, this.gameObject, 1.0f);
         }
@@ -138,4 +153,10 @@ public class GuardMode : MonoBehaviour
     {
         fStockBurst += damage;
     }
+
+    private Vector3 GetMousePosition()
+    {
+        return new Vector3(Input.mousePosition.x, 0, Input.mousePosition.y);
+    }
+
 }

@@ -20,7 +20,6 @@ public class PlayerState : MonoBehaviour
         eNormal = 0,
         eHard,
         eBurst,
-        eArmor,
         eDie,
     }
     private StateEnum eState = StateEnum.eNormal;
@@ -41,7 +40,6 @@ public class PlayerState : MonoBehaviour
     public bool IsNormal => eState == StateEnum.eNormal;
     public bool IsHard => eState == StateEnum.eHard;
     public bool IsBurst => eState == StateEnum.eBurst;
-    public bool IsArmor => eState == StateEnum.eArmor;
     public bool IsDie => eState == StateEnum.eDie;
 
     // Start is called before the first frame update
@@ -124,12 +122,6 @@ public class PlayerState : MonoBehaviour
     {
         if (!IsDie)
             eState = StateEnum.eBurst;
-    }
-    public void GotoArmorState()
-    {
-        if (!IsDie)
-            eState = StateEnum.eArmor;
-        // TODO スタート子ルーチン
     }
 
     public void GotoDieState()
