@@ -7,6 +7,7 @@
 // 2022/03/18 author：小椋駿 画面外に敵が生成するように
 // 2022/03/28 author：小椋駿 敵のレベルアップ処理追加
 // 2022/04/21 author：小椋駿 レベルをEnemyDataから取得するように変更
+// 2022/04/26 author：小椋駿 画面外生成処理を変更
 //
 //======================================================================
 using System.Collections;
@@ -19,11 +20,20 @@ using UnityEngine;
 public class EnemyManager : MonoBehaviour
 {
     // 敵の最大数
-    [Header("敵の数のMAX")] [SerializeField] int MaxEnemy = 2;
+    [Header("敵の数 MIN,MAX")]
+    [SerializeField] Vector2Int vEnemyNum = new Vector2Int(0, 20);
 
-    // プレイヤーとどれだけ離れて生成するか
-    [Header("生成距離")] [SerializeField] Vector2 vDistance = new Vector2(15.0f, 8.0f);
-    Vector2 vInstantePos;
+    // 敵の最大数
+    float fChangeNumCount = 0.0f;
+
+    // 敵の最大数保存用
+    int nTmpMaxNum;
+
+    [Header("生成距離")]
+    [SerializeField] float fDistance = 20.0f;
+
+    [Header("敵のレベルアップ速度(秒)")]
+    [SerializeField] float fLevelUpTime = 20.0f;
 
     // 敵の種類
     [SerializeField] List<GameObject> EnemyList;
@@ -31,18 +41,18 @@ public class EnemyManager : MonoBehaviour
     // 出現している敵のリスト
     public List<GameObject> NowEnemyList;
 
-    // 敵のレベルアップ関連
-    [Header("敵のレベルアップ秒数")] [SerializeField] float fLevelUpTime = 20.0f;
+    // レベルアップカウント
     float fLevelUpCount;
+
+    // 現在の敵のレベル
     int nEnemyLevel = 0;
 
     GameObject player;
     GameObject enemy;
 
-    int debug = 0;
+    [Header("ジェネレートデータ")]
+    [SerializeField] GenerateEnemyData GenerateEnemyData;
 
-    
-    
     //---------------
     // 初期化
     //---------------
@@ -51,16 +61,12 @@ public class EnemyManager : MonoBehaviour
         player = GameObject.Find("Player");
         fLevelUpCount = fLevelUpTime;
 
-        // 出現範囲を設定
-        vInstantePos = new Vector2(vDistance.x * 1.5f, vDistance.y * 1.5f);
-
-        // 敵生成
-        for (int i = 0; i < MaxEnemy; i++)
-        {
-            CreateEnemy();
-        }
+        // 敵の最大数保存
+        nTmpMaxNum = vEnemyNum.y;
 
         
+
+
         //DontDestroyOnLoad(this.gameObject);
     }
 
@@ -69,23 +75,15 @@ public class EnemyManager : MonoBehaviour
     //---------------
     void Update()
     {
+        ChangeNum();
+
+        LevelUp();
+
         // 減ったら新しく生成
-        if (NowEnemyList.Count < MaxEnemy)
+        if (NowEnemyList.Count < vEnemyNum.y)
         {
             CreateEnemy();
         }
-
-        // 時間に応じて敵のレベルアップ
-        fLevelUpCount -= Time.deltaTime;
-        if (fLevelUpCount < 0.0f)
-        {
-            // 初期化
-            fLevelUpCount = fLevelUpTime;
-
-            // 敵のレベルを上げる
-            nEnemyLevel++;
-        }
-
     }
 
     //---------------
@@ -114,31 +112,46 @@ public class EnemyManager : MonoBehaviour
     //---------------
     private Vector3 CreatePos()
     {
-        // プレイヤーの左端の位置を求める
-        Vector2 tmpPos = new Vector2(player.transform.position.x - vInstantePos.x, player.transform.position.z - vInstantePos.y);
+        // 1/2の確率で負の値にする
+        int random = Random.Range(0, 1);
+        if (random == 0)
+            fDistance *= -1;
 
-        // 出現位置をランダムに計算（プレイヤーの左端から右端の間で生成）
-        Vector3 vPos = new Vector3(Random.Range(tmpPos.x, tmpPos.x + (vInstantePos.x * 2)), 0.5f, Random.Range(tmpPos.y, tmpPos.y + (vInstantePos.y * 2)));
+        // 画面外の座標取得
+        Vector3 vPos = Camera.main.ViewportToWorldPoint(new Vector3(fDistance, 0.0f, Camera.main.nearClipPlane));
 
-        // プレイヤーとの距離を計算
-        Vector3 vCreatePos = vPos - player.transform.position;
-
-        // 画面外でなければ、もう一度計算  （TODO:あまりよくない。改善の余地あり）
-        while ((vCreatePos.x < vDistance.x && vCreatePos.x > -vDistance.x) && (vCreatePos.y < vDistance.y && vCreatePos.y > -vDistance.y))
-        {
-            vPos = new Vector3(Random.Range(tmpPos.x, tmpPos.x + (vInstantePos.x * 2)), 0.5f, Random.Range(tmpPos.y, tmpPos.y + (vInstantePos.y * 2)));
-            vCreatePos = vPos - player.transform.position;
-
-            // 強制終了(無限ループに入らないように)
-            debug++;
-            if (debug > 100)
-            {
-                Debug.Log("適生成エラー");
-                debug = 0;
-                return vPos;
-            }
-        }
+        vPos.z = Random.Range(player.transform.position.z - 5.0f, player.transform.position.z + 5.0f);
 
         return vPos;
+    }
+
+    //---------------
+    // レベルアップ処理
+    //---------------
+    void LevelUp()
+    {
+        // 時間に応じて敵のレベルアップ
+        fLevelUpCount -= Time.deltaTime;
+        if (fLevelUpCount < 0.0f)
+        {
+            // 初期化
+            fLevelUpCount = fLevelUpTime;
+
+            // 敵のレベルを上げる
+            nEnemyLevel++;
+        }
+    }
+
+
+    //-----------------------
+    // 敵の数を調整
+    //-----------------------
+    void ChangeNum()
+    {
+        // カウント増加
+        fChangeNumCount += Time.deltaTime * 0.1f;
+
+        // 敵の最大数の増減
+        vEnemyNum.y = (int)Mathf.Abs(nTmpMaxNum * Mathf.Sin(fChangeNumCount));
     }
 }
