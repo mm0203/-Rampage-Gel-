@@ -28,6 +28,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private float fLate = 0.97f;
 
     private PlayerState state;
+    private PlayerStatus status;
     private Rigidbody rb;
 
     // 発射方向
@@ -54,6 +55,7 @@ public class PlayerMove : MonoBehaviour
     void Start()
     {
         state = GetComponent<PlayerState>();
+        status = GetComponent<PlayerStatus>();
         rb = GetComponent<Rigidbody>();
         shaker = GetComponent<CameraShaker>();
         effectmove.SetActive(false);
@@ -81,9 +83,12 @@ public class PlayerMove : MonoBehaviour
 
         PadMove();
         KeyBoardMove();
-
-        // 減速
-        rb.velocity *= fLate;
+        status.fBreakTime++;
+        if(status.fBreakTime >= 20)
+        {
+            // 減速
+            rb.velocity *= fLate;
+        }
     }
 
     // キーボード操作
@@ -130,6 +135,7 @@ public class PlayerMove : MonoBehaviour
         {
             // 瞬間的に力を加えてはじく
             rb.AddForce(vCurrentForce.normalized * fStockPower * fInitial, ForceMode.Impulse);
+            status.fBreakTime = 0.0f;
             vCurrentForce = Vector3.zero;
             effectmove.SetActive(true);
             // 初期化
@@ -178,6 +184,7 @@ public class PlayerMove : MonoBehaviour
             effectmove.SetActive(true);
             // 初期化
             fStockPower = 0;
+            status.fBreakTime = 0.0f;
             vCurrentForce = Vector3.zero;
             Direction.enabled = false;
 

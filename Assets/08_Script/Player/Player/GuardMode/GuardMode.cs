@@ -94,6 +94,7 @@ public class GuardMode : MonoBehaviour
             burst.Explode(fStockBurst);
             // uŠÔ“I‚É—Í‚ğ‰Á‚¦‚Ä‚Í‚¶‚­
             rb.AddForce(transform.forward * fStockBurst, ForceMode.Impulse);
+            status.fBreakTime = 0.0f;
             state.GotoNormalState();
             fStockBurst = 0.0f;
         }
