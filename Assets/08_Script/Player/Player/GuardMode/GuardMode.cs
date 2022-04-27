@@ -42,6 +42,9 @@ public class GuardMode : MonoBehaviour
     // 爆発威力を収納
     private float fStockBurst = 0.0f;
 
+    // 硬化中にローテするための変数
+    bool bGuardStart = false;
+
     //*応急* エフェクトスクリプト
     [SerializeField] AID_PlayerEffect effect;
 
@@ -66,11 +69,6 @@ public class GuardMode : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && Input.GetMouseButtonDown(1))
-        {
-            vStartPos = GetMousePosition();
-        }
-
         if (!state.IsHard)
         {
             // ゲージ回復
@@ -81,6 +79,12 @@ public class GuardMode : MonoBehaviour
         // ハードモードなら
         if (state.IsHard)
         {
+            if(!bGuardStart)
+            {
+                vStartPos = GetMousePosition();
+                bGuardStart = true;
+            }
+
             // ゲージ消費
             SubtractGauge();
             DefaultModel.SetActive(false);
@@ -90,8 +94,6 @@ public class GuardMode : MonoBehaviour
             var position = GetMousePosition();
             // マウスの初期座標と動かした座標の差分を取得
             vCurrentForce = vStartPos - position;
-
-            Debug.Log(vStartPos);
 
             // 動く方向を見る
             if (vCurrentForce != new Vector3(0, 0, 0))
@@ -113,6 +115,7 @@ public class GuardMode : MonoBehaviour
             status.fBreakTime = 0.0f;
             state.GotoNormalState();
             fStockBurst = 0.0f;
+            bGuardStart = false;
         }
 
         // ハードモードかつゲージ残量があるなら停止
@@ -125,6 +128,8 @@ public class GuardMode : MonoBehaviour
         else
         {
             state.GotoNormalState();
+            state.bGuard = false;
+            bGuardStart = false;
         }
     }
 

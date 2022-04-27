@@ -36,6 +36,9 @@ public class PlayerState : MonoBehaviour
     bool bLflg = false;
     bool bRflg = false;
 
+    // 硬化フラグ
+    public bool bGuard = false;
+
     // 現在モード取得
     public bool IsNormal => eState == StateEnum.eNormal;
     public bool IsHard => eState == StateEnum.eHard;
@@ -61,13 +64,17 @@ public class PlayerState : MonoBehaviour
         }
 
         // バースト移行
-        if (IsDoubleTrigger(Input.GetMouseButtonUp(0), Input.GetMouseButtonUp(1)))
+        if (IsDoubleTrigger(Input.GetMouseButtonUp(0), Input.GetMouseButtonUp(1)) 
+            || Input.GetAxis("LTrigger") <= 0.2f && Input.GetAxis("RTrigger") <= 0.2f)
         {
-            GotoBurstState();
+            if(bGuard)
+            {
+                GotoBurstState();
+            }
         }
     }
 
-    private bool IsDoubleTrigger(bool LB, bool RB)
+    public bool IsDoubleTrigger(bool LB, bool RB)
     {
         if (LB) bLflg = true;
         if (RB) bRflg = true;
@@ -82,6 +89,7 @@ public class PlayerState : MonoBehaviour
                 {
                     bLflg = false;
                     bRflg = false;
+                    bGuard = true;
                     time = 0.0f;
                     return true;
                 }
@@ -89,6 +97,7 @@ public class PlayerState : MonoBehaviour
                 {
                     bLflg = false;
                     bRflg = false;
+                    bGuard = true;
                     time = 0.0f;
                     return true;
                 }
@@ -100,6 +109,7 @@ public class PlayerState : MonoBehaviour
                 time = 0.0f;
             }
         }
+        bGuard = false;
         return false;
     }
 
@@ -120,8 +130,8 @@ public class PlayerState : MonoBehaviour
     // バーストモードに移行
     public void GotoBurstState()
     {
-        if (!IsDie)
-            eState = StateEnum.eBurst;
+        if (!IsHard) return;
+        eState = StateEnum.eBurst;
     }
 
     public void GotoDieState()
