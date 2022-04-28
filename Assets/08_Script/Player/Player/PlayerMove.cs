@@ -39,9 +39,11 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private float fLate = 0.85f; // 減速率
     [Header("最大威力に到達する時間")]
     [SerializeField] private float fInputTime = 0.8f;
-    private float fStockPower = 0; // 蓄積時間
-    private float fTimeToMove = 999.0f;
-    private float fDistance = 0; // ステータスのスピードと連動
+    [SerializeField] private float fStockPower = 0; // 蓄積時間
+    private float fTimeToMove = 999.0f; // Time.deltaTimeを使う場合
+    //private int nTimeToMove = 999;    // フレームを使う場合
+    [SerializeField] private float fDistance = 0; // ステータスのスピードと連動 //上昇量0.02
+    //[SerializeField] private int nDistance = 0; // ステータスのスピードと連動 //上昇量1
     private bool bShot = false;
 
  
@@ -78,7 +80,7 @@ public class PlayerMove : MonoBehaviour
     // アニメーション ******************************************
     void MoveAnim()
     {
-        anime.SetFloat("pull", vCurrentForce.magnitude);
+        anime.SetFloat("pull", fStockPower);
         anime.SetFloat("blowway", rb.velocity.magnitude);
     }
     //**********************************************************
@@ -116,7 +118,8 @@ public class PlayerMove : MonoBehaviour
     // ブレーキ処理 ********************************************
     void MoveBrake()
     {
-        if(fTimeToMove > fDistance)
+        // float Time.deltaTimeを使用する例
+        if (fTimeToMove > fDistance)
         {
             rb.velocity *= fLate;
         }
@@ -124,6 +127,16 @@ public class PlayerMove : MonoBehaviour
         {
             fTimeToMove += Time.deltaTime;
         }
+
+        // int フレームを利用する例
+        //if (nTimeToMove > nDistance)
+        //{
+        //    rb.velocity *= fLate;
+        //}
+        //else
+        //{
+        //    nTimeToMove ++;
+        //}
     }
     //**********************************************************
 
@@ -156,6 +169,10 @@ public class PlayerMove : MonoBehaviour
             {
                 fStockPower += Time.deltaTime;
             }
+            else
+            {
+                fStockPower = fInputTime;
+            }
 
         }
 
@@ -166,19 +183,16 @@ public class PlayerMove : MonoBehaviour
             rb.AddForce(vCurrentForce.normalized * fStockPower * fInitial, ForceMode.Impulse);
             vCurrentForce = Vector3.zero;
             effectmove.SetActive(true);
-            if(rb.velocity.magnitude > 0.5)
-            {
-                effect.StartEffect(0, this.gameObject, 1.0f);
-            }
+            
 
             // 初期化
             fStockPower = 0;
             Direction.enabled = false;
+            effect.StartEffect(0, this.gameObject, 1.0f);
 
-
-            
 
             fTimeToMove = 0;
+            //nTimeToMove = 0;
         }
     }
     //**********************************************************
