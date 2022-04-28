@@ -8,11 +8,14 @@
 // 2022/03/28 author：小椋駿 敵のレベルアップ処理追加
 // 2022/04/21 author：小椋駿 レベルをEnemyDataから取得するように変更
 // 2022/04/26 author：小椋駿 画面外生成処理を変更
+// 2022/04/28 author：小椋駿 GenerateDataからデータを取得するように変更
+//                           Planet1にしか対応していないため、直す必要あり
 //
 //======================================================================
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 // 重複禁止
 [DisallowMultipleComponent]
@@ -61,11 +64,20 @@ public class EnemyManager : MonoBehaviour
         player = GameObject.Find("Player");
         fLevelUpCount = fLevelUpTime;
 
+        //// 現在シーンの取得
+        //Scene scene = SceneManager.GetActiveScene();
+
+        //// 現在シーンのビルド番号取得
+        //int nSceneNo = scene.buildIndex;
+
+        //// 敵の最大数をGenerateから取得   *TODO* Planet1しか対応していないため変更必須
+        //vEnemyNum.y = GenerateEnemyData.Planet1[nSceneNo].MaxEnemy;
+
+        //// 出現する敵リスト取得   *TODO* Planet1しか対応していないため変更必須
+        //EnemyList = GenerateEnemyData.Planet1[nSceneNo].EnemyList;
+
         // 敵の最大数保存
         nTmpMaxNum = vEnemyNum.y;
-
-        
-
 
         //DontDestroyOnLoad(this.gameObject);
     }
@@ -75,8 +87,10 @@ public class EnemyManager : MonoBehaviour
     //---------------
     void Update()
     {
+        // 敵の最大数の増減
         ChangeNum();
 
+        // 敵レベルアップ
         LevelUp();
 
         // 減ったら新しく生成
@@ -114,12 +128,12 @@ public class EnemyManager : MonoBehaviour
     {
         // 1/2の確率で負の値にする
         int random = Random.Range(0, 1);
-        if (random == 0)
-            fDistance *= -1;
+        if (random == 0) fDistance *= -1;
 
         // 画面外の座標取得
         Vector3 vPos = Camera.main.ViewportToWorldPoint(new Vector3(fDistance, 0.0f, Camera.main.nearClipPlane));
 
+        // Z座標をずらす
         vPos.z = Random.Range(player.transform.position.z - 5.0f, player.transform.position.z + 5.0f);
 
         return vPos;

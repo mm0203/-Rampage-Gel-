@@ -77,16 +77,10 @@ public class EnemyBase : MonoBehaviour
     [Header("エフェクトシステム")]
     [SerializeField] EnemyEffect effect;
 
-
-
     public EnemyEffect GetEffect { get { return effect; }}
 
     // 消滅距離
     float fDistance = 20.0f;
-
-    //------------------------
-    // ゲッター、セッター
-    //------------------------
 
     //----------------------------
     // 初期化
@@ -259,10 +253,8 @@ public class EnemyBase : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             // ダメージ処理
-            nHp -= player.GetComponent<PlayerStatus>().Attack;     // TODO:ここにプレイヤーの攻撃力が入る
-
-            // ダメージ表記
-            ViewDamage(player.GetComponent<PlayerStatus>().Attack);      // TODO:ここにプレイヤーの攻撃力が入る
+            nHp -= player.GetComponent<PlayerStatus>().Attack;    
+            ViewDamage(player.GetComponent<PlayerStatus>().Attack);  
         }
     }
 
