@@ -74,6 +74,9 @@ public class EnemyBase : MonoBehaviour
 
     [Header("エフェクトシステム")]
     [SerializeField] EnemyEffect effect;
+
+
+
     public EnemyEffect GetEffect { get { return effect; }}
 
     // 消滅距離
@@ -203,14 +206,13 @@ public class EnemyBase : MonoBehaviour
         // 動いているか
         if ((vOldPos.x == transform.position.x || vOldPos.z == transform.position.z))
         {
-            Debug.Log("notmove");
+            //Debug.Log("notmove");
         }
         else
         {
             // 移動モーション
             animator.SetInteger("Parameter", (int)eAnimetion.eMove);
             bFirstAttack = false;
-            Debug.Log("move");
         }
 
         // 攻撃中でないとき
