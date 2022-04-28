@@ -12,6 +12,7 @@
 // 2022/04/04 author：小椋駿 中ボス用に少し改良
 // 2022/04/15 author：松野将之 マスターデータからステータスを取得
 // 2022/04/21 author：小椋駿 GetEnemyDataを作成(EnamyManager.csにて使用)
+// 2022/04/28 author：竹尾　攻撃してこない不具合をeAnimetionに要素追加で対応
 //
 //======================================================================
 
@@ -28,6 +29,7 @@ public class EnemyBase : MonoBehaviour
     // アニメーションの種類
     enum eAnimetion
     {
+        eDefult,
         eMove,
         eAttack,
     }
