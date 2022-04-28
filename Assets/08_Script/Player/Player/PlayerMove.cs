@@ -22,34 +22,34 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    // 初速倍率
-    [SerializeField] private float fInitial = 30.0f;
-    // 減速率
-    [SerializeField] private float fLate = 0.97f;
 
+    [SerializeField] private LineRenderer Direction = null;  // 発射方向
+    [SerializeField] private Animator anime;
+    [SerializeField] private GameObject effectmove;
     private PlayerState state;
     private Rigidbody rb;
+    private CameraShaker shaker;
 
-    // 発射方向
-    [SerializeField] private LineRenderer Direction = null;
-    // 発射方向の力
-    private Vector3 vCurrentForce = Vector3.zero;
-    // ドラッグ開始点
-    private Vector3 vDragStart = Vector3.zero;
-
-    [SerializeField] private Animator anime;
-
-    // 蓄積時間
-    private float fStockPower = 0;
-
+    private Vector3 vCurrentForce = Vector3.zero; // 発射方向の力   
+    private Vector3 vDragStart = Vector3.zero; // ドラッグ開始点
+    
+    [Header("発射威力")]
+    [SerializeField] private float fInitial = 100.0f; // 初速倍率
+    [Header("減速率")]
+    [SerializeField] private float fLate = 0.85f; // 減速率
+    [Header("最大威力に到達する時間")]
+    [SerializeField] private float fInputTime = 0.8f;
+    private float fStockPower = 0; // 蓄積時間
+    private float fTimeToMove = 999.0f;
+    private float fDistance = 0; // ステータスのスピードと連動
     private bool bShot = false;
 
-    // 画面揺れ
-    CameraShaker shaker;
+ 
+    
 
     //*応急* エフェクトスクリプト
     [SerializeField] AID_PlayerEffect effect;
-    [SerializeField] GameObject effectmove;
+    
 
     void Start()
     {
@@ -62,31 +62,72 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
+        MoveAnim();
+
+        IsState(!state.IsNormal);
+
+        LookToMove(rb.velocity);
+        
+        PadMove();
+        KeyBoardMove();
+
+        MoveBrake();
+
+    }
+
+    // アニメーション ******************************************
+    void MoveAnim()
+    {
         anime.SetFloat("pull", vCurrentForce.magnitude);
         anime.SetFloat("blowway", rb.velocity.magnitude);
+    }
+    //**********************************************************
 
-        if (!state.IsNormal)
+    // 状態 ****************************************************
+    void IsState(bool state)
+    {
+        if (state)
         {
             fStockPower = 0;
             Direction.enabled = false;
             effectmove.SetActive(false);
             return;
         }
-
-        // 動いてる方向を見る
-        if (rb.velocity != new Vector3(0, 0, 0))
-        {
-            transform.rotation = Quaternion.LookRotation(rb.velocity);
-        }
-
-        PadMove();
-        KeyBoardMove();
-
-        // 減速
-        rb.velocity *= fLate;
     }
+    //**********************************************************
 
-    // キーボード操作
+    // 移動方向に向く ******************************************
+    void LookToMove(Vector3 vector)
+    {
+        if (vector != new Vector3(0, 0, 0))
+        {
+            transform.rotation = Quaternion.LookRotation(vector);
+        }
+    }
+    //**********************************************************
+
+    // マウス座標を3D座標に変換 ********************************
+    private Vector3 GetMousePosition()
+    {
+        return new Vector3(Input.mousePosition.x, 0, Input.mousePosition.y);
+    }
+    //**********************************************************
+
+    // ブレーキ処理 ********************************************
+    void MoveBrake()
+    {
+        if(fTimeToMove > fDistance)
+        {
+            rb.velocity *= fLate;
+        }
+        else
+        {
+            fTimeToMove += Time.deltaTime;
+        }
+    }
+    //**********************************************************
+
+    // キーボード操作 ******************************************
     private void KeyBoardMove()
     {
         // 左クリック入力
@@ -94,22 +135,15 @@ public class PlayerMove : MonoBehaviour
         {
             // 押されたとき
             if (Input.GetMouseButtonDown(0))
-            {
-                // マウスの初期位置を取得
-                vDragStart = GetMousePosition();
+            {              
+                vDragStart = GetMousePosition(); // マウスの初期位置を取得
                 fStockPower = 0;
             }
-            // 動かしたマウス座標の位置を取得
-            var position = GetMousePosition();
-
-            // マウスの初期座標と動かした座標の差分を取得
-            vCurrentForce = vDragStart - position;
-
-            // 動く方向を見る
-            if (vCurrentForce != new Vector3(0, 0, 0))
-            {
-                transform.rotation = Quaternion.LookRotation(vCurrentForce);
-            }
+            
+            var position = GetMousePosition(); // 動かしたマウス座標の位置を取得            
+            vCurrentForce = vDragStart - position; // マウスの初期座標と動かした座標の差分を取得
+            
+            LookToMove(vCurrentForce); // 動く方向を見る
 
             // 矢印の引っ張り処理
             Direction.enabled = true;
@@ -118,7 +152,7 @@ public class PlayerMove : MonoBehaviour
             Direction.SetPosition(1, rb.position - vCurrentForce.normalized * 2);
 
             // マウスを押してる間、威力を高める
-            if (fStockPower < 2)
+            if (fStockPower < fInputTime)
             {
                 fStockPower += Time.deltaTime;
             }
@@ -132,14 +166,22 @@ public class PlayerMove : MonoBehaviour
             rb.AddForce(vCurrentForce.normalized * fStockPower * fInitial, ForceMode.Impulse);
             vCurrentForce = Vector3.zero;
             effectmove.SetActive(true);
+            if(rb.velocity.magnitude > 0.5)
+            {
+                effect.StartEffect(0, this.gameObject, 1.0f);
+            }
+
             // 初期化
             fStockPower = 0;
             Direction.enabled = false;
 
-            //*応急*
-            effect.StartEffect(0, this.gameObject, 1.0f);
+
+            
+
+            fTimeToMove = 0;
         }
     }
+    //**********************************************************
 
     private void PadMove()
     {
@@ -185,17 +227,11 @@ public class PlayerMove : MonoBehaviour
             effect.StartEffect(0, this.gameObject, 1.0f);
         }
     }
+    //**********************************************************
 
-    // マウス座標を3D座標に変換
-    private Vector3 GetMousePosition()
-    {
-        return new Vector3(Input.mousePosition.x, 0, Input.mousePosition.y);
-    }
+    
 
-    private void OnCollisionEnter(Collision collision)
-    {
-
-    }
+    
 
     //*応急*
     private void OnTriggerEnter(Collider other)
@@ -204,6 +240,8 @@ public class PlayerMove : MonoBehaviour
         {
             shaker.Do();
         }
+
+        
 
     }
 }
