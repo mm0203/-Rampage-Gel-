@@ -122,8 +122,6 @@ public class GuardMode : MonoBehaviour
         if (state.IsHard && status.Stamina > 0)
         {
             stop.DoStop(rb);
-            //*‰ž‹}*
-            effect.StartEffect(2, this.gameObject, 1.0f);
         }
         else
         {

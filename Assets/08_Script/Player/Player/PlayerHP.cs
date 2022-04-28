@@ -43,21 +43,14 @@ public class PlayerHP : MonoBehaviour
         {
             //*応急*
             effect.StartEffect(6, this.gameObject, 0.5f);
-
             // damageをストックする
             this.GetComponent<GuardMode>().AddStockExplode(status.BurstStock);
             return;
         }
 
-        //*応急*
-        else
-        {
-            effect.StartEffect(8, this.gameObject, 0.5f);
-        }
-        //******
-
         // ダメージを与える
         status.HP -= damage;
+        effect.StartEffect(8, this.gameObject, 0.5f);
         if (status.HP <= 0)
         {
             state.GotoDieState();

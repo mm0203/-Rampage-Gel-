@@ -88,6 +88,7 @@ public class PlayerMove : MonoBehaviour
         {
             // Œ¸‘¬
             rb.velocity *= fLate;
+            effectmove.SetActive(false);
         }
     }
 
