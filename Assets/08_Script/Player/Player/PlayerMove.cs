@@ -66,12 +66,13 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
+        // アニメーション
         MoveAnim();
-
+        // ステート管理
         IsState(!state.IsNormal);
-
+        // 方向転換
         LookToMove(rb.velocity);
-        
+        // 移動
         PadMove();
         KeyBoardMove();
 
@@ -123,6 +124,7 @@ public class PlayerMove : MonoBehaviour
         // float Time.deltaTimeを使用する例
         if (fTimeToMove > fDistance)
         {
+            // 減速
             rb.velocity *= fLate;
         }
         else
@@ -243,6 +245,9 @@ public class PlayerMove : MonoBehaviour
 
             //*応急*
             effect.StartEffect(0, this.gameObject, 1.0f);
+
+            fTimeToMove = 0;
+            //nTimeToMove = 0;
         }
     }
     //**********************************************************

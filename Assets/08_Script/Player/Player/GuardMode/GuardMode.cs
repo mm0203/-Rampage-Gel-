@@ -79,11 +79,25 @@ public class GuardMode : MonoBehaviour
         // ハードモードなら
         if (state.IsHard)
         {
+            // キーボード
             if(!bGuardStart)
             {
                 vStartPos = GetMousePosition();
                 bGuardStart = true;
             }
+            // パッド
+            float x = Input.GetAxis("Horizontal");
+            float y = Input.GetAxis("Vertical");
+
+            if (Mathf.Abs(x) >= 0.5f || Mathf.Abs(y) >= 0.5f)
+            {
+                // 入力方向を逆にして受け取る
+                vCurrentForce = new Vector3(-x * 1000, 0, -y * 1000);
+
+                // 動く方向を見る
+                transform.rotation = Quaternion.LookRotation(vCurrentForce);
+            }
+
 
             // ゲージ消費
             SubtractGauge();
