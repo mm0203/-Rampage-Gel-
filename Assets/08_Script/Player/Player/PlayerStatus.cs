@@ -40,6 +40,13 @@ public class PlayerStatus : MonoBehaviour
     private int nUpExp = 20;
     private int nUpAttack = 6;
 
+    // 移動に関するデータ
+    public float fBreakTime { get; set; } = 0.0f;
+
+    // 無敵フラグ
+    public bool bArmor { get; set; } = false;
+    public float fArmorTime { get; set; } = 0.0f;
+
     // 最大ステータスを参照
     public int MaxLevel { get { return nMaxLevel; } set { nMaxLevel = value; } }
     public int MaxHP { get { return nMaxHp; } set { nMaxHp = value; } }

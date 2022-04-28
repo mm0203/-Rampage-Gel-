@@ -27,6 +27,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private Animator anime;
     [SerializeField] private GameObject effectmove;
     private PlayerState state;
+    private PlayerStatus status;
     private Rigidbody rb;
     private CameraShaker shaker;
 
@@ -56,6 +57,7 @@ public class PlayerMove : MonoBehaviour
     void Start()
     {
         state = GetComponent<PlayerState>();
+        status = GetComponent<PlayerStatus>();
         rb = GetComponent<Rigidbody>();
         shaker = GetComponent<CameraShaker>();
         effectmove.SetActive(false);
@@ -181,6 +183,7 @@ public class PlayerMove : MonoBehaviour
         {
             // èuä‘ìIÇ…óÕÇâ¡Ç¶ÇƒÇÕÇ∂Ç≠
             rb.AddForce(vCurrentForce.normalized * fStockPower * fInitial, ForceMode.Impulse);
+            status.fBreakTime = 0.0f;
             vCurrentForce = Vector3.zero;
             effectmove.SetActive(true);
             
@@ -234,6 +237,7 @@ public class PlayerMove : MonoBehaviour
             effectmove.SetActive(true);
             // èâä˙âª
             fStockPower = 0;
+            status.fBreakTime = 0.0f;
             vCurrentForce = Vector3.zero;
             Direction.enabled = false;
 

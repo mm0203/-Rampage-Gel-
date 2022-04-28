@@ -296,6 +296,7 @@ GameObject:
   - component: {fileID: 8653902471880294901}
   - component: {fileID: 8653902471880294858}
   - component: {fileID: 8653902471880294859}
+  - component: {fileID: 3196425095044793510}
   - component: {fileID: 8653902471880294856}
   - component: {fileID: 8653902471880294857}
   - component: {fileID: 8653902471880294862}
@@ -362,6 +363,18 @@ MonoBehaviour:
   anime: {fileID: 8653902472783900674}
   effect: {fileID: 0}
   effectmove: {fileID: 0}
+--- !u!114 &3196425095044793510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8653902471880294848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a21e28a3990eb0e4cbd3508718cb2d63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &8653902471880294856
 MonoBehaviour:
   m_ObjectHideFlags: 0
