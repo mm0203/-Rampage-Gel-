@@ -29,6 +29,37 @@ public class BGMPlayer : MonoBehaviour
        
     }
 
+    private void Start()
+    {
+        switch(SceneManager.GetActiveScene().name)
+        {
+            case "Stage1-1":
+                Stage1();
+                break;
+            case "Stage2-1":
+                Stage2();
+                break;
+            case "Stage3-1":
+                Stage3();
+                break;
+            case "Stage4-1":
+                Stage4();
+                break;
+            case "Stage5-1":
+                Stage5();
+                break;
+            case "Stage6-1":
+                Stage6();
+                break;
+            case "Stage7-1":
+                Stage7();
+                break;
+            default:
+                Debug.Log("Continue BGM");
+                break;
+        }
+    }
+
     private void Update()
     {
         
