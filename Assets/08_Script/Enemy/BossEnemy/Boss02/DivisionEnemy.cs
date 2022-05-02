@@ -19,9 +19,8 @@ public class DivisionEnemy : MonoBehaviour
 
     private bool bStop = false;
 
-    private float fTime = 1.0f;
+    private float fTime = 4.0f;
 
-    // Start is called before the first frame update
     void Start()
     {
         player = GameObject.Find("Player");
@@ -29,39 +28,35 @@ public class DivisionEnemy : MonoBehaviour
         myAgent = GetComponent<NavMeshAgent>();
     }
 
-    // Update is called once per frame
     void Update()
     {
+        Move();
         fTime -= Time.deltaTime;
 
-
-        if (fTime <= 0)
+        if (fTime <= 2.0f)
         {
-            bStop = true;
+            //myAgent.velocity = Vector3.zero;
+            myAgent.Stop();
+            //Destroy(this.gameObject);
         }
-
-        Move();
+        if(fTime <= 0.0f)
+        {
+            Destroy(this.gameObject);
+            //fTime = 0.0f;
+        }
     }
 
     private void Move()
     {
-        if (!bStop)
-        {
-            // ŽŸ‚ÌêŠ‚ðŒvŽZ
-            Vector3 nextPoint = myAgent.steeringTarget;
-            Vector3 targetDir = nextPoint - transform.position;
+        // ŽŸ‚ÌêŠ‚ðŒvŽZ
+        Vector3 nextPoint = myAgent.steeringTarget;
+        Vector3 targetDir = nextPoint - transform.position;
 
-            // ‰ñ“]
-            Quaternion targetRotation = Quaternion.LookRotation(targetDir);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 120f * Time.deltaTime);
+        // ‰ñ“]
+        Quaternion targetRotation = Quaternion.LookRotation(targetDir);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 120f * Time.deltaTime);
 
-            // ƒvƒŒƒCƒ„[‚ð’Ç‚¢‚©‚¯‚é
-            myAgent.SetDestination(player.transform.position);
-        }
-
-        //if(myAgent.stoppingDistance <= 4.0f)
-        //{
-        //    bStop = true;
-        //}
+        // ƒvƒŒƒCƒ„[‚ð’Ç‚¢‚©‚¯‚é
+        myAgent.SetDestination(player.transform.position);
     }
 }
