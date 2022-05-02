@@ -1,17 +1,30 @@
+
+//======================================================================
+// BossHPUI.cs
+//======================================================================
+// 開発履歴
+//
+// 2022/05/02 author：小椋駿  ボスHPUI処理作成。
+//
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public class BossHPUI : MonoBehaviour
 {
-    public GameObject Boss;
+    // [BossTimer.cs]にてBossを取得
+    [HideInInspector] public GameObject Boss;
 
+    // HP
     float fMaxHP, fNowHp;
 
     Slider slider;
 
+    //----------------------
+    // 初期化
+    //----------------------
     void Start()
     {
         // 体力取得
@@ -21,6 +34,10 @@ public class BossHPUI : MonoBehaviour
         slider = GetComponent<Slider>();
     }
 
+
+    //----------------------
+    // 更新
+    //----------------------
     void Update()
     {
         // ボス死亡時破棄

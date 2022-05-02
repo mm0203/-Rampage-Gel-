@@ -1521,6 +1521,7 @@ GameObject:
   - component: {fileID: 5948117694582846670}
   - component: {fileID: -5088609625435277598}
   - component: {fileID: 5019184624758902508}
+  - component: {fileID: 634064963987476905}
   m_Layer: 0
   m_Name: IcePillar
   m_TagString: Untagged
@@ -1627,10 +1628,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyData: {fileID: 11400000, guid: 4570e7ccf9be7b24e9040c4161085551, type: 2}
-  DamageObj: {fileID: 1599770427430637572, guid: f281449c9f2cf8045930e932567b2b5e, type: 3}
   DeathSE: {fileID: 8300000, guid: da24daa9fcff69c4d884496fda891063, type: 3}
   fAttackDis: 6.5
   fAttackTime: 3
+  mat: {fileID: 0}
 --- !u!114 &-5088609625435277598
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1660,6 +1661,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   effect: {fileID: 4654835053005618983, guid: 8ad696e21e4db31429ba8402a66d472b, type: 3}
+--- !u!114 &634064963987476905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6572944489662062766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78056be96c4ee02459ab5d3bb7a54896, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DamageObj: {fileID: 1599770427430637572, guid: f281449c9f2cf8045930e932567b2b5e, type: 3}
+  mat: {fileID: 2100000, guid: 0ff5c1c38cc269447af7d7d31345c016, type: 2}
+  fDamageTime: 0.2
 --- !u!1 &6733513146064114487
 GameObject:
   m_ObjectHideFlags: 0

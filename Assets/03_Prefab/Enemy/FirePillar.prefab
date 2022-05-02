@@ -284,6 +284,7 @@ GameObject:
   - component: {fileID: -1594156555943018376}
   - component: {fileID: 1642878539436827144}
   - component: {fileID: -3647659987780740021}
+  - component: {fileID: -8330456655823175726}
   m_Layer: 0
   m_Name: FirePillar
   m_TagString: Untagged
@@ -398,6 +399,7 @@ MonoBehaviour:
   DeathSE: {fileID: 8300000, guid: da24daa9fcff69c4d884496fda891063, type: 3}
   fAttackDis: 6.5
   fAttackTime: 3
+  mat: {fileID: 2100000, guid: 0ff5c1c38cc269447af7d7d31345c016, type: 2}
 --- !u!114 &1642878539436827144
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -426,6 +428,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   effect: {fileID: 4654835053005618983, guid: 8ad696e21e4db31429ba8402a66d472b, type: 3}
+--- !u!114 &-8330456655823175726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1054541111543390759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78056be96c4ee02459ab5d3bb7a54896, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mat: {fileID: 2100000, guid: 0ff5c1c38cc269447af7d7d31345c016, type: 2}
+  fDamageTime: 0.2
+  DamageObj: {fileID: 1599770427430637572, guid: f281449c9f2cf8045930e932567b2b5e, type: 3}
 --- !u!1 &1396298650181788993
 GameObject:
   m_ObjectHideFlags: 0
