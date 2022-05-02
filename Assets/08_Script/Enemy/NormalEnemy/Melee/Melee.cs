@@ -33,10 +33,11 @@ public class Melee : MonoBehaviour
     //------------------------
     private void Start()
     {
-        enemyBase = GetComponent<EnemyBase>();
+        // エフェクト取得
+        enemyEffect = GetComponent<EnemyEffectBase>().GetEffect;
 
-        // エフェクト取得（EnemyBase.csより）
-        enemyEffect = enemyBase.GetEffect;
+        // エネミーベース情報取得
+        enemyBase = this.GetComponent<EnemyBase>();
 
         // 当たり判定のサイズを敵の大きさの半分にする
         fHitSize = gameObject.transform.localScale.x / 2;

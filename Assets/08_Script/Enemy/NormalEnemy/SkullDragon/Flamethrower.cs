@@ -26,6 +26,8 @@ public class Flamethrower : MonoBehaviour
     float fInterval = 0.5f;
     float fTime;
 
+
+
     public GameObject player { get; set; }
     public GameObject enemy { get; set; }
     public GameObject effect { get; set; }

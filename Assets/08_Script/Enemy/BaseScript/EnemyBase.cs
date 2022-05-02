@@ -74,11 +74,6 @@ public class EnemyBase : MonoBehaviour
     [SerializeField, Range(0.0f, 10.0f)] private float fAttackTime = 3.0f;
     private float fAttackCount;
 
-    [Header("エフェクトシステム")]
-    [SerializeField] EnemyEffect effect;
-
-    public EnemyEffect GetEffect { get { return effect; }}
-
     // 消滅距離
     float fDistance = 20.0f;
 
@@ -101,7 +96,6 @@ public class EnemyBase : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 
         fAttackCount = fAttackTime;
-
     }
 
     //----------------------------

@@ -15,13 +15,14 @@ using UnityEngine.UI;
 public class TargetMarker : MonoBehaviour
 {
     // マーカーを出すターゲット
-    [SerializeField]private Transform target;
+    [SerializeField]public Transform target;
 
     // 矢印画像
     [SerializeField]private Image arrow;
 
     private Camera mainCamera;
     private RectTransform rectTransform;
+
 
     private void Start()
     {
@@ -63,4 +64,7 @@ public class TargetMarker : MonoBehaviour
             arrow.rectTransform.eulerAngles = new Vector3(0.0f, 0.0f,Mathf.Atan2(pos.y, pos.x) * Mathf.Rad2Deg);
         }
     }
+
+
+
 }

@@ -56,8 +56,8 @@ public class Ice : MonoBehaviour
         // サークルの透明度を下げる
         AttackCircle.GetComponent<SpriteRenderer>().color -= new Color32(0, 0, 0, 125);
 
-        // ザコ用
-        enemyEffect = enemy.GetComponent<EnemyBase>().GetEffect;
+        // エフェクト取得
+        enemyEffect = GetComponent<EnemyEffectBase>().GetEffect;
     }
 
     //----------------------------------

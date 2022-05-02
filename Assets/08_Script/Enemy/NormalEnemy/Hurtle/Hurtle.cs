@@ -18,7 +18,9 @@ public class Hurtle : MonoBehaviour
 
     void Start()
     {
-        enemyBase = GetComponent<EnemyBase>();
+
+        // エネミーベース情報取得
+        enemyBase = this.GetComponent<EnemyBase>();
     }
 
     private void HurtleAttack()

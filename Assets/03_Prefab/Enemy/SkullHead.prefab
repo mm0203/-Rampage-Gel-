@@ -564,6 +564,7 @@ GameObject:
   - component: {fileID: 3110787205036155485}
   - component: {fileID: 3110787205036155474}
   - component: {fileID: 3110787205036155473}
+  - component: {fileID: -5046429756622587260}
   m_Layer: 0
   m_Name: SkullHead
   m_TagString: Enemy
@@ -677,7 +678,6 @@ MonoBehaviour:
   DeathSE: {fileID: 8300000, guid: da24daa9fcff69c4d884496fda891063, type: 3}
   fAttackDis: 4
   fAttackTime: 1
-  effect: {fileID: 4654835053005618983, guid: 8ad696e21e4db31429ba8402a66d472b, type: 3}
 --- !u!114 &3110787205036155473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -691,6 +691,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fSpeed: 5
+--- !u!114 &-5046429756622587260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2876346242041339717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 224e9f08c45d40b4fa33f05ca405bc64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effect: {fileID: 4654835053005618983, guid: 8ad696e21e4db31429ba8402a66d472b, type: 3}
 --- !u!1 &2929289432632238651
 GameObject:
   m_ObjectHideFlags: 0

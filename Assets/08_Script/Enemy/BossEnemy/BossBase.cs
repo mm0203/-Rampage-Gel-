@@ -4,6 +4,7 @@
 // 開発履歴
 //
 // 2022/04/15 author：松野将之 ボスの基底クラス実装
+// 2022/05/02 author：小椋駿   ターゲットマーカー生成追加
 //
 //======================================================================
 using System.Collections;
@@ -19,7 +20,7 @@ public class BossBase : MonoBehaviour
     private Animator animator;
 
     // HP
-    private float nHp;
+    public int nHp;
 
     //*応急*
     [SerializeField] GameObject Portals;
@@ -31,25 +32,16 @@ public class BossBase : MonoBehaviour
     // ダメージUI
     [SerializeField] private GameObject DamageObj;
 
-    // 効果音
     [Header("死亡時効果音")]
     [SerializeField] private AudioClip DeathSE;
 
-    // エフェクト
     [Header("エフェクトシステム")]
     [SerializeField] EnemyEffect effect;
 
+    [Header("敵マーカー")]
+    [SerializeField] Canvas Marker;
+
     public EnemyEffect GetEffect { get { return effect; } }
-
-    // ボスの前面に当たり判定用意
-    GameObject FrontCube;
-
-    // 突進中か
-    bool bRush = false;
-    float fRushTime = 1.0f;
-    float fRushCount = 0.0f;
-
-    bool bVisible = false;
 
     void Start()
     {
@@ -61,13 +53,14 @@ public class BossBase : MonoBehaviour
         myAgent = GetComponent<NavMeshAgent>();
         myAgent.speed = enemyData.fSpeed;
 
-        // その他初期化
+        // アニメーター初期化
         animator = GetComponent<Animator>();
 
-        // ダメージ処理
-        BossRush rush = gameObject.GetComponentInChildren<BossRush>();
-        rush.SetPlayer(player);
-        rush.SetEnemy(gameObject);
+        // 敵ターゲットマーカー生成
+        Marker = Instantiate(Marker, Vector3.zero, Quaternion.identity);
+
+        // ボス情報をセット
+        Marker.GetComponentInChildren<TargetMarker>().target = gameObject.transform;
 
     }
 
@@ -94,6 +87,9 @@ public class BossBase : MonoBehaviour
                 bPortal = true;
             }
 
+            // ターゲットマーカー消滅
+            Destroy(Marker);
+
             // 全て消滅
             Destroy(this.gameObject);
 
@@ -113,23 +109,8 @@ public class BossBase : MonoBehaviour
         Quaternion targetRotation = Quaternion.LookRotation(targetDir);
         transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 120f * Time.deltaTime);
 
-        // プレイヤーを追いかける（一定秒数ごとに敵めがけて移動）
-        if (!bRush)
-        {
-            // 現在のプレイヤーの位置を目指す
-            myAgent.SetDestination(player.transform.position);
-
-            // 初期化
-            bRush = true;
-            fRushCount = fRushTime;
-        }
-
-        // 移動のカウント処理
-        fRushCount -= Time.deltaTime;
-        if (fRushCount < 0.0f)
-        {
-            bRush = false;
-        }
+        // 現在のプレイヤーの位置を目指す
+        myAgent.SetDestination(player.transform.position);
 
         // 過去座標を更新
         vOldPos = gameObject.transform.position;
