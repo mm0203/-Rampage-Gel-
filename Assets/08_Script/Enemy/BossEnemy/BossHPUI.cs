@@ -11,7 +11,6 @@ public class BossHPUI : MonoBehaviour
     float fMaxHP, fNowHp;
 
     Slider slider;
-    TextMeshProUGUI textMesh;
 
     void Start()
     {
@@ -20,7 +19,6 @@ public class BossHPUI : MonoBehaviour
 
         // èâä˙âª
         slider = GetComponent<Slider>();
-        textMesh = GetComponentInChildren<TextMeshProUGUI>();
     }
 
     void Update()

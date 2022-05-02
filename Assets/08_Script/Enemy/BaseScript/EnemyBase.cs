@@ -141,11 +141,8 @@ public class EnemyBase : MonoBehaviour
         Vector2 vdistance = new Vector2(transform.position.x - player.transform.position.x, transform.position.z - player.transform.position.z);
 
         // Á–Åˆ—
-        if (vdistance.x > fDistance || vdistance.x < -fDistance ||
-           vdistance.y > fDistance || vdistance.y < -fDistance)
+        if (vdistance.x > fDistance || vdistance.x < -fDistance ||vdistance.y > fDistance || vdistance.y < -fDistance)
         {
-            Debug.Log("Á–Å");
-
             // ƒŠƒXƒg‚©‚çíœ
             manager.NowEnemyList.Remove(gameObject);
             Destroy(this.gameObject);
