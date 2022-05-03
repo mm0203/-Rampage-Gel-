@@ -47,26 +47,27 @@ public class ItemManager : MonoBehaviour
 
     public List<GameObject> ItemObjectList;
     public List<int> CountList;
+    public List<int> DrawItemList;
     public int nStatus;
 
     // アイテム画像データ（竹）
     public ItemImage itemImage;
+    public GameObject imageObject;
 
     // Start is called before the first frame update
     void Start()
     {
-        for (int i = 0; i < (int)eItem.eMax; i++)
+        for (int i = 0; i < (int)eItem.eMax + 1; i++)
         {
             CountList.Add(0);
         }
 
-        
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.A))
         {
             nStatus = Random.Range(0, (int)eItem.eMax - 1);
             nItemCount(nStatus);
@@ -89,7 +90,31 @@ public class ItemManager : MonoBehaviour
         CountList[itemID]++;
         Debug.Log(itemID + "番アイテム：" + CountList[itemID] + "個");
 
-        return CountList[nStatus];
+        if (CountList[itemID] == 1)
+        {
+            DrawItemList.Add(itemID);
+            imageObject.GetComponent<Image>().sprite = itemImage.ItemImageList[itemID];
+            GetComponent<ItemUI>().CreateItemUI(DrawItemList.Count, imageObject);
+        }
+
+        return CountList[itemID];
+    }
+
+    /* 以下、レベルアップ処理用関数 */
+
+    // オブジェクトのアイテム番号渡し
+    public int nStatusNum()
+    {
+        // ランダムな番号を生成し、それを返す
+        int num = Random.Range(0, (int)eItem.eMax - 1);
+        return num;
+    }
+
+    // オブジェクトの取得個数のカウントアップ
+    // 引数：取得したアイテムのアイテム番号
+    public void nCountup(int nItemStatus)
+    {
+        CountList[nItemStatus]++;
     }
 
     // アイテム抽選（竹尾）
@@ -104,7 +129,7 @@ public class ItemManager : MonoBehaviour
     public Sprite setItemIcon(int itemID)
     {
         Sprite image;
-        image =  itemImage.ItemImageList[itemID];
+        image = itemImage.ItemImageList[itemID];
         return image;
     }
 }

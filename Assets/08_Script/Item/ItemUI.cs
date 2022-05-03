@@ -13,11 +13,7 @@ using UnityEngine.UI;
 
 public class ItemUI : MonoBehaviour
 {
-    [SerializeField] GameObject itemImage;
-
     [SerializeField] GameObject canvas;
-
-    private int nUINum = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -31,11 +27,9 @@ public class ItemUI : MonoBehaviour
         
     }
 
-    public void CreateItemUI()
+    public void CreateItemUI(int itemNum, GameObject itemImage)
     {
-        GameObject prefab = (GameObject)Instantiate(itemImage, new Vector3(-740.0f + 90.0f * nUINum, 365.0f, 0.0f), Quaternion.identity);
+        GameObject prefab = (GameObject)Instantiate(itemImage, new Vector3(-830.0f + 90.0f * itemNum, 365.0f, 0.0f), Quaternion.identity);
         prefab.transform.SetParent(canvas.transform, false);
-
-        nUINum++;
     }
 }
