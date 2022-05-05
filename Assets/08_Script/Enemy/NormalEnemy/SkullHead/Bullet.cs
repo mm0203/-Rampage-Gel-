@@ -8,6 +8,7 @@
 // 2022/03/28 author：竹尾　応急　プレイヤーへのダメージ判定
 // 2022/03/30 author：小椋　エフェクト処理の追加
 // 2022/04/21 author：小椋　敵の攻撃力をEnemyDataから参照するように変更
+// 2022/05/05 author：竹尾　発射した本人がいなくても攻撃力がわかるように
 //
 //======================================================================
 
@@ -28,6 +29,8 @@ public class Bullet : MonoBehaviour
 
     public void SetEffect(GameObject obj) { effect = obj; }
 
+    private int nSetAttack;
+
 
     //---------------------------
     // 初期化
@@ -37,6 +40,9 @@ public class Bullet : MonoBehaviour
         // エフェクトを180°回転させる
         transform.Rotate(transform.rotation.x, transform.rotation.y + 180.0f, transform.rotation.z);
         effect.transform.rotation = transform.rotation;
+
+        // 発射した本人がいなくても攻撃力がわかるように
+        nSetAttack = enemy.GetComponent<EnemyBase>().GetEnemyData.nAttack;
     }
 
 
@@ -62,7 +68,7 @@ public class Bullet : MonoBehaviour
         if (other.transform.tag == "Player")
         {
             // ダメージ処理
-            player.GetComponent<PlayerHP>().OnDamage(enemy.GetComponent<EnemyBase>().GetEnemyData.nAttack);
+            player.GetComponent<PlayerHP>().OnDamage(nSetAttack);
 
             Destroy(effect);
             Destroy(gameObject);

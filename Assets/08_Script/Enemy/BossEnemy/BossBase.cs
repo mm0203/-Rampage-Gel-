@@ -4,6 +4,7 @@
 // 開発履歴
 //
 // 2022/04/15 author：松野将之 ボスの基底クラス実装
+// 2022/05/02 author：松野将之 死亡関数(Death)からHPを取得可能に
 // 2022/05/02 author：小椋駿   ターゲットマーカー生成追加
 // 2022/05/05 author：竹尾　プレイヤーの速度に対してダメージ出せるように
 //
@@ -51,7 +52,7 @@ public class BossBase : MonoBehaviour
     {
         player = GameObject.Find("Player");
 
-        nHp = enemyData.nBossHp + (enemyData.nLevel * enemyData.nUpHP);
+        nHp = enemyData.BossHp + (enemyData.nLevel * enemyData.nUpHP);
 
         // ナビメッシュ初期化（ステータスからスピードを取得）
         myAgent = GetComponent<NavMeshAgent>();
@@ -76,7 +77,7 @@ public class BossBase : MonoBehaviour
     }
 
     // 死亡
-    public bool Death()
+    public int Death()
     {
         // HP0以下で消滅
         if (nHp <= 0)
@@ -97,9 +98,9 @@ public class BossBase : MonoBehaviour
             // 全て消滅
             Destroy(this.gameObject);
 
-            return true;
+            return 0;
         }
-        return false;
+        return nHp;
     }
 
     // 移動
@@ -121,10 +122,19 @@ public class BossBase : MonoBehaviour
     }
 
     // プレイヤーとの接触時
-    private void OnTriggerEnter(Collider other)
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    // プレイヤーとの衝突時ダメージ
+    //    if (other.CompareTag("Player"))
+    //    {
+    //        // ダメージ処理
+    //        Damege();
+    //    }
+    //}
+
+    private void OnCollisionEnter(Collision other)
     {
-        // プレイヤーとの衝突時ダメージ
-        if (other.CompareTag("Player"))
+        if (other.gameObject.tag == "Player")
         {
             // ダメージ処理
             Damege();
