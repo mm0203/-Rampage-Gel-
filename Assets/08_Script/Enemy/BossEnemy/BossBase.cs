@@ -5,6 +5,7 @@
 //
 // 2022/04/15 author：松野将之 ボスの基底クラス実装
 // 2022/05/02 author：小椋駿   ターゲットマーカー生成追加
+// 2022/05/05 author：竹尾　プレイヤーの速度に対してダメージ出せるように
 //
 //======================================================================
 using System.Collections;
@@ -21,6 +22,9 @@ public class BossBase : MonoBehaviour
 
     // HP
     public int nHp;
+
+    // 速度に対するダメージ補正
+    float fSpeedtoDamage = 0.03f;
 
     //*応急*
     [SerializeField] GameObject Portals;
@@ -131,10 +135,11 @@ public class BossBase : MonoBehaviour
     public void Damege()
     {
         // ダメージ処理
-        nHp -= player.GetComponent<PlayerStatus>().Attack;
+        int n = (int)((player.GetComponent<PlayerStatus>().Attack * (int)player.GetComponent<Rigidbody>().velocity.magnitude) * fSpeedtoDamage);
+        nHp -= n;
 
         // ダメージ表記
-        ViewDamage(player.GetComponent<PlayerStatus>().Attack);
+        ViewDamage(n);
     }
 
     // ダメージ表記

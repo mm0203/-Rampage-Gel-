@@ -52,7 +52,8 @@ public class EnemyBase : MonoBehaviour
     private Vector3 vOldPos;
 
     // 吹っ飛ばされてから動き出す秒数
-    private float fBurstTime = 2.0f;
+    private float fBurstTime = 0.2f;
+    private float fSetOldBurstTime;
 
     // 攻撃中か
     public bool bAttack { get; set; }
@@ -234,13 +235,22 @@ public class EnemyBase : MonoBehaviour
         // 物理演算がONの時（バースト時に物理演算がONになる）
         if (!rb.isKinematic)
         {
+            
             // 2秒後に、物理演算OFFにする(仮)
             fBurstTime -= Time.deltaTime;
             if (fBurstTime < 0.0)
             {
-                fBurstTime = 2.0f;
+                
+                fBurstTime = fSetOldBurstTime;
+                
                 rb.isKinematic = true;
+                
+                
             }
+        }
+        else
+        {
+            fSetOldBurstTime = fBurstTime;
         }
     }
 }

@@ -26,6 +26,10 @@ public class BossTimer : MonoBehaviour
     // 残り時間
     float fTimer;
 
+    // HP
+    float fMaxHP, fNowHp;
+    bool bSetBoss = false;
+
 
     [Header("ボス出現時間")]
     [SerializeField]float fCount = 60.0f;
@@ -34,7 +38,7 @@ public class BossTimer : MonoBehaviour
     [SerializeField]GameObject Boss;
 
     [Header("ボスHPUI")]
-    [SerializeField] Canvas bossHPUI;
+    [SerializeField] GameObject bossHPUI;
 
     GameObject Player;
 
@@ -45,43 +49,68 @@ public class BossTimer : MonoBehaviour
         textMesh = GetComponentInChildren<TextMeshProUGUI>();
         fTimer = fCount;
         Player = GameObject.Find("Player");
+
+        bSetBoss = false;
     }
 
     void Update()
     {
-        fTimer -= Time.deltaTime;
+        
 
         // 0秒になったら
         if(fTimer < 0.0f)
         {
-            fTimer = 0.0f;
+            fTimer = -1.0f;
 
-            // ボスの出現処理(座標は適当)
-            // プレイヤーの上方向に出現
-            Vector3 pos = new Vector3(Player.transform.position.x, Player.transform.position.y, Player.transform.position.z + 20.0f);   
-            Boss = Instantiate(Boss, pos, Boss.transform.rotation);
+            if(bSetBoss == false)
+            {
+                // ボスの出現処理(座標は適当)
+                // プレイヤーの上方向に出現
+                Vector3 pos = new Vector3(Player.transform.position.x, Player.transform.position.y, Player.transform.position.z + 20.0f);
+                Boss = Instantiate(Boss, pos, Boss.transform.rotation);
 
-            // 中ボスにプレイヤー情報セット
-            if(Boss.GetComponent<EnemyBase>())
-                Player = Boss.GetComponent<EnemyBase>().player;
+                // 中ボスにプレイヤー情報セット
+                if (Boss.GetComponent<BossBase>()) { Player = Boss.GetComponent<BossBase>().player; }
 
-            bossHPUI = Instantiate(bossHPUI, transform.position, transform.rotation);
+                // スライダーをHP用に
+                fMaxHP = fNowHp = Boss.GetComponent<BossBase>().nHp;
 
-            bossHPUI.GetComponentInChildren<BossHPUI>().Boss = Boss;
+                bSetBoss = true;
+                
+            }
 
-            // 消滅（仮）
-            Destroy(gameObject);
+            // なぜか最初だけボスのHPが０なので
+            if(fMaxHP == 0)
+            { fMaxHP = Boss.GetComponent<BossBase>().nHp;
+                
+            }
+
+
+
+            fNowHp = Boss.GetComponent<BossBase>().nHp;
+
+            // ゲージ減少
+            slider.value = fNowHp / fMaxHP;
+            
+            textMesh.text = "";
+
+        }
+        else
+        {
+            fTimer -= Time.deltaTime;
+
+            // ゲージ減少
+            slider.value = fTimer / fCount;
+
+            // 分、秒の計算
+            minute = (int)fTimer / 60;
+            second = (int)fTimer % 60;
+
+            // テキストに反映
+            textMesh.text = minute.ToString("d2") + ":" + second.ToString("d2");
         }
 
-        // ゲージ減少
-        slider.value =  fTimer/ fCount;
-
-        // 分、秒の計算
-        minute = (int)fTimer / 60;
-        second = (int)fTimer % 60;
-
-        // テキストに反映
-        textMesh.text = minute.ToString("d2") + ":" + second.ToString("d2");
+        
 
     }
 }

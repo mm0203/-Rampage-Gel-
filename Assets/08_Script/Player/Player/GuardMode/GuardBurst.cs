@@ -33,11 +33,12 @@ public class GuardBurst : MonoBehaviour
 
     }
 
-    public void Explode(float power)
+    // Œƒ‚µ‚­‚Á”ò‚Ô‚æ‚¤C³
+    public void Explode(int power)
     {
         // “G‚ğ’T‚·
         GameObject[] enemys = GameObject.FindGameObjectsWithTag("Enemy");
-
+        
         // —v‘f‚Ì’†g•ªƒ‹[ƒv‚·‚é
         foreach (GameObject hit in enemys)
         {
@@ -48,8 +49,29 @@ public class GuardBurst : MonoBehaviour
 
             if (rb != null)
             {
-                // ‚«”ò‚Î‚·
-                rb.AddExplosionForce(power * status.MaxBurstPower, transform.position, power * status.MaxBurstRadisu, UpandDown);
+                // —v’²® ================================================================================================
+                if (hit.GetComponent<EnemyDamageBase>()) //
+                {
+                    if ((this.gameObject.transform.position - hit.transform.position).magnitude <= status.BurstRadisu * 10)
+                    {
+                        hit.GetComponent<EnemyDamageBase>().IsDamage(status.Attack);
+                    }
+
+                }
+                else
+                {
+                    if ((this.gameObject.transform.position - hit.transform.position).magnitude <= status.BurstRadisu * 10)
+                    {
+                        hit.GetComponent<EnemyDamageBase>().IsDamage(status.Attack);
+                    }
+                }
+
+                // ‚«”ò‚Î‚·               
+                rb.AddExplosionForce(power * status.MaxBurstPower, transform.position, status.MaxBurstRadisu, UpandDown);
+
+                //=====================================================================================================
+                
+                
             }
         }
     }

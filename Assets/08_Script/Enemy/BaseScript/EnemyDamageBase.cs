@@ -4,7 +4,7 @@
 // 開発履歴
 //
 // 2022/05/02 author：小椋駿 製作開始　敵ダメージ処理を移行。
-//
+// 2022/05/05 author：竹尾　プレイヤーの速度に対してダメージ出せるように
 
 using System.Collections;
 using System.Collections.Generic;
@@ -32,6 +32,9 @@ public class EnemyDamageBase : MonoBehaviour
     [Header("変化する時間")]
     [SerializeField] private float fDamageTime = 0.2f;
     float fDamageCount;
+
+    // 速度に対するダメージ補正
+    float fSpeedtoDamage = 0.03f;
 
     //--------------------------
     // 初期化
@@ -89,12 +92,26 @@ public class EnemyDamageBase : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             // ダメージ処理
-            gameObject.GetComponent<EnemyBase>().nHp -= player.GetComponent<PlayerStatus>().Attack;
-            ViewDamage(player.GetComponent<PlayerStatus>().Attack);
+            int n = (int)((player.GetComponent<PlayerStatus>().Attack * (int)player.GetComponent<Rigidbody>().velocity.magnitude) * fSpeedtoDamage);
+            gameObject.GetComponent<EnemyBase>().nHp -= n;
+            ViewDamage(n);
 
             // 一瞬色を変える
             ChangeMaterial();
         }
+    }
+
+    //----------------------------
+    // ダメージ処理
+    //----------------------------
+    public void IsDamage(int damage)
+    {
+        // ダメージ処理
+        gameObject.GetComponent<EnemyBase>().nHp -= damage;
+        ViewDamage(damage);
+
+        // 一瞬色を変える
+        ChangeMaterial();
     }
 
     //----------------------------
