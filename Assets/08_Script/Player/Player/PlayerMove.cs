@@ -10,6 +10,7 @@
 // 2022/03/25 author：田村敏基 アニメーション実装
 // 2022/03/27 author：田村敏基 updateの最初にアニメーションを持ってくるよう変更
 // 2022/03/28 author：竹尾　応急 エフェクト発生組み込み
+// 2022/05/02                    音組み込み
 //
 //======================================================================
 using System.Collections;
@@ -30,6 +31,7 @@ public class PlayerMove : MonoBehaviour
     private PlayerStatus status;
     private Rigidbody rb;
     private CameraShaker shaker;
+    private SoundManager sound;
 
     private Vector3 vCurrentForce = Vector3.zero; // 発射方向の力   
     private Vector3 vDragStart = Vector3.zero; // ドラッグ開始点
@@ -66,6 +68,9 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
+        // 無いコンポーネントを入れなおす
+        SetComponent();
+
         // アニメーション
         MoveAnim();
         // ステート管理
@@ -152,7 +157,8 @@ public class PlayerMove : MonoBehaviour
         {
             // 押されたとき
             if (Input.GetMouseButtonDown(0))
-            {              
+            {
+                if (state.IsNormal) sound.Play_PlayerCharge(this.gameObject);
                 vDragStart = GetMousePosition(); // マウスの初期位置を取得
                 fStockPower = 0;
             }
@@ -183,6 +189,8 @@ public class PlayerMove : MonoBehaviour
         // 左クリック離れたとき
         if (Input.GetMouseButtonUp(0))
         {
+            if (state.IsNormal) sound.Play_PlayerShotWeek(this.gameObject);
+
             // 瞬間的に力を加えてはじく
             rb.AddForce(vCurrentForce.normalized * fStockPower * fInitial, ForceMode.Impulse);
             status.fBreakTime = 0.0f;
@@ -210,6 +218,8 @@ public class PlayerMove : MonoBehaviour
         // スティックを倒してるなら
         if (Mathf.Abs(x) >= 0.5f || Mathf.Abs(y) >= 0.5f)
         {
+            if (state.IsNormal && bShot == true) sound.Play_PlayerCharge(this.gameObject);
+
             // フラグを立てる
             bShot = true;
             // 入力方向を逆にして受け取る
@@ -232,6 +242,8 @@ public class PlayerMove : MonoBehaviour
         }
         else if (bShot == true)
         {
+            if (state.IsNormal) sound.Play_PlayerShotWeek(this.gameObject);
+
             // フラグを下す
             bShot = false;
             // 瞬間的に力を加えてはじく
@@ -252,7 +264,15 @@ public class PlayerMove : MonoBehaviour
     }
     //**********************************************************
 
-    
+    // SoundManagerを入れる ************************************
+    void SetComponent()
+    {
+        if(sound == null)
+        {
+            sound = GameObject.FindWithTag("SoundPlayer").GetComponent<SoundManager>();
+        }
+    }
+    //**********************************************************
 
     
 
@@ -263,8 +283,6 @@ public class PlayerMove : MonoBehaviour
         {
             shaker.Do();
         }
-
-        
 
     }
 }
