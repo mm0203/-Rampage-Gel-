@@ -45,7 +45,7 @@ public class EnemyBase : MonoBehaviour
     private Rigidbody rb;
 
     // HPと攻撃力
-    private float nHp;
+    public float nHp { get; set; }
     private float nAttack;
 
     // 前フレームの座標
@@ -60,10 +60,6 @@ public class EnemyBase : MonoBehaviour
     // 攻撃範囲に入ってから、一度目の攻撃か
     private bool bFirstAttack = false;
 
-    // ダメージUI
-    [SerializeField] private GameObject DamageObj;
-
-
     [Header("死亡時効果音")]
     [SerializeField] private AudioClip DeathSE;
 
@@ -73,11 +69,6 @@ public class EnemyBase : MonoBehaviour
     [Header("攻撃頻度")]
     [SerializeField, Range(0.0f, 10.0f)] private float fAttackTime = 3.0f;
     private float fAttackCount;
-
-    [Header("エフェクトシステム")]
-    [SerializeField] EnemyEffect effect;
-
-    public EnemyEffect GetEffect { get { return effect; }}
 
     // 消滅距離
     float fDistance = 20.0f;
@@ -101,7 +92,6 @@ public class EnemyBase : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 
         fAttackCount = fAttackTime;
-
     }
 
     //----------------------------
@@ -112,7 +102,7 @@ public class EnemyBase : MonoBehaviour
         Burst();
         Move();
         Death();
-        DistanceDeth();
+        DistanceDeth();   
     }
 
     //----------------------------
@@ -129,8 +119,6 @@ public class EnemyBase : MonoBehaviour
             // 効果音再生
             AudioSource.PlayClipAtPoint(DeathSE, transform.position);
 
-            // リストから削除(中ボスはEnemyManagerのリストに入ってないため処理しない)
-            if(manager != null) manager.NowEnemyList.Remove(gameObject);
             Destroy(this.gameObject);
         }
     }
@@ -140,18 +128,12 @@ public class EnemyBase : MonoBehaviour
     //----------------------------
     private void DistanceDeth()
     {
-        // 中ボスは離れても消滅しないため処理しない
-        if (manager == null) return;
-
         // プレイヤーとの差を計算
         Vector2 vdistance = new Vector2(transform.position.x - player.transform.position.x, transform.position.z - player.transform.position.z);
 
         // 消滅処理
-        if (vdistance.x > fDistance || vdistance.x < -fDistance ||
-           vdistance.y > fDistance || vdistance.y < -fDistance)
+        if (vdistance.x > fDistance || vdistance.x < -fDistance ||vdistance.y > fDistance || vdistance.y < -fDistance)
         {
-            Debug.Log("消滅");
-
             // リストから削除
             manager.NowEnemyList.Remove(gameObject);
             Destroy(this.gameObject);
@@ -245,20 +227,6 @@ public class EnemyBase : MonoBehaviour
     }
 
     //----------------------------
-    // プレイヤーとの接触時
-    //----------------------------
-    private void OnTriggerEnter(Collider other)
-    {
-        // プレイヤーとの衝突時ダメージ
-        if (other.CompareTag("Player"))
-        {
-            // ダメージ処理
-            nHp -= player.GetComponent<PlayerStatus>().Attack;    
-            ViewDamage(player.GetComponent<PlayerStatus>().Attack);  
-        }
-    }
-
-    //----------------------------
     // バーストをくらったとき
     //----------------------------
     private void Burst()
@@ -274,18 +242,5 @@ public class EnemyBase : MonoBehaviour
                 rb.isKinematic = true;
             }
         }
-    }
-
-    //----------------------------
-    // ダメージ表記
-    //----------------------------
-    private void ViewDamage(int damage)
-    {
-        // テキストの生成
-        GameObject text = Instantiate(DamageObj);
-        text.GetComponent<TextMesh>().text = damage.ToString();
-
-        // 少しずらした位置に生成(z + 1.0f)
-        text.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + 1.0f);
     }
 }

@@ -26,11 +26,15 @@ public class BossTimer : MonoBehaviour
     // 残り時間
     float fTimer;
 
-    // ボス出現時間
-    [Header("ボス出現時間")][SerializeField]float fCount = 60.0f;
 
-    // 出現するボス
-    [Header("出現するボス")][SerializeField]GameObject Boss;
+    [Header("ボス出現時間")]
+    [SerializeField]float fCount = 60.0f;
+
+    [Header("出現するボス")]
+    [SerializeField]GameObject Boss;
+
+    [Header("ボスHPUI")]
+    [SerializeField] Canvas bossHPUI;
 
     GameObject Player;
 
@@ -60,6 +64,10 @@ public class BossTimer : MonoBehaviour
             // 中ボスにプレイヤー情報セット
             if(Boss.GetComponent<EnemyBase>())
                 Player = Boss.GetComponent<EnemyBase>().player;
+
+            bossHPUI = Instantiate(bossHPUI, transform.position, transform.rotation);
+
+            bossHPUI.GetComponentInChildren<BossHPUI>().Boss = Boss;
 
             // 消滅（仮）
             Destroy(gameObject);

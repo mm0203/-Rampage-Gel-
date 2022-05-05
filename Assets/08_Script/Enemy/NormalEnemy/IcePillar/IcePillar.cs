@@ -35,7 +35,9 @@ public class IcePillar : MonoBehaviour
 
     private void Start()
     {
-        enemyBase = GetComponent<EnemyBase>();
+        // エネミーベース情報取得
+        enemyBase = this.GetComponent<EnemyBase>();
+
         player = enemyBase.player;
     }
 

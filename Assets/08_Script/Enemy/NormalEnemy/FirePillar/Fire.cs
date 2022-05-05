@@ -34,12 +34,12 @@ public class Fire : MonoBehaviour
 
     public GameObject player { get; set; }
     public GameObject enemy { get; set; }
+    public EnemyEffect effect { get; set; }
+
     GameObject AttackCircle,TimeCircle;
 
     float fScale;
 
-    //public void SetPlayer(GameObject obj) { player = obj; }
-    //public void SetEnemy(GameObject obj) { enemy = obj; }
     public void SetCircle(GameObject obj) { AttackCircle = obj; }
 
 
@@ -65,15 +65,6 @@ public class Fire : MonoBehaviour
         
         // サークルの透明度を下げる
         AttackCircle.GetComponent<SpriteRenderer>().color -= new Color32(0, 0, 0, 125);
-
-        Debug.Log(enemy.GetComponent<BossBase>());
-
-        // ボス用?
-        //enemyEffect = enemy.GetComponent<BossBase>().GetEffect;
-
-        // ザコ用
-        enemyEffect = enemy.GetComponent<EnemyBase>().GetEffect;
-
     }
 
     //----------------------------------
@@ -87,7 +78,7 @@ public class Fire : MonoBehaviour
             bAttackStart = true;
 
             // エフェクト生成
-            ObjEffect = enemyEffect.CreateEffect(EnemyEffect.eEffect.eFirePiller, gameObject, fLifeTime - fAttackStart);
+            ObjEffect = effect.CreateEffect(EnemyEffect.eEffect.eFirePiller, gameObject, fLifeTime - fAttackStart);
         }
 
         Destroy(gameObject, fLifeTime);
