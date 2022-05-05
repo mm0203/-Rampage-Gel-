@@ -54,7 +54,7 @@ public class GuardBurst : MonoBehaviour
                 {
                     if ((this.gameObject.transform.position - hit.transform.position).magnitude <= status.BurstRadisu * 10)
                     {
-                        hit.GetComponent<EnemyDamageBase>().IsDamage(status.Attack);
+                        hit.GetComponent<EnemyDamageBase>().IsDamage((status.Attack * power) / 2);
                     }
 
                 }
@@ -62,7 +62,8 @@ public class GuardBurst : MonoBehaviour
                 {
                     if ((this.gameObject.transform.position - hit.transform.position).magnitude <= status.BurstRadisu * 10)
                     {
-                        hit.GetComponent<EnemyDamageBase>().IsDamage(status.Attack);
+                        // BossBaseを書き換えてバーストでダメージを与えられるように
+                        //hit.GetComponent<BossBase>().IsDamage((status.Attack * power) / 2);
                     }
                 }
 
