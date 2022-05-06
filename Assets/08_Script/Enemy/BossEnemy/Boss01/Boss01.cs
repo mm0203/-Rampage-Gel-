@@ -93,7 +93,7 @@ public class Boss01 : MonoBehaviour
         //Attack();
 
         // ボスが死んだら子オブジェクトも破壊
-        if(BossBase.Death())
+        if(BossBase.Death() <= 0)
             DestroyObject();
     }
 
