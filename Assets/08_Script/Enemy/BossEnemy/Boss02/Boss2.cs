@@ -32,6 +32,7 @@ public class Boss2 : MonoBehaviour
 
     private bool bHit = false;
 
+
     // ”¼Œa
     public float distance = 5.0f;
 
