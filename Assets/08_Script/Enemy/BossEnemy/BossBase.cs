@@ -8,6 +8,7 @@
 // 2022/05/02 author：小椋駿   ターゲットマーカー生成追加
 // 2022/05/05 author：竹尾　プレイヤーの速度に対してダメージ出せるように
 // 2022/05/06 　　　　　　　メモ、攻撃関数を追加しアニメーションを起こしたい
+// 2022/05/09               アニメーションと攻撃を仮追加
 //
 //======================================================================
 using System.Collections;
@@ -17,7 +18,33 @@ using UnityEngine.AI;
 
 public class BossBase : MonoBehaviour
 {
+    //0509 追加 **********************************************
+    // アニメーションの種類
+    enum eAnimetion
+    {
+        eDefult,
+        eMove,
+        eAttack,
+    }
+
+    // 攻撃中か
+    public bool bAttack { get; set; }
+
+    // 攻撃頻度
+    private float fAttackCount;
+
+    [Header("攻撃を開始する距離")]
+    [SerializeField, Range(0.0f, 50.0f)] private float fAttackDis = 3.0f;
+
+    [Header("攻撃頻度")]
+    [SerializeField, Range(0.0f, 10.0f)] private float fAttackTime = 3.0f;
+
+    // 攻撃範囲に入ってから、一度目の攻撃か
+    private bool bFirstAttack = false;
+    //********************************************************
+
     [SerializeField] public EnemyData enemyData;
+    public EnemyData GetEnemyData { get { return enemyData; } }
     public GameObject player { get; set; }
     private NavMeshAgent myAgent;
     private Animator animator;
@@ -49,9 +76,11 @@ public class BossBase : MonoBehaviour
 
     public EnemyEffect GetEffect { get { return effect; } }
 
+
+
     void Start()
     {
-        player = GameObject.Find("Player");
+        player = GameObject.FindWithTag("Player");
 
         nHp = enemyData.BossHp + (enemyData.nLevel * enemyData.nUpHP);
 
@@ -70,12 +99,16 @@ public class BossBase : MonoBehaviour
 
     }
 
+
+
     void Update()
     {
         Move();
         Death();
 
     }
+
+
 
     // 死亡
     public int Death()
@@ -104,6 +137,8 @@ public class BossBase : MonoBehaviour
         return nHp;
     }
 
+
+
     // 移動
     public void Move()
     {
@@ -120,6 +155,24 @@ public class BossBase : MonoBehaviour
 
         // 過去座標を更新
         vOldPos = gameObject.transform.position;
+
+        // プレイヤーとの距離計算
+        Vector3 vDiffPos = this.transform.position - player.transform.position;
+
+
+        // 0509 追加 **********************************************
+        // 敵との距離が一定以下なら攻撃処理
+        if ((vDiffPos.x <= fAttackDis && vDiffPos.x >= -fAttackDis) && (vDiffPos.z <= fAttackDis && vDiffPos.z >= -fAttackDis))
+        {
+            EnemyAttack();
+        }
+        // 攻撃終了時動き出す
+        else if (myAgent.speed == 0.0f && !bAttack)
+        {
+            // スピードの再設定
+            myAgent.speed = enemyData.fSpeed;
+        }
+        //********************************************************
     }
 
     //プレイヤーとの接触時(IsTrigger)
@@ -133,15 +186,44 @@ public class BossBase : MonoBehaviour
         }
     }
 
-    //private void OnCollisionEnter(Collision other)
-    //{
-    //    if (other.gameObject.tag == "Player")
-    //    {
-            
-    //        // ダメージ処理
-    //        Damege();
-    //    }
-    //}
+
+    // 0509 追加 **********************************************
+    //----------------------------
+    // 攻撃
+    //----------------------------
+    private void EnemyAttack()
+    {
+        // 動きを止める
+        myAgent.speed = 0.0f;
+        myAgent.velocity = Vector3.zero;
+
+        // 攻撃開始か判定 or 攻撃範囲に入ってから、最初の攻撃の時
+        if (IsAttack() || !bFirstAttack)
+        {
+            // 攻撃モーション
+            animator.SetInteger("Parameter", (int)eAnimetion.eAttack);
+
+            bFirstAttack = true;
+        }
+    }
+
+
+
+    //----------------------------
+    // 攻撃開始か
+    //----------------------------
+    private bool IsAttack()
+    {
+        fAttackCount -= Time.deltaTime;
+
+        // 攻撃開始
+        if (fAttackCount < 0.0f)
+        {
+            fAttackCount = fAttackTime;
+            return true;
+        }
+        return false;
+    }
 
     // ダメージの処理
     public void Damege()
@@ -164,4 +246,5 @@ public class BossBase : MonoBehaviour
         // 少しずらした位置に生成(z + 1.0f)
         text.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + 1.0f);
     }
+    //********************************************************
 }

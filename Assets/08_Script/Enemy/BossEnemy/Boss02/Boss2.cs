@@ -71,7 +71,7 @@ public class Boss2 : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision other)
+    private void OnTriggerEnter(Collider other) // 竹尾：CollisionからTriggerへ仮変更、プレイヤーを何とかしたら戻す
     {
         if (other.gameObject.tag == "Player" && !bHit)
         {

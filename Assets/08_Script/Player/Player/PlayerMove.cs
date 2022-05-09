@@ -72,6 +72,9 @@ public class PlayerMove : MonoBehaviour
         // 無いコンポーネントを入れなおす
         SetComponent();
 
+        // Y軸固定
+        FixedtoY();
+
         // アニメーション
         MoveAnim();
         // ステート管理
@@ -275,7 +278,11 @@ public class PlayerMove : MonoBehaviour
     }
     //**********************************************************
 
-    
+    // Y軸固定 *************************************************
+    void FixedtoY()
+    {
+        
+    }
 
     //*応急*
     private void OnTriggerEnter(Collider other)

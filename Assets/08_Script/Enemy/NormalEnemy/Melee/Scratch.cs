@@ -21,6 +21,8 @@ public class Scratch : MonoBehaviour
     public void SetPlayer (GameObject obj) { player = obj; }
     public void SetEnemy(GameObject obj) { enemy = obj; }
 
+    public bool bImBoss = false;
+
 
     
     void Update()
@@ -34,7 +36,15 @@ public class Scratch : MonoBehaviour
 
         {
             // É_ÉÅÅ[ÉWèàóù
-            player.GetComponent<PlayerHP>().OnDamage(enemy.GetComponent<EnemyBase>().GetEnemyData.nAttack);
+            if (bImBoss == true)
+            {
+                player.GetComponent<PlayerHP>().OnDamage(enemy.GetComponent<BossBase>().GetEnemyData.nAttack);
+            }
+            else if(bImBoss == false)
+            {
+                player.GetComponent<PlayerHP>().OnDamage(enemy.GetComponent<EnemyBase>().GetEnemyData.nAttack);
+            }
+            
 
             Destroy(gameObject);
 

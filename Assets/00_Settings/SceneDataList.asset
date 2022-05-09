@@ -15,9 +15,9 @@ MonoBehaviour:
   TitleScene:
     m_SceneName: Title
   GameScene:
-  - m_SceneName: Stage1
-  - m_SceneName: Stage2
-  - m_SceneName: Stage3
-  - m_SceneName: Stage4
-  - m_SceneName: Stage5
+  - m_SceneName: Stage1-1
+  - m_SceneName: Stage1-2
+  - m_SceneName: Stage1-3
+  - m_SceneName: Stage1-4
+  - m_SceneName: Stage1-5
   MovieScene: []

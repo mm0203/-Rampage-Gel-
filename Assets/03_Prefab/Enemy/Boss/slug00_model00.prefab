@@ -408,6 +408,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e18d693c62377f544914da7faa7c905b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fAttackDis: 3
+  fAttackTime: 3
   enemyData: {fileID: 11400000, guid: 4570e7ccf9be7b24e9040c4161085551, type: 2}
   nHp: 0
   Portals: {fileID: 2108885355349615795, guid: 3b15cef950eda504dad4e58240b093bd, type: 3}
