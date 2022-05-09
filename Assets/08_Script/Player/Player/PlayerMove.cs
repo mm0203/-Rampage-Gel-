@@ -37,9 +37,9 @@ public class PlayerMove : MonoBehaviour
     private Vector3 vDragStart = Vector3.zero; // ドラッグ開始点
     
     [Header("発射威力")]
-    [SerializeField] private float fInitial = 100.0f; // 初速倍率
+    [SerializeField] private float fInitial = 90.0f; // 初速倍率
     [Header("減速率")]
-    [SerializeField] private float fLate = 0.85f; // 減速率
+    [SerializeField] private float fLate = 0.8f; // 減速率
     [Header("最大威力に到達する時間")]
     [SerializeField] private float fInputTime = 0.8f;
     [SerializeField] private float fStockPower = 0; // 蓄積時間
@@ -281,7 +281,7 @@ public class PlayerMove : MonoBehaviour
     // Y軸固定 *************************************************
     void FixedtoY()
     {
-        
+        //this.transform.position = new Vector3()
     }
 
     //*応急*
@@ -290,6 +290,17 @@ public class PlayerMove : MonoBehaviour
         if (other.tag == "Enemy")
         {
             shaker.Do();
+        }
+
+        // ぶつかった相手がボスの時、はじかれる
+        if (other.tag == "Boss")
+        {
+            GameObject cylinder;
+            cylinder = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
+            cylinder.transform.position = new Vector3(transform.position.x + transform.forward.x * 1.5f, transform.position.y, transform.position.z + transform.forward.z * 1.5f);
+
+            Destroy(cylinder, 0.1f);
+            
         }
 
     }

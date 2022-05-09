@@ -41,6 +41,8 @@ public class BossBase : MonoBehaviour
 
     // 攻撃範囲に入ってから、一度目の攻撃か
     private bool bFirstAttack = false;
+
+    private Rigidbody rb;
     //********************************************************
 
     [SerializeField] public EnemyData enemyData;
@@ -48,6 +50,7 @@ public class BossBase : MonoBehaviour
     public GameObject player { get; set; }
     private NavMeshAgent myAgent;
     private Animator animator;
+    
 
     // HP
     public int nHp;
@@ -97,6 +100,10 @@ public class BossBase : MonoBehaviour
         // ボス情報をセット
         Marker.GetComponentInChildren<TargetMarker>().target = gameObject.transform;
 
+        //0509 追加 **********************************************
+        rb = this.gameObject.GetComponent<Rigidbody>();
+        //********************************************************
+
     }
 
 
@@ -105,6 +112,10 @@ public class BossBase : MonoBehaviour
     {
         Move();
         Death();
+
+        // 0509 追加 **********************************************
+        Burst();
+        //********************************************************
 
     }
 
@@ -247,4 +258,22 @@ public class BossBase : MonoBehaviour
         text.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + 1.0f);
     }
     //********************************************************
+
+    //----------------------------
+    // バーストをくらったとき
+    //----------------------------
+    private void Burst()
+    {
+        // 物理演算がONの時（バースト時に物理演算がONになる）
+        if (!rb.isKinematic)
+        {
+
+            rb.isKinematic = true;
+
+
+
+
+        }
+        
+    }
 }

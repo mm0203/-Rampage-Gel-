@@ -26,7 +26,14 @@ public class GenerateEnemyData : ScriptableObject
         [SerializeField] public List<GameObject> EnemyList = new List<GameObject>();
 
         [Header("-ボス-")]
-        [SerializeField] public GameObject BossEnemy = new GameObject();
+        [SerializeField] public GameObject BossEnemy;
+
+        
+    }
+
+    private void Awake()
+    {
+        
     }
 
     [Header("<各ステージ敵生成リスト>")]

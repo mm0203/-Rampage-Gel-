@@ -32,14 +32,14 @@ public class BossDirection : MonoBehaviour
 
     private void Update()
     {
-        
+        setBossPosition();
     }
 
     public void StartDirection(int bgmNumber)
     {
         // シーンから必要なデータを取得
         Cameraobj = GameObject.FindWithTag("MainCamera");
-        Bossobj = GameObject.FindWithTag("Boss");
+        Bossobj = GameObject.FindWithTag("DirectionPoint");
         UIobj = GameObject.FindWithTag("UI");
         BGMPlayer = GameObject.FindWithTag("SoundPlayer").gameObject.GetComponent<BGMPlayer>();
         effectPlayer = Cameraobj.GetComponent<EffectPlayer>();
@@ -120,6 +120,22 @@ public class BossDirection : MonoBehaviour
         }
         Cameraobj.GetComponent<CameraController>().bOnDirection = false; // プレイヤーへのカメラ追従有効化
         UIobj.SetActive(true);
+    }
+
+    // 動くボスをずっと捉えておく
+    void setBossPosition()
+    {
+        if(Bossobj == null)
+        {
+           
+        }
+        else
+        {
+            BossPos.x = Bossobj.transform.position.x;     // ボスの位置[X]を取得
+            BossPos.y = oldCameraPos.y;                   // 高さ[Y]は固定
+            BossPos.z = Bossobj.transform.position.z;     // ボスの位置[Z]を取得
+        }
+        
     }
 }
 
