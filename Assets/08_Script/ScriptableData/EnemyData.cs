@@ -25,10 +25,10 @@ public class EnemyData : ScriptableObject
     public float fSpeed { get; set; } = 1.0f;
 
     // ボス
-    public int nBossLevel { get; set; } = 1;
-    public int nBossHp { get; set; } = 200;
-    public int nBossAttack { get; set; } = 10;
-    public float fBossSpeed { get; set; } = 4.0f;
+    [Tooltip("ボスのレベル")]  public int BossLevel = 1;
+    [Tooltip("ボスのHP")]      public int BossHp = 200;
+    [Tooltip("ボスの攻撃力")]  public int BossAttack = 10;
+    [Tooltip("ボスの速度")]    public float BossSpeed = 4.0f;
 
     // レベルアップ時のステータス上昇値
     public int nUpHP { get; set; } = 1;
