@@ -39,13 +39,13 @@ public class Boss2 : MonoBehaviour
 
     void Start()
     {
-        player = GameObject.Find("Player");
+        player = GameObject.FindWithTag("Player").gameObject;
 
         animation = GetComponent<Animator>();
 
         BossBase = GetComponent<BossBase>();
 
-        nMaxHp = enemyData.BossHp;
+        nMaxHp = BossBase.enemyData.BossHp;
     }
 
     void Update()

@@ -64,6 +64,7 @@ public class PlayerMove : MonoBehaviour
         shaker = GetComponent<CameraShaker>();
         effectmove.SetActive(false);
 
+        Direction.enabled = false;
     }
 
     void Update()
@@ -171,7 +172,7 @@ public class PlayerMove : MonoBehaviour
             // 矢印の引っ張り処理
             Direction.enabled = true;
             // 動く方向と逆に矢印が出るように
-            Direction.SetPosition(0, rb.position);
+            Direction.SetPosition(0, rb.position); 
             Direction.SetPosition(1, rb.position - vCurrentForce.normalized * 2);
 
             // マウスを押してる間、威力を高める

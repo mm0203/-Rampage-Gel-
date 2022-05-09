@@ -22,48 +22,102 @@ public class BGMPlayer : MonoBehaviour
     public AudioSource EnvSound_L;
     public AudioSource EnvSound_R;
 
+    BossDirection BossDirection = null;
+
 
     private void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
-       
+
+        // 現在シーン
+        //Scene scene = SceneManager.GetSceneByName("Stage1-1");
+        //SceneManager.SetActiveScene(scene);
+
     }
 
     private void Start()
     {
-        switch(SceneManager.GetActiveScene().name)
-        {
-            case "Stage1-1":
-                Stage1();
-                break;
-            case "Stage2-1":
-                Stage2();
-                break;
-            case "Stage3-1":
-                Stage3();
-                break;
-            case "Stage4-1":
-                Stage4();
-                break;
-            case "Stage5-1":
-                Stage5();
-                break;
-            case "Stage6-1":
-                Stage6();
-                break;
-            case "Stage7-1":
-                Stage7();
-                break;
-            default:
-                Debug.Log("Continue BGM");
-                break;
-        }
+        // BossDirectionを読み込む
+        BossDirection = this.gameObject.GetComponent<BossDirection>();
+
+        // ステージの切り替えを検知する為、「activeSceneChanged」にこの関数を入れる
+        SceneManager.activeSceneChanged += ActiveSceneChanged;
+
+        ChangeStageBGM();
+
     }
 
     private void Update()
     {
         
     }
+
+    // 特定シーンの切り替えを検知しBGMを変更 *******************
+    void ChangeStageBGM()
+    {
+        switch (SceneManager.GetActiveScene().name)
+        {
+            case "Stage1-1":
+                Stage1();
+                break;
+            case "Stage1-5":
+                BossDirection.StartDirection(1);
+                break;
+
+            case "Stage2-1":
+                Stage2();
+                break;
+            case "Stage2-5":
+                BossDirection.StartDirection(2);
+                break;
+
+            case "Stage3-1":
+                Stage3();
+                break;
+            case "Stage3-5":
+                BossDirection.StartDirection(3);
+                break;
+
+            case "Stage4-1":
+                Stage4();
+                break;
+            case "Stage4-5":
+                BossDirection.StartDirection(4);
+                break;
+
+            case "Stage5-1":
+                Stage5();
+                break;
+            case "Stage5-5":
+                BossDirection.StartDirection(5);
+                break;
+
+            case "Stage6-1":
+                Stage6();
+                break;
+            case "Stage6-5":
+                BossDirection.StartDirection(6);
+                break;
+
+            case "Stage7-1":
+                Stage7();
+                break;
+            case "Stage7-5":
+                BossDirection.StartDirection(7);
+                break;
+
+            default:
+                Debug.Log("Continue BGM");
+                break;
+        }
+    }
+
+    // シーンの切り替えを検知 **********************************
+    void ActiveSceneChanged(Scene thisScene, Scene nextScene)
+    {
+        ChangeStageBGM();
+    }
+    //**********************************************************
 
     // BGM停止 *************************************************
     public void StopBGM()

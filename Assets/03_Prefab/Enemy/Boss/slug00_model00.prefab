@@ -374,7 +374,7 @@ CapsuleCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.68
-  m_Height: 1
+  m_Height: 5
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!95 &1277353414753026481
@@ -409,10 +409,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyData: {fileID: 11400000, guid: 4570e7ccf9be7b24e9040c4161085551, type: 2}
+  nHp: 0
   Portals: {fileID: 2108885355349615795, guid: 3b15cef950eda504dad4e58240b093bd, type: 3}
   DamageObj: {fileID: 1599770427430637572, guid: f281449c9f2cf8045930e932567b2b5e, type: 3}
   DeathSE: {fileID: 8300000, guid: da24daa9fcff69c4d884496fda891063, type: 3}
-  effect: {fileID: 0}
+  effect: {fileID: 4654835053005618983, guid: 8ad696e21e4db31429ba8402a66d472b, type: 3}
+  Marker: {fileID: 1745901886875421882, guid: 51a17eb9e33794a4eab9304a26a60304, type: 3}
 --- !u!114 &1277353414753026477
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -426,7 +428,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  enemyData: {fileID: 0}
   DivisionEnemy: {fileID: 7785710047647153494, guid: 0a3f955af5600e342bceb8ac27ced102, type: 3}
+  distance: 5
 --- !u!195 &1277353414753026478
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1440,7 +1444,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -5051033422192379376, guid: 7b47731ca0157a54c91833beeea55f4f, type: 3}
+  - {fileID: 2100000, guid: 022174747e3db7247a956ed7158f6b8d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

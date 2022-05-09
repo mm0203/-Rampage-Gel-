@@ -7,6 +7,7 @@
 // 2022/05/02 author：松野将之 死亡関数(Death)からHPを取得可能に
 // 2022/05/02 author：小椋駿   ターゲットマーカー生成追加
 // 2022/05/05 author：竹尾　プレイヤーの速度に対してダメージ出せるように
+// 2022/05/06 　　　　　　　メモ、攻撃関数を追加しアニメーションを起こしたい
 //
 //======================================================================
 using System.Collections;
@@ -16,7 +17,7 @@ using UnityEngine.AI;
 
 public class BossBase : MonoBehaviour
 {
-    [SerializeField] private EnemyData enemyData;
+    [SerializeField] public EnemyData enemyData;
     public GameObject player { get; set; }
     private NavMeshAgent myAgent;
     private Animator animator;
@@ -121,25 +122,26 @@ public class BossBase : MonoBehaviour
         vOldPos = gameObject.transform.position;
     }
 
-    // プレイヤーとの接触時
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    // プレイヤーとの衝突時ダメージ
-    //    if (other.CompareTag("Player"))
-    //    {
-    //        // ダメージ処理
-    //        Damege();
-    //    }
-    //}
-
-    private void OnCollisionEnter(Collision other)
+    //プレイヤーとの接触時(IsTrigger)
+    private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        // プレイヤーとの衝突時ダメージ
+        if (other.CompareTag("Player"))
         {
             // ダメージ処理
             Damege();
         }
     }
+
+    //private void OnCollisionEnter(Collision other)
+    //{
+    //    if (other.gameObject.tag == "Player")
+    //    {
+            
+    //        // ダメージ処理
+    //        Damege();
+    //    }
+    //}
 
     // ダメージの処理
     public void Damege()
