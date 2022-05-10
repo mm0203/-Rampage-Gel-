@@ -17,7 +17,7 @@ using System;
 
 public class GenerateEnemyData : ScriptableObject
 {
-    [Serializable] public class StageData : MonoBehaviour
+    [Serializable] public class StageData 
     {
         [Header("-最大敵数-")]
         [SerializeField] public int MaxEnemy = 10;
@@ -26,7 +26,14 @@ public class GenerateEnemyData : ScriptableObject
         [SerializeField] public List<GameObject> EnemyList = new List<GameObject>();
 
         [Header("-ボス-")]
-        [SerializeField] public GameObject BossEnemy = new GameObject();
+        [SerializeField] public GameObject BossEnemy;
+
+        
+    }
+
+    private void Awake()
+    {
+        
     }
 
     [Header("<各ステージ敵生成リスト>")]

@@ -344,6 +344,7 @@ Transform:
   m_Children:
   - {fileID: 3557252714470749295}
   - {fileID: 3053069114582476903}
+  - {fileID: 1091507182667652731}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90.45, z: 0}
@@ -355,7 +356,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1277353414753026474}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 100
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 0
@@ -371,10 +372,10 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1277353414753026474}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.68
-  m_Height: 1
+  m_Height: 5
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!95 &1277353414753026481
@@ -408,11 +409,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e18d693c62377f544914da7faa7c905b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fAttackDis: 3
+  fAttackTime: 3
   enemyData: {fileID: 11400000, guid: 4570e7ccf9be7b24e9040c4161085551, type: 2}
+  nHp: 0
   Portals: {fileID: 2108885355349615795, guid: 3b15cef950eda504dad4e58240b093bd, type: 3}
   DamageObj: {fileID: 1599770427430637572, guid: f281449c9f2cf8045930e932567b2b5e, type: 3}
   DeathSE: {fileID: 8300000, guid: da24daa9fcff69c4d884496fda891063, type: 3}
-  effect: {fileID: 0}
+  effect: {fileID: 4654835053005618983, guid: 8ad696e21e4db31429ba8402a66d472b, type: 3}
+  Marker: {fileID: 1745901886875421882, guid: 51a17eb9e33794a4eab9304a26a60304, type: 3}
 --- !u!114 &1277353414753026477
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -426,7 +431,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  enemyData: {fileID: 0}
   DivisionEnemy: {fileID: 7785710047647153494, guid: 0a3f955af5600e342bceb8ac27ced102, type: 3}
+  distance: 5
 --- !u!195 &1277353414753026478
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -956,6 +963,36 @@ Transform:
   m_Father: {fileID: 4792847627350006113}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3751273168465190708
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1091507182667652731}
+  m_Layer: 0
+  m_Name: DirectionPoint
+  m_TagString: Boss
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1091507182667652731
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3751273168465190708}
+  m_LocalRotation: {x: -0, y: -0.709878, z: -0, w: 0.7043246}
+  m_LocalPosition: {x: -0.01, y: 0.39, z: 1.011}
+  m_LocalScale: {x: 0.20000002, y: 0.2, z: 0.20000002}
+  m_Children: []
+  m_Father: {fileID: 1941546791401741072}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3883226189660448304
 GameObject:
   m_ObjectHideFlags: 0
@@ -1440,7 +1477,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -5051033422192379376, guid: 7b47731ca0157a54c91833beeea55f4f, type: 3}
+  - {fileID: 2100000, guid: 022174747e3db7247a956ed7158f6b8d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

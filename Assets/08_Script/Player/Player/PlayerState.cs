@@ -20,7 +20,6 @@ public class PlayerState : MonoBehaviour
         eNormal = 0,
         eHard,
         eBurst,
-        eArmor,
         eDie,
     }
     private StateEnum eState = StateEnum.eNormal;
@@ -37,11 +36,13 @@ public class PlayerState : MonoBehaviour
     bool bLflg = false;
     bool bRflg = false;
 
+    // 硬化フラグ
+    public bool bGuard = false;
+
     // 現在モード取得
     public bool IsNormal => eState == StateEnum.eNormal;
     public bool IsHard => eState == StateEnum.eHard;
     public bool IsBurst => eState == StateEnum.eBurst;
-    public bool IsArmor => eState == StateEnum.eArmor;
     public bool IsDie => eState == StateEnum.eDie;
 
     // Start is called before the first frame update
@@ -63,13 +64,17 @@ public class PlayerState : MonoBehaviour
         }
 
         // バースト移行
-        if (IsDoubleTrigger(Input.GetMouseButtonUp(0), Input.GetMouseButtonUp(1)))
+        if (IsDoubleTrigger(Input.GetMouseButtonUp(0), Input.GetMouseButtonUp(1)) 
+            || Input.GetAxis("LTrigger") <= 0.2f && Input.GetAxis("RTrigger") <= 0.2f)
         {
-            GotoBurstState();
+            if(bGuard)
+            {
+                GotoBurstState();
+            }
         }
     }
 
-    private bool IsDoubleTrigger(bool LB, bool RB)
+    public bool IsDoubleTrigger(bool LB, bool RB)
     {
         if (LB) bLflg = true;
         if (RB) bRflg = true;
@@ -84,6 +89,7 @@ public class PlayerState : MonoBehaviour
                 {
                     bLflg = false;
                     bRflg = false;
+                    bGuard = true;
                     time = 0.0f;
                     return true;
                 }
@@ -91,6 +97,7 @@ public class PlayerState : MonoBehaviour
                 {
                     bLflg = false;
                     bRflg = false;
+                    bGuard = true;
                     time = 0.0f;
                     return true;
                 }
@@ -102,6 +109,7 @@ public class PlayerState : MonoBehaviour
                 time = 0.0f;
             }
         }
+        bGuard = false;
         return false;
     }
 
@@ -122,14 +130,8 @@ public class PlayerState : MonoBehaviour
     // バーストモードに移行
     public void GotoBurstState()
     {
-        if (!IsDie)
-            eState = StateEnum.eBurst;
-    }
-    public void GotoArmorState()
-    {
-        if (!IsDie)
-            eState = StateEnum.eArmor;
-        // TODO スタート子ルーチン
+        if (!IsHard) return;
+        eState = StateEnum.eBurst;
     }
 
     public void GotoDieState()

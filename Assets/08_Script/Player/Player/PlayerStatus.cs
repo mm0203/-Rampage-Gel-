@@ -19,8 +19,8 @@ public class PlayerStatus : MonoBehaviour
     private int nMaxStamina = 450;
     private int nMaxAttack = 22;
     private int nMaxExp = 10;
-    private float fMaxBurstPower = 5;
-    private float fMaxBurstRadius = 1;
+    private float fMaxBurstPower = 3000;
+    private float fMaxBurstRadius = 5;
 
     // 基本ステータス(現在)
     private int nLevel = 1;
@@ -39,6 +39,13 @@ public class PlayerStatus : MonoBehaviour
     private int nUpStamina = 10;
     private int nUpExp = 20;
     private int nUpAttack = 6;
+
+    // 移動に関するデータ
+    public float fBreakTime { get; set; } = 0.0f;
+
+    // 無敵フラグ
+    public bool bArmor { get; set; } = false;
+    public float fArmorTime { get; set; } = 0.0f;
 
     // 最大ステータスを参照
     public int MaxLevel { get { return nMaxLevel; } set { nMaxLevel = value; } }

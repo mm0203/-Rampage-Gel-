@@ -10,6 +10,10 @@ TagManager:
   - OBject
   - CircleEventSwitch
   - ItemManager
+  - Boss
+  - UI
+  - SoundPlayer
+  - DirectionPoint
   layers:
   - Default
   - TransparentFX

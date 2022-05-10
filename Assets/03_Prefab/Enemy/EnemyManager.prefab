@@ -43,10 +43,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1364637fbc0d1b6439789c946307f987, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxEnemy: 30
-  vDistance: {x: 15, y: 8}
+  vEnemyNum: {x: 0, y: 20}
+  fDistance: 20
+  fLevelUpTime: 20
   EnemyList:
   - {fileID: 8943500349344443402, guid: a59efd64dfbd53648987faa568a42eea, type: 3}
   - {fileID: 2876346242041339717, guid: 0bc76b8d47e5fae46a90966b15f76d02, type: 3}
   NowEnemyList: []
-  fLevelUpTime: 20
+  GenerateEnemyData: {fileID: 11400000, guid: a5fc10e0eadab54488a63ea74bbcb83f, type: 2}

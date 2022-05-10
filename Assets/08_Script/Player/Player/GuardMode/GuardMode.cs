@@ -10,6 +10,7 @@
 //                             爆発実装(敵に効果なし...)
 // 2022/03/27 author：田村敏基 爆発の威力を蓄える機能実装
 // 2022/03/28 author：竹尾　応急 エフェクト発生組み込み
+// 2022/05/05                    バーストの発生をダメージから回数へ変更
 //
 //======================================================================
 using System.Collections;
@@ -40,7 +41,10 @@ public class GuardMode : MonoBehaviour
     [SerializeField] private int nCost = 1;
 
     // 爆発威力を収納
-    private float fStockBurst = 0.0f;
+    private int fStockBurst = 0;
+
+    // 硬化中にローテするための変数
+    bool bGuardStart = false;
 
     //*応急* エフェクトスクリプト
     [SerializeField] AID_PlayerEffect effect;
@@ -48,6 +52,10 @@ public class GuardMode : MonoBehaviour
     // ガードモデルとデフォルトモデル
     [SerializeField] private GameObject DefaultModel;
     [SerializeField] private GameObject GuardModel;
+
+    // ガード中に向き変えるための変数
+    private Vector3 vStartPos = Vector3.zero;
+    private Vector3 vCurrentForce = Vector3.zero;
 
     // Start is called before the first frame update
     void Start()
@@ -62,13 +70,6 @@ public class GuardMode : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //<<<<<<< HEAD
-        // ハードモードじゃない
-        //=======
-        Debug.Log("バースト回数:" + fStockBurst);
-
-        // ハードモードじゃないならゲージ回復
-        //>>>>>>> f691fcfffdd2bac8e0e6608715070ea534b60237
         if (!state.IsHard)
         {
             // ゲージ回復
@@ -79,10 +80,41 @@ public class GuardMode : MonoBehaviour
         // ハードモードなら
         if (state.IsHard)
         {
+            // キーボード
+            if(!bGuardStart)
+            {
+                vStartPos = GetMousePosition();
+                bGuardStart = true;
+            }
+            // パッド
+            float x = Input.GetAxis("Horizontal");
+            float y = Input.GetAxis("Vertical");
+
+            if (Mathf.Abs(x) >= 0.5f || Mathf.Abs(y) >= 0.5f)
+            {
+                // 入力方向を逆にして受け取る
+                vCurrentForce = new Vector3(-x * 1000, 0, -y * 1000);
+
+                // 動く方向を見る
+                transform.rotation = Quaternion.LookRotation(vCurrentForce);
+            }
+
+
             // ゲージ消費
             SubtractGauge();
             DefaultModel.SetActive(false);
             GuardModel.SetActive(true);
+
+            // 動かしたマウス座標の位置を取得
+            var position = GetMousePosition();
+            // マウスの初期座標と動かした座標の差分を取得
+            vCurrentForce = vStartPos - position;
+
+            // 動く方向を見る
+            if (vCurrentForce != new Vector3(0, 0, 0))
+            {
+                transform.rotation = Quaternion.LookRotation(vCurrentForce);
+            }
         }
         // バーストモードなら
         if (state.IsBurst)
@@ -94,21 +126,23 @@ public class GuardMode : MonoBehaviour
             burst.Explode(fStockBurst);
             // 瞬間的に力を加えてはじく
             rb.AddForce(transform.forward * fStockBurst, ForceMode.Impulse);
+            status.bArmor = true;
+            status.fBreakTime = 0.0f;
             state.GotoNormalState();
-            fStockBurst = 0.0f;
+            fStockBurst = 0;
+            bGuardStart = false;
         }
 
         // ハードモードかつゲージ残量があるなら停止
         if (state.IsHard && status.Stamina > 0)
         {
             stop.DoStop(rb);
-
-            //*応急*
-            effect.StartEffect(2, this.gameObject, 1.0f);
         }
         else
         {
             state.GotoNormalState();
+            state.bGuard = false;
+            bGuardStart = false;
         }
     }
 
@@ -135,6 +169,17 @@ public class GuardMode : MonoBehaviour
 
     public void AddStockExplode(float damage)
     {
-        fStockBurst += damage;
+        //回数制に変更（竹尾）
+        fStockBurst += 1;
+        if(fStockBurst > 6)
+        {
+            fStockBurst = 6;
+        }
     }
+
+    private Vector3 GetMousePosition()
+    {
+        return new Vector3(Input.mousePosition.x, 0, Input.mousePosition.y);
+    }
+
 }

@@ -5,6 +5,10 @@
 //
 // 2022/04/15 author：松野将之 ボスの基底クラス実装
 // 2022/05/02 author：松野将之 死亡関数(Death)からHPを取得可能に
+// 2022/05/02 author：小椋駿   ターゲットマーカー生成追加
+// 2022/05/05 author：竹尾　プレイヤーの速度に対してダメージ出せるように
+// 2022/05/06 　　　　　　　メモ、攻撃関数を追加しアニメーションを起こしたい
+// 2022/05/09               アニメーションと攻撃を仮追加
 //
 //======================================================================
 using System.Collections;
@@ -14,13 +18,45 @@ using UnityEngine.AI;
 
 public class BossBase : MonoBehaviour
 {
-    [SerializeField] private EnemyData enemyData;
+    //0509 追加 **********************************************
+    // アニメーションの種類
+    enum eAnimetion
+    {
+        eDefult,
+        eMove,
+        eAttack,
+    }
+
+    // 攻撃中か
+    public bool bAttack { get; set; }
+
+    // 攻撃頻度
+    private float fAttackCount;
+
+    [Header("攻撃を開始する距離")]
+    [SerializeField, Range(0.0f, 50.0f)] private float fAttackDis = 3.0f;
+
+    [Header("攻撃頻度")]
+    [SerializeField, Range(0.0f, 10.0f)] private float fAttackTime = 3.0f;
+
+    // 攻撃範囲に入ってから、一度目の攻撃か
+    private bool bFirstAttack = false;
+
+    private Rigidbody rb;
+    //********************************************************
+
+    [SerializeField] public EnemyData enemyData;
+    public EnemyData GetEnemyData { get { return enemyData; } }
     public GameObject player { get; set; }
     private NavMeshAgent myAgent;
     private Animator animator;
+    
 
     // HP
-    private int nHp;
+    public int nHp;
+
+    // 速度に対するダメージ補正
+    float fSpeedtoDamage = 0.03f;
 
     //*応急*
     [SerializeField] GameObject Portals;
@@ -32,29 +68,22 @@ public class BossBase : MonoBehaviour
     // ダメージUI
     [SerializeField] private GameObject DamageObj;
 
-    // 効果音
     [Header("死亡時効果音")]
     [SerializeField] private AudioClip DeathSE;
 
-    // エフェクト
     [Header("エフェクトシステム")]
     [SerializeField] EnemyEffect effect;
 
+    [Header("敵マーカー")]
+    [SerializeField] Canvas Marker;
+
     public EnemyEffect GetEffect { get { return effect; } }
 
-    // ボスの前面に当たり判定用意
-    GameObject FrontCube;
 
-    // 突進中か
-    bool bRush = false;
-    float fRushTime = 1.0f;
-    float fRushCount = 0.0f;
-
-    bool bVisible = false;
 
     void Start()
     {
-        player = GameObject.Find("Player");
+        player = GameObject.FindWithTag("Player");
 
         nHp = enemyData.BossHp + (enemyData.nLevel * enemyData.nUpHP);
 
@@ -62,22 +91,35 @@ public class BossBase : MonoBehaviour
         myAgent = GetComponent<NavMeshAgent>();
         myAgent.speed = enemyData.fSpeed;
 
-        // その他初期化
+        // アニメーター初期化
         animator = GetComponent<Animator>();
 
-        // ダメージ処理
-        BossRush rush = gameObject.GetComponentInChildren<BossRush>();
-        rush.SetPlayer(player);
-        rush.SetEnemy(gameObject);
+        // 敵ターゲットマーカー生成
+        Marker = Instantiate(Marker, Vector3.zero, Quaternion.identity);
+
+        // ボス情報をセット
+        Marker.GetComponentInChildren<TargetMarker>().target = gameObject.transform;
+
+        //0509 追加 **********************************************
+        rb = this.gameObject.GetComponent<Rigidbody>();
+        //********************************************************
 
     }
+
+
 
     void Update()
     {
         Move();
         Death();
 
+        // 0509 追加 **********************************************
+        Burst();
+        //********************************************************
+
     }
+
+
 
     // 死亡
     public int Death()
@@ -95,6 +137,9 @@ public class BossBase : MonoBehaviour
                 bPortal = true;
             }
 
+            // ターゲットマーカー消滅
+            Destroy(Marker);
+
             // 全て消滅
             Destroy(this.gameObject);
 
@@ -102,6 +147,8 @@ public class BossBase : MonoBehaviour
         }
         return nHp;
     }
+
+
 
     // 移動
     public void Move()
@@ -114,56 +161,90 @@ public class BossBase : MonoBehaviour
         Quaternion targetRotation = Quaternion.LookRotation(targetDir);
         transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 120f * Time.deltaTime);
 
-        // プレイヤーを追いかける（一定秒数ごとに敵めがけて移動）
-        if (!bRush)
-        {
-            // 現在のプレイヤーの位置を目指す
-            myAgent.SetDestination(player.transform.position);
-
-            // 初期化
-            bRush = true;
-            fRushCount = fRushTime;
-        }
-
-        // 移動のカウント処理
-        fRushCount -= Time.deltaTime;
-        if (fRushCount < 0.0f)
-        {
-            bRush = false;
-        }
+        // 現在のプレイヤーの位置を目指す
+        myAgent.SetDestination(player.transform.position);
 
         // 過去座標を更新
         vOldPos = gameObject.transform.position;
+
+        // プレイヤーとの距離計算
+        Vector3 vDiffPos = this.transform.position - player.transform.position;
+
+
+        // 0509 追加 **********************************************
+        // 敵との距離が一定以下なら攻撃処理
+        if ((vDiffPos.x <= fAttackDis && vDiffPos.x >= -fAttackDis) && (vDiffPos.z <= fAttackDis && vDiffPos.z >= -fAttackDis))
+        {
+            EnemyAttack();
+        }
+        // 攻撃終了時動き出す
+        else if (myAgent.speed == 0.0f && !bAttack)
+        {
+            // スピードの再設定
+            myAgent.speed = enemyData.fSpeed;
+        }
+        //********************************************************
     }
 
-    // プレイヤーとの接触時
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    // プレイヤーとの衝突時ダメージ
-    //    if (other.CompareTag("Player"))
-    //    {
-    //        // ダメージ処理
-    //        Damege();
-    //    }
-    //}
-
-    private void OnCollisionEnter(Collision other)
+    //プレイヤーとの接触時(IsTrigger)
+    private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        // プレイヤーとの衝突時ダメージ
+        if (other.CompareTag("Player"))
         {
             // ダメージ処理
             Damege();
         }
     }
 
+
+    // 0509 追加 **********************************************
+    //----------------------------
+    // 攻撃
+    //----------------------------
+    private void EnemyAttack()
+    {
+        // 動きを止める
+        myAgent.speed = 0.0f;
+        myAgent.velocity = Vector3.zero;
+
+        // 攻撃開始か判定 or 攻撃範囲に入ってから、最初の攻撃の時
+        if (IsAttack() || !bFirstAttack)
+        {
+            // 攻撃モーション
+            animator.SetInteger("Parameter", (int)eAnimetion.eAttack);
+
+            bFirstAttack = true;
+        }
+    }
+
+
+
+    //----------------------------
+    // 攻撃開始か
+    //----------------------------
+    private bool IsAttack()
+    {
+        fAttackCount -= Time.deltaTime;
+
+        // 攻撃開始
+        if (fAttackCount < 0.0f)
+        {
+            fAttackCount = fAttackTime;
+            return true;
+        }
+        return false;
+    }
+
     // ダメージの処理
     public void Damege()
     {
         // ダメージ処理
-        nHp -= player.GetComponent<PlayerStatus>().Attack;
+        int n = (int)((player.GetComponent<PlayerStatus>().Attack * (int)player.GetComponent<Rigidbody>().velocity.magnitude) * fSpeedtoDamage);
+        nHp -= n;
 
         // ダメージ表記
-        ViewDamage(player.GetComponent<PlayerStatus>().Attack);
+        ViewDamage(n);
     }
 
     // ダメージ表記
@@ -175,5 +256,24 @@ public class BossBase : MonoBehaviour
 
         // 少しずらした位置に生成(z + 1.0f)
         text.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + 1.0f);
+    }
+    //********************************************************
+
+    //----------------------------
+    // バーストをくらったとき
+    //----------------------------
+    private void Burst()
+    {
+        // 物理演算がONの時（バースト時に物理演算がONになる）
+        if (!rb.isKinematic)
+        {
+
+            rb.isKinematic = true;
+
+
+
+
+        }
+        
     }
 }

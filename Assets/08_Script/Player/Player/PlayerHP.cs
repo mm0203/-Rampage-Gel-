@@ -36,32 +36,21 @@ public class PlayerHP : MonoBehaviour
     public void OnDamage(int damage)
     {
         // 0以下なら死んでるためリターン
-        if (status.HP <= 0)
-        {
-            state.GotoDieState();
-            return;
-        }
+        if (state.IsDie) return;
+        if (status.bArmor) return;
         // ハードモードなら無効
         if (state.IsHard)
         {
             //*応急*
             effect.StartEffect(6, this.gameObject, 0.5f);
-
             // damageをストックする
             this.GetComponent<GuardMode>().AddStockExplode(status.BurstStock);
             return;
         }
-        if (state.IsArmor) return;
-
-        //*応急*
-        else
-        {
-            effect.StartEffect(8, this.gameObject, 0.5f);
-        }
-        //******
 
         // ダメージを与える
         status.HP -= damage;
+        effect.StartEffect(8, this.gameObject, 0.5f);
         if (status.HP <= 0)
         {
             state.GotoDieState();

@@ -22,37 +22,135 @@ public class BGMPlayer : MonoBehaviour
     public AudioSource EnvSound_L;
     public AudioSource EnvSound_R;
 
+    BossDirection BossDirection = null;
+
 
     private void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
-       
+
+        // 現在シーン
+        //Scene scene = SceneManager.GetSceneByName("Stage1-1");
+        //SceneManager.SetActiveScene(scene);
+
+    }
+
+    private void Start()
+    {
+        // BossDirectionを読み込む
+        BossDirection = this.gameObject.GetComponent<BossDirection>();
+
+        // ステージの切り替えを検知する為、「activeSceneChanged」にこの関数を入れる
+        SceneManager.activeSceneChanged += ActiveSceneChanged;
+
+        ChangeStageBGM();
+
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.U))
-        {
-            Stage1();
-        }
-
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            SceneManager.LoadScene("Stage2");
-        }
-
         
     }
 
+    // 特定シーンの切り替えを検知しBGMを変更 *******************
+    void ChangeStageBGM()
+    {
+        switch (SceneManager.GetActiveScene().name)
+        {
+            case "Stage1-1":
+                Stage1();
+                break;
+            case "Stage1-5":
+                BossDirection.StartDirection(1);
+                break;
+
+            case "Stage2-1":
+                Stage2();
+                break;
+            case "Stage2-5":
+                BossDirection.StartDirection(2);
+                break;
+
+            case "Stage3-1":
+                Stage3();
+                break;
+            case "Stage3-5":
+                BossDirection.StartDirection(3);
+                break;
+
+            case "Stage4-1":
+                Stage4();
+                break;
+            case "Stage4-5":
+                BossDirection.StartDirection(4);
+                break;
+
+            case "Stage5-1":
+                Stage5();
+                break;
+            case "Stage5-5":
+                BossDirection.StartDirection(5);
+                break;
+
+            case "Stage6-1":
+                Stage6();
+                break;
+            case "Stage6-5":
+                BossDirection.StartDirection(6);
+                break;
+
+            case "Stage7-1":
+                Stage7();
+                break;
+            case "Stage7-5":
+                BossDirection.StartDirection(7);
+                break;
+
+            default:
+                Debug.Log("Continue BGM");
+                break;
+        }
+    }
+
+    // シーンの切り替えを検知 **********************************
+    void ActiveSceneChanged(Scene thisScene, Scene nextScene)
+    {
+        ChangeStageBGM();
+    }
+    //**********************************************************
+
+    // BGM停止 *************************************************
+    public void StopBGM()
+    {
+        Intro.clip = EnvSound_L.clip;
+        Intro.Play();
+        Loop.Stop();
+        //EnvSound_L.Stop();
+        //EnvSound_R.Stop();
+    }
+    //**********************************************************
+
+    
+
+    // BGM再開 *************************************************
+    public void ReStartBGM()
+    {
+        Intro.Play();
+        Loop.Play();
+        //EnvSound_L.Play();
+        //EnvSound_R.Play();
+    }
+    //**********************************************************
+
     // Planet1 *************************************************
-    void Stage1()
+    public void Stage1()
     {
         int num = 0;
         StartIntro(SoundData.StageBGMSoundList[num], num);
         PlayEnvSound(SoundData.EnvSoundList[num]);
     }
 
-    void Stage1_Boss()
+    public void Stage1_Boss()
     {
         int num = 0;
         StartIntro_Boss(SoundData.BossBGMSoundList[num], num);
@@ -60,14 +158,14 @@ public class BGMPlayer : MonoBehaviour
     //**********************************************************
 
     // Planet2 *************************************************
-    void Stage2()
+    public void Stage2()
     {
         int num = 2;
         StartIntro(SoundData.StageBGMSoundList[num], num);
         PlayEnvSound(SoundData.EnvSoundList[num / 2]);
     }
 
-    void Stage2_Boss()
+    public void Stage2_Boss()
     {
         int num = 2;
         StartIntro_Boss(SoundData.BossBGMSoundList[num], num);
@@ -75,14 +173,14 @@ public class BGMPlayer : MonoBehaviour
     //**********************************************************
 
     // Planet3 *************************************************
-    void Stage3()
+    public void Stage3()
     {
         int num = 4;
         StartIntro(SoundData.StageBGMSoundList[num], num);
         PlayEnvSound(SoundData.EnvSoundList[num / 2]);
     }
 
-    void Stage3_Boss()
+    public void Stage3_Boss()
     {
         int num = 4;
         StartIntro_Boss(SoundData.BossBGMSoundList[num], num);
@@ -90,14 +188,14 @@ public class BGMPlayer : MonoBehaviour
     //**********************************************************
 
     // Planet4 *************************************************
-    void Stage4()
+    public void Stage4()
     {
         int num = 6;
         StartIntro(SoundData.StageBGMSoundList[num], num);
         PlayEnvSound(SoundData.EnvSoundList[num / 2]);
     }
 
-    void Stage4_Boss()
+    public void Stage4_Boss()
     {
         int num = 6;
         StartIntro_Boss(SoundData.BossBGMSoundList[num], num);
@@ -105,14 +203,14 @@ public class BGMPlayer : MonoBehaviour
     //**********************************************************
 
     // Planet5 *************************************************
-    void Stage5()
+    public void Stage5()
     {
         int num = 8;
         StartIntro(SoundData.StageBGMSoundList[num], num);
         PlayEnvSound(SoundData.EnvSoundList[num / 2]);
     }
 
-    void Stage5_Boss()
+    public void Stage5_Boss()
     {
         int num = 8;
         StartIntro_Boss(SoundData.BossBGMSoundList[num], num);
@@ -121,14 +219,14 @@ public class BGMPlayer : MonoBehaviour
 
 
     // Planet6 *************************************************
-    void Stage6()
+    public void Stage6()
     {
         int num = 10;
         StartIntro(SoundData.StageBGMSoundList[num], num);
         PlayEnvSound(SoundData.EnvSoundList[num / 2]);
     }
 
-    void Stage6_Boss()
+    public void Stage6_Boss()
     {
         int num = 10;
         StartIntro_Boss(SoundData.BossBGMSoundList[num], num);
@@ -136,14 +234,14 @@ public class BGMPlayer : MonoBehaviour
     //**********************************************************
 
     // Planet7 *************************************************
-    void Stage7()
+    public void Stage7()
     {
         int num = 12;
         StartIntro(SoundData.StageBGMSoundList[num], num);
         PlayEnvSound(SoundData.EnvSoundList[num / 2]);
     }
 
-    void Stage7_Boss()
+    public void Stage7_Boss()
     {
         int num = 12;
         StartIntro_Boss(SoundData.BossBGMSoundList[num], num);
