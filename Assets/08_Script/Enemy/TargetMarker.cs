@@ -49,7 +49,7 @@ public class TargetMarker : MonoBehaviour
         float d = Mathf.Max(Mathf.Abs(pos.x / (center.x - halfSize.x)),Mathf.Abs(pos.y / (center.y - halfSize.y)));
 
         // ターゲットのスクリーン座標が画面外なら、画面端になるよう調整する
-        bool isOffscreen = (pos.z < 0f || d > 1f);
+        bool isOffscreen = (pos.z < 0.0f || d > 1.0f);
         if (isOffscreen)
         {
             pos.x /= d;

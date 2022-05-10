@@ -10,9 +10,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyEffect : MonoBehaviour
+public class EnemyEffectSystem : MonoBehaviour
 {
-    [Header("エフェクト")][SerializeField] List<GameObject> EffectList;
+    [Header("エフェクトデータ")]
+    [SerializeField] EnemyEffectData EffectData;
+
+    // エフェクトリスト
+    List<GameObject> EffectList;
+
+    private void Start()
+    {
+        // エフェクトリスト取得
+        EffectList = EffectData.GetEffectList;
+    }
 
     public enum eEffect
     {

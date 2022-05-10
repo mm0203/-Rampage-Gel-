@@ -43,8 +43,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 638df952c2657074d806adac1483a4d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EffectList:
-  - {fileID: 7459329192734169272, guid: 6775aa08484add849ab79e830a0866f9, type: 3}
-  - {fileID: 2365966739339037635, guid: e9f237f95fcd89d458bac918b2bdcb92, type: 3}
-  - {fileID: 3197226220344567370, guid: c5448b5fd3a1b414caeb303693b9dedd, type: 3}
-  - {fileID: 471469745905693378, guid: 4e3e6b117f8d69a49a8722151d0914e9, type: 3}
+  EffectData: {fileID: 11400000, guid: 46c0fc7985dda7742bd83f523f8f502e, type: 2}
