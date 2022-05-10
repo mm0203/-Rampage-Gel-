@@ -7,6 +7,52 @@ EditorUserSettings:
   m_ConfigSettings:
     RecentlyUsedScenePath-0:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+      value: 224247031146460b5a313f21152d5a0359231d393e1b2535232c5326ece92021
+      flags: 0
+    RecentlyUsedScenePath-1:
+<<<<<<< HEAD
+      value: 224247031146460b5a313f21152d5a0359231927393a27032e2c1336acf53a31f6fe
+      flags: 0
+    RecentlyUsedScenePath-2:
+      value: 224247031146460b5a313f21152d5a0359240c2b2b2d690021281336f6b17b0bf6e631ecb6742a323016f6
+      flags: 0
+    RecentlyUsedScenePath-3:
+      value: 224247031146460b5a313f21152d5a0359231921292715332827187df7ee3d2cfb
+      flags: 0
+    RecentlyUsedScenePath-4:
+      value: 224247031146460b5a313f21152d5a035923113e202d12353e3d5326ece92021
+=======
+      value: 224247031146460b5a313f21152d5a035938160d2d25237f1920093fe7ae2136ebf32f
+      flags: 0
+    RecentlyUsedScenePath-2:
+      value: 22424703114646680e0b0227036c7017030519192f2d2835633c133af6f9
+      flags: 0
+    RecentlyUsedScenePath-3:
+      value: 224247031146460b5a313f21152d5a0359381f3f3e2915332827187df7ee3d2cfb
+      flags: 0
+    RecentlyUsedScenePath-4:
+      value: 224247031146460b5a313f21152d5a0359231921292715332827187df7ee3d2cfb
+>>>>>>> 30c008e84837b509218060c1fb67ebcf3bda0e3f
+      flags: 0
+    RecentlyUsedScenePath-5:
+      value: 224247031146460b5a313f21152d5a035938160d2d25237f1d251c3de7f46577d1f337eee2687129370bfb25
+      flags: 0
+    RecentlyUsedScenePath-6:
+<<<<<<< HEAD
+      value: 224247031146460b5a313f21152d5a03593f193e2d2323032e2c1336acf53a31f6fe
+      flags: 0
+    RecentlyUsedScenePath-7:
+      value: 224247031146460b5a313f21152d5a03593a193e3f3d283f1e2a183de7ae2136ebf32f
+      flags: 0
+    RecentlyUsedScenePath-8:
+      value: 224247031146460b5a313f21152d5a0359381f3f3e2915332827187df7ee3d2cfb
+=======
+      value: 224247031146460b5a313f21152d5a035938160d2d25237f1d251c3de7f46577d1f337eee2697129370bfb25
+=======
+>>>>>>> main
       value: 224247031146460b5a313f21152d5a035923113e202d12353e3d5326ece92021
       flags: 0
     RecentlyUsedScenePath-1:
@@ -44,11 +90,41 @@ EditorUserSettings:
       flags: 0
     RecentlyUsedScenePath-6:
       value: 224247031146460b5a313f21152d5a035938160d2d25237f1920093fe7ae2136ebf32f
+>>>>>>> 06f72ed36d2313d0114fc962dc77ebd403e393de
       flags: 0
     RecentlyUsedScenePath-7:
       value: 224247031146460b5a313f21152d5a0359381f3f3e293431633c133af6f9
       flags: 0
     RecentlyUsedScenePath-8:
+<<<<<<< HEAD
+      value: 224247031146460b5a313f21152d5a035938160d2d25237f1d251c3de7f46577d1f337eee26f7129370bfb25
+>>>>>>> 30c008e84837b509218060c1fb67ebcf3bda0e3f
+      flags: 0
+    RecentlyUsedScenePath-9:
+      value: 224247031146460b5a313f21152d5a035938160d2d25237f1d251c3de7f46577d1f337eee26b7129370bfb25
+=======
+      value: 224247031146460b5a313f21152d5a0359231927393a27032e2c1336acf53a31f6fe
+      flags: 0
+    RecentlyUsedScenePath-1:
+      value: 224247031146460b5a313f21152d5a03593a193e3f3d283f1e2a183de7ae2136ebf32f
+      flags: 0
+    RecentlyUsedScenePath-2:
+      value: 224247031146460b5a313f21152d5a0359381f3f3e2915332827187df7ee3d2cfb
+      flags: 0
+    RecentlyUsedScenePath-3:
+      value: 224247031146460b5a313f21152d5a03591a15192f2d2835633c133af6f9
+      flags: 0
+    RecentlyUsedScenePath-4:
+      value: 224247031146460b5a313f21152d5a0359231921292715332827187df7ee3d2cfb
+      flags: 0
+    RecentlyUsedScenePath-5:
+      value: 224247031146460b5a313f21152d5a0359301927291b2535232c5326ece92021
+      flags: 0
+    RecentlyUsedScenePath-6:
+      value: 224247031146460b5a313f21152d5a03593f193e2d2323032e2c1336acf53a31f6fe
+>>>>>>> 1d895ff4d476edb126b553d2a4728e7241600ef8
+      flags: 0
+=======
       value: 224247031146460b5a313f21152d5a0359381f3f3e2915332827187df7ee3d2cfb
       flags: 0
     RecentlyUsedScenePath-9:
@@ -64,6 +140,7 @@ EditorUserSettings:
       value: 224247031146460b5a313f21152d5a0359231927393a27032e2c1336acf53a31f6fe
 >>>>>>> bf0912663b81f6adf93f6dee0953b774624af598
       flags: 0
+>>>>>>> 06f72ed36d2313d0114fc962dc77ebd403e393de
     vcSharedLogLevel:
       value: 0d5e400f0650
       flags: 0

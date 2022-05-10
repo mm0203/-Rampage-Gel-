@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 885217041960179940}
   - component: {fileID: 8584115748193603422}
   - component: {fileID: 6254754792247365295}
-  - component: {fileID: 169498486074006155}
+  - component: {fileID: -5372976858247304210}
   m_Layer: 0
   m_Name: Stage4_Rock
   m_TagString: Untagged
@@ -82,8 +82,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &169498486074006155
-MeshCollider:
+--- !u!136 &-5372976858247304210
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -92,7 +92,7 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -1138965167089476267, guid: ba0f9b3d54f9cba4492f05a160a3dda8, type: 3}
+  m_Radius: 0.38007355
+  m_Height: 3
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.000000029802322, z: -0.000000014901161}
