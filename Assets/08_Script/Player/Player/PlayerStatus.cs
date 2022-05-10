@@ -34,6 +34,9 @@ public class PlayerStatus : MonoBehaviour
     private float fBurstPower = 5;
     private float fBurstRadius = 1;
 
+    // ガードペナルティ時間
+    public float fGuardPenalty { get; set; } = 1.0f;
+
     // レベルアップ時のステータス上昇値
     private int nUpHP = 10;
     private int nUpStamina = 10;

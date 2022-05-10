@@ -36,6 +36,8 @@ public class PlayerState : MonoBehaviour
     bool bLflg = false;
     bool bRflg = false;
 
+    GuardMode guardMode;
+
     // 硬化フラグ
     public bool bGuard = false;
 
@@ -49,6 +51,7 @@ public class PlayerState : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        guardMode = GetComponent<GuardMode>();
     }
 
     // Update is called once per frame
@@ -60,7 +63,10 @@ public class PlayerState : MonoBehaviour
         if (IsDoubleTrigger(Input.GetMouseButtonDown(0), Input.GetMouseButtonDown(1)) ||
         Input.GetAxis("LTrigger") >= 0.3f && Input.GetAxis("RTrigger") >= 0.3f)
         {
-            GotoHardState();
+            if (!guardMode.bGuardPenalty)
+            {
+                GotoHardState();
+            }
         }
 
         // バースト移行

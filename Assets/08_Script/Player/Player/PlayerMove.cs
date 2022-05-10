@@ -72,9 +72,12 @@ public class PlayerMove : MonoBehaviour
         IsState(!state.IsNormal);
         // •ûŒü“]Š·
         LookToMove(rb.velocity);
-        // ˆÚ“®
-        PadMove();
-        KeyBoardMove();
+        if(state.IsNormal)
+        {
+            // ˆÚ“®
+            PadMove();
+            KeyBoardMove();
+        }
 
         MoveBrake();
 
@@ -94,7 +97,6 @@ public class PlayerMove : MonoBehaviour
         if (state)
         {
             fStockPower = 0;
-            Direction.enabled = false;
             effectmove.SetActive(false);
             return;
         }

@@ -30,6 +30,10 @@ public class PlayerHP : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.V))
+        {
+            OnDamage(1);
+        }
     }
 
     // ダメージコールバック関数
