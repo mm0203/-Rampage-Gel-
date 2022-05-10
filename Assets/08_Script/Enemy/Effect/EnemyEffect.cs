@@ -10,19 +10,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyEffectSystem : MonoBehaviour
+public class EnemyEffect : MonoBehaviour
 {
     [Header("エフェクトデータ")]
     [SerializeField] EnemyEffectData EffectData;
 
     // エフェクトリスト
     List<GameObject> EffectList;
-
-    private void Start()
-    {
-        // エフェクトリスト取得
-        EffectList = EffectData.GetEffectList;
-    }
 
     public enum eEffect
     {
@@ -40,7 +34,7 @@ public class EnemyEffectSystem : MonoBehaviour
     //--------------------------------------------------
     public GameObject CreateEffect(eEffect num, GameObject obj, float time = 5.0f)
     {
-        GameObject Effect = Instantiate(EffectList[(int)num], obj.transform.position, obj.transform.rotation);
+        GameObject Effect = Instantiate(EffectData.GetEffectList[(int)num], obj.transform.position, obj.transform.rotation);
         Destroy(Effect, time);
 
         return Effect;
@@ -51,7 +45,7 @@ public class EnemyEffectSystem : MonoBehaviour
     //--------------------------------
     public GameObject CreateEffect(eEffect num, Vector3 pos ,GameObject obj, float time = 5.0f)
     {
-        GameObject Effect = Instantiate(EffectList[(int)num], pos, obj.transform.rotation);
+        GameObject Effect = Instantiate(EffectData.GetEffectList[(int)num], pos, obj.transform.rotation);
         Destroy(Effect, time);
 
         return Effect;

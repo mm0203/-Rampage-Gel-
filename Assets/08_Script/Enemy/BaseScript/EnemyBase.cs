@@ -65,7 +65,7 @@ public class EnemyBase : MonoBehaviour
     [SerializeField] private AudioClip DeathSE;
 
     [Header("UŒ‚‚ğŠJn‚·‚é‹——£")]
-    [SerializeField, Range(0.0f, 50.0f)] private float fAttackDis = 3.0f;
+    [SerializeField, Range(0.0f, 10.0f)] private float fAttackDis = 3.0f;
 
     [Header("UŒ‚•p“x")]
     [SerializeField, Range(0.0f, 10.0f)] private float fAttackTime = 3.0f;
