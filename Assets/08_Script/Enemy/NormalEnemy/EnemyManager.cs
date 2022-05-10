@@ -64,22 +64,13 @@ public class EnemyManager : MonoBehaviour
         player = GameObject.Find("Player");
         fLevelUpCount = fLevelUpTime;
 
-        //// 現在シーンの取得
-        //Scene scene = SceneManager.GetActiveScene();
+        // 敵初期化
+        InitEnemy();
 
-        //// 現在シーンのビルド番号取得
-        //int nSceneNo = scene.buildIndex;
+        // シーン切替検知
+        SceneManager.activeSceneChanged += SceneChanged;
 
-        //// 敵の最大数をGenerateから取得   *TODO* Planet1しか対応していないため変更必須
-        //vEnemyNum.y = GenerateEnemyData.Planet1[nSceneNo].MaxEnemy;
-
-        //// 出現する敵リスト取得   *TODO* Planet1しか対応していないため変更必須
-        //EnemyList = GenerateEnemyData.Planet1[nSceneNo].EnemyList;
-
-        // 敵の最大数保存
-        nTmpMaxNum = vEnemyNum.y;
-
-        //DontDestroyOnLoad(this.gameObject);
+        DontDestroyOnLoad(this.gameObject);
     }
 
     //---------------
@@ -87,6 +78,7 @@ public class EnemyManager : MonoBehaviour
     //---------------
     void Update()
     {
+
         // 敵の最大数の増減
         ChangeNum();
 
@@ -167,5 +159,37 @@ public class EnemyManager : MonoBehaviour
 
         // 敵の最大数の増減
         vEnemyNum.y = (int)Mathf.Abs(nTmpMaxNum * Mathf.Sin(fChangeNumCount));
+    }
+
+
+    //-----------------------
+    // シーンごとに初期化
+    //-----------------------
+    private void InitEnemy()
+    {
+        //// 現在シーンの取得
+        //Scene scene = SceneManager.GetActiveScene();
+
+        //// 現在シーンのビルド番号取得
+        //int nSceneNo = scene.buildIndex;
+
+        //Debug.Log(nSceneNo);
+
+        //// 敵の最大数をGenerateから取得   *TODO* Planet1しか対応していないため変更必須
+        //vEnemyNum.y = GenerateEnemyData.Planet1[nSceneNo].MaxEnemy;
+
+        //// 出現する敵リスト取得   *TODO* Planet1しか対応していないため変更必須
+        //EnemyList = GenerateEnemyData.Planet1[nSceneNo].EnemyList;
+
+        // 敵の最大数保存
+        nTmpMaxNum = vEnemyNum.y;
+    }
+
+    //-----------------------
+    // シーン切替時、初期化処理
+    //-----------------------
+    void SceneChanged(Scene thisScene, Scene nextScene)
+    {
+        InitEnemy();
     }
 }
