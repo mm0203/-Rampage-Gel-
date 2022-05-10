@@ -70,11 +70,13 @@ public class EnemyManager : MonoBehaviour
         //// 現在シーンのビルド番号取得
         //int nSceneNo = scene.buildIndex;
 
+        //Debug.Log(nSceneNo);
+
         //// 敵の最大数をGenerateから取得   *TODO* Planet1しか対応していないため変更必須
-        //vEnemyNum.y = GenerateEnemyData.Planet1[nSceneNo].MaxEnemy;
+        //vEnemyNum.y = GenerateEnemyData.Planet1[nSceneNo - 1].MaxEnemy;
 
         //// 出現する敵リスト取得   *TODO* Planet1しか対応していないため変更必須
-        //EnemyList = GenerateEnemyData.Planet1[nSceneNo].EnemyList;
+        //EnemyList = GenerateEnemyData.Planet1[nSceneNo - 1].EnemyList;
 
         // 敵の最大数保存
         nTmpMaxNum = vEnemyNum.y;

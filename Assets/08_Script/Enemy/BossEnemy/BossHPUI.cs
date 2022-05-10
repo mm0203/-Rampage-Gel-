@@ -48,5 +48,10 @@ public class BossHPUI : MonoBehaviour
 
         // ÉQÅ[ÉWå∏è≠
         slider.value = fNowHp / fMaxHP;
+
+        if(Input.GetKeyDown(KeyCode.I))
+        {
+            Boss.GetComponent<BossBase>().nHp-=10;
+        }
     }
 }

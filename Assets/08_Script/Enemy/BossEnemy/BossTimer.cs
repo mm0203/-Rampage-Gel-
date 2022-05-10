@@ -6,6 +6,7 @@
 // 2022/03/24 author：小椋駿 製作開始　ボス出現タイマー処理追加。
 //                           テキストの反映、ゲージ減少。
 // 2022/04/04 author：小椋駿 中ボス用に少し改良
+// 2022/05/10 author：小椋駿 ボスHPUI用に改良
 //
 //======================================================================
 
@@ -55,60 +56,42 @@ public class BossTimer : MonoBehaviour
 
     void Update()
     {
-        
-
         // 0秒になったら
         if(fTimer < 0.0f)
         {
             fTimer = -1.0f;
 
-            if(bSetBoss == false)
-            {
-                // ボスの出現処理(座標は適当)
-                // プレイヤーの上方向に出現
-                Vector3 pos = new Vector3(Player.transform.position.x, Player.transform.position.y, Player.transform.position.z + 20.0f);
-                Boss = Instantiate(Boss, pos, Boss.transform.rotation);
+           // ボスの出現処理(座標は適当)
+           // プレイヤーの上方向に出現
+           Vector3 pos = new Vector3(Player.transform.position.x, Player.transform.position.y, Player.transform.position.z + 20.0f);
+           Boss = Instantiate(Boss, pos, Boss.transform.rotation);
 
-                // 中ボスにプレイヤー情報セット
-                if (Boss.GetComponent<BossBase>()) { Player = Boss.GetComponent<BossBase>().player; }
+            // 中ボスにプレイヤー情報セット
+            if (Boss.GetComponent<BossBase>()) { Player = Boss.GetComponent<BossBase>().player; }
 
-                // スライダーをHP用に
-                fMaxHP = fNowHp = Boss.GetComponent<BossBase>().nHp;
+            // HPUI生成
+            bossHPUI = Instantiate(bossHPUI, new Vector3(0.0f,0.0f,0.0f), transform.rotation);
 
-                bSetBoss = true;
-                
-            }
+            // ボス情報セット
+            bossHPUI.GetComponentInChildren<BossHPUI>().Boss = Boss;
 
-            // なぜか最初だけボスのHPが０なので
-            if(fMaxHP == 0)
-            { fMaxHP = Boss.GetComponent<BossBase>().nHp;
-                
-            }
-
-
-
-            fNowHp = Boss.GetComponent<BossBase>().nHp;
-
-            // ゲージ減少
-            slider.value = fNowHp / fMaxHP;
-            
-            textMesh.text = "";
+            // 消滅
+            Destroy(gameObject);
 
         }
-        else
-        {
-            fTimer -= Time.deltaTime;
+        
+        
+        fTimer -= Time.deltaTime;
 
-            // ゲージ減少
-            slider.value = fTimer / fCount;
+        // ゲージ減少
+        slider.value = fTimer / fCount;
 
-            // 分、秒の計算
-            minute = (int)fTimer / 60;
-            second = (int)fTimer % 60;
+        // 分、秒の計算
+        minute = (int)fTimer / 60;
+        second = (int)fTimer % 60;
 
-            // テキストに反映
-            textMesh.text = minute.ToString("d2") + ":" + second.ToString("d2");
-        }
+        // テキストに反映
+        textMesh.text = minute.ToString("d2") + ":" + second.ToString("d2");
 
         
 
