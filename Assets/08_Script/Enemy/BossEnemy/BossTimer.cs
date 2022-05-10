@@ -70,24 +70,28 @@ public class BossTimer : MonoBehaviour
                 Boss = Instantiate(Boss, pos, Boss.transform.rotation);
 
                 // 中ボスにプレイヤー情報セット
-                if (Boss.GetComponent<BossBase>()) { Player = Boss.GetComponent<BossBase>().player; }
+                if (Boss.GetComponent<EnemyBase>()) { Player = Boss.GetComponent<EnemyBase>().player; }
 
                 // スライダーをHP用に
-                fMaxHP = fNowHp = Boss.GetComponent<BossBase>().nHp;
+                fMaxHP = fNowHp = Boss.GetComponent<EnemyBase>().nHp;
 
                 bSetBoss = true;
                 
             }
+            else if(!(Boss == null))
+            {
+                // なぜか最初だけボスのHPが０なので
+                if (fMaxHP == 0)
+                {
+                    fMaxHP = Boss.GetComponent<EnemyBase>().nHp;
+                }
 
-            // なぜか最初だけボスのHPが０なので
-            if(fMaxHP == 0)
-            { fMaxHP = Boss.GetComponent<BossBase>().nHp;
+                fNowHp = Boss.GetComponent<EnemyBase>().nHp;
                 
             }
 
-
-
-            fNowHp = Boss.GetComponent<BossBase>().nHp;
+            
+            
 
             // ゲージ減少
             slider.value = fNowHp / fMaxHP;

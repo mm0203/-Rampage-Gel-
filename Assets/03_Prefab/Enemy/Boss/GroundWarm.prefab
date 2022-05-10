@@ -13,13 +13,13 @@ GameObject:
   - component: {fileID: 3298727508544821820}
   - component: {fileID: 3298727508544821817}
   - component: {fileID: 8944647305687876598}
-  - component: {fileID: 2408482496719567575}
-  - component: {fileID: 2645006530656392778}
-  - component: {fileID: -9186063581271690245}
+  - component: {fileID: 1300204877532008319}
   - component: {fileID: 6844305377297733746}
+  - component: {fileID: 2408482496719567575}
+  - component: {fileID: 4900907345792386094}
   m_Layer: 0
   m_Name: GroundWarm
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 18
@@ -115,7 +115,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &2408482496719567575
+--- !u!114 &1300204877532008319
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -124,50 +124,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2379597016144334215}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c8c0164ed6f4a24d8d0df115b9b9ef0, type: 3}
+  m_Script: {fileID: 11500000, guid: 78056be96c4ee02459ab5d3bb7a54896, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fAttackTime: 3
-  effect: {fileID: 707058587186697454, guid: d63d43aa85bc2c4469259fbe60af9c97, type: 3}
-  body: {fileID: 8529943048718830661, guid: c291895b6a32f4a439fc57463608ef7f, type: 3}
-  tail: {fileID: 4408414568023588543, guid: 2a946ed9aadeee248acd7d3d12def9c9, type: 3}
-  speed: 10
-  rotSpeed: 1
---- !u!114 &2645006530656392778
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2379597016144334215}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5bf3ff3346495548ab6c9c959d2d2a9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fDistance: 3
-  Circle: {fileID: 1199865174811731554, guid: e635dad1e48884b4b94f8f348ed4abe3, type: 3}
---- !u!114 &-9186063581271690245
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2379597016144334215}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e18d693c62377f544914da7faa7c905b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fAttackDis: 3
-  fAttackTime: 3
-  enemyData: {fileID: 11400000, guid: 4570e7ccf9be7b24e9040c4161085551, type: 2}
-  nHp: 0
-  Portals: {fileID: 2108885355349615795, guid: 3b15cef950eda504dad4e58240b093bd, type: 3}
   DamageObj: {fileID: 1599770427430637572, guid: f281449c9f2cf8045930e932567b2b5e, type: 3}
-  DeathSE: {fileID: 8300000, guid: da24daa9fcff69c4d884496fda891063, type: 3}
-  effect: {fileID: 4654835053005618983, guid: 8ad696e21e4db31429ba8402a66d472b, type: 3}
-  Marker: {fileID: 1745901886875421882, guid: 51a17eb9e33794a4eab9304a26a60304, type: 3}
+  mat: {fileID: 2100000, guid: 0ff5c1c38cc269447af7d7d31345c016, type: 2}
+  fDamageTime: 0.2
 --- !u!114 &6844305377297733746
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -181,6 +143,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   effect: {fileID: 4654835053005618983, guid: 8ad696e21e4db31429ba8402a66d472b, type: 3}
+--- !u!114 &2408482496719567575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2379597016144334215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c8c0164ed6f4a24d8d0df115b9b9ef0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fAttackTime: 5.46
+  effect: {fileID: 707058587186697454, guid: d63d43aa85bc2c4469259fbe60af9c97, type: 3}
+  body: {fileID: 8529943048718830661, guid: c291895b6a32f4a439fc57463608ef7f, type: 3}
+  tail: {fileID: 4408414568023588543, guid: 2a946ed9aadeee248acd7d3d12def9c9, type: 3}
+  speed: 10
+  rotSpeed: 1
+--- !u!114 &4900907345792386094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2379597016144334215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5bf3ff3346495548ab6c9c959d2d2a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fDistance: 3
+  Circle: {fileID: 1567581828387049091, guid: 44b55e868d11eb84e903048b711a6bd2, type: 3}
 --- !u!1 &4534157978803181989
 GameObject:
   m_ObjectHideFlags: 0

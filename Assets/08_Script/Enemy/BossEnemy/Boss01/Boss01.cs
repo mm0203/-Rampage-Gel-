@@ -33,7 +33,7 @@ public class Boss01 : MonoBehaviour
     // プレイヤー
     private GameObject player;
     // ボスの基底クラス
-    private BossBase BossBase;
+    private EnemyBase BossBase;
     // 前フレームの座標
     private Vector3 vOldPos;
 
@@ -71,7 +71,7 @@ public class Boss01 : MonoBehaviour
     void Start()
     {
         player = GameObject.Find("Player");
-        BossBase = GetComponent<BossBase>();
+        BossBase = GetComponent<EnemyBase>();
 
         // 攻撃関連
         bossAttack = GetComponent<BossAttack>();
@@ -106,7 +106,7 @@ public class Boss01 : MonoBehaviour
         Aim_at_Player();
 
         // ボスが死んだら子オブジェクトも破壊
-        if (BossBase.Death() <= 0)
+        if (BossBase.nHp <= 0)
             DestroyObject();
     }
 
