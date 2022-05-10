@@ -12,4 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 812eae3fc0d143346b87c0092dc43f82, type: 3}
   m_Name: EnemyEffectData
   m_EditorClassIdentifier: 
-  EffectList: []
+  EffectList:
+  - {fileID: 7459329192734169272, guid: 6775aa08484add849ab79e830a0866f9, type: 3}
+  - {fileID: 2365966739339037635, guid: e9f237f95fcd89d458bac918b2bdcb92, type: 3}
+  - {fileID: 3197226220344567370, guid: c5448b5fd3a1b414caeb303693b9dedd, type: 3}
+  - {fileID: 9075650012993910734, guid: 888a591b345901445a1682ac1cec37a7, type: 3}
+  - {fileID: 5338500971931117871, guid: 15e34e04fff676440beabafe4d87973e, type: 3}
