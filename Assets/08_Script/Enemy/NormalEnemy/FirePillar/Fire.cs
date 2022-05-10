@@ -29,7 +29,6 @@ public class Fire : MonoBehaviour
     bool bAttackStart = false;
 
     // エフェクト関連
-    EnemyEffect enemyEffect;
     GameObject ObjEffect;
 
     public GameObject player { get; set; }
