@@ -14,11 +14,15 @@ using UnityEngine;
 public class PlayerExp : MonoBehaviour
 {
     PlayerStatus status;
+    ItemManager itemManager;
+    Pause LvupPause;
+
 
     // Start is called before the first frame update
     void Start()
     {
         status = GetComponent<PlayerStatus>();
+        LvupPause = GameObject.Find("Pause").GetComponent<Pause>();
     }
 
     // Update is called once per frame
@@ -43,10 +47,12 @@ public class PlayerExp : MonoBehaviour
     {
         status.Level++;
 
+        LvupPause.SetbLevelPause(true);
+
         // 現在Expを0にする
         status.Exp = 0;
         // 次のレベルアップまでの経験値量を増やす
         status.MaxExp += status.UpExp;
-        status.Attack += status.UpAttack;
+        
     }
 }

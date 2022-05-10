@@ -38,8 +38,6 @@ public class GuardMode : MonoBehaviour
 
     // ƒK[ƒhƒQ[ƒW
     private PlayerStatus status;
-    [SerializeField] private int nRecovery = 2;
-    [SerializeField] private int nCost = 1;
 
     // ”š”­ˆĞ—Í‚ğû”[
     private float fStockBurst = 0.0f;
@@ -176,7 +174,7 @@ public class GuardMode : MonoBehaviour
     private void RecoveryGauge()
     {
         // ƒQ[ƒW—Ê‰ñ•œ
-        status.Stamina += nRecovery;
+        status.Stamina += status.StaminaRecovery;
         if (status.Stamina >= status.MaxStamina)
         {
             status.Stamina = status.MaxStamina;
@@ -186,7 +184,7 @@ public class GuardMode : MonoBehaviour
     // ƒQ[ƒWÁ”ï
     private void SubtractGauge()
     {
-        status.Stamina -= nCost;
+        status.Stamina -= status.StaminaCost;
         if (status.Stamina < 0)
         {
             status.Stamina = 0;

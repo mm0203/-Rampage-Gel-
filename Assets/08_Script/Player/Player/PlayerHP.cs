@@ -25,14 +25,15 @@ public class PlayerHP : MonoBehaviour
     {
         status = GetComponent<PlayerStatus>();
         state = GetComponent<PlayerState>();
+        StartCoroutine("AutoHeal");
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.V))
+        if (Input.GetKeyDown(KeyCode.V))
         {
-            OnDamage(1);
+            OnDamage(10);
         }
     }
 
@@ -58,6 +59,23 @@ public class PlayerHP : MonoBehaviour
         if (status.HP <= 0)
         {
             state.GotoDieState();
+        }
+    }
+
+    IEnumerator AutoHeal()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(1.0f);
+
+            if(status.HP <= status.MaxHP)
+            {
+                if (state.IsDie) yield break;
+                // ‰ñ•œ«(‰ñ•œ—Ê)
+                status.HP += status.UpHP;
+            }
+            //@ŽŸ‚ÌƒtƒŒ[ƒ€‚É”ò‚Î‚·
+            yield return null;
         }
     }
 }
