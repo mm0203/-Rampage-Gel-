@@ -141,7 +141,7 @@ public class Pause : MonoBehaviour
     {
         bPause = b;
     }
-    private void SetbLevelPause(bool b)
+    public void SetbLevelPause(bool b)
     {
         bLevelUpPause = b;
     }

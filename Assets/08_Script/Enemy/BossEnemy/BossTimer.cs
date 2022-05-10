@@ -91,6 +91,13 @@ public class BossTimer : MonoBehaviour
             textMesh.text = "";
 
         }
+        else
+        {
+            
+
+            
+        }
+
 
         fTimer -= Time.deltaTime;
 
@@ -103,9 +110,6 @@ public class BossTimer : MonoBehaviour
 
         // テキストに反映
         textMesh.text = minute.ToString("d2") + ":" + second.ToString("d2");
-
-
-
 
     }
 }

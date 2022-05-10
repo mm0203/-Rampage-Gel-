@@ -25,7 +25,11 @@ MonoBehaviour:
 =======
 >>>>>>> origin/mm
 >>>>>>> mm
+<<<<<<< HEAD
 >>>>>>> 2ab5185bd89fcce9c9642a5fe4380b3a89217646
+=======
+>>>>>>> main
+>>>>>>> bf0912663b81f6adf93f6dee0953b774624af598
 --- !u!21 &2100000
 Material:
   serializedVersion: 6
@@ -135,6 +139,10 @@ Material:
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
   m_BuildTextureStacks: []
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> bf0912663b81f6adf93f6dee0953b774624af598
 --- !u!114 &3848941696186769043
 MonoBehaviour:
   m_ObjectHideFlags: 11
@@ -148,3 +156,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 4
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> main
+>>>>>>> bf0912663b81f6adf93f6dee0953b774624af598

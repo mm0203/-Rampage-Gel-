@@ -35,6 +35,7 @@ public class PlayerMove : MonoBehaviour
 
     private Vector3 vCurrentForce = Vector3.zero; // 発射方向の力   
     private Vector3 vDragStart = Vector3.zero; // ドラッグ開始点
+   
     
     [Header("発射威力")]
     [SerializeField] private float fInitial = 90.0f; // 初速倍率
@@ -81,9 +82,12 @@ public class PlayerMove : MonoBehaviour
         IsState(!state.IsNormal);
         // 方向転換
         LookToMove(rb.velocity);
-        // 移動
-        PadMove();
-        KeyBoardMove();
+        if(state.IsNormal)
+        {
+            // 移動
+            PadMove();
+            KeyBoardMove();
+        }
 
         MoveBrake();
 
@@ -103,7 +107,6 @@ public class PlayerMove : MonoBehaviour
         if (state)
         {
             fStockPower = 0;
-            Direction.enabled = false;
             effectmove.SetActive(false);
             return;
         }
@@ -196,7 +199,7 @@ public class PlayerMove : MonoBehaviour
             if (state.IsNormal) sound.Play_PlayerShotWeek(this.gameObject);
 
             // 瞬間的に力を加えてはじく
-            rb.AddForce(vCurrentForce.normalized * fStockPower * fInitial, ForceMode.Impulse);
+            rb.AddForce(vCurrentForce.normalized * fStockPower * status.Speed, ForceMode.Impulse);
             status.fBreakTime = 0.0f;
             vCurrentForce = Vector3.zero;
             effectmove.SetActive(true);
@@ -251,7 +254,7 @@ public class PlayerMove : MonoBehaviour
             // フラグを下す
             bShot = false;
             // 瞬間的に力を加えてはじく
-            rb.AddForce(vCurrentForce.normalized * fStockPower * fInitial, ForceMode.Impulse);
+            rb.AddForce(vCurrentForce.normalized * fStockPower * status.Speed, ForceMode.Impulse);
             effectmove.SetActive(true);
             // 初期化
             fStockPower = 0;
