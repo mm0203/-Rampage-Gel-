@@ -91,7 +91,7 @@ public class EnemyBase : MonoBehaviour
     void Start()
     {
         // ステータス初期化
-        nHp = enemyData.nHp + (enemyData.nLevel * enemyData.nUpHP) + 10000;
+        nHp = enemyData.nHp + (enemyData.nLevel * enemyData.nUpHP);
         nAttack = enemyData.nAttack + (enemyData.nLevel * enemyData.nUpAttack);
 
         // ナビメッシュ設定
