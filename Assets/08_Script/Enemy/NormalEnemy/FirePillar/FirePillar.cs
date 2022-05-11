@@ -47,6 +47,9 @@ public class FirePillar : MonoBehaviour
 
     private void FirePillarAttack()
     {
+        // プレイヤー取得
+        player = enemyBase.player;
+
         // 当たり判定用キューブ
         cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
 
@@ -56,6 +59,7 @@ public class FirePillar : MonoBehaviour
         // 火柱のサイズ、座標、角度設定
         cube.transform.localScale = vFireSize;
         transform.Rotate(-90.0f,0.0f,0.0f);
+        Debug.Log(player);
         cube.transform.position = player.transform.position;
 
         // 火柱コンポーネント調整

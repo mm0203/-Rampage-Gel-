@@ -47,7 +47,7 @@ public class EnemyBase : MonoBehaviour
 
     // HPと攻撃力
     public float nHp { get; set; }
-    private float nAttack;
+    public int nAttack { get; set; }
 
     // 前フレームの座標
     private Vector3 vOldPos;
@@ -126,6 +126,12 @@ public class EnemyBase : MonoBehaviour
     //----------------------------
     void Update()
     {
+        // なぜか取得できないバグの対策
+        if(player == null)
+        {
+            player = GameObject.FindWithTag("Player");
+        }
+
         Burst();
         Move();
         Death();
@@ -143,16 +149,9 @@ public class EnemyBase : MonoBehaviour
             if(bBoss == true)
             {
                 // ポータル生成
-                if(bPortal == false)
-                {
-                    Instantiate(Portals, this.gameObject.transform.position, Quaternion.identity);
-                    bPortal = true;
-                }
-                
-                
+                bPortal = true;
                 // ターゲットマーカー消滅
-                Destroy(Marker.gameObject);
-
+                Destroy(Marker);
             }
 
             // 経験値処理

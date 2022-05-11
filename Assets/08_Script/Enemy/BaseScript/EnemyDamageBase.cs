@@ -33,8 +33,6 @@ public class EnemyDamageBase : MonoBehaviour
     [SerializeField] private float fDamageTime = 0.2f;
     float fDamageCount;
 
-    [SerializeField] EnemyBase pp;
-
     // 速度に対するダメージ補正
     float fSpeedtoDamage = 0.03f;
 
@@ -126,6 +124,9 @@ public class EnemyDamageBase : MonoBehaviour
         ChangeMaterial();
     }
 
+    //----------------------------
+    // グランドワーム専用
+    //----------------------------
     public void TailDamage()
     {
         int n = (int)((player.GetComponent<PlayerStatus>().Attack * (int)player.GetComponent<Rigidbody>().velocity.magnitude) * fSpeedtoDamage);
