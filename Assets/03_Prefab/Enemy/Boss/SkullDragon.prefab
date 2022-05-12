@@ -1484,7 +1484,7 @@ GameObject:
   - component: {fileID: 8589682909820711295}
   m_Layer: 0
   m_Name: SkullDragon
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

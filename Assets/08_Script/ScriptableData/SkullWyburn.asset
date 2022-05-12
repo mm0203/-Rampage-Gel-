@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: SkullWyburn
   m_EditorClassIdentifier: 
   BossLevel: 1
-  BossHp: 390
+  BossHp: 39
   BossAttack: 25
   BossSpeed: 5
