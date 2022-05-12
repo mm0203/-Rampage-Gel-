@@ -91,8 +91,8 @@ public class EnemyBase : MonoBehaviour
     void Start()
     {
         // ステータス初期化
-        nHp = enemyData.nHp + (enemyData.nLevel * enemyData.nUpHP);
-        nAttack = enemyData.nAttack + (enemyData.nLevel * enemyData.nUpAttack);
+        nHp = enemyData.BossHp + (enemyData.nLevel * (enemyData.BossHp / 10));
+        nAttack = enemyData.BossAttack + (enemyData.nLevel * (enemyData.nUpAttack / 10));
 
         // ナビメッシュ設定
         myAgent = GetComponent<NavMeshAgent>();
@@ -143,6 +143,8 @@ public class EnemyBase : MonoBehaviour
     //----------------------------
     private void Death()
     {
+        Debug.Log(nHp);
+
         // HP0以下で消滅
         if (nHp <= 0)
         {

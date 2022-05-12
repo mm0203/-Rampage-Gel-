@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7ce0b103daf1b1b44b0c46fb9e2efd96, type: 3}
-  m_Name: SkullWyburn
+  m_Name: Boss_Monohorn
   m_EditorClassIdentifier: 
   BossLevel: 1
-  BossHp: 390
-  BossAttack: 25
-  BossSpeed: 5
+  BossHp: 420
+  BossAttack: 45
+  BossSpeed: 9

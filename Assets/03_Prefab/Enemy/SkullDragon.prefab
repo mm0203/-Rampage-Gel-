@@ -747,7 +747,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96707ce0b8aa8cf4aa85d80aae2464dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyData: {fileID: 11400000, guid: 3f0f2e9047b817f47b6be2d955c9435c, type: 2}
+  enemyData: {fileID: 11400000, guid: 0456dfc737e13184caced3741dfef4b2, type: 2}
   DeathSE: {fileID: 8300000, guid: da24daa9fcff69c4d884496fda891063, type: 3}
   fAttackDis: 5
   fAttackTime: 3
