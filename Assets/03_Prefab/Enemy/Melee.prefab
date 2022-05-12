@@ -2328,11 +2328,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96707ce0b8aa8cf4aa85d80aae2464dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyData: {fileID: 11400000, guid: 4570e7ccf9be7b24e9040c4161085551, type: 2}
+  enemyData: {fileID: 11400000, guid: 08cff714359fc894b97454298edbe069, type: 2}
   DeathSE: {fileID: 8300000, guid: da24daa9fcff69c4d884496fda891063, type: 3}
   fAttackDis: 1.3
   fAttackTime: 3
-  mat: {fileID: 0}
+  bBoss: 0
+  bNavOn: 1
+  Marker: {fileID: 0}
+  Portals: {fileID: 0}
 --- !u!114 &6057131830715300600
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2345,6 +2348,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8adbadb8f11b0304b8c800ccc9600286, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bImBoss: 0
 --- !u!114 &7644813043106498269
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2370,6 +2374,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78056be96c4ee02459ab5d3bb7a54896, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   DamageObj: {fileID: 1599770427430637572, guid: f281449c9f2cf8045930e932567b2b5e, type: 3}
   mat: {fileID: 2100000, guid: 0ff5c1c38cc269447af7d7d31345c016, type: 2}
   fDamageTime: 0.2
