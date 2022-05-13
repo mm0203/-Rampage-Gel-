@@ -25,7 +25,7 @@ public class EnemyData : ScriptableObject
 
     // 基本ステータス
     public int nLevel { get; set; } = 1;
-    public int nHp { get; set; } = 20;
+    public int nHp { get; set; } = 2000;
     public int nAttack { get; set; } = 10;
     public float fSpeed { get; set; } = 1.0f;
 

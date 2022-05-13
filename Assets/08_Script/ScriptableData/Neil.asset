@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Neil
   m_EditorClassIdentifier: 
   BossLevel: 1
-  BossHp: 25
+  BossHp: 2000
   BossAttack: 20
   BossSpeed: 5

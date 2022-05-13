@@ -92,6 +92,21 @@ public class PlayerStatus : MonoBehaviour
     public int UpExp { get { return nUpExp; } set { nExp = value; } }
     public int UpAttack { get { return nUpAttack; } set { nUpAttack = value; } }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("Enemy"))
+        {
+            // 1ˆÈã‚È‚çŽ‚Á‚Ä‚¢‚é
+            if(itemManager.CountList[6] >= 1)
+            {
+                for(int i = 0;i <= itemManager.CountList[6];i++)
+                {
+                    other.gameObject.AddComponent<BurningAttribute>();
+                }
+            }
+        }
+    }
+
     private void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
