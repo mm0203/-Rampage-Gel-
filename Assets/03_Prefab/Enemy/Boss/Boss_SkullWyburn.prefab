@@ -641,7 +641,7 @@ GameObject:
   - component: {fileID: -3752910277187311284}
   - component: {fileID: -5669560501003263274}
   m_Layer: 0
-  m_Name: Boss_SkullDragon
+  m_Name: Boss_SkullWyburn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

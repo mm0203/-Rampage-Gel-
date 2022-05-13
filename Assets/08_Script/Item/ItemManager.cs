@@ -96,7 +96,7 @@ public class ItemManager : MonoBehaviour
             imageObject.GetComponent<Image>().sprite = itemImage.ItemImageList[itemID];
             GetComponent<ItemUI>().CreateItemUI(DrawItemList.Count, imageObject);
         }
-
+        Debug.Log(CountList[itemID]);
         return CountList[itemID];
     }
 

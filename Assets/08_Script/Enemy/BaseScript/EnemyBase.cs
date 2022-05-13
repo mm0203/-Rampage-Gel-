@@ -143,7 +143,7 @@ public class EnemyBase : MonoBehaviour
     //----------------------------
     private void Death()
     {
-        Debug.Log(nHp);
+        
 
         // HP0à»â∫Ç≈è¡ñ≈
         if (nHp <= 0)
