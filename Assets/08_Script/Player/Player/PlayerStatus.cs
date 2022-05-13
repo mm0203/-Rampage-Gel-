@@ -92,6 +92,16 @@ public class PlayerStatus : MonoBehaviour
     public int UpExp { get { return nUpExp; } set { nExp = value; } }
     public int UpAttack { get { return nUpAttack; } set { nUpAttack = value; } }
 
+    private void Awake()
+    {
+        DontDestroyOnLoad(this.gameObject);
+
+        // åªç›ÉVÅ[Éì
+        //Scene scene = SceneManager.GetSceneByName("Stage1-1");
+        //SceneManager.SetActiveScene(scene);
+
+    }
+
     // Start is called before the first frame update
     void Start()
     {
