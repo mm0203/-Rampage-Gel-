@@ -15,6 +15,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class BossTimer : MonoBehaviour
 {
@@ -29,7 +30,8 @@ public class BossTimer : MonoBehaviour
 
     // HP
     float fMaxHP, fNowHp;
-    bool bSetBoss = false;
+    [SerializeField]bool bSetBoss = false;
+    bool bSetHP = false; // 表記バグ対策
 
 
     [Header("ボス出現時間")]
@@ -45,6 +47,8 @@ public class BossTimer : MonoBehaviour
 
     void Start()
     {
+        Debug.Log("aaa");
+
         // 初期化
         slider = GetComponent<Slider>();
         textMesh = GetComponentInChildren<TextMeshProUGUI>();
@@ -59,13 +63,16 @@ public class BossTimer : MonoBehaviour
         // 0秒になったら
         if (fTimer < 0.0f)
         {
-            fTimer = -1.0f;
+            
 
-            if(bSetBoss == false)
+            if (bSetBoss == false)
             {
+                
+
                 // ボスの出現処理(座標は適当)
                 // プレイヤーの上方向に出現
                 Vector3 pos = new Vector3(Player.transform.position.x, Player.transform.position.y, Player.transform.position.z + 20.0f);
+                Boss = GameObject.Find("EnemyManager").GetComponent<EnemyManager>().Boss;
                 Boss = Instantiate(Boss, pos, Boss.transform.rotation);
 
                 // 中ボスにプレイヤー情報セット
@@ -76,25 +83,33 @@ public class BossTimer : MonoBehaviour
 
                 // スライダーをHP用に
                 fMaxHP = fNowHp = Boss.GetComponent<EnemyBase>().nHp;
-                                
+               
                 bSetBoss = true;
             }
 
             // なぜか最初だけボスのHPが０なので
-            if (fMaxHP == 0)
+            if (fMaxHP == 0 && bSetHP == false)
             {
                 fMaxHP = Boss.GetComponent<EnemyBase>().nHp;
+                fNowHp = Boss.GetComponent<EnemyBase>().nHp;
+                bSetHP = true;
             }
-
-            if(!(Boss == null))
+            else if(bSetHP == true)
             {
+                // ゲージ減少
+                slider.value = fNowHp / fMaxHP;
                 fNowHp = Boss.GetComponent<EnemyBase>().nHp;
             }
+        
+            if(fNowHp <= 0)
+            {
+                fNowHp = 0;
+                bSetHP = false;
+            }
 
-            // ゲージ減少
-            slider.value = fNowHp / fMaxHP;
+            textMesh.text = fNowHp.ToString();
 
-            textMesh.text = "";
+            fTimer = -1.0f;
         }
         else 
         {
@@ -111,7 +126,8 @@ public class BossTimer : MonoBehaviour
             textMesh.text = minute.ToString("d2") + ":" + second.ToString("d2");
         }
 
-        
+        // ステージの切り替えを検知する為、「activeSceneChanged」にこの関数を入れる
+        SceneManager.activeSceneChanged += ActiveSceneChanged;
 
 
         //// 0秒になったら
@@ -170,4 +186,11 @@ public class BossTimer : MonoBehaviour
         //textMesh.text = minute.ToString("d2") + ":" + second.ToString("d2");
 
     }
+
+    // シーンの切り替えを検知 **********************************
+    void ActiveSceneChanged(Scene thisScene, Scene nextScene)
+    {
+        Start();
+    }
+    //**********************************************************
 }

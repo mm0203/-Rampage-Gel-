@@ -45,9 +45,10 @@ public class EnemyBase : MonoBehaviour
     private Animator animator;
     private Rigidbody rb;
 
-    // HPと攻撃力
+    // LvとHPと攻撃力
     public float nHp { get; set; }
     public int nAttack { get; set; }
+    public int nLv { get; set; } = 1;
 
     // 前フレームの座標
     private Vector3 vOldPos;
@@ -90,9 +91,11 @@ public class EnemyBase : MonoBehaviour
     //----------------------------
     void Start()
     {
+        nLv = GameObject.Find("EnemyManager").GetComponent<EnemyManager>().nEnemyLevel;
+
         // ステータス初期化
-        nHp = enemyData.BossHp + (enemyData.nLevel * (enemyData.BossHp / 10));
-        nAttack = enemyData.BossAttack + (enemyData.nLevel * (enemyData.nUpAttack / 10));
+        nHp = enemyData.BossHp + (nLv * (enemyData.BossHp / 10));
+        nAttack = enemyData.BossAttack + (nLv * (enemyData.nUpAttack / 10));
 
         // ナビメッシュ設定
         myAgent = GetComponent<NavMeshAgent>();
@@ -151,9 +154,10 @@ public class EnemyBase : MonoBehaviour
             if(bBoss == true)
             {
                 // ポータル生成
+                Instantiate(Portals, this.gameObject.transform.position, Quaternion.identity);
                 bPortal = true;
                 // ターゲットマーカー消滅
-                Destroy(Marker);
+                Destroy(Marker.gameObject);
             }
 
             // 経験値処理

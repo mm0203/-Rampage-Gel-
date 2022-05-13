@@ -50,6 +50,8 @@ public class PlayerMove : MonoBehaviour
     //[SerializeField] private int nDistance = 0; // ステータスのスピードと連動 //上昇量1
     private bool bShot = false;
 
+    private bool bPlatOneshot_pull = false;
+
  
     
 
@@ -66,6 +68,7 @@ public class PlayerMove : MonoBehaviour
         effectmove.SetActive(false);
 
         Direction.enabled = false;
+        bPlatOneshot_pull = false;
     }
 
     void Update()
@@ -225,7 +228,11 @@ public class PlayerMove : MonoBehaviour
         // スティックを倒してるなら
         if (Mathf.Abs(x) >= 0.5f || Mathf.Abs(y) >= 0.5f)
         {
-            if (state.IsNormal && bShot == true) sound.Play_PlayerCharge(this.gameObject);
+            if (bPlatOneshot_pull == false)
+            {
+                sound.Play_PlayerCharge(this.gameObject);
+                bPlatOneshot_pull = true;
+            }
 
             // フラグを立てる
             bShot = true;
@@ -267,6 +274,10 @@ public class PlayerMove : MonoBehaviour
 
             fTimeToMove = 0;
             //nTimeToMove = 0;
+        }
+        else
+        {
+            bPlatOneshot_pull = false;
         }
     }
     //**********************************************************
