@@ -20,6 +20,7 @@ public class Melee : MonoBehaviour
     GameObject cube;
 
     EnemyBase enemyBase;
+    BossBase bossBase;
 
     // エフェクト関連
     EnemyEffect enemyEffect;
@@ -28,15 +29,19 @@ public class Melee : MonoBehaviour
     // 当たり判定サイズ
     private float fHitSize;
 
+    // こいつはボス？
+    public bool bImBoss = false;
+
     //------------------------
     // 初期化
     //------------------------
     private void Start()
     {
-        enemyBase = GetComponent<EnemyBase>();
+        // エフェクト取得
+        enemyEffect = GetComponent<EnemyEffectBase>().GetEffect;
 
-        // エフェクト取得（EnemyBase.csより）
-        enemyEffect = enemyBase.GetEffect;
+        
+        enemyBase = this.GetComponent<EnemyBase>();
 
         // 当たり判定のサイズを敵の大きさの半分にする
         fHitSize = gameObject.transform.localScale.x / 2;
@@ -61,8 +66,9 @@ public class Melee : MonoBehaviour
         // Scratchコンポーネント追加
         cube.AddComponent<Scratch>();
 
-        // 情報をセット
-        cube.GetComponent<Scratch>().SetPlayer(enemyBase.GetComponent<EnemyBase>().player);
+        // 情報をセット （ボスであるかどうか）
+        cube.GetComponent<Scratch>().SetPlayer(enemyBase.player);
+
         cube.GetComponent<Scratch>().SetEnemy(this.gameObject);
 
         // その他コンポーネント調整

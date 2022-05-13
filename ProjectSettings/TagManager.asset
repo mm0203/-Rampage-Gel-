@@ -13,6 +13,7 @@ TagManager:
   - Boss
   - UI
   - SoundPlayer
+  - DirectionPoint
   layers:
   - Default
   - TransparentFX

@@ -10,6 +10,7 @@
 // 2022/03/25 author：田村敏基 アニメーション実装
 // 2022/03/27 author：田村敏基 updateの最初にアニメーションを持ってくるよう変更
 // 2022/03/28 author：竹尾　応急 エフェクト発生組み込み
+// 2022/05/02                    音組み込み
 //
 //======================================================================
 using System.Collections;
@@ -30,12 +31,16 @@ public class PlayerMove : MonoBehaviour
     private PlayerStatus status;
     private Rigidbody rb;
     private CameraShaker shaker;
+    private SoundManager sound;
 
     private Vector3 vCurrentForce = Vector3.zero; // 発射方向の力   
     private Vector3 vDragStart = Vector3.zero; // ドラッグ開始点
    
+    
+    [Header("発射威力")]
+    [SerializeField] private float fInitial = 90.0f; // 初速倍率
     [Header("減速率")]
-    [SerializeField] private float fLate = 0.85f; // 減速率
+    [SerializeField] private float fLate = 0.8f; // 減速率
     [Header("最大威力に到達する時間")]
     [SerializeField] private float fInputTime = 0.8f;
     [SerializeField] private float fStockPower = 0; // 蓄積時間
@@ -60,10 +65,17 @@ public class PlayerMove : MonoBehaviour
         shaker = GetComponent<CameraShaker>();
         effectmove.SetActive(false);
 
+        Direction.enabled = false;
     }
 
     void Update()
     {
+        // 無いコンポーネントを入れなおす
+        SetComponent();
+
+        // Y軸固定
+        FixedtoY();
+
         // アニメーション
         MoveAnim();
         // ステート管理
@@ -152,7 +164,8 @@ public class PlayerMove : MonoBehaviour
         {
             // 押されたとき
             if (Input.GetMouseButtonDown(0))
-            {              
+            {
+                if (state.IsNormal) sound.Play_PlayerCharge(this.gameObject);
                 vDragStart = GetMousePosition(); // マウスの初期位置を取得
                 fStockPower = 0;
             }
@@ -165,7 +178,7 @@ public class PlayerMove : MonoBehaviour
             // 矢印の引っ張り処理
             Direction.enabled = true;
             // 動く方向と逆に矢印が出るように
-            Direction.SetPosition(0, rb.position);
+            Direction.SetPosition(0, rb.position); 
             Direction.SetPosition(1, rb.position - vCurrentForce.normalized * 2);
 
             // マウスを押してる間、威力を高める
@@ -183,6 +196,8 @@ public class PlayerMove : MonoBehaviour
         // 左クリック離れたとき
         if (Input.GetMouseButtonUp(0))
         {
+            if (state.IsNormal) sound.Play_PlayerShotWeek(this.gameObject);
+
             // 瞬間的に力を加えてはじく
             rb.AddForce(vCurrentForce.normalized * fStockPower * status.Speed, ForceMode.Impulse);
             status.fBreakTime = 0.0f;
@@ -210,6 +225,8 @@ public class PlayerMove : MonoBehaviour
         // スティックを倒してるなら
         if (Mathf.Abs(x) >= 0.5f || Mathf.Abs(y) >= 0.5f)
         {
+            if (state.IsNormal && bShot == true) sound.Play_PlayerCharge(this.gameObject);
+
             // フラグを立てる
             bShot = true;
             // 入力方向を逆にして受け取る
@@ -232,6 +249,8 @@ public class PlayerMove : MonoBehaviour
         }
         else if (bShot == true)
         {
+            if (state.IsNormal) sound.Play_PlayerShotWeek(this.gameObject);
+
             // フラグを下す
             bShot = false;
             // 瞬間的に力を加えてはじく
@@ -252,9 +271,21 @@ public class PlayerMove : MonoBehaviour
     }
     //**********************************************************
 
-    
+    // SoundManagerを入れる ************************************
+    void SetComponent()
+    {
+        if(sound == null)
+        {
+            sound = GameObject.FindWithTag("SoundPlayer").GetComponent<SoundManager>();
+        }
+    }
+    //**********************************************************
 
-    
+    // Y軸固定 *************************************************
+    void FixedtoY()
+    {
+        //this.transform.position = new Vector3()
+    }
 
     //*応急*
     private void OnTriggerEnter(Collider other)
@@ -264,7 +295,16 @@ public class PlayerMove : MonoBehaviour
             shaker.Do();
         }
 
-        
+        // ぶつかった相手がボスの時、はじかれる
+        if (other.tag == "Boss")
+        {
+            GameObject cylinder;
+            cylinder = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
+            cylinder.transform.position = new Vector3(transform.position.x + transform.forward.x * 1.5f, transform.position.y, transform.position.z + transform.forward.z * 1.5f);
+
+            Destroy(cylinder, 0.1f);
+            
+        }
 
     }
 }

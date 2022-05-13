@@ -2,6 +2,9 @@
 %TAG !u! tag:unity3d.com,2011:
 <<<<<<< HEAD
 =======
+<<<<<<< HEAD
+=======
+>>>>>>> bf0912663b81f6adf93f6dee0953b774624af598
 --- !u!114 &-9094887356214050689
 MonoBehaviour:
   m_ObjectHideFlags: 11
@@ -15,7 +18,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 4
+<<<<<<< HEAD
+=======
 >>>>>>> main
+>>>>>>> bf0912663b81f6adf93f6dee0953b774624af598
 --- !u!21 &2100000
 Material:
   serializedVersion: 6
@@ -126,6 +132,9 @@ Material:
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
   m_BuildTextureStacks: []
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> bf0912663b81f6adf93f6dee0953b774624af598
 --- !u!114 &2807223292647448497
 MonoBehaviour:
   m_ObjectHideFlags: 11
@@ -139,5 +148,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 4
+<<<<<<< HEAD
+=======
 =======
 >>>>>>> main
+>>>>>>> bf0912663b81f6adf93f6dee0953b774624af598

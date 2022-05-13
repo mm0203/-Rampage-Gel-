@@ -118,7 +118,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2278465258743351948, guid: 9959a86023e717c468b2969539dc5f50, type: 3}
       propertyPath: m_nextScene.m_SceneName
-      value: TesrScene
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5989245679783999047, guid: 9959a86023e717c468b2969539dc5f50, type: 3}
       propertyPath: m_RootOrder

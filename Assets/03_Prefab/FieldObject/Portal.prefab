@@ -205,8 +205,8 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 2
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!114 &2278465258743351948
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -220,7 +220,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_nextScene:
-    m_SceneName: Stage1
+    m_SceneName: Stage1-1
   SceneData: {fileID: 11400000, guid: 8cd85850103a12f46b72aac0f8947289, type: 2}
 --- !u!1 &7889288712703657429
 GameObject:

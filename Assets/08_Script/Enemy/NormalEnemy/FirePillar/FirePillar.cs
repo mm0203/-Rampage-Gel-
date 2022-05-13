@@ -21,6 +21,10 @@ public class FirePillar : MonoBehaviour
     EnemyBase enemyBase;
     GameObject player;
 
+    // エフェクト関連
+    EnemyEffect enemyEffect;
+    GameObject objEffect;
+
     [SerializeField] private GameObject Circle;
 
     // サークルサイズ
@@ -31,12 +35,21 @@ public class FirePillar : MonoBehaviour
 
     private void Start()
     {
-        enemyBase = GetComponent<EnemyBase>();
+        // エフェクト取得
+        enemyEffect = GetComponent<EnemyEffectBase>().GetEffect;
+
+        // エネミーベース情報取得
+        enemyBase = this.GetComponent<EnemyBase>();
+
+        // プレイヤー取得
         player = enemyBase.player;
     }
 
     private void FirePillarAttack()
     {
+        // プレイヤー取得
+        player = enemyBase.player;
+
         // 当たり判定用キューブ
         cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
 
@@ -64,7 +77,10 @@ public class FirePillar : MonoBehaviour
         // 敵情報セット
         cube.GetComponent<Fire>().enemy = gameObject;
     
-        // プレイヤー情報セッ
+        // プレイヤー情報セット
         cube.GetComponent<Fire>().player = player;
+
+        // プレイヤー情報セット
+        cube.GetComponent<Fire>().effect = enemyEffect;
     }
 }

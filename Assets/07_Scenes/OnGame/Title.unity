@@ -432,7 +432,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nTitleFrame: 0
   sNextScene:
-    m_SceneName: Stage1
+    m_SceneName: Stage1-1
   gTitleMenuChoice:
   - {fileID: 111104529}
   - {fileID: 1307881562}

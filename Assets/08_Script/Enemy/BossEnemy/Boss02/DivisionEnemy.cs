@@ -17,9 +17,14 @@ public class DivisionEnemy : MonoBehaviour
 
     private NavMeshAgent myAgent;
 
-    private bool bStop = false;
-
     private float fTime = 4.0f;
+
+    bool isCalledOnce = false;
+    bool bAttackStart = false;
+
+    public GameObject AttackCircle;
+
+    public GameObject enemy { get; set; }
 
     void Start()
     {
@@ -35,14 +40,23 @@ public class DivisionEnemy : MonoBehaviour
 
         if (fTime <= 2.0f)
         {
-            //myAgent.velocity = Vector3.zero;
-            myAgent.Stop();
-            //Destroy(this.gameObject);
+            // AoE生成
+            if (!isCalledOnce)
+            {
+                isCalledOnce = true;
+                AttackCircle = Instantiate(AttackCircle, new Vector3(this.transform.position.x, 0.1f, this.transform.position.z), AttackCircle.transform.rotation);
+                AttackCircle.GetComponent<SpriteRenderer>().color = new Color32(255, 0, 0, 255);
+
+                myAgent.velocity = Vector3.zero;
+                myAgent.Stop();
+            }
+
         }
         if(fTime <= 0.0f)
         {
+            bAttackStart = true;
+            Destroy(this.AttackCircle);
             Destroy(this.gameObject);
-            //fTime = 0.0f;
         }
     }
 
@@ -58,5 +72,14 @@ public class DivisionEnemy : MonoBehaviour
 
         // プレイヤーを追いかける
         myAgent.SetDestination(player.transform.position);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player" && bAttackStart)
+        {
+            // ダメージ処理
+            player.GetComponent<PlayerHP>().OnDamage(enemy.GetComponent<EnemyBase>().GetEnemyData.nAttack);
+        }
     }
 }

@@ -32,17 +32,14 @@ public class BossDirection : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha0))
-        {
-            StartDirection();
-        }
+        setBossPosition();
     }
 
-    public void StartDirection()
+    public void StartDirection(int bgmNumber)
     {
         // シーンから必要なデータを取得
         Cameraobj = GameObject.FindWithTag("MainCamera");
-        Bossobj = GameObject.FindWithTag("Boss");
+        Bossobj = GameObject.FindWithTag("DirectionPoint");
         UIobj = GameObject.FindWithTag("UI");
         BGMPlayer = GameObject.FindWithTag("SoundPlayer").gameObject.GetComponent<BGMPlayer>();
         effectPlayer = Cameraobj.GetComponent<EffectPlayer>();
@@ -59,12 +56,11 @@ public class BossDirection : MonoBehaviour
         StartCoroutine(effectPlayer.BlackFogAnimaion(0));               // 黒い霧発生
         UIobj.SetActive(false);                                         // 演出に集中させるためUIを非表示に
 
-        StartCoroutine(CameraMan());
+        StartCoroutine(CameraMan(bgmNumber));
     }
 
-    IEnumerator CameraMan()
+    IEnumerator CameraMan(int Number)
     {
-        BGMPlayer.Stage7();
         BGMPlayer.StopBGM();
         
 
@@ -80,7 +76,35 @@ public class BossDirection : MonoBehaviour
         StartCoroutine(effectPlayer.BlackFogAnimaion(1));
 
         // ステージに応じたBGMを鳴らす
-        BGMPlayer.Stage7_Boss();
+        switch(Number)
+        {
+            case 1:
+                BGMPlayer.Stage1_Boss(); ;
+                break;
+            case 2:
+                BGMPlayer.Stage2_Boss(); ;
+                break;
+            case 3:
+                BGMPlayer.Stage3_Boss(); ;
+                break;
+            case 4:
+                BGMPlayer.Stage4_Boss(); ;
+                break;
+            case 5:
+                BGMPlayer.Stage5_Boss(); ;
+                break;
+            case 6:
+                BGMPlayer.Stage6_Boss(); ;
+                break;
+            case 7:
+                BGMPlayer.Stage7_Boss(); ;
+                break;
+
+            default:
+                Debug.LogError("該当しないBGMが選択されました");
+                break;
+        }
+        
 
         for (int n = 0; n <= nShowTime; n++)
         {
@@ -96,6 +120,22 @@ public class BossDirection : MonoBehaviour
         }
         Cameraobj.GetComponent<CameraController>().bOnDirection = false; // プレイヤーへのカメラ追従有効化
         UIobj.SetActive(true);
+    }
+
+    // 動くボスをずっと捉えておく
+    void setBossPosition()
+    {
+        if(Bossobj == null)
+        {
+           
+        }
+        else
+        {
+            BossPos.x = Bossobj.transform.position.x;     // ボスの位置[X]を取得
+            BossPos.y = oldCameraPos.y;                   // 高さ[Y]は固定
+            BossPos.z = Bossobj.transform.position.z;     // ボスの位置[Z]を取得
+        }
+        
     }
 }
 

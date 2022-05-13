@@ -13,44 +13,245 @@ MonoBehaviour:
   m_Name: GenerateEnemyData
   m_EditorClassIdentifier: 
   Planet1:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - MaxEnemy: 10
+    EnemyList:
+    - {fileID: 8943500349344443402, guid: a59efd64dfbd53648987faa568a42eea, type: 3}
+    BossEnemy: {fileID: 6487413376399020312, guid: e2c45aa15f48323458543eb32c886719, type: 3}
+  - MaxEnemy: 15
+    EnemyList:
+    - {fileID: 8943500349344443402, guid: a59efd64dfbd53648987faa568a42eea, type: 3}
+    - {fileID: 8943500349344443402, guid: a59efd64dfbd53648987faa568a42eea, type: 3}
+    - {fileID: 8943500349344443402, guid: a59efd64dfbd53648987faa568a42eea, type: 3}
+    - {fileID: 8943500349344443402, guid: a59efd64dfbd53648987faa568a42eea, type: 3}
+    - {fileID: 8943500349344443402, guid: a59efd64dfbd53648987faa568a42eea, type: 3}
+    - {fileID: 8943500349344443402, guid: a59efd64dfbd53648987faa568a42eea, type: 3}
+    - {fileID: 2876346242041339717, guid: 0bc76b8d47e5fae46a90966b15f76d02, type: 3}
+    BossEnemy: {fileID: 6487413376399020312, guid: e2c45aa15f48323458543eb32c886719, type: 3}
+  - MaxEnemy: 10
+    EnemyList:
+    - {fileID: 8943500349344443402, guid: a59efd64dfbd53648987faa568a42eea, type: 3}
+    - {fileID: 8943500349344443402, guid: a59efd64dfbd53648987faa568a42eea, type: 3}
+    - {fileID: 2876346242041339717, guid: 0bc76b8d47e5fae46a90966b15f76d02, type: 3}
+    BossEnemy: {fileID: 6487413376399020312, guid: e2c45aa15f48323458543eb32c886719, type: 3}
+  - MaxEnemy: 18
+    EnemyList:
+    - {fileID: 8943500349344443402, guid: a59efd64dfbd53648987faa568a42eea, type: 3}
+    - {fileID: 8943500349344443402, guid: a59efd64dfbd53648987faa568a42eea, type: 3}
+    - {fileID: 8943500349344443402, guid: a59efd64dfbd53648987faa568a42eea, type: 3}
+    - {fileID: 2876346242041339717, guid: 0bc76b8d47e5fae46a90966b15f76d02, type: 3}
+    BossEnemy: {fileID: 5037731325522262350, guid: fccf5f9a499ee4e4bba40ff0019c5fa6, type: 3}
+  - MaxEnemy: 15
+    EnemyList:
+    - {fileID: 8943500349344443402, guid: a59efd64dfbd53648987faa568a42eea, type: 3}
+    - {fileID: 8943500349344443402, guid: a59efd64dfbd53648987faa568a42eea, type: 3}
+    - {fileID: 8943500349344443402, guid: a59efd64dfbd53648987faa568a42eea, type: 3}
+    - {fileID: 8943500349344443402, guid: a59efd64dfbd53648987faa568a42eea, type: 3}
+    - {fileID: 2876346242041339717, guid: 0bc76b8d47e5fae46a90966b15f76d02, type: 3}
+    BossEnemy: {fileID: 2379597016144334215, guid: 72fc3197a1a3c024ca65975630906b05, type: 3}
   Planet2:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - MaxEnemy: 15
+    EnemyList:
+    - {fileID: 8943500349344443402, guid: a59efd64dfbd53648987faa568a42eea, type: 3}
+    - {fileID: 2876346242041339717, guid: 0bc76b8d47e5fae46a90966b15f76d02, type: 3}
+    - {fileID: 2876346242041339717, guid: 0bc76b8d47e5fae46a90966b15f76d02, type: 3}
+    BossEnemy: {fileID: 5037731325522262350, guid: fccf5f9a499ee4e4bba40ff0019c5fa6, type: 3}
+  - MaxEnemy: 21
+    EnemyList:
+    - {fileID: 8943500349344443402, guid: a59efd64dfbd53648987faa568a42eea, type: 3}
+    - {fileID: 2876346242041339717, guid: 0bc76b8d47e5fae46a90966b15f76d02, type: 3}
+    BossEnemy: {fileID: 6487413376399020312, guid: e2c45aa15f48323458543eb32c886719, type: 3}
+  - MaxEnemy: 15
+    EnemyList:
+    - {fileID: 5907127726947567017, guid: c17ea0a5e4553d442a00ef739f20f9e5, type: 3}
+    - {fileID: 2876346242041339717, guid: 0bc76b8d47e5fae46a90966b15f76d02, type: 3}
+    - {fileID: 2876346242041339717, guid: 0bc76b8d47e5fae46a90966b15f76d02, type: 3}
+    - {fileID: 2876346242041339717, guid: 0bc76b8d47e5fae46a90966b15f76d02, type: 3}
+    - {fileID: 8943500349344443402, guid: a59efd64dfbd53648987faa568a42eea, type: 3}
+    BossEnemy: {fileID: 5037731325522262350, guid: fccf5f9a499ee4e4bba40ff0019c5fa6, type: 3}
+  - MaxEnemy: 23
+    EnemyList:
+    - {fileID: 2876346242041339717, guid: 0bc76b8d47e5fae46a90966b15f76d02, type: 3}
+    - {fileID: 8943500349344443402, guid: a59efd64dfbd53648987faa568a42eea, type: 3}
+    - {fileID: 2876346242041339717, guid: 0bc76b8d47e5fae46a90966b15f76d02, type: 3}
+    - {fileID: 8943500349344443402, guid: a59efd64dfbd53648987faa568a42eea, type: 3}
+    - {fileID: 5907127726947567017, guid: c17ea0a5e4553d442a00ef739f20f9e5, type: 3}
+    BossEnemy: {fileID: 5037731325522262350, guid: fccf5f9a499ee4e4bba40ff0019c5fa6, type: 3}
+  - MaxEnemy: 6
+    EnemyList:
+    - {fileID: 2876346242041339717, guid: 0bc76b8d47e5fae46a90966b15f76d02, type: 3}
+    - {fileID: 5907127726947567017, guid: c17ea0a5e4553d442a00ef739f20f9e5, type: 3}
+    BossEnemy: {fileID: 1277353414753026474, guid: bfc013b5569b1e140ba5182bd84daf2e, type: 3}
   Planet3:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - MaxEnemy: 25
+    EnemyList:
+    - {fileID: 5907127726947567017, guid: c17ea0a5e4553d442a00ef739f20f9e5, type: 3}
+    - {fileID: 2876346242041339717, guid: 0bc76b8d47e5fae46a90966b15f76d02, type: 3}
+    - {fileID: 8943500349344443402, guid: a59efd64dfbd53648987faa568a42eea, type: 3}
+    - {fileID: 8943500349344443402, guid: a59efd64dfbd53648987faa568a42eea, type: 3}
+    - {fileID: 8943500349344443402, guid: a59efd64dfbd53648987faa568a42eea, type: 3}
+    BossEnemy: {fileID: 6487413376399020312, guid: e2c45aa15f48323458543eb32c886719, type: 3}
+  - MaxEnemy: 27
+    EnemyList:
+    - {fileID: 5907127726947567017, guid: c17ea0a5e4553d442a00ef739f20f9e5, type: 3}
+    - {fileID: 2876346242041339717, guid: 0bc76b8d47e5fae46a90966b15f76d02, type: 3}
+    - {fileID: 2876346242041339717, guid: 0bc76b8d47e5fae46a90966b15f76d02, type: 3}
+    - {fileID: 2876346242041339717, guid: 0bc76b8d47e5fae46a90966b15f76d02, type: 3}
+    - {fileID: 8943500349344443402, guid: a59efd64dfbd53648987faa568a42eea, type: 3}
+    - {fileID: 8943500349344443402, guid: a59efd64dfbd53648987faa568a42eea, type: 3}
+    - {fileID: 8943500349344443402, guid: a59efd64dfbd53648987faa568a42eea, type: 3}
+    - {fileID: 8943500349344443402, guid: a59efd64dfbd53648987faa568a42eea, type: 3}
+    - {fileID: 1054541111543390759, guid: 2ba082bd24d6f5946abaf42f576af56e, type: 3}
+    BossEnemy: {fileID: 6487413376399020312, guid: e2c45aa15f48323458543eb32c886719, type: 3}
+  - MaxEnemy: 30
+    EnemyList:
+    - {fileID: 1054541111543390759, guid: 2ba082bd24d6f5946abaf42f576af56e, type: 3}
+    - {fileID: 2876346242041339717, guid: 0bc76b8d47e5fae46a90966b15f76d02, type: 3}
+    - {fileID: 2876346242041339717, guid: 0bc76b8d47e5fae46a90966b15f76d02, type: 3}
+    - {fileID: 5907127726947567017, guid: c17ea0a5e4553d442a00ef739f20f9e5, type: 3}
+    - {fileID: 8943500349344443402, guid: a59efd64dfbd53648987faa568a42eea, type: 3}
+    - {fileID: 8943500349344443402, guid: a59efd64dfbd53648987faa568a42eea, type: 3}
+    BossEnemy: {fileID: 6487413376399020312, guid: e2c45aa15f48323458543eb32c886719, type: 3}
+  - MaxEnemy: 30
+    EnemyList:
+    - {fileID: 1054541111543390759, guid: 2ba082bd24d6f5946abaf42f576af56e, type: 3}
+    - {fileID: 1054541111543390759, guid: 2ba082bd24d6f5946abaf42f576af56e, type: 3}
+    - {fileID: 1054541111543390759, guid: 2ba082bd24d6f5946abaf42f576af56e, type: 3}
+    - {fileID: 1054541111543390759, guid: 2ba082bd24d6f5946abaf42f576af56e, type: 3}
+    - {fileID: 1054541111543390759, guid: 2ba082bd24d6f5946abaf42f576af56e, type: 3}
+    - {fileID: 2876346242041339717, guid: 0bc76b8d47e5fae46a90966b15f76d02, type: 3}
+    - {fileID: 2876346242041339717, guid: 0bc76b8d47e5fae46a90966b15f76d02, type: 3}
+    - {fileID: 2876346242041339717, guid: 0bc76b8d47e5fae46a90966b15f76d02, type: 3}
+    - {fileID: 2876346242041339717, guid: 0bc76b8d47e5fae46a90966b15f76d02, type: 3}
+    - {fileID: 8943500349344443402, guid: a59efd64dfbd53648987faa568a42eea, type: 3}
+    BossEnemy: {fileID: 5037731325522262350, guid: fccf5f9a499ee4e4bba40ff0019c5fa6, type: 3}
+  - MaxEnemy: 20
+    EnemyList:
+    - {fileID: 2876346242041339717, guid: 0bc76b8d47e5fae46a90966b15f76d02, type: 3}
+    - {fileID: 1054541111543390759, guid: 2ba082bd24d6f5946abaf42f576af56e, type: 3}
+    - {fileID: 8943500349344443402, guid: a59efd64dfbd53648987faa568a42eea, type: 3}
+    - {fileID: 8943500349344443402, guid: a59efd64dfbd53648987faa568a42eea, type: 3}
+    - {fileID: 8943500349344443402, guid: a59efd64dfbd53648987faa568a42eea, type: 3}
+    BossEnemy: {fileID: 2379597016144334215, guid: 72fc3197a1a3c024ca65975630906b05, type: 3}
   Planet4:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - MaxEnemy: 40
+    EnemyList:
+    - {fileID: 8943500349344443402, guid: a59efd64dfbd53648987faa568a42eea, type: 3}
+    - {fileID: 2876346242041339717, guid: 0bc76b8d47e5fae46a90966b15f76d02, type: 3}
+    BossEnemy: {fileID: 5037731325522262350, guid: fccf5f9a499ee4e4bba40ff0019c5fa6, type: 3}
+  - MaxEnemy: 40
+    EnemyList:
+    - {fileID: 8943500349344443402, guid: a59efd64dfbd53648987faa568a42eea, type: 3}
+    - {fileID: 1054541111543390759, guid: 2ba082bd24d6f5946abaf42f576af56e, type: 3}
+    - {fileID: 2876346242041339717, guid: 0bc76b8d47e5fae46a90966b15f76d02, type: 3}
+    - {fileID: 8943500349344443402, guid: a59efd64dfbd53648987faa568a42eea, type: 3}
+    BossEnemy: {fileID: 5037731325522262350, guid: fccf5f9a499ee4e4bba40ff0019c5fa6, type: 3}
+  - MaxEnemy: 40
+    EnemyList:
+    - {fileID: 8943500349344443402, guid: a59efd64dfbd53648987faa568a42eea, type: 3}
+    - {fileID: 8943500349344443402, guid: a59efd64dfbd53648987faa568a42eea, type: 3}
+    - {fileID: 8943500349344443402, guid: a59efd64dfbd53648987faa568a42eea, type: 3}
+    - {fileID: 8943500349344443402, guid: a59efd64dfbd53648987faa568a42eea, type: 3}
+    - {fileID: 2876346242041339717, guid: 0bc76b8d47e5fae46a90966b15f76d02, type: 3}
+    - {fileID: 2876346242041339717, guid: 0bc76b8d47e5fae46a90966b15f76d02, type: 3}
+    - {fileID: 2876346242041339717, guid: 0bc76b8d47e5fae46a90966b15f76d02, type: 3}
+    - {fileID: 1054541111543390759, guid: 2ba082bd24d6f5946abaf42f576af56e, type: 3}
+    - {fileID: 1054541111543390759, guid: 2ba082bd24d6f5946abaf42f576af56e, type: 3}
+    - {fileID: 1054541111543390759, guid: 2ba082bd24d6f5946abaf42f576af56e, type: 3}
+    - {fileID: 2128453719246741746, guid: e15c1d763e58dbe4f9797e737c9c0421, type: 3}
+    BossEnemy: {fileID: 5037731325522262350, guid: fccf5f9a499ee4e4bba40ff0019c5fa6, type: 3}
+  - MaxEnemy: 40
+    EnemyList:
+    - {fileID: 2128453719246741746, guid: e15c1d763e58dbe4f9797e737c9c0421, type: 3}
+    - {fileID: 2876346242041339717, guid: 0bc76b8d47e5fae46a90966b15f76d02, type: 3}
+    - {fileID: 2876346242041339717, guid: 0bc76b8d47e5fae46a90966b15f76d02, type: 3}
+    - {fileID: 2876346242041339717, guid: 0bc76b8d47e5fae46a90966b15f76d02, type: 3}
+    - {fileID: 2876346242041339717, guid: 0bc76b8d47e5fae46a90966b15f76d02, type: 3}
+    - {fileID: 2876346242041339717, guid: 0bc76b8d47e5fae46a90966b15f76d02, type: 3}
+    - {fileID: 2876346242041339717, guid: 0bc76b8d47e5fae46a90966b15f76d02, type: 3}
+    - {fileID: 2876346242041339717, guid: 0bc76b8d47e5fae46a90966b15f76d02, type: 3}
+    - {fileID: 2876346242041339717, guid: 0bc76b8d47e5fae46a90966b15f76d02, type: 3}
+    - {fileID: 5907127726947567017, guid: c17ea0a5e4553d442a00ef739f20f9e5, type: 3}
+    BossEnemy: {fileID: 5037731325522262350, guid: fccf5f9a499ee4e4bba40ff0019c5fa6, type: 3}
+  - MaxEnemy: 30
+    EnemyList:
+    - {fileID: 8943500349344443402, guid: a59efd64dfbd53648987faa568a42eea, type: 3}
+    - {fileID: 2876346242041339717, guid: 0bc76b8d47e5fae46a90966b15f76d02, type: 3}
+    BossEnemy: {fileID: 5037731325522262350, guid: fccf5f9a499ee4e4bba40ff0019c5fa6, type: 3}
   Planet5:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - MaxEnemy: 50
+    EnemyList:
+    - {fileID: 8943500349344443402, guid: a59efd64dfbd53648987faa568a42eea, type: 3}
+    - {fileID: 2876346242041339717, guid: 0bc76b8d47e5fae46a90966b15f76d02, type: 3}
+    - {fileID: 1054541111543390759, guid: 2ba082bd24d6f5946abaf42f576af56e, type: 3}
+    - {fileID: 1054541111543390759, guid: 2ba082bd24d6f5946abaf42f576af56e, type: 3}
+    BossEnemy: {fileID: 5037731325522262350, guid: fccf5f9a499ee4e4bba40ff0019c5fa6, type: 3}
+  - MaxEnemy: 50
+    EnemyList:
+    - {fileID: 1054541111543390759, guid: 2ba082bd24d6f5946abaf42f576af56e, type: 3}
+    - {fileID: 5907127726947567017, guid: c17ea0a5e4553d442a00ef739f20f9e5, type: 3}
+    - {fileID: 8943500349344443402, guid: a59efd64dfbd53648987faa568a42eea, type: 3}
+    - {fileID: 8943500349344443402, guid: a59efd64dfbd53648987faa568a42eea, type: 3}
+    - {fileID: 8943500349344443402, guid: a59efd64dfbd53648987faa568a42eea, type: 3}
+    BossEnemy: {fileID: 5037731325522262350, guid: fccf5f9a499ee4e4bba40ff0019c5fa6, type: 3}
+  - MaxEnemy: 50
+    EnemyList:
+    - {fileID: 1054541111543390759, guid: 2ba082bd24d6f5946abaf42f576af56e, type: 3}
+    - {fileID: 2876346242041339717, guid: 0bc76b8d47e5fae46a90966b15f76d02, type: 3}
+    - {fileID: 2876346242041339717, guid: 0bc76b8d47e5fae46a90966b15f76d02, type: 3}
+    - {fileID: 2128453719246741746, guid: e15c1d763e58dbe4f9797e737c9c0421, type: 3}
+    - {fileID: 2876346242041339717, guid: 0bc76b8d47e5fae46a90966b15f76d02, type: 3}
+    BossEnemy: {fileID: 5037731325522262350, guid: fccf5f9a499ee4e4bba40ff0019c5fa6, type: 3}
+  - MaxEnemy: 10
+    EnemyList:
+    - {fileID: 2128453719246741746, guid: e15c1d763e58dbe4f9797e737c9c0421, type: 3}
+    BossEnemy: {fileID: 5037731325522262350, guid: fccf5f9a499ee4e4bba40ff0019c5fa6, type: 3}
+  - MaxEnemy: 40
+    EnemyList:
+    - {fileID: 1054541111543390759, guid: 2ba082bd24d6f5946abaf42f576af56e, type: 3}
+    - {fileID: 8943500349344443402, guid: a59efd64dfbd53648987faa568a42eea, type: 3}
+    - {fileID: 2876346242041339717, guid: 0bc76b8d47e5fae46a90966b15f76d02, type: 3}
+    BossEnemy: {fileID: 1277353414753026474, guid: bfc013b5569b1e140ba5182bd84daf2e, type: 3}
   Planet6:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - MaxEnemy: 60
+    EnemyList:
+    - {fileID: 8943500349344443402, guid: a59efd64dfbd53648987faa568a42eea, type: 3}
+    - {fileID: 1054541111543390759, guid: 2ba082bd24d6f5946abaf42f576af56e, type: 3}
+    - {fileID: 1054541111543390759, guid: 2ba082bd24d6f5946abaf42f576af56e, type: 3}
+    BossEnemy: {fileID: 1277353414753026474, guid: bfc013b5569b1e140ba5182bd84daf2e, type: 3}
+  - MaxEnemy: 60
+    EnemyList:
+    - {fileID: 8943500349344443402, guid: a59efd64dfbd53648987faa568a42eea, type: 3}
+    BossEnemy: {fileID: 6487413376399020312, guid: e2c45aa15f48323458543eb32c886719, type: 3}
+  - MaxEnemy: 60
+    EnemyList:
+    - {fileID: 8943500349344443402, guid: a59efd64dfbd53648987faa568a42eea, type: 3}
+    BossEnemy: {fileID: 6487413376399020312, guid: e2c45aa15f48323458543eb32c886719, type: 3}
+  - MaxEnemy: 60
+    EnemyList:
+    - {fileID: 8943500349344443402, guid: a59efd64dfbd53648987faa568a42eea, type: 3}
+    BossEnemy: {fileID: 6487413376399020312, guid: e2c45aa15f48323458543eb32c886719, type: 3}
+  - MaxEnemy: 60
+    EnemyList:
+    - {fileID: 8943500349344443402, guid: a59efd64dfbd53648987faa568a42eea, type: 3}
+    BossEnemy: {fileID: 6487413376399020312, guid: e2c45aa15f48323458543eb32c886719, type: 3}
   Planet7:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - MaxEnemy: 10
+    EnemyList:
+    - {fileID: 8943500349344443402, guid: a59efd64dfbd53648987faa568a42eea, type: 3}
+    BossEnemy: {fileID: 6487413376399020312, guid: e2c45aa15f48323458543eb32c886719, type: 3}
+  - MaxEnemy: 10
+    EnemyList:
+    - {fileID: 8943500349344443402, guid: a59efd64dfbd53648987faa568a42eea, type: 3}
+    BossEnemy: {fileID: 6487413376399020312, guid: e2c45aa15f48323458543eb32c886719, type: 3}
+  - MaxEnemy: 10
+    EnemyList:
+    - {fileID: 8943500349344443402, guid: a59efd64dfbd53648987faa568a42eea, type: 3}
+    BossEnemy: {fileID: 6487413376399020312, guid: e2c45aa15f48323458543eb32c886719, type: 3}
+  - MaxEnemy: 10
+    EnemyList:
+    - {fileID: 8943500349344443402, guid: a59efd64dfbd53648987faa568a42eea, type: 3}
+    BossEnemy: {fileID: 6487413376399020312, guid: e2c45aa15f48323458543eb32c886719, type: 3}
+  - MaxEnemy: 10
+    EnemyList:
+    - {fileID: 8943500349344443402, guid: a59efd64dfbd53648987faa568a42eea, type: 3}
+    BossEnemy: {fileID: 6487413376399020312, guid: e2c45aa15f48323458543eb32c886719, type: 3}

@@ -33,6 +33,8 @@ public class Boss01_body : MonoBehaviour
 
     void Update()
     {
+        DeathHead();
+
         // 体の座標を調整
         gameObject.transform.position = new Vector3(FrontObject.transform.position.x - FrontObject.transform.forward.x * fDistance, 
                                                     FrontObject.transform.position.y,
@@ -51,7 +53,14 @@ public class Boss01_body : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             // ダメージ処理
-            HeadObject.GetComponent<BossBase>().Damege();
+            HeadObject.GetComponent<EnemyDamageBase>().TailDamage();
         }
+    }
+
+    // 死亡判定
+    private void DeathHead()
+    {
+        if (HeadObject.GetComponent<EnemyBase>().nHp <= 0)
+            Destroy(this.gameObject);
     }
 }

@@ -26,11 +26,12 @@ public class Boss2 : MonoBehaviour
     private Animator animation;
 
     // ボスの基底クラス
-    private BossBase BossBase;
+    private EnemyBase BossBase;
 
     private int nMaxHp;
 
     private bool bHit = false;
+
 
     // 半径
     public float distance = 5.0f;
@@ -39,13 +40,13 @@ public class Boss2 : MonoBehaviour
 
     void Start()
     {
-        player = GameObject.Find("Player");
+        player = GameObject.FindWithTag("Player").gameObject;
 
         animation = GetComponent<Animator>();
 
-        BossBase = GetComponent<BossBase>();
+        BossBase = GetComponent<EnemyBase>();
 
-        nMaxHp = enemyData.BossHp;
+        nMaxHp = BossBase.enemyData.BossHp;
     }
 
     void Update()
@@ -70,7 +71,7 @@ public class Boss2 : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision other)
+    private void OnTriggerEnter(Collider other) // 竹尾：CollisionからTriggerへ仮変更、プレイヤーを何とかしたら戻す
     {
         if (other.gameObject.tag == "Player" && !bHit)
         {
@@ -92,7 +93,7 @@ public class Boss2 : MonoBehaviour
     private int OnDamegeHp()
     {
         // ボスの現在のHPを取得
-        int CurrentHP = BossBase.Death();
+        int CurrentHP = (int)BossBase.nHp;
         Debug.Log(CurrentHP);
 
         int nDivisionCnt = 0;

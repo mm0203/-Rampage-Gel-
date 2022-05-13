@@ -10,6 +10,7 @@
 //                             爆発実装(敵に効果なし...)
 // 2022/03/27 author：田村敏基 爆発の威力を蓄える機能実装
 // 2022/03/28 author：竹尾　応急 エフェクト発生組み込み
+// 2022/05/05                    バーストの発生をダメージから回数へ変更
 //
 //======================================================================
 using System.Collections;
@@ -40,7 +41,7 @@ public class GuardMode : MonoBehaviour
     private PlayerStatus status;
 
     // 爆発威力を収納
-    private float fStockBurst = 0.0f;
+    private int fStockBurst = 0;
 
     // 硬化中にローテするための変数
     bool bGuardStart = false;
@@ -153,7 +154,7 @@ public class GuardMode : MonoBehaviour
             status.bArmor = true;
             status.fBreakTime = 0.0f;
             state.GotoNormalState();
-            fStockBurst = 0.0f;
+            fStockBurst = 0;
             bGuardStart = false;
         }
 
@@ -195,7 +196,12 @@ public class GuardMode : MonoBehaviour
 
     public void AddStockExplode(float damage)
     {
-        fStockBurst += damage;
+        //回数制に変更（竹尾）
+        fStockBurst += 1;
+        if(fStockBurst > 6)
+        {
+            fStockBurst = 6;
+        }
     }
 
     private Vector3 GetMousePosition()

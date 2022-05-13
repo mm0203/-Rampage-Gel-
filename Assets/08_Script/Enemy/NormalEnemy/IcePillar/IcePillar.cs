@@ -18,6 +18,8 @@ public class IcePillar : MonoBehaviour
     // 当たり判定用キューブ
     GameObject cube;
 
+    EnemyEffect enemyEffect;
+
     EnemyBase enemyBase;
     GameObject player;
 
@@ -35,7 +37,12 @@ public class IcePillar : MonoBehaviour
 
     private void Start()
     {
-        enemyBase = GetComponent<EnemyBase>();
+        // エフェクト取得
+        enemyEffect = GetComponent<EnemyEffectBase>().GetEffect;
+
+        // エネミーベース情報取得
+        enemyBase = this.GetComponent<EnemyBase>();
+
         player = enemyBase.player;
     }
 
@@ -72,6 +79,9 @@ public class IcePillar : MonoBehaviour
 
         // 氷柱の生存時間設定
         cube.GetComponent<Ice>().fLifeTime = fIceTime;
+
+        // プレイヤー情報セット
+        cube.GetComponent<Ice>().effect = enemyEffect;
     }
 }
 

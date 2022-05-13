@@ -23,11 +23,12 @@ public class Ice : MonoBehaviour
     bool bAttackStart = false;
 
     // エフェクト関連
-    EnemyEffect enemyEffect;
     GameObject ObjEffect;
 
     public GameObject player { get; set; }
     public GameObject enemy { get; set; }
+    public EnemyEffect effect { get; set; }
+
     GameObject AttackCircle, TimeCircle;
 
     // サークル拡大量
@@ -55,9 +56,6 @@ public class Ice : MonoBehaviour
 
         // サークルの透明度を下げる
         AttackCircle.GetComponent<SpriteRenderer>().color -= new Color32(0, 0, 0, 125);
-
-        // ザコ用
-        enemyEffect = enemy.GetComponent<EnemyBase>().GetEffect;
     }
 
     //----------------------------------
@@ -71,10 +69,10 @@ public class Ice : MonoBehaviour
             bAttackStart = true;
 
             gameObject.GetComponent<CapsuleCollider>().isTrigger = false;
-            gameObject.GetComponent<MeshRenderer>().enabled = true;
+            gameObject.GetComponent<MeshRenderer>().enabled = false;
 
             // エフェクト生成
-            //ObjEffect = enemyEffect.CreateEffect(EnemyEffect.eEffect.eFirePiller, gameObject, fLifeTime - fAttackStart);
+            ObjEffect = effect.CreateEffect(EnemyEffect.eEffect.eIcePiller, gameObject, fLifeTime - fAttackStart);
         }
 
         Destroy(gameObject, fLifeTime);

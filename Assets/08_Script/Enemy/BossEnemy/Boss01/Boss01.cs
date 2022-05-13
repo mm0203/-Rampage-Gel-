@@ -6,6 +6,8 @@
 // 2022/03/27 author：小椋駿 製作開始　ボスベース処理
 // 2022/03/28 author：竹尾　応急　ポータル出現、リスト消去機能コメントアウト
 // 2022/04/16 author：松野将之 設計変更 コンポーネントを細分化
+// 2022/05/09 author：竹尾　本来のワーム挙動へ変更
+// 2022/05/11 author：竹尾　ワーム完成（余裕あれば岩落とし実装）
 //
 //======================================================================
 
@@ -28,11 +30,11 @@ public class Boss01 : MonoBehaviour
     }
 
     // ボスの攻撃
-    private BossAttack bossAttack;
+    //private BossAttack bossAttack;
     // プレイヤー
     private GameObject player;
     // ボスの基底クラス
-    private BossBase BossBase;
+    private EnemyBase BossBase;
     // 前フレームの座標
     private Vector3 vOldPos;
 
@@ -41,11 +43,11 @@ public class Boss01 : MonoBehaviour
     //[SerializeField, Range(0.0f, 50.0f)] private float fAttackDis = 5.0f;
 
     [Header("攻撃頻度")]
-    [SerializeField, Range(0.0f, 10.0f)] private float fAttackTime = 3.0f;
+    [SerializeField, Range(0.0f, 10.0f)] private float fAttackTime = 10.0f;
 
     private float fAttackCount;
 
-    int nAttackType;
+    //int nAttackType;
 
     // エフェクト
     [Header("エフェクトシステム")] [SerializeField] EnemyEffect effect;
@@ -59,15 +61,26 @@ public class Boss01 : MonoBehaviour
     // ボスの前面に当たり判定用意
     GameObject FrontCube;
 
+
+    // 方向転換と移動速度
+    public float fspeed = 10.0f;
+    public float frotSpeed = 1;
+
+    bool bIsAttack = false;
+    Rigidbody PlayerRB;
+    //
+
+
     void Start()
     {
-        player = GameObject.Find("Player");
-        BossBase = GetComponent<BossBase>();
+        player = GameObject.FindWithTag("Player");
+        BossBase = GetComponent<EnemyBase>();
 
         // 攻撃関連
-        bossAttack = GetComponent<BossAttack>();
-        bossAttack.SetPlayer(player);
+        //bossAttack = GetComponent<BossAttack>();
+        //bossAttack.SetPlayer(player);
         fAttackCount = fAttackTime;
+        PlayerRB = player.GetComponent<Rigidbody>();
 
         // ボスの体、尾を生成
         body = Instantiate(body, transform.position, transform.rotation);
@@ -85,15 +98,19 @@ public class Boss01 : MonoBehaviour
         body.GetComponent<Boss01_body>().SetBossHead(gameObject);
         tail.GetComponent<Boss01_body>().SetBossFront(body);
         tail.GetComponent<Boss01_body>().SetBossHead(gameObject);
+
+        
+
     }
 
     void Update()
     {
         // 攻撃
-        //Attack();
+        Attack();
+        Aim_at_Player();
 
         // ボスが死んだら子オブジェクトも破壊
-        if(BossBase.Death() <= 0)
+        if (BossBase.nHp <= 0)
             DestroyObject();
     }
 
@@ -104,35 +121,58 @@ public class Boss01 : MonoBehaviour
         Destroy(body);
     }
 
+    // // Playerを狙い、動き続ける *****************************
+    void Aim_at_Player() 
+    {
+        //追従するように走る
+        Quaternion lookatWP = Quaternion.LookRotation(player.transform.position - this.transform.position);
+
+        this.transform.rotation = Quaternion.Slerp(transform.rotation, lookatWP, frotSpeed * Time.deltaTime);
+
+        this.transform.Translate(0, 0, fspeed * Time.deltaTime);
+    }
+    //**********************************************************
+
     // 攻撃
     void Attack()
     {
-        // 一定時間毎に攻撃
-        fAttackCount -= Time.deltaTime;
-        if(fAttackCount < 0.0f)
+        //一定時間毎に攻撃
+        if(bIsAttack == false)
         {
-            // 攻撃種類をランダムで
-            nAttackType = Random.Range(0, (int)eAttackType.eAttackMax) % (int)eAttackType.eAttackMax;
+            fAttackCount -= Time.deltaTime;
+        }
+        
+        if (fAttackCount < 0.0f)
+        {
+            bIsAttack = true;
+            frotSpeed = 5;
+            
+        }
+        else
+        {
+            frotSpeed = 1;
+        }
 
-            // 攻撃の分岐
-            switch (nAttackType)
-            {
-                // 火柱生成
-                case (int)eAttackType.eFire:
-                    bossAttack.CreateFire(player.transform.position);
-                    break;
+    }
 
-                // 火炎放射生成
-                case (int)eAttackType.eFlame:
-                    bossAttack.CreateFlame(player.transform.position);
-                    break;
-
-                default:
-                    break;
-            }
-
-            // タイマー初期化
+    private void OnTriggerEnter(Collider other)
+    {
+        // プレイヤーとの衝突時ダメージ
+        if (other.CompareTag("Player"))
+        {
             fAttackCount = fAttackTime;
         }
+
+        if (other.CompareTag("Player") && bIsAttack == true)
+        {
+            // ダメージ処理
+            player.GetComponent<PlayerHP>().OnDamage(BossBase.GetComponent<EnemyBase>().nAttack);
+
+            PlayerRB.AddForce(this.transform.forward * 500);
+
+            bIsAttack = false;
+        }
     }
+
+    
 }

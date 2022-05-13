@@ -33,11 +33,12 @@ public class GuardBurst : MonoBehaviour
 
     }
 
-    public void Explode(float power)
+    // 激しく吹っ飛ぶよう修正
+    public void Explode(int power)
     {
         // 敵を探す
         GameObject[] enemys = GameObject.FindGameObjectsWithTag("Enemy");
-
+        
         // 要素の中身分ループする
         foreach (GameObject hit in enemys)
         {
@@ -48,8 +49,30 @@ public class GuardBurst : MonoBehaviour
 
             if (rb != null)
             {
-                // 吹き飛ばす
-                rb.AddExplosionForce(power * status.MaxBurstPower, transform.position, power * status.MaxBurstRadisu, UpandDown);
+                // 要調整 ================================================================================================
+                if (hit.GetComponent<EnemyDamageBase>()) //
+                {
+                    if ((this.gameObject.transform.position - hit.transform.position).magnitude <= status.BurstRadisu * 10)
+                    {
+                        hit.GetComponent<EnemyDamageBase>().IsDamage((status.Attack * power) / 2);
+                    }
+
+                }
+                else
+                {
+                    if ((this.gameObject.transform.position - hit.transform.position).magnitude <= status.BurstRadisu * 10)
+                    {
+                        // BossBaseを書き換えてバーストでダメージを与えられるように
+                        //hit.GetComponent<BossBase>().IsDamage((status.Attack * power) / 2);
+                    }
+                }
+
+                // 吹き飛ばす               
+                rb.AddExplosionForce(power * status.MaxBurstPower, transform.position, status.MaxBurstRadisu, UpandDown);
+
+                //=====================================================================================================
+                
+                
             }
         }
     }

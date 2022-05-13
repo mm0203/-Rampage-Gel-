@@ -21,8 +21,8 @@ public class PlayerStatus : MonoBehaviour
     private int nMaxStamina = 450;
     private int nMaxAttack = 22;
     private int nMaxExp = 10;
-    private float fMaxBurstPower = 5;
-    private float fMaxBurstRadius = 1;
+    private float fMaxBurstPower = 3000;
+    private float fMaxBurstRadius = 5;
 
     // 基本ステータス(現在)
     private int nLevel = 1;
