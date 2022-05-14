@@ -14,17 +14,116 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/07_Scenes/OnGame/Planet1/Stage1-2.unity
     guid: 4f18abf7b61cc174397ffdf2f7bc144d
+  - enabled: 1
+    path: Assets/07_Scenes/OnGame/Planet1/Stage1-3.unity
+    guid: 9ae50ade795324a41bebd40862b040b9
+  - enabled: 1
+    path: Assets/07_Scenes/OnGame/Planet1/Stage1-4.unity
+    guid: 6eac666f40eaf5c4d9711aea8ec27912
+  - enabled: 1
+    path: Assets/07_Scenes/OnGame/Planet1/Stage1-5.unity
+    guid: 67669106245d73644b1624db7548fe5e
+  - enabled: 1
+    path: Assets/07_Scenes/OnGame/Planet2/Stage2-1.unity
+    guid: 2bcfa9efcdfe17644b80a94f42252fad
+  - enabled: 1
+    path: Assets/07_Scenes/OnGame/Planet2/Stage2-2.unity
+    guid: a86d395c68295834cbd2dc2f90410a72
+  - enabled: 1
+    path: Assets/07_Scenes/OnGame/Planet2/Stage2-3.unity
+    guid: 746a1d1a8ce287d4eadb3386935aa76b
+  - enabled: 1
+    path: Assets/07_Scenes/OnGame/Planet2/Stage2-4.unity
+    guid: 78a83697c6271d9468b009fe5b7e8d2b
+  - enabled: 1
+    path: Assets/07_Scenes/OnGame/Planet2/Stage2-5.unity
+    guid: 4a4a2b5ceb696bc4f922b85d5cfaf4bd
+  - enabled: 1
+    path: Assets/07_Scenes/OnGame/Planet3/Stage3-1.unity
+    guid: e925af4bd4423494199f5f3e3e165011
+  - enabled: 1
+    path: Assets/07_Scenes/OnGame/Planet3/Stage3-2.unity
+    guid: 5905731daa30c404e814aff25c380766
+  - enabled: 1
+    path: Assets/07_Scenes/OnGame/Planet3/Stage3-3.unity
+    guid: a6858be007f86f240b2a5bc142941a21
+  - enabled: 1
+    path: Assets/07_Scenes/OnGame/Planet3/Stage3-4.unity
+    guid: 3ffc45e3d2b5f114da3f34dc0b65b7fa
+  - enabled: 1
+    path: Assets/07_Scenes/OnGame/Planet3/Stage3-5.unity
+    guid: 39ac371120a8b3f43b7981111aa8c986
+  - enabled: 1
+    path: Assets/07_Scenes/OnGame/Planet4/Stage4-1.unity
+    guid: 81ab080a40c3a9d4d9d26cd968b3adba
+  - enabled: 1
+    path: Assets/07_Scenes/OnGame/Planet4/Stage4-2.unity
+    guid: 752bb2ab7f9e72243ab3bed265085d46
+  - enabled: 1
+    path: Assets/07_Scenes/OnGame/Planet4/Stage4-3.unity
+    guid: 19786f29180b0484b84af417fddfc64a
+  - enabled: 1
+    path: Assets/07_Scenes/OnGame/Planet4/Stage4-4.unity
+    guid: 5f051c0a05dd36140a3a12fe25aa41af
+  - enabled: 1
+    path: Assets/07_Scenes/OnGame/Planet4/Stage4-5.unity
+    guid: 5d672b88535b4aa42a8d2d2da151f32e
+  - enabled: 1
+    path: Assets/07_Scenes/OnGame/Planet5/Stage5-1.unity
+    guid: 7843ba616ec292642948b8f6cb110e0c
+  - enabled: 1
+    path: Assets/07_Scenes/OnGame/Planet5/Stage5-2.unity
+    guid: 799ee7dade10df54c8dccda927e34b9c
+  - enabled: 1
+    path: Assets/07_Scenes/OnGame/Planet5/Stage5-3.unity
+    guid: 5f460c8bd66c621428aaa026e1e80433
+  - enabled: 1
+    path: Assets/07_Scenes/OnGame/Planet5/Stage5-4.unity
+    guid: 3ffe0ae6786c5794dab34d55e1d6af89
+  - enabled: 1
+    path: Assets/07_Scenes/OnGame/Planet5/Stage5-5.unity
+    guid: 0c4c27c39bb1e6d4aba65678d2a4e6fe
+  - enabled: 1
+    path: Assets/07_Scenes/OnGame/Planet6/Stage6-1.unity
+    guid: 7c594337f3b76d046a6db0af5626ff66
+  - enabled: 1
+    path: Assets/07_Scenes/OnGame/Planet6/Stage6-2.unity
+    guid: 8e520271c0cd953438e75b0f6d328df8
+  - enabled: 1
+    path: Assets/07_Scenes/OnGame/Planet6/Stage6-3.unity
+    guid: 172fad76ad9477041967b3159c94d855
+  - enabled: 1
+    path: Assets/07_Scenes/OnGame/Planet6/Stage6-4.unity
+    guid: 955e49642594ff647ab554cc1bb73f17
+  - enabled: 1
+    path: Assets/07_Scenes/OnGame/Planet6/Stage6-5.unity
+    guid: d6d6d8c68a014d14a91fe89375b81800
+  - enabled: 1
+    path: Assets/07_Scenes/OnGame/Planet7/Stage7-1.unity
+    guid: 767a9a08677ef804e8b7f6b87656e244
+  - enabled: 1
+    path: Assets/07_Scenes/OnGame/Planet7/Stage7-2.unity
+    guid: 6904da83ed012944dae4e7ee91d600f2
+  - enabled: 1
+    path: Assets/07_Scenes/OnGame/Planet7/Stage7-3.unity
+    guid: abdaa1fd33e32184dafbcaafa31b6cea
+  - enabled: 1
+    path: Assets/07_Scenes/OnGame/Planet7/Stage7-4.unity
+    guid: 43e73e5603c894e49aa183d4458217f9
+  - enabled: 1
+    path: Assets/07_Scenes/OnGame/Planet7/Stage7-5.unity
+    guid: c29d4ea96cf768c45be7036a30e86925
   - enabled: 0
     path: 
     guid: bc123453f94d4784ca07f31251d030c0
   - enabled: 0
-    path: Assets/07_Scenes/OnGame/Planet1/Stage1-3.unity
+    path: 
     guid: 20d8ddf6ea85f9e4eb962060b943c4d9
   - enabled: 0
-    path: Assets/07_Scenes/OnGame/Planet1/Stage1-4.unity
+    path: 
     guid: 958658361283b2c41a5bcce2ef8b36e5
   - enabled: 0
-    path: Assets/07_Scenes/OnGame/Planet1/Stage1-5.unity
+    path: 
     guid: 8b9ace04a2bb83e4fba9bb0bc7c8e403
   - enabled: 0
     path: 

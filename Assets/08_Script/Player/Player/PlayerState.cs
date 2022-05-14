@@ -86,8 +86,10 @@ public class PlayerState : MonoBehaviour
         {
             if (!guardMode.bGuardPenalty)
             {
+                
                 GotoHardState();
             }
+            
         }
 
         // バースト移行
@@ -95,6 +97,8 @@ public class PlayerState : MonoBehaviour
         {
             if (bGuard)
             {
+                // 一定量振動させる
+                StartCoroutine("StartVibation");
                 GotoBurstState();
             }
         }
@@ -114,6 +118,8 @@ public class PlayerState : MonoBehaviour
         {
             if (bGuard)
             {
+                
+                StartCoroutine(StartVibation());
                 GotoBurstState();
             }
         }
@@ -311,6 +317,7 @@ public class PlayerState : MonoBehaviour
     public void GotoBurstState()
     {
         if (!IsHard) return;
+        
         eState = StateEnum.eBurst;
     }
 
@@ -318,4 +325,15 @@ public class PlayerState : MonoBehaviour
     {
         eState = StateEnum.eDie;
     }
+
+    // 振動コルーチン
+    IEnumerator StartVibation()
+    {
+        
+        XInputDotNetPure.GamePad.SetVibration(0, 5, 5);
+        yield return new WaitForSecondsRealtime(0.5f);
+        XInputDotNetPure.GamePad.SetVibration(0, 0, 0);
+    }
+
+    
 }
