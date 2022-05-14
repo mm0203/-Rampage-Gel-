@@ -47,7 +47,7 @@ public class BossTimer : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("aaa");
+        
 
         // ‰Šú‰»
         slider = GetComponent<Slider>();

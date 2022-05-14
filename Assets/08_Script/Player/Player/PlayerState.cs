@@ -36,6 +36,9 @@ public class PlayerState : MonoBehaviour
     bool bLflg = false;
     bool bRflg = false;
 
+    private bool m_isLAxisInUse = false;
+    private bool m_isRAxisInUse = false;
+
     GuardMode guardMode;
 
     // 硬化フラグ
@@ -59,9 +62,27 @@ public class PlayerState : MonoBehaviour
     {
         if (IsDie) return;
 
-        // キーボード移動 
-        if (IsDoubleTrigger(Input.GetMouseButtonDown(0), Input.GetMouseButtonDown(1)) ||
-        Input.GetAxis("LTrigger") >= 0.3f && Input.GetAxis("RTrigger") >= 0.3f)
+        //// XBox操作 ***********************************************
+        //if (IsDoubleTrigger_XBOXTriggerDown(Input.GetAxis("LTrigger"), Input.GetAxis("RTrigger")))
+        //{
+        //    if (!guardMode.bGuardPenalty)
+        //    {
+        //        GotoHardState();
+        //    }
+        //}
+
+        //// バースト移行
+        //if (IsDoubleTrigger_XBOXTriggerUP(Input.GetAxis("LTrigger"), Input.GetAxis("RTrigger")))
+        //{
+        //    if (bGuard)
+        //    {
+        //        GotoBurstState();
+        //    }
+        //}
+        //***********************************************************
+
+        // XBox操作 ************************************************* 
+        if (IsDoubleTrigger(Input.GetKeyDown("joystick button 4"), Input.GetKeyDown("joystick button 5")))
         {
             if (!guardMode.bGuardPenalty)
             {
@@ -70,14 +91,33 @@ public class PlayerState : MonoBehaviour
         }
 
         // バースト移行
-        if (IsDoubleTrigger(Input.GetMouseButtonUp(0), Input.GetMouseButtonUp(1)) 
-            || Input.GetAxis("LTrigger") <= 0.2f && Input.GetAxis("RTrigger") <= 0.2f)
+        if (IsDoubleTrigger(Input.GetKeyUp("joystick button 4"), Input.GetKeyUp("joystick button 5")))
         {
-            if(bGuard)
+            if (bGuard)
             {
                 GotoBurstState();
             }
         }
+        //***********************************************************
+
+        // キーボード操作********************************************
+        if (IsDoubleTrigger(Input.GetMouseButtonDown(0), Input.GetMouseButtonDown(1)))
+        {
+            if (!guardMode.bGuardPenalty)
+            {
+                GotoHardState();
+            }
+        }
+
+        // バースト移行
+        if (IsDoubleTrigger(Input.GetMouseButtonUp(0), Input.GetMouseButtonUp(1)))
+        {
+            if (bGuard)
+            {
+                GotoBurstState();
+            }
+        }
+        //***********************************************************
     }
 
     public bool IsDoubleTrigger(bool LB, bool RB)
@@ -118,6 +158,140 @@ public class PlayerState : MonoBehaviour
         bGuard = false;
         return false;
     }
+
+    // XBOXコントローラー処理 **********************************
+    public bool IsDoubleTrigger_XBOXTriggerDown(float LB, float RB)
+    {
+        if (LB != 0)
+        {
+            if (m_isLAxisInUse == false)
+            {
+                Debug.Log("押した");
+                bLflg = true;
+                m_isLAxisInUse = true;
+            }
+        }
+        if (LB == 0)
+        {
+
+            m_isLAxisInUse = false;
+        }
+
+        if (RB != 0)
+        {
+            if (m_isRAxisInUse == false)
+            {
+                bRflg = true;
+                m_isRAxisInUse = true;
+            }
+        }
+        if (RB == 0)
+        {
+            m_isLAxisInUse = false;
+        }
+
+
+
+        if (bLflg || bRflg)
+        {
+            time += Time.deltaTime;
+
+            if (time <= fInterbalTime)
+            {
+                if (LB > 0.1 && bRflg)
+                {
+                    bLflg = false;
+                    bRflg = false;
+                    bGuard = true;
+                    time = 0.0f;
+                    return true;
+                }
+                if (RB > 0.1 && bLflg)
+                {
+                    bLflg = false;
+                    bRflg = false;
+                    bGuard = true;
+                    time = 0.0f;
+                    return true;
+                }
+            }
+            else
+            {
+                bLflg = false;
+                bRflg = false;
+                time = 0.0f;
+            }
+        }
+        bGuard = false;
+        return false;
+    }
+
+    public bool IsDoubleTrigger_XBOXTriggerUP(float LB, float RB)
+    {
+        
+        if (LB != 0)
+        {
+            if (m_isLAxisInUse == false)
+            {
+                Debug.Log("押した");
+                bLflg = true;
+                m_isLAxisInUse = true;
+            }
+        }
+        if (LB == 0)
+        {
+
+            m_isLAxisInUse = false;
+        }
+
+        if (RB != 0)
+        {
+            if (m_isRAxisInUse == false)
+            {
+                bRflg = true;
+                m_isRAxisInUse = true;
+            }
+        }
+        if (RB == 0)
+        {
+            m_isLAxisInUse = false;
+        }
+
+
+        if (bLflg || bRflg)
+        {
+            time += Time.deltaTime;
+
+            if (time <= fInterbalTime)
+            {
+                if (LB > 0.1 && bRflg)
+                {
+                    bLflg = false;
+                    bRflg = false;
+                    bGuard = true;
+                    time = 0.0f;
+                    return true;
+                }
+                if (RB > 0.1 && bLflg)
+                {
+                    bLflg = false;
+                    bRflg = false;
+                    bGuard = true;
+                    time = 0.0f;
+                    return true;
+                }
+            }
+            else
+            {
+                bLflg = false;
+                bRflg = false;
+                time = 0.0f;
+            }
+        }
+        bGuard = false;
+        return false;
+    }
+    //**********************************************************
 
     // ノーマルモードに移行
     public void GotoNormalState()
