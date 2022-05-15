@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: SkullHead
   m_EditorClassIdentifier: 
   BossLevel: 1
-  BossHp: 20
-  BossAttack: 10
+  BossHp: 45
+  BossAttack: 20
   BossSpeed: 7

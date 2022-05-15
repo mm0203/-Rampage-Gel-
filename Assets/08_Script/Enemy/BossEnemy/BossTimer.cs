@@ -45,6 +45,8 @@ public class BossTimer : MonoBehaviour
 
     [SerializeField] GameObject Player;
 
+    public GameObject SoundPlayer ; 
+
     void Start()
     {
         
@@ -83,7 +85,34 @@ public class BossTimer : MonoBehaviour
 
                 // スライダーをHP用に
                 fMaxHP = fNowHp = Boss.GetComponent<EnemyBase>().nHp;
-               
+
+                switch (SceneManager.GetActiveScene().name)
+                {
+                    case "Stage1-5":
+                        SoundPlayer.GetComponent<BossDirection>().StartDirection(1);
+                        break;
+                    case "Stage2-5":
+                        SoundPlayer.GetComponent<BossDirection>().StartDirection(2);
+                        break;
+                    case "Stage3-5":
+                        SoundPlayer.GetComponent<BossDirection>().StartDirection(3);
+                        break;
+                    case "Stage4-5":
+                        SoundPlayer.GetComponent<BossDirection>().StartDirection(4);
+                        break;
+                    case "Stage5-5":
+                        SoundPlayer.GetComponent<BossDirection>().StartDirection(5);
+                        break;
+                    case "Stage6-5":
+                        SoundPlayer.GetComponent<BossDirection>().StartDirection(6);
+                        break;
+                    case "Stage7-5":
+                        SoundPlayer.GetComponent<BossDirection>().StartDirection(7);
+                        break;
+                    default:
+                        break;
+                }
+
                 bSetBoss = true;
             }
 
@@ -110,6 +139,8 @@ public class BossTimer : MonoBehaviour
             textMesh.text = fNowHp.ToString();
 
             fTimer = -1.0f;
+
+            
         }
         else 
         {

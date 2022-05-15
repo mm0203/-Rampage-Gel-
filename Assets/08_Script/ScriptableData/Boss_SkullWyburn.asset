@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BossLevel: 1
   BossHp: 390
-  BossAttack: 25
+  BossAttack: 30
   BossSpeed: 5

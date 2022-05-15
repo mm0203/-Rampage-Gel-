@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: RedMagician
   m_EditorClassIdentifier: 
   BossLevel: 1
-  BossHp: 50
-  BossAttack: 40
+  BossHp: 70
+  BossAttack: 45
   BossSpeed: 3

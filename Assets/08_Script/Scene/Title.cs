@@ -20,7 +20,7 @@ public class Title : MonoBehaviour
     void Start()
     {
         //‰Šú‰»
-        nTitleFrame = 0;
+        nTitleFrame = 1;
     }
     void Update()
     {
@@ -33,35 +33,53 @@ public class Title : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            nTitleFrame++;
-            if (nTitleFrame > 2)
-                nTitleFrame = 0;
+            //nTitleFrame++;
+            //if (nTitleFrame > 1)
+            //    nTitleFrame = 0;
+            nTitleFrame = 1;
         }
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            nTitleFrame--;
-            if (nTitleFrame < 0)
-                nTitleFrame = 2;
+            //nTitleFrame--;
+            //if (nTitleFrame < 0)
+            //    nTitleFrame = 1;
+            nTitleFrame = 2;
         }
-        if (nTitleFrame == 0)
-        {
-            if (Input.GetKeyDown(KeyCode.Return))
-                ChangeScene();
-            gTitleMenuChoice[nTitleFrame].SetActive(true);
-            gTitleMenuChoice[nTitleFrame + 1].SetActive(false);
-            gTitleMenuChoice[nTitleFrame + 2].SetActive(false);
+        //if (nTitleFrame == 0)
+        //{
+        //    if (Input.GetKeyDown(KeyCode.Return))
+        //        ChangeScene();
+        //    gTitleMenuChoice[nTitleFrame].SetActive(true);
+        //    gTitleMenuChoice[nTitleFrame + 1].SetActive(false);
+        //    gTitleMenuChoice[nTitleFrame + 2].SetActive(false);
             
-        }
-        if (nTitleFrame == 1)
+        //}
+        //if (nTitleFrame == 1)
+        //{
+        //    if (Input.GetKeyDown(KeyCode.Return))
+        //    {
+        //        Debug.Log("ƒQ[ƒ€‚â‚ß‚Ü‚·‚©H");
+        //        Application.Quit();
+        //    }
+        //    gTitleMenuChoice[nTitleFrame].SetActive(true);
+        //    gTitleMenuChoice[nTitleFrame - 1].SetActive(false);
+        //    gTitleMenuChoice[nTitleFrame + 1].SetActive(false);
+        //}
+
+        switch(nTitleFrame)
         {
-            if (Input.GetKeyDown(KeyCode.Return))
-            {
-                Debug.Log("ƒQ[ƒ€‚â‚ß‚Ü‚·‚©H");
-                Application.Quit();
-            }
-            gTitleMenuChoice[nTitleFrame].SetActive(true);
-            gTitleMenuChoice[nTitleFrame - 1].SetActive(false);
-            gTitleMenuChoice[nTitleFrame + 1].SetActive(false);
+            case 1:
+                if (Input.GetKeyDown(KeyCode.Return))
+                    ChangeScene();
+                gTitleMenuChoice[0].SetActive(true);
+                gTitleMenuChoice[1].SetActive(false);
+                break;
+            case 2:
+                if (Input.GetKeyDown(KeyCode.Return))
+                    Application.Quit();
+                gTitleMenuChoice[1].SetActive(true);
+                gTitleMenuChoice[0].SetActive(false);
+                break;
         }
     }
 

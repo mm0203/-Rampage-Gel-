@@ -371,7 +371,7 @@ public class EnemyManager : MonoBehaviour
                 break;
 
             default:
-                Debug.LogError("存在しないシーン");
+                Debug.LogError("存在しないシーン : " + nSceneNo );
                 break;
         }
 

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Monohorn
   m_EditorClassIdentifier: 
   BossLevel: 1
-  BossHp: 42
+  BossHp: 50
   BossAttack: 40
   BossSpeed: 10

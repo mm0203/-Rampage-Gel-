@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: BlueMagician
   m_EditorClassIdentifier: 
   BossLevel: 1
-  BossHp: 55
-  BossAttack: 20
+  BossHp: 90
+  BossAttack: 30
   BossSpeed: 3
