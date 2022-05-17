@@ -16,7 +16,7 @@ using UnityEngine.UI;
 public class ItemManager : MonoBehaviour
 {
     // ƒAƒCƒeƒ€‚ÌŽí—Þ
-    enum eItem
+    public enum eItem
     {
         eHp = 0,     // nHp
         eStamina,    // nStamina

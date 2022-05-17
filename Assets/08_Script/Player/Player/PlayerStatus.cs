@@ -17,7 +17,7 @@ public class PlayerStatus : MonoBehaviour
 
     // 基本ステータス(最大)
     private int nMaxLevel = 1;
-    private int nMaxHp = 40;
+    private int nMaxHp = 100;
     private int nMaxStamina = 450;
     private int nMaxAttack = 22;
     private int nMaxExp = 10;
@@ -26,7 +26,7 @@ public class PlayerStatus : MonoBehaviour
 
     // 基本ステータス(現在)
     private int nLevel = 1;
-    private int nHp = 40;
+    private int nHp = 100;
     private int nStamina = 450;
     private int nAttack = 22;
     private float fSpeed = 100.0f;
@@ -61,9 +61,9 @@ public class PlayerStatus : MonoBehaviour
     // 最大ステータスを参照
     public int MaxLevel { get { return nMaxLevel; } set { nMaxLevel = value; } }
     // 最大体力増やす
-    public int MaxHP { get { return nMaxHp + (itemManager.CountList[0] * nUpHP); } set { nMaxHp = value; } }
+    public int MaxHP { get { return nMaxHp + (itemManager.CountList[(int)ItemManager.eItem.eHp] * nUpHP); } set { nMaxHp = value; } }
     // 最大スタミナ増やす
-    public int MaxStamina { get { return nMaxStamina + (itemManager.CountList[1] * nUpStamina); } set { nMaxStamina = value; } }
+    public int MaxStamina { get { return nMaxStamina + (itemManager.CountList[(int)ItemManager.eItem.eStamina] * nUpStamina); } set { nMaxStamina = value; } }
     public int MaxAttack { get { return nMaxAttack; } set { nMaxAttack = value; } }
     public int MaxExp { get { return nMaxExp; } set { nMaxExp = value; } }
     public float MaxBurstPower { get { return fMaxBurstPower; } set { fMaxBurstPower = value; } }
@@ -74,21 +74,21 @@ public class PlayerStatus : MonoBehaviour
     public int HP { get { return nHp; } set { nHp = value; } }
     public int Stamina { get { return nStamina; } set { nStamina = value; } }
     // 攻撃力を増やす
-    public int Attack { get { return nAttack + (itemManager.CountList[2] * nUpAttack); } set { nAttack = value; } }
+    public int Attack { get { return nAttack + (itemManager.CountList[(int)ItemManager.eItem.eAttack] * nUpAttack); } set { nAttack = value; } }
     // スピードを速くする
-    public float Speed { get { return fSpeed + (itemManager.CountList[3] * fUpSpeed); } set { fSpeed = value; } }
+    public float Speed { get { return fSpeed + (itemManager.CountList[(int)ItemManager.eItem.eSpeed] * fUpSpeed); } set { fSpeed = value; } }
     public int Exp { get { return nExp; } set { nExp = value; } }
     public float BurstStock { get { return fBurstStock; } set { fBurstStock = value; } }
     // バーストダメージを増やす
-    public float BurstDamage { get { return fBurstDamage + (itemManager.CountList[5] * fBurstDamage); } set { fBurstDamage = value; } }
+    public float BurstDamage { get { return fBurstDamage + (itemManager.CountList[(int)ItemManager.eItem.eBurstDamage] * fBurstDamage); } set { fBurstDamage = value; } }
     public float BurstPower { get { return fBurstPower; } set { fBurstPower = value; } }
     // バースト範囲を増やす
-    public float BurstRadisu { get { return fBurstRadius + (itemManager.CountList[4] * fBurstRadius); } set { fBurstRadius = value; } }
-    public int StaminaRecovery { get { return nStaminaRecovery + (itemManager.CountList[11] * nStaminaRecovery); } }
+    public float BurstRadisu { get { return fBurstRadius + (itemManager.CountList[(int)ItemManager.eItem.eBurstRange] * fBurstRadius); } set { fBurstRadius = value; } }
+    public int StaminaRecovery { get { return nStaminaRecovery + (itemManager.CountList[(int)ItemManager.eItem.eStaminaHeal] * nStaminaRecovery); } }
     public int StaminaCost { get { return nStaminaCost; } }
 
     // レベルアップステータスを参照
-    public int UpHP { get { return nUpHP + (nUpHP * itemManager.CountList[10]); } set { nUpHP = value; } }
+    public int UpHP { get { return nUpHP + (nUpHP * itemManager.CountList[(int)ItemManager.eItem.eAutoHeal]); } set { nUpHP = value; } }
     public int UpExp { get { return nUpExp; } set { nExp = value; } }
     public int UpAttack { get { return nUpAttack; } set { nUpAttack = value; } }
 
@@ -97,11 +97,16 @@ public class PlayerStatus : MonoBehaviour
         if(other.CompareTag("Enemy"))
         {
             // 1以上なら持っている
-            if(itemManager.CountList[6] >= 1)
+            if(itemManager.CountList[(int)ItemManager.eItem.eFire] >= 1)
             {
-                for(int i = 0;i <= itemManager.CountList[6];i++)
+                for(int i = 0;i <= itemManager.CountList[(int)ItemManager.eItem.eFire]; i++)
                 {
-                    other.gameObject.AddComponent<BurningAttribute>();
+                    other.gameObject.AddComponent<BurningAttribute>();                    
+                }
+                for(int i = 0; i <= itemManager.CountList[(int)ItemManager.eItem.eDrain]; i++)
+                {
+                    Debug.Log("aaa");
+                    HP += 2;
                 }
             }
         }
