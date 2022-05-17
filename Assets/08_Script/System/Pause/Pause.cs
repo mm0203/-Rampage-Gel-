@@ -41,7 +41,7 @@ public class Pause : MonoBehaviour
         bLevelUpPause = false;
         bResume = true;
 
-        
+        DontDestroyOnLoad(this.gameObject);
         
     }
     void Update()
@@ -141,7 +141,7 @@ public class Pause : MonoBehaviour
     {
         bPause = b;
     }
-    private void SetbLevelPause(bool b)
+    public void SetbLevelPause(bool b)
     {
         bLevelUpPause = b;
     }
@@ -223,7 +223,7 @@ public class Pause : MonoBehaviour
             }
             if (nMenuFrame == 0)
             {
-                Debug.Log("左アイテム選択中");
+                //Debug.Log("左アイテム選択中");
                 
                 gLevelUpMenuChoice[nMenuFrame].SetActive(true);
                 gLevelUpMenuChoice[nMenuFrame + 1].SetActive(false);
@@ -239,7 +239,7 @@ public class Pause : MonoBehaviour
             }
             if (nMenuFrame == 1)
             {
-                Debug.Log("中央アイテム選択中");
+                //Debug.Log("中央アイテム選択中");
                 
                 gLevelUpMenuChoice[nMenuFrame].SetActive(true);
                 gLevelUpMenuChoice[nMenuFrame - 1].SetActive(false);
@@ -255,7 +255,7 @@ public class Pause : MonoBehaviour
             }
             if (nMenuFrame == 2)
             {
-                Debug.Log("右アイテム選択中");
+                //Debug.Log("右アイテム選択中");
                 
                 gLevelUpMenuChoice[nMenuFrame].SetActive(true);
                 gLevelUpMenuChoice[nMenuFrame - 1].SetActive(false);

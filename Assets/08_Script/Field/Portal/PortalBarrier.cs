@@ -22,7 +22,7 @@ public class PortalBarrier : MonoBehaviour
 
     void Update()
     {
-       Debug.Log("‚ ‚Æ" + nHp + "‰ñ‚ÅŠ„‚ê‚é");
+       //Debug.Log("‚ ‚Æ" + nHp + "‰ñ‚ÅŠ„‚ê‚é");
     }
 
     // ƒoƒŠƒA‚Ì“–‚½‚è”»’è

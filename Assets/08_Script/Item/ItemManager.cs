@@ -88,7 +88,7 @@ public class ItemManager : MonoBehaviour
     public int nItemCount(int itemID)
     {
         CountList[itemID]++;
-        Debug.Log(itemID + "番アイテム：" + CountList[itemID] + "個");
+        //Debug.Log(itemID + "番アイテム：" + CountList[itemID] + "個");
 
         if (CountList[itemID] == 1)
         {
@@ -96,7 +96,7 @@ public class ItemManager : MonoBehaviour
             imageObject.GetComponent<Image>().sprite = itemImage.ItemImageList[itemID];
             GetComponent<ItemUI>().CreateItemUI(DrawItemList.Count, imageObject);
         }
-
+        //Debug.Log(CountList[itemID]);
         return CountList[itemID];
     }
 

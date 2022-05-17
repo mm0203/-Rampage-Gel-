@@ -48,10 +48,11 @@ public class EnemyManager : MonoBehaviour
     float fLevelUpCount;
 
     // 現在の敵のレベル
-    int nEnemyLevel = 0;
+    public int nEnemyLevel = 1;
 
     GameObject player;
     GameObject enemy;
+    public GameObject Boss;
 
     [Header("ジェネレートデータ")]
     [SerializeField] GenerateEnemyData GenerateEnemyData;
@@ -85,11 +86,15 @@ public class EnemyManager : MonoBehaviour
         // 敵レベルアップ
         LevelUp();
 
+        
+
         // 減ったら新しく生成
         if (NowEnemyList.Count < vEnemyNum.y)
         {
             CreateEnemy();
         }
+
+        RemoveNullData();
     }
 
     //---------------
@@ -167,11 +172,11 @@ public class EnemyManager : MonoBehaviour
     //-----------------------
     private void InitEnemy()
     {
-        //// 現在シーンの取得
-        //Scene scene = SceneManager.GetActiveScene();
+        // 現在シーンの取得
+        Scene scene = SceneManager.GetActiveScene();
 
-        //// 現在シーンのビルド番号取得
-        //int nSceneNo = scene.buildIndex;
+        // 現在シーンのビルド番号取得
+        int nSceneNo = scene.buildIndex;
 
         //Debug.Log(nSceneNo);
 
@@ -181,8 +186,216 @@ public class EnemyManager : MonoBehaviour
         //// 出現する敵リスト取得   *TODO* Planet1しか対応していないため変更必須
         //EnemyList = GenerateEnemyData.Planet1[nSceneNo].EnemyList;
 
+        switch(nSceneNo)
+        {
+            case 1:
+                vEnemyNum.y = GenerateEnemyData.Planet1[nSceneNo-1].MaxEnemy;
+                EnemyList = GenerateEnemyData.Planet1[nSceneNo-1].EnemyList;
+                Boss = GenerateEnemyData.Planet1[nSceneNo - 1].BossEnemy;
+                break;
+            case 2:
+                vEnemyNum.y = GenerateEnemyData.Planet1[nSceneNo-1].MaxEnemy;
+                EnemyList = GenerateEnemyData.Planet1[nSceneNo-1].EnemyList;
+                Boss = GenerateEnemyData.Planet1[nSceneNo - 1].BossEnemy;
+                break;
+            case 3:
+                vEnemyNum.y = GenerateEnemyData.Planet1[nSceneNo-1].MaxEnemy;
+                EnemyList = GenerateEnemyData.Planet1[nSceneNo-1].EnemyList;
+                Boss = GenerateEnemyData.Planet1[nSceneNo - 1].BossEnemy;
+                break;
+            case 4:
+                vEnemyNum.y = GenerateEnemyData.Planet1[nSceneNo - 1].MaxEnemy;
+                EnemyList = GenerateEnemyData.Planet1[nSceneNo - 1].EnemyList;
+                Boss = GenerateEnemyData.Planet1[nSceneNo - 1].BossEnemy;
+                break;
+            case 5:
+                vEnemyNum.y = GenerateEnemyData.Planet1[nSceneNo - 1].MaxEnemy;
+                EnemyList = GenerateEnemyData.Planet1[nSceneNo - 1].EnemyList;
+                Boss = GenerateEnemyData.Planet1[nSceneNo - 1].BossEnemy;
+                break;
+
+            case 6:
+                vEnemyNum.y = GenerateEnemyData.Planet2[nSceneNo-6].MaxEnemy;
+                EnemyList = GenerateEnemyData.Planet2[nSceneNo-6].EnemyList;
+                Boss = GenerateEnemyData.Planet2[nSceneNo - 6].BossEnemy;
+                break;
+            case 7:
+                vEnemyNum.y = GenerateEnemyData.Planet2[nSceneNo - 6].MaxEnemy;
+                EnemyList = GenerateEnemyData.Planet2[nSceneNo - 6].EnemyList;
+                Boss = GenerateEnemyData.Planet2[nSceneNo - 6].BossEnemy;
+                break;
+            case 8:
+                vEnemyNum.y = GenerateEnemyData.Planet2[nSceneNo - 6].MaxEnemy;
+                EnemyList = GenerateEnemyData.Planet2[nSceneNo - 6].EnemyList;
+                Boss = GenerateEnemyData.Planet2[nSceneNo - 6].BossEnemy;
+                break;
+            case 9:
+                vEnemyNum.y = GenerateEnemyData.Planet2[nSceneNo - 6].MaxEnemy;
+                EnemyList = GenerateEnemyData.Planet2[nSceneNo - 6].EnemyList;
+                Boss = GenerateEnemyData.Planet2[nSceneNo - 6].BossEnemy;
+                break;
+            case 10:
+                vEnemyNum.y = GenerateEnemyData.Planet2[nSceneNo - 6].MaxEnemy;
+                EnemyList = GenerateEnemyData.Planet2[nSceneNo - 6].EnemyList;
+                Boss = GenerateEnemyData.Planet2[nSceneNo - 6].BossEnemy;
+                break;
+
+            case 11:
+                vEnemyNum.y = GenerateEnemyData.Planet3[nSceneNo - 11].MaxEnemy;
+                EnemyList = GenerateEnemyData.Planet3[nSceneNo - 11].EnemyList;
+                Boss = GenerateEnemyData.Planet3[nSceneNo - 11].BossEnemy;
+                break;
+            case 12:
+                vEnemyNum.y = GenerateEnemyData.Planet3[nSceneNo - 11].MaxEnemy;
+                EnemyList = GenerateEnemyData.Planet3[nSceneNo - 11].EnemyList;
+                Boss = GenerateEnemyData.Planet3[nSceneNo - 11].BossEnemy;
+                break;
+            case 13:
+                vEnemyNum.y = GenerateEnemyData.Planet3[nSceneNo - 11].MaxEnemy;
+                EnemyList = GenerateEnemyData.Planet3[nSceneNo - 11].EnemyList;
+                Boss = GenerateEnemyData.Planet3[nSceneNo - 11].BossEnemy;
+                break;
+            case 14:
+                vEnemyNum.y = GenerateEnemyData.Planet3[nSceneNo - 11].MaxEnemy;
+                EnemyList = GenerateEnemyData.Planet3[nSceneNo - 11].EnemyList;
+                Boss = GenerateEnemyData.Planet3[nSceneNo - 11].BossEnemy;
+                break;
+            case 15:
+                vEnemyNum.y = GenerateEnemyData.Planet3[nSceneNo - 11].MaxEnemy;
+                EnemyList = GenerateEnemyData.Planet3[nSceneNo - 11].EnemyList;
+                Boss = GenerateEnemyData.Planet3[nSceneNo - 11].BossEnemy;
+                break;
+
+            case 16:
+                vEnemyNum.y = GenerateEnemyData.Planet4[nSceneNo - 16].MaxEnemy;
+                EnemyList = GenerateEnemyData.Planet4[nSceneNo - 16].EnemyList;
+                Boss = GenerateEnemyData.Planet4[nSceneNo - 16].BossEnemy;
+                break;
+            case 17:
+                vEnemyNum.y = GenerateEnemyData.Planet4[nSceneNo - 16].MaxEnemy;
+                EnemyList = GenerateEnemyData.Planet4[nSceneNo - 16].EnemyList;
+                Boss = GenerateEnemyData.Planet4[nSceneNo - 16].BossEnemy;
+                break;
+            case 18:
+                vEnemyNum.y = GenerateEnemyData.Planet4[nSceneNo - 16].MaxEnemy;
+                EnemyList = GenerateEnemyData.Planet4[nSceneNo - 16].EnemyList;
+                Boss = GenerateEnemyData.Planet4[nSceneNo - 16].BossEnemy;
+                break;
+            case 19:
+                vEnemyNum.y = GenerateEnemyData.Planet4[nSceneNo - 16].MaxEnemy;
+                EnemyList = GenerateEnemyData.Planet4[nSceneNo - 16].EnemyList;
+                Boss = GenerateEnemyData.Planet4[nSceneNo - 16].BossEnemy;
+                break;
+            case 20:
+                vEnemyNum.y = GenerateEnemyData.Planet4[nSceneNo - 16].MaxEnemy;
+                EnemyList = GenerateEnemyData.Planet4[nSceneNo - 16].EnemyList;
+                Boss = GenerateEnemyData.Planet4[nSceneNo - 16].BossEnemy;
+                break;
+
+            case 21:
+                vEnemyNum.y = GenerateEnemyData.Planet5[nSceneNo - 21].MaxEnemy;
+                EnemyList = GenerateEnemyData.Planet5[nSceneNo - 21].EnemyList;
+                Boss = GenerateEnemyData.Planet5[nSceneNo - 21].BossEnemy;
+                break;
+            case 22:
+                vEnemyNum.y = GenerateEnemyData.Planet5[nSceneNo - 21].MaxEnemy;
+                EnemyList = GenerateEnemyData.Planet5[nSceneNo - 21].EnemyList;
+                Boss = GenerateEnemyData.Planet5[nSceneNo - 21].BossEnemy;
+                break;
+            case 23:
+                vEnemyNum.y = GenerateEnemyData.Planet5[nSceneNo - 21].MaxEnemy;
+                EnemyList = GenerateEnemyData.Planet5[nSceneNo - 21].EnemyList;
+                Boss = GenerateEnemyData.Planet5[nSceneNo - 21].BossEnemy;
+                break;
+            case 24:
+                vEnemyNum.y = GenerateEnemyData.Planet5[nSceneNo - 21].MaxEnemy;
+                EnemyList = GenerateEnemyData.Planet5[nSceneNo - 21].EnemyList;
+                Boss = GenerateEnemyData.Planet5[nSceneNo - 21].BossEnemy;
+                break;
+            case 25:
+                vEnemyNum.y = GenerateEnemyData.Planet5[nSceneNo - 21].MaxEnemy;
+                EnemyList = GenerateEnemyData.Planet5[nSceneNo - 21].EnemyList;
+                Boss = GenerateEnemyData.Planet5[nSceneNo - 21].BossEnemy;
+                break;
+
+            case 26:
+                vEnemyNum.y = GenerateEnemyData.Planet6[nSceneNo - 26].MaxEnemy;
+                EnemyList = GenerateEnemyData.Planet6[nSceneNo - 26].EnemyList;
+                Boss = GenerateEnemyData.Planet6[nSceneNo - 26].BossEnemy;
+                break;
+            case 27:
+                vEnemyNum.y = GenerateEnemyData.Planet6[nSceneNo - 26].MaxEnemy;
+                EnemyList = GenerateEnemyData.Planet6[nSceneNo - 26].EnemyList;
+                Boss = GenerateEnemyData.Planet6[nSceneNo - 26].BossEnemy;
+                break;
+            case 28:
+                vEnemyNum.y = GenerateEnemyData.Planet6[nSceneNo - 26].MaxEnemy;
+                EnemyList = GenerateEnemyData.Planet6[nSceneNo - 26].EnemyList;
+                Boss = GenerateEnemyData.Planet6[nSceneNo - 26].BossEnemy;
+                break;
+            case 29:
+                vEnemyNum.y = GenerateEnemyData.Planet6[nSceneNo - 26].MaxEnemy;
+                EnemyList = GenerateEnemyData.Planet6[nSceneNo - 26].EnemyList;
+                Boss = GenerateEnemyData.Planet6[nSceneNo - 26].BossEnemy;
+                break;
+            case 30:
+                vEnemyNum.y = GenerateEnemyData.Planet6[nSceneNo - 26].MaxEnemy;
+                EnemyList = GenerateEnemyData.Planet6[nSceneNo - 26].EnemyList;
+                Boss = GenerateEnemyData.Planet6[nSceneNo - 26].BossEnemy;
+                break;
+
+            case 31:
+                vEnemyNum.y = GenerateEnemyData.Planet7[nSceneNo - 31].MaxEnemy;
+                EnemyList = GenerateEnemyData.Planet7[nSceneNo - 31].EnemyList;
+                Boss = GenerateEnemyData.Planet7[nSceneNo - 31].BossEnemy;
+                break;
+            case 32:
+                vEnemyNum.y = GenerateEnemyData.Planet7[nSceneNo - 31].MaxEnemy;
+                EnemyList = GenerateEnemyData.Planet7[nSceneNo - 31].EnemyList;
+                Boss = GenerateEnemyData.Planet7[nSceneNo - 31].BossEnemy;
+                break;
+            case 33:
+                vEnemyNum.y = GenerateEnemyData.Planet7[nSceneNo - 31].MaxEnemy;
+                EnemyList = GenerateEnemyData.Planet7[nSceneNo - 31].EnemyList;
+                Boss = GenerateEnemyData.Planet7[nSceneNo - 31].BossEnemy;
+                break;
+            case 34:
+                vEnemyNum.y = GenerateEnemyData.Planet7[nSceneNo - 31].MaxEnemy;
+                EnemyList = GenerateEnemyData.Planet7[nSceneNo - 31].EnemyList;
+                Boss = GenerateEnemyData.Planet7[nSceneNo - 31].BossEnemy;
+                break;
+            case 35:
+                vEnemyNum.y = GenerateEnemyData.Planet7[nSceneNo - 31].MaxEnemy;
+                EnemyList = GenerateEnemyData.Planet7[nSceneNo - 31].EnemyList;
+                Boss = GenerateEnemyData.Planet7[nSceneNo - 31].BossEnemy;
+                break;
+
+            default:
+                Debug.LogError("存在しないシーン : " + nSceneNo );
+                break;
+        }
+
         // 敵の最大数保存
         nTmpMaxNum = vEnemyNum.y;
+    }
+
+    //-----------------------
+    // リスト整理
+    //-----------------------
+    void RemoveNullData()
+    {
+        if(NowEnemyList.Count > 0)
+        {
+            for (int i = 0; i < NowEnemyList.Count; i++)
+            {
+                if (NowEnemyList[i] == null)
+                {
+                    Debug.Log("リストから削除");
+                    NowEnemyList.Remove(NowEnemyList[i]);
+                }
+            }
+        }
+        
     }
 
     //-----------------------

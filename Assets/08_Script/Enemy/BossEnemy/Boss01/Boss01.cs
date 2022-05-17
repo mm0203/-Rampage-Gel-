@@ -7,6 +7,7 @@
 // 2022/03/28 author：竹尾　応急　ポータル出現、リスト消去機能コメントアウト
 // 2022/04/16 author：松野将之 設計変更 コンポーネントを細分化
 // 2022/05/09 author：竹尾　本来のワーム挙動へ変更
+// 2022/05/11 author：竹尾　ワーム完成（余裕あれば岩落とし実装）
 //
 //======================================================================
 
@@ -29,11 +30,11 @@ public class Boss01 : MonoBehaviour
     }
 
     // ボスの攻撃
-    private BossAttack bossAttack;
+    //private BossAttack bossAttack;
     // プレイヤー
     private GameObject player;
     // ボスの基底クラス
-    private BossBase BossBase;
+    private EnemyBase BossBase;
     // 前フレームの座標
     private Vector3 vOldPos;
 
@@ -46,7 +47,7 @@ public class Boss01 : MonoBehaviour
 
     private float fAttackCount;
 
-    int nAttackType;
+    //int nAttackType;
 
     // エフェクト
     [Header("エフェクトシステム")] [SerializeField] EnemyEffect effect;
@@ -61,22 +62,25 @@ public class Boss01 : MonoBehaviour
     GameObject FrontCube;
 
 
-    //
-    public float speed = 10.0f;
-    public float rotSpeed = 1;
-   
+    // 方向転換と移動速度
+    public float fspeed = 10.0f;
+    public float frotSpeed = 1;
+
+    bool bIsAttack = false;
+    Rigidbody PlayerRB;
     //
 
 
     void Start()
     {
-        player = GameObject.Find("Player");
-        BossBase = GetComponent<BossBase>();
+        player = GameObject.FindWithTag("Player");
+        BossBase = GetComponent<EnemyBase>();
 
         // 攻撃関連
-        bossAttack = GetComponent<BossAttack>();
-        bossAttack.SetPlayer(player);
+        //bossAttack = GetComponent<BossAttack>();
+        //bossAttack.SetPlayer(player);
         fAttackCount = fAttackTime;
+        PlayerRB = player.GetComponent<Rigidbody>();
 
         // ボスの体、尾を生成
         body = Instantiate(body, transform.position, transform.rotation);
@@ -106,7 +110,7 @@ public class Boss01 : MonoBehaviour
         Aim_at_Player();
 
         // ボスが死んだら子オブジェクトも破壊
-        if (BossBase.Death() <= 0)
+        if (BossBase.nHp <= 0)
             DestroyObject();
     }
 
@@ -123,9 +127,9 @@ public class Boss01 : MonoBehaviour
         //追従するように走る
         Quaternion lookatWP = Quaternion.LookRotation(player.transform.position - this.transform.position);
 
-        this.transform.rotation = Quaternion.Slerp(transform.rotation, lookatWP, rotSpeed * Time.deltaTime);
+        this.transform.rotation = Quaternion.Slerp(transform.rotation, lookatWP, frotSpeed * Time.deltaTime);
 
-        this.transform.Translate(0, 0, speed * Time.deltaTime);
+        this.transform.Translate(0, 0, fspeed * Time.deltaTime);
     }
     //**********************************************************
 
@@ -133,45 +137,21 @@ public class Boss01 : MonoBehaviour
     void Attack()
     {
         //一定時間毎に攻撃
-        fAttackCount -= Time.deltaTime;
+        if(bIsAttack == false)
+        {
+            fAttackCount -= Time.deltaTime;
+        }
+        
         if (fAttackCount < 0.0f)
         {
-            rotSpeed = 5;
+            bIsAttack = true;
+            frotSpeed = 5;
             
         }
         else
         {
-            rotSpeed = 1;
+            frotSpeed = 1;
         }
-
-        // 一定時間毎に攻撃
-        //fAttackCount -= Time.deltaTime;
-        //if(fAttackCount < 0.0f)
-        //{
-        //     //攻撃種類をランダムで
-        //    nAttackType = Random.Range(0, (int)eAttackType.eAttackMax) % (int)eAttackType.eAttackMax;
-
-        //     //攻撃の分岐
-        //    switch (nAttackType)
-        //    {
-        //         //火柱生成
-        //        case (int)eAttackType.eFire:
-        //            bossAttack.CreateFire(player.transform.position);
-        //            break;
-
-        //         //火炎放射生成
-        //        case (int)eAttackType.eFlame:
-        //            bossAttack.CreateFlame(player.transform.position);
-        //            break;
-
-        //        default:
-        //            break;
-        //    }
-
-        //     //タイマー初期化
-        //    fAttackCount = fAttackTime;
-        //}
-
 
     }
 
@@ -182,6 +162,17 @@ public class Boss01 : MonoBehaviour
         {
             fAttackCount = fAttackTime;
         }
+
+        if (other.CompareTag("Player") && bIsAttack == true)
+        {
+            // ダメージ処理
+            player.GetComponent<PlayerHP>().OnDamage(BossBase.GetComponent<EnemyBase>().nAttack);
+
+            PlayerRB.AddForce(this.transform.forward * 500);
+
+            bIsAttack = false;
+        }
     }
 
+    
 }

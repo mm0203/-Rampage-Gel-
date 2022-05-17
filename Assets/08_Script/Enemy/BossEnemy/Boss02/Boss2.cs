@@ -26,7 +26,7 @@ public class Boss2 : MonoBehaviour
     private Animator animation;
 
     // ボスの基底クラス
-    private BossBase BossBase;
+    private EnemyBase BossBase;
 
     private int nMaxHp;
 
@@ -44,7 +44,7 @@ public class Boss2 : MonoBehaviour
 
         animation = GetComponent<Animator>();
 
-        BossBase = GetComponent<BossBase>();
+        BossBase = GetComponent<EnemyBase>();
 
         nMaxHp = BossBase.enemyData.BossHp;
     }
@@ -93,7 +93,7 @@ public class Boss2 : MonoBehaviour
     private int OnDamegeHp()
     {
         // ボスの現在のHPを取得
-        int CurrentHP = BossBase.Death();
+        int CurrentHP = (int)BossBase.nHp;
         Debug.Log(CurrentHP);
 
         int nDivisionCnt = 0;

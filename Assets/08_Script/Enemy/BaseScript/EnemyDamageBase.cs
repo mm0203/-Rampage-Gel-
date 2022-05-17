@@ -21,7 +21,7 @@ public class EnemyDamageBase : MonoBehaviour
     // ダメージフラグ
     bool bDamage = false;
 
-    GameObject player;
+    [SerializeField]GameObject player;
 
     [Header("DamegeUI")]
     [SerializeField] private GameObject DamageObj;
@@ -36,7 +36,7 @@ public class EnemyDamageBase : MonoBehaviour
     // 速度に対するダメージ補正
     float fSpeedtoDamage = 0.03f;
 
-    //--------------------------
+    //--------------------------s
     // 初期化
     //--------------------------
     void Start()
@@ -54,7 +54,9 @@ public class EnemyDamageBase : MonoBehaviour
         fDamageCount = fDamageTime;
 
         // プレイヤー取得
-        player = gameObject.GetComponent<EnemyBase>().player;
+        player = this.gameObject.GetComponent<EnemyBase>().player;
+       
+
     }
 
     //--------------------------
@@ -62,6 +64,12 @@ public class EnemyDamageBase : MonoBehaviour
     //--------------------------
     void Update()
     {
+        // バグ対策
+        if(player == null)
+        {
+            player = this.gameObject.GetComponent<EnemyBase>().player;
+        }
+        
         // ダメージを受けていなければスキップ
         if (!bDamage) return;
 
@@ -101,6 +109,8 @@ public class EnemyDamageBase : MonoBehaviour
         }
     }
 
+
+
     //----------------------------
     // ダメージ処理
     //----------------------------
@@ -109,6 +119,19 @@ public class EnemyDamageBase : MonoBehaviour
         // ダメージ処理
         gameObject.GetComponent<EnemyBase>().nHp -= damage;
         ViewDamage(damage);
+
+        // 一瞬色を変える
+        ChangeMaterial();
+    }
+
+    //----------------------------
+    // グランドワーム専用
+    //----------------------------
+    public void TailDamage()
+    {
+        int n = (int)((player.GetComponent<PlayerStatus>().Attack * (int)player.GetComponent<Rigidbody>().velocity.magnitude) * fSpeedtoDamage);
+        gameObject.GetComponent<EnemyBase>().nHp -= n;
+        ViewDamage(n);
 
         // 一瞬色を変える
         ChangeMaterial();

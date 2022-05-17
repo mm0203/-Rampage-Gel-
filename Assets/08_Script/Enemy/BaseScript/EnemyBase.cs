@@ -13,6 +13,7 @@
 // 2022/04/15 author：松野将之 マスターデータからステータスを取得
 // 2022/04/21 author：小椋駿 GetEnemyDataを作成(EnamyManager.csにて使用)
 // 2022/04/28 author：竹尾　攻撃してこない不具合をeAnimetionに要素追加で対応
+// 2022/05/10 author：竹尾　BossBase統合
 //
 //======================================================================
 
@@ -35,7 +36,7 @@ public class EnemyBase : MonoBehaviour
     }
 
     // 敵のマスターデータ
-    [SerializeField] private EnemyData enemyData;
+    [SerializeField] public EnemyData enemyData;
     public EnemyData GetEnemyData { get { return enemyData; } }
 
     public GameObject player{ get; set; }
@@ -44,9 +45,10 @@ public class EnemyBase : MonoBehaviour
     private Animator animator;
     private Rigidbody rb;
 
-    // HPと攻撃力
+    // LvとHPと攻撃力
     public float nHp { get; set; }
-    private float nAttack;
+    public int nAttack { get; set; }
+    public int nLv { get; set; } = 1;
 
     // 前フレームの座標
     private Vector3 vOldPos;
@@ -74,14 +76,26 @@ public class EnemyBase : MonoBehaviour
     // 消滅距離
     float fDistance = 20.0f;
 
+    // ボス処理用
+    [SerializeField] bool bBoss = false;
+    [SerializeField] bool bNavOn = true;
+    [Header("ボスターゲットマーカー")]
+    [SerializeField] Canvas Marker;
+
+    //*応急
+    [SerializeField] GameObject Portals;
+    bool bPortal = false;
+
     //----------------------------
     // 初期化
     //----------------------------
     void Start()
     {
+        nLv = GameObject.Find("EnemyManager").GetComponent<EnemyManager>().nEnemyLevel;
+
         // ステータス初期化
-        nHp = enemyData.nHp + (enemyData.nLevel * enemyData.nUpHP);
-        nAttack = enemyData.nAttack + (enemyData.nLevel * enemyData.nUpAttack);
+        nHp = enemyData.BossHp + (nLv * (enemyData.BossHp / 10));
+        nAttack = enemyData.BossAttack + (nLv * (enemyData.nUpAttack / 10));
 
         // ナビメッシュ設定
         myAgent = GetComponent<NavMeshAgent>();
@@ -93,6 +107,21 @@ public class EnemyBase : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 
         fAttackCount = fAttackTime;
+
+        player = GameObject.FindWithTag("Player");
+        
+        
+        // ボスであるか
+        if (bBoss == true)
+        {
+            // 敵ターゲットマーカー生成
+            Marker = Instantiate(Marker, Vector3.zero, Quaternion.identity);
+
+            // ボス情報をセット
+            Marker.GetComponentInChildren<TargetMarker>().target = gameObject.transform;
+        }
+
+        //
     }
 
     //----------------------------
@@ -100,6 +129,12 @@ public class EnemyBase : MonoBehaviour
     //----------------------------
     void Update()
     {
+        // なぜか取得できないバグの対策
+        if(player == null)
+        {
+            player = GameObject.FindWithTag("Player");
+        }
+
         Burst();
         Move();
         Death();
@@ -111,11 +146,22 @@ public class EnemyBase : MonoBehaviour
     //----------------------------
     private void Death()
     {
+        
+
         // HP0以下で消滅
         if (nHp <= 0)
         {
+            if(bBoss == true)
+            {
+                // ポータル生成
+                Instantiate(Portals, this.gameObject.transform.position, Quaternion.identity);
+                bPortal = true;
+                // ターゲットマーカー消滅
+                Destroy(Marker.gameObject);
+            }
+
             // 経験値処理
-            player.GetComponent<PlayerExp>().AddExp(10);
+            player.GetComponent<PlayerExp>().AddExp(10); // 敵により変える
 
             // 効果音再生
             AudioSource.PlayClipAtPoint(DeathSE, transform.position);
@@ -129,16 +175,20 @@ public class EnemyBase : MonoBehaviour
     //----------------------------
     private void DistanceDeth()
     {
-        // プレイヤーとの差を計算
-        Vector2 vdistance = new Vector2(transform.position.x - player.transform.position.x, transform.position.z - player.transform.position.z);
-
-        // 消滅処理
-        if (vdistance.x > fDistance || vdistance.x < -fDistance ||vdistance.y > fDistance || vdistance.y < -fDistance)
+        if(bBoss == false)
         {
-            // リストから削除
-            manager.NowEnemyList.Remove(gameObject);
-            Destroy(this.gameObject);
+            // プレイヤーとの差を計算
+            Vector2 vdistance = new Vector2(transform.position.x - player.transform.position.x, transform.position.z - player.transform.position.z);
+
+            // 消滅処理
+            if (vdistance.x > fDistance || vdistance.x < -fDistance || vdistance.y > fDistance || vdistance.y < -fDistance)
+            {
+                // リストから削除
+                manager.NowEnemyList.Remove(gameObject);
+                Destroy(this.gameObject);
+            }
         }
+       
     }
 
 
@@ -182,49 +232,54 @@ public class EnemyBase : MonoBehaviour
     //----------------------------
     private void Move()
     {
-        // 動いているか
-        if ((vOldPos.x == transform.position.x || vOldPos.z == transform.position.z))
+        if (bNavOn == true)
         {
-            //Debug.Log("notmove");
+
+
+            // 動いているか
+            if ((vOldPos.x == transform.position.x || vOldPos.z == transform.position.z))
+            {
+                //Debug.Log("notmove");
+            }
+            else
+            {
+                // 移動モーション
+                animator.SetInteger("Parameter", (int)eAnimetion.eMove);
+                bFirstAttack = false;
+            }
+
+            // 攻撃中でないとき
+            if (!bAttack)
+            {
+                // 次の場所を計算
+                Vector3 nextPoint = myAgent.steeringTarget;
+                Vector3 targetDir = nextPoint - transform.position;
+
+                // 回転
+                Quaternion targetRotation = Quaternion.LookRotation(targetDir);
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 120f * Time.deltaTime);
+
+                // プレイヤーを追いかける
+                myAgent.SetDestination(player.transform.position);
+            }
+
+            // プレイヤーとの距離計算
+            Vector3 vDiffPos = this.transform.position - player.transform.position;
+
+            // 敵との距離が一定以下なら攻撃処理
+            if ((vDiffPos.x <= fAttackDis && vDiffPos.x >= -fAttackDis) && (vDiffPos.z <= fAttackDis && vDiffPos.z >= -fAttackDis))
+            {
+                EnemyAttack();
+            }
+            // 攻撃終了時動き出す
+            else if (myAgent.speed == 0.0f && !bAttack)
+            {
+                // スピードの再設定
+                myAgent.speed = enemyData.fSpeed;
+            }
+
+            vOldPos = this.gameObject.transform.position;
         }
-        else
-        {
-            // 移動モーション
-            animator.SetInteger("Parameter", (int)eAnimetion.eMove);
-            bFirstAttack = false;
-        }
-
-        // 攻撃中でないとき
-        if (!bAttack)
-        {
-           // 次の場所を計算
-           Vector3 nextPoint = myAgent.steeringTarget;
-            Vector3 targetDir = nextPoint - transform.position;
-
-           // 回転
-           Quaternion targetRotation = Quaternion.LookRotation(targetDir);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 120f * Time.deltaTime);
-
-            // プレイヤーを追いかける
-            myAgent.SetDestination(player.transform.position);
-        }
-
-        // プレイヤーとの距離計算
-        Vector3 vDiffPos = this.transform.position - player.transform.position;
-
-        // 敵との距離が一定以下なら攻撃処理
-        if ((vDiffPos.x <= fAttackDis && vDiffPos.x >= -fAttackDis) && (vDiffPos.z <= fAttackDis && vDiffPos.z >= -fAttackDis))
-        {
-            EnemyAttack();
-        }
-        // 攻撃終了時動き出す
-        else if (myAgent.speed == 0.0f && !bAttack)
-        {
-            // スピードの再設定
-            myAgent.speed = enemyData.fSpeed;
-        }
-
-        vOldPos = this.gameObject.transform.position;
     }
 
     //----------------------------

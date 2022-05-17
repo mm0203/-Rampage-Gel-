@@ -23,6 +23,8 @@ using UnityEngine;
 
 public class GuardMode : MonoBehaviour
 {
+    [SerializeField] private LineRenderer Direction = null;  // 発射方向
+
     // 停止
     private Stop stop;
 
@@ -37,8 +39,6 @@ public class GuardMode : MonoBehaviour
 
     // ガードゲージ
     private PlayerStatus status;
-    [SerializeField] private int nRecovery = 2;
-    [SerializeField] private int nCost = 1;
 
     // 爆発威力を収納
     private int fStockBurst = 0;
@@ -56,6 +56,10 @@ public class GuardMode : MonoBehaviour
     // ガード中に向き変えるための変数
     private Vector3 vStartPos = Vector3.zero;
     private Vector3 vCurrentForce = Vector3.zero;
+
+    // ガードペナルティ
+    public bool bGuardPenalty = false;
+    float fGuardPenaltyTime = 0.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -76,6 +80,16 @@ public class GuardMode : MonoBehaviour
             RecoveryGauge();
             DefaultModel.SetActive(true);
             GuardModel.SetActive(false);
+            // ガードペナルティ時間
+            if(bGuardPenalty)
+            {
+                fGuardPenaltyTime += Time.deltaTime;
+                if(fGuardPenaltyTime >= status.fGuardPenalty)
+                {
+                    fGuardPenaltyTime = 0.0f;
+                    bGuardPenalty = false;
+                }
+            }
         }
         // ハードモードなら
         if (state.IsHard)
@@ -110,6 +124,16 @@ public class GuardMode : MonoBehaviour
             // マウスの初期座標と動かした座標の差分を取得
             vCurrentForce = vStartPos - position;
 
+            // ガード中にダメージが当たったら
+            if (fStockBurst >= 0.01f)
+            {
+                // 矢印の引っ張り処理
+                Direction.enabled = true;
+                // 動く方向と逆に矢印が出るように
+                Direction.SetPosition(0, rb.position);
+                Direction.SetPosition(1, rb.position - transform.forward * 2);
+            }
+
             // 動く方向を見る
             if (vCurrentForce != new Vector3(0, 0, 0))
             {
@@ -126,6 +150,7 @@ public class GuardMode : MonoBehaviour
             burst.Explode(fStockBurst);
             // 瞬間的に力を加えてはじく
             rb.AddForce(transform.forward * fStockBurst, ForceMode.Impulse);
+            Direction.enabled = false;
             status.bArmor = true;
             status.fBreakTime = 0.0f;
             state.GotoNormalState();
@@ -150,7 +175,7 @@ public class GuardMode : MonoBehaviour
     private void RecoveryGauge()
     {
         // ゲージ量回復
-        status.Stamina += nRecovery;
+        status.Stamina += status.StaminaRecovery;
         if (status.Stamina >= status.MaxStamina)
         {
             status.Stamina = status.MaxStamina;
@@ -160,10 +185,12 @@ public class GuardMode : MonoBehaviour
     // ゲージ消費
     private void SubtractGauge()
     {
-        status.Stamina -= nCost;
+        status.Stamina -= status.StaminaCost;
         if (status.Stamina < 0)
         {
             status.Stamina = 0;
+            // ガードペナルティ発生
+            bGuardPenalty = true;
         }
     }
 

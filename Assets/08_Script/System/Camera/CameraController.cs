@@ -51,6 +51,8 @@ public class CameraController : MonoBehaviour
         //@Player‚Ìî•ñ‚ğæ“¾
         this.Player = GameObject.Find("Player");
 
+        Player.transform.position = new Vector3(0.47f, 0, 0.55f); 
+
         // ƒJƒƒ‰‚ÆPlayer‚Æ‚Ì‘Š‘Î‹——£‚ğ‹‚ß‚é
         Offset = transform.position - Player.transform.position;
     }

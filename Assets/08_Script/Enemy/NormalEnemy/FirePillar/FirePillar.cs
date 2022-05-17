@@ -47,6 +47,9 @@ public class FirePillar : MonoBehaviour
 
     private void FirePillarAttack()
     {
+        // プレイヤー取得
+        player = enemyBase.player;
+
         // 当たり判定用キューブ
         cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
 

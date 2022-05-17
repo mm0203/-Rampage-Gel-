@@ -25,11 +25,16 @@ public class PlayerHP : MonoBehaviour
     {
         status = GetComponent<PlayerStatus>();
         state = GetComponent<PlayerState>();
+        StartCoroutine("AutoHeal");
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            OnDamage(10);
+        }
     }
 
     // ダメージコールバック関数
@@ -54,6 +59,23 @@ public class PlayerHP : MonoBehaviour
         if (status.HP <= 0)
         {
             state.GotoDieState();
+        }
+    }
+
+    IEnumerator AutoHeal()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(1.0f);
+
+            if(status.HP <= status.MaxHP)
+            {
+                if (state.IsDie) yield break;
+                // 回復↓(回復量)
+                status.HP += status.UpHP;
+            }
+            //　次のフレームに飛ばす
+            yield return null;
         }
     }
 }

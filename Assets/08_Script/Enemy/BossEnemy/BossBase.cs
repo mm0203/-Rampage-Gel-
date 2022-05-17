@@ -58,7 +58,7 @@ public class BossBase : MonoBehaviour
     // 速度に対するダメージ補正
     float fSpeedtoDamage = 0.03f;
 
-    //*応急*
+    //*応急
     [SerializeField] GameObject Portals;
     bool bPortal = false;
 
