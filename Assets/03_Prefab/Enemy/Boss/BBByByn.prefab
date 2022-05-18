@@ -433,9 +433,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  enemyData: {fileID: 0}
   DivisionEnemy: {fileID: 7785710047647153494, guid: 0a3f955af5600e342bceb8ac27ced102, type: 3}
-  distance: 5
+  AttackField: {fileID: 5477982483691435718, guid: 2f2fac0baee509e4dbcb8b8e17b3ce6a, type: 3}
+  Radius: 5
 --- !u!114 &4246263011771263441
 MonoBehaviour:
   m_ObjectHideFlags: 0
