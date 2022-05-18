@@ -34,7 +34,7 @@ public class Boss2 : MonoBehaviour
     private int nMaxHp;
 
     private bool bHit = false;
-
+    private bool bField = false;
 
     // ”¼Œa
     public float distance = 5.0f;
@@ -159,5 +159,21 @@ public class Boss2 : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
         // UŒ‚”ÍˆÍ‚ğíœ
         Destroy(field);
+
+        if(bField)
+        {
+            player.GetComponent<PlayerHP>().OnDamage(30);
+        }
+        bField = false;
+
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            bField = true;
+        }
+
     }
 }

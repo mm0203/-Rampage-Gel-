@@ -54,9 +54,16 @@ public class DivisionEnemy : MonoBehaviour
         }
         if(fTime <= 0.0f)
         {
-            bAttackStart = true;
+            // ダメージ処理
+           // player.GetComponent<PlayerHP>().OnDamage(20);
+            if (bAttackStart)
+            {
+
+            }
+
             Destroy(this.AttackCircle);
             Destroy(this.gameObject);
+            bAttackStart = false;
         }
     }
 
@@ -76,10 +83,9 @@ public class DivisionEnemy : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.tag == "Player" && bAttackStart)
+        if (other.tag == "Player")
         {
-            // ダメージ処理
-            player.GetComponent<PlayerHP>().OnDamage(enemy.GetComponent<EnemyBase>().GetEnemyData.nAttack);
+            bAttackStart = true;
         }
     }
 }
