@@ -28,6 +28,9 @@ public class Boss2 : MonoBehaviour
     // ƒ{ƒX‚ÌŠî’êƒNƒ‰ƒX
     private EnemyBase BossBase;
 
+    // UŒ‚”ÍˆÍ
+    public GameObject AttackField;
+
     private int nMaxHp;
 
     private bool bHit = false;
@@ -56,7 +59,7 @@ public class Boss2 : MonoBehaviour
 
         if(Input.GetKey(KeyCode.O))
         {
-            animation.SetTrigger("attack");
+            CreateAttackField();
         }
 
         if(bHit)
@@ -132,5 +135,29 @@ public class Boss2 : MonoBehaviour
                 obj.transform.LookAt(center.transform);
             }
         }
+    }
+
+    // UŒ‚”ÍˆÍ•\¦
+    void CreateAttackField()
+    {
+        GameObject field = AttackField;
+
+        // UŒ‚”ÍˆÍ¶¬
+        field = Instantiate(field, new Vector3(this.transform.position.x, 0.1f, this.transform.position.z), field.transform.rotation);
+        // UŒ‚”ÍˆÍ‚ÌF‚ğÔF‚É
+        field.GetComponent<SpriteRenderer>().color = new Color32(255, 0, 0, 255);
+
+        // ”ÍˆÍ‚Ìíœ
+        StartCoroutine(AcidAttackField(field));
+
+    }
+
+    // UŒ‚”ÍˆÍíœ
+    IEnumerator AcidAttackField(GameObject field)
+    {
+        // UŒ‚”ÍˆÍ‚ª•\¦‚³‚ê‚Ä1.5•bŒo‰ß‚µ‚½‚ç
+        yield return new WaitForSeconds(1.5f);
+        // UŒ‚”ÍˆÍ‚ğíœ
+        Destroy(field);
     }
 }
