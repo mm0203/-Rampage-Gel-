@@ -49,6 +49,11 @@ public class GuardMode : MonoBehaviour
     //*応急* エフェクトスクリプト
     [SerializeField] AID_PlayerEffect effect;
 
+    // サウンドエフェクト
+    [SerializeField] SoundManager soundManager;
+    float fVibeInterbal  = 1.0f;
+    float fCountTime = 0;
+
     // ガードモデルとデフォルトモデル
     [SerializeField] private GameObject DefaultModel;
     [SerializeField] private GameObject GuardModel;
@@ -59,7 +64,8 @@ public class GuardMode : MonoBehaviour
 
     // ガードペナルティ
     public bool bGuardPenalty = false;
-    float fGuardPenaltyTime = 0.0f;
+    float fGuardPenaltyTime = 1.0f;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -69,6 +75,9 @@ public class GuardMode : MonoBehaviour
         state = GetComponent<PlayerState>();
         rb = GetComponent<Rigidbody>();
         status = GetComponent<PlayerStatus>();
+
+        fVibeInterbal = 1.0f;
+        fCountTime = 0;
     }
 
     // Update is called once per frame
@@ -143,9 +152,9 @@ public class GuardMode : MonoBehaviour
         // バーストモードなら
         if (state.IsBurst)
         {
-
             //*応急*
             effect.StartEffect(1, this.gameObject, 1.0f);
+            soundManager.Play_PlayerBurst(this.gameObject);
 
             // 爆発
             burst.Explode(fStockBurst);
@@ -162,6 +171,14 @@ public class GuardMode : MonoBehaviour
         // ハードモードかつゲージ残量があるなら停止
         if (state.IsHard && status.Stamina > 0)
         {
+            if(fCountTime < 0)
+            {
+                StartCoroutine(StartVibation());
+                fCountTime = fVibeInterbal;
+            }
+            fCountTime -= Time.deltaTime;
+
+
             stop.DoStop(rb);
         }
         else
@@ -191,6 +208,7 @@ public class GuardMode : MonoBehaviour
         {
             status.Stamina = 0;
             // ガードペナルティ発生
+            soundManager.Play_PlayerGuardBreak(this.gameObject);
             bGuardPenalty = true;
         }
     }
@@ -199,6 +217,7 @@ public class GuardMode : MonoBehaviour
     {
         //回数制に変更（竹尾）
         fStockBurst += 1;
+        soundManager.Play_PlayerDamageatGuardA(this.gameObject);
         if(fStockBurst > 6)
         {
             fStockBurst = 6;
@@ -210,4 +229,16 @@ public class GuardMode : MonoBehaviour
         return new Vector3(Input.mousePosition.x, 0, Input.mousePosition.y);
     }
 
+    // 振動コルーチン(ガード振動)
+    IEnumerator StartVibation()
+    {
+
+        XInputDotNetPure.GamePad.SetVibration(0, 1, 1);
+        yield return new WaitForSecondsRealtime(0.1f);
+        XInputDotNetPure.GamePad.SetVibration(0, 0, 0);
+        yield return new WaitForSecondsRealtime(0.1f);
+        XInputDotNetPure.GamePad.SetVibration(0, 1, 1);
+        yield return new WaitForSecondsRealtime(0.1f);
+        XInputDotNetPure.GamePad.SetVibration(0, 0, 0);
+    }
 }

@@ -32,6 +32,7 @@ public class Pause : MonoBehaviour
     int setItem_L = 0, setItem_C = 0, setItem_R = 0;
     bool bLotteryComp = false;
 
+    [SerializeField] SoundManager soundManager;
 
     void Start()
     {
@@ -52,6 +53,7 @@ public class Pause : MonoBehaviour
         {
             if (bResume)
             {
+               
                 SetbPause(true);
             }
             else
@@ -155,12 +157,14 @@ public class Pause : MonoBehaviour
         gPauseMenu.SetActive(b);
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
+            soundManager.Play_SystemSelect(this.gameObject);
             nMenuFrame++;
             if (nMenuFrame > 1)
                 nMenuFrame = 0;
         }
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
+            soundManager.Play_SystemSelect(this.gameObject);
             nMenuFrame--;
             if (nMenuFrame < 0)
                 nMenuFrame = 1;
@@ -171,6 +175,7 @@ public class Pause : MonoBehaviour
             gPauseMenuChoice[nMenuFrame + 1].SetActive(false);
             if (Input.GetKeyDown(KeyCode.Return))
             {
+                soundManager.Play_SystemDecide(this.gameObject);
                 SetbPause(false);               
             }
         }
@@ -179,6 +184,7 @@ public class Pause : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Return))
             {
                 Debug.Log("ƒQ[ƒ€‚â‚ß‚Ü‚·‚©H");
+                soundManager.Play_SystemDecide(this.gameObject);
                 Application.Quit();
             }
             gPauseMenuChoice[nMenuFrame].SetActive(true);
@@ -211,12 +217,14 @@ public class Pause : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.RightArrow))
             {
+                soundManager.Play_SystemSelect(this.gameObject);
                 nMenuFrame++;
                 if (nMenuFrame > 2)
                     nMenuFrame = 0;
             }
             if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
+                soundManager.Play_SystemSelect(this.gameObject);
                 nMenuFrame--;
                 if (nMenuFrame < 0)
                     nMenuFrame = 2;
@@ -232,6 +240,7 @@ public class Pause : MonoBehaviour
                 //Œˆ’èˆ—i’|”öj
                 if (Input.GetKeyDown(KeyCode.Return))
                 {
+                    soundManager.Play_SystemDecide(this.gameObject);
                     itemManager.nItemCount(setItem_L);
                     SetbLevelPause(false);
                     bLotteryComp = false;
@@ -248,6 +257,7 @@ public class Pause : MonoBehaviour
                 //Œˆ’èˆ—i’|”öj
                 if (Input.GetKeyDown(KeyCode.Return))
                 {
+                    soundManager.Play_SystemDecide(this.gameObject);
                     itemManager.nItemCount(setItem_C);
                     SetbLevelPause(false);
                     bLotteryComp = false;
@@ -264,6 +274,7 @@ public class Pause : MonoBehaviour
                 //Œˆ’èˆ—i’|”öj
                 if (Input.GetKeyDown(KeyCode.Return))
                 {
+                    soundManager.Play_SystemDecide(this.gameObject);
                     itemManager.nItemCount(setItem_R);
                     SetbLevelPause(false);
                     bLotteryComp = false;

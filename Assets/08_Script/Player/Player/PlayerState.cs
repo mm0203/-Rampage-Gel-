@@ -40,10 +40,10 @@ public class PlayerState : MonoBehaviour
     private bool m_isRAxisInUse = false;
 
     GuardMode guardMode;
+    [SerializeField]SoundManager soundManager;
 
     // 硬化フラグ
     public bool bGuard = false;
-    public bool bPadGuard = false;
 
     // 現在モード取得
     public bool IsNormal => eState == StateEnum.eNormal;
@@ -83,42 +83,26 @@ public class PlayerState : MonoBehaviour
         //***********************************************************
 
         // XBox操作 ************************************************* 
-        //if (IsDoubleTrigger(Input.GetKeyDown("joystick button 4"), Input.GetKeyDown("joystick button 5")))
-        //{
-        //    if (!guardMode.bGuardPenalty)
-        //    {              
-        //        GotoHardState();
-        //    }
-
-        //}
-        if (Input.GetAxis("LTrigger") >= 0.1f && Input.GetAxis("RTrigger") >= 0.1f)
+        if (IsDoubleTrigger(Input.GetKeyDown("joystick button 4"), Input.GetKeyDown("joystick button 5")))
         {
-            GotoHardState();
-            bPadGuard = true;
-        }
-
-        if (Input.GetAxis("LTrigger") <= 0.1f && Input.GetAxis("RTrigger") <= 0.1f)
-        {
-            if (bPadGuard)
+            if (!guardMode.bGuardPenalty)
             {
-                Debug.Log("aaa");
-                // 一定量振動させる
-                StartCoroutine("StartVibation");
-                GotoBurstState();
-                bPadGuard = false;
+                
+                GotoHardState();
             }
+            
         }
 
         // バースト移行
-        //if (IsDoubleTrigger(Input.GetKeyUp("joystick button 4"), Input.GetKeyUp("joystick button 5")))
-        //{
-        //    if (bGuard)
-        //    {
-        //        // 一定量振動させる
-        //        StartCoroutine("StartVibation");
-        //        GotoBurstState();
-        //    }
-        //}
+        if (IsDoubleTrigger(Input.GetKeyUp("joystick button 4"), Input.GetKeyUp("joystick button 5")))
+        {
+            if (bGuard)
+            {
+                // 一定量振動させる
+                StartCoroutine("StartVibation");
+                GotoBurstState();
+            }
+        }
         //***********************************************************
 
         // キーボード操作********************************************
@@ -160,6 +144,7 @@ public class PlayerState : MonoBehaviour
                     bRflg = false;
                     bGuard = true;
                     time = 0.0f;
+                    soundManager.Play_PlayerGuard(this.gameObject);
                     return true;
                 }
                 if (RB && bLflg)
@@ -168,6 +153,7 @@ public class PlayerState : MonoBehaviour
                     bRflg = false;
                     bGuard = true;
                     time = 0.0f;
+                    soundManager.Play_PlayerGuard(this.gameObject);
                     return true;
                 }
             }
@@ -343,12 +329,12 @@ public class PlayerState : MonoBehaviour
         eState = StateEnum.eDie;
     }
 
-    // 振動コルーチン
+    // 振動コルーチン(バースト)
     IEnumerator StartVibation()
     {
         
-        XInputDotNetPure.GamePad.SetVibration(0, 5, 5);
-        yield return new WaitForSecondsRealtime(0.5f);
+        XInputDotNetPure.GamePad.SetVibration(0, 3, 3);
+        yield return new WaitForSecondsRealtime(0.9f);
         XInputDotNetPure.GamePad.SetVibration(0, 0, 0);
     }
 

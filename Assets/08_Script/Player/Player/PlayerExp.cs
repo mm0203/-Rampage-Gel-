@@ -16,6 +16,7 @@ public class PlayerExp : MonoBehaviour
     PlayerStatus status;
     ItemManager itemManager;
     Pause LvupPause;
+    [SerializeField] SoundManager soundManager;
 
 
     // Start is called before the first frame update
@@ -38,6 +39,7 @@ public class PlayerExp : MonoBehaviour
 
         if(status.MaxExp <= status.Exp)
         {
+            soundManager.Play_PlayerLVUP(this.gameObject);
             LevelUp();
         }
     }

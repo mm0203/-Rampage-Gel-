@@ -19,6 +19,9 @@ public class PlayerHP : MonoBehaviour
 
     //*応急* エフェクトスクリプト
     [SerializeField] AID_PlayerEffect effect;
+    [SerializeField] SoundManager soundManager;
+
+    // サウンドマネージャー
 
     // Start is called before the first frame update
     void Start()
@@ -53,6 +56,9 @@ public class PlayerHP : MonoBehaviour
             return;
         }
 
+        StartCoroutine(StartVibation());
+        soundManager.Play_PlayerDamage(this.gameObject);
+
         // ダメージを与える
         status.HP -= damage;
         effect.StartEffect(8, this.gameObject, 0.5f);
@@ -77,5 +83,14 @@ public class PlayerHP : MonoBehaviour
             //　次のフレームに飛ばす
             yield return null;
         }
+    }
+
+    // 振動コルーチン(被ダメージ)
+    IEnumerator StartVibation()
+    {
+
+        XInputDotNetPure.GamePad.SetVibration(0, 9, 9);
+        yield return new WaitForSecondsRealtime(0.1f);
+        XInputDotNetPure.GamePad.SetVibration(0, 0, 0);
     }
 }
