@@ -50,6 +50,9 @@ public class EnemyManager : MonoBehaviour
     // 現在の敵のレベル
     public int nEnemyLevel = 1;
 
+    // ボス出現中か
+    public bool bBoss { get; set; } = false; 
+
     GameObject player;
     GameObject enemy;
     public GameObject Boss;
@@ -64,12 +67,14 @@ public class EnemyManager : MonoBehaviour
     {
         player = GameObject.Find("Player");
         fLevelUpCount = fLevelUpTime;
+        bBoss = false;
 
         // 敵初期化
         InitEnemy();
 
         // シーン切替検知
         SceneManager.activeSceneChanged += SceneChanged;
+
 
         DontDestroyOnLoad(this.gameObject);
     }
@@ -102,6 +107,8 @@ public class EnemyManager : MonoBehaviour
     //---------------
     private void CreateEnemy()
     {
+        if (bBoss) return;
+
         // 敵情報取得
         enemy = Instantiate(EnemyList[Random.Range(0, EnemyList.Count)], CreatePos(), Quaternion.identity);
 

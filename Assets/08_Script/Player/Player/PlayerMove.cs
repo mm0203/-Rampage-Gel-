@@ -35,10 +35,7 @@ public class PlayerMove : MonoBehaviour
 
     private Vector3 vCurrentForce = Vector3.zero; // 発射方向の力   
     private Vector3 vDragStart = Vector3.zero; // ドラッグ開始点
-   
-    
-    [Header("発射威力")]
-    [SerializeField] private float fInitial = 90.0f; // 初速倍率
+  
     [Header("減速率")]
     [SerializeField] private float fLate = 0.8f; // 減速率
     [Header("最大威力に到達する時間")]
@@ -73,6 +70,8 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
+
+        transform.position = new Vector3(transform.position.x, 0, transform.position.z);
         // 無いコンポーネントを入れなおす
         SetComponent();
 

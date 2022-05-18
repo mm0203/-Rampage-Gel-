@@ -143,6 +143,7 @@ public class GuardMode : MonoBehaviour
         // バーストモードなら
         if (state.IsBurst)
         {
+
             //*応急*
             effect.StartEffect(1, this.gameObject, 1.0f);
 
