@@ -16,6 +16,7 @@ public class Title : MonoBehaviour
     [SerializeField] int nTitleFrame;
     [SerializeField] SceneObject sNextScene;
     [SerializeField] List<GameObject> gTitleMenuChoice;
+    [SerializeField] SoundManager soundManager;
 
     void Start()
     {
@@ -33,6 +34,7 @@ public class Title : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
+            soundManager.Play_SystemSelect(this.gameObject);
             //nTitleFrame++;
             //if (nTitleFrame > 1)
             //    nTitleFrame = 0;
@@ -40,6 +42,7 @@ public class Title : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
+            soundManager.Play_SystemSelect(this.gameObject);
             //nTitleFrame--;
             //if (nTitleFrame < 0)
             //    nTitleFrame = 1;
@@ -70,13 +73,21 @@ public class Title : MonoBehaviour
         {
             case 1:
                 if (Input.GetKeyDown(KeyCode.Return))
+                {
+                    soundManager.Play_SystemDecide(this.gameObject);
                     ChangeScene();
+                }
+                    
                 gTitleMenuChoice[0].SetActive(true);
                 gTitleMenuChoice[1].SetActive(false);
                 break;
             case 2:
                 if (Input.GetKeyDown(KeyCode.Return))
+                {
+                    soundManager.Play_SystemDecide(this.gameObject);
                     Application.Quit();
+                }
+                    
                 gTitleMenuChoice[1].SetActive(true);
                 gTitleMenuChoice[0].SetActive(false);
                 break;
