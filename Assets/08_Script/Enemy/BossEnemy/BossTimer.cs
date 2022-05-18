@@ -45,7 +45,9 @@ public class BossTimer : MonoBehaviour
 
     [SerializeField] GameObject Player;
 
-    public GameObject SoundPlayer ; 
+    public GameObject SoundPlayer ;
+
+    GameObject enemyManager;
 
     void Start()
     {
@@ -58,6 +60,8 @@ public class BossTimer : MonoBehaviour
         Player = GameObject.FindWithTag("Player");
 
         bSetBoss = false;
+
+        enemyManager = GameObject.Find("EnemyManager");
     }
 
     void Update()
@@ -74,7 +78,7 @@ public class BossTimer : MonoBehaviour
                 // ボスの出現処理(座標は適当)
                 // プレイヤーの上方向に出現
                 Vector3 pos = new Vector3(Player.transform.position.x, Player.transform.position.y, Player.transform.position.z + 20.0f);
-                Boss = GameObject.Find("EnemyManager").GetComponent<EnemyManager>().Boss;
+                Boss = enemyManager.GetComponent<EnemyManager>().Boss;               
                 Boss = Instantiate(Boss, pos, Boss.transform.rotation);
 
                 // 中ボスにプレイヤー情報セット
@@ -114,6 +118,9 @@ public class BossTimer : MonoBehaviour
                 }
 
                 bSetBoss = true;
+
+                // ボス出現フラグON
+                enemyManager.GetComponent<EnemyManager>().bBoss = true;
             }
 
             // なぜか最初だけボスのHPが０なので
