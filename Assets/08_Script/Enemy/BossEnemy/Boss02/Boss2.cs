@@ -6,7 +6,7 @@
 // 2022/04/15 author：松野将之 ボス2(バイバイン)実装開始
 // 2022/04/26 author：松野将之 アニメーション追加(移動・攻撃)
 // 2022/05/02 author：松野将之 雑魚敵をボスの周りから円状に生成されるように
-//
+// 2022/05/18 author：松野将之 攻撃範囲・ダメージ処理追加                           
 //======================================================================
 using System.Collections;
 using System.Collections.Generic;
@@ -16,29 +16,29 @@ using UnityEngine.AI;
 public class Boss2 : MonoBehaviour
 {
     // プレイヤー情報
+    [Header("プレイヤーオブジェクト")]
     [SerializeField] private GameObject player;
-
-    [SerializeField] private EnemyData enemyData;
-
-    // 分裂する雑魚的e
+    // 分裂する雑魚敵
+    [Header("雑魚的オブジェクト")]
     public GameObject DivisionEnemy;
-
+    // アニメーション
     private Animator animation;
-
     // ボスの基底クラス
     private EnemyBase BossBase;
-
-    // 攻撃範囲
+    // 攻撃範囲の表示用オブジェクト
+    [Header("攻撃範囲表示用オブジェクト")]
     public GameObject AttackField;
 
+    // ボスの最大HP
     private int nMaxHp;
-
+    // ボスに接触したかどうか
     private bool bHit = false;
-    private bool bField = false;
-
-    // 半径
-    public float distance = 5.0f;
-
+    // 雑魚的生成の半径
+    private float distance = 5.0f;
+    // ボスの攻撃範囲
+    [Header("攻撃範囲")]
+    public float Radius = 5.0f;
+    // 雑魚敵が生成から消えるまでの時間
     private float fTime = 2.0f;
 
     void Start()
@@ -54,14 +54,6 @@ public class Boss2 : MonoBehaviour
 
     void Update()
     {
-        //Move(myAgent, Player);
-        //CreateDivision();
-
-        if(Input.GetKey(KeyCode.O))
-        {
-            CreateAttackField();
-        }
-
         if(bHit)
         {
             fTime -= Time.deltaTime;
@@ -149,31 +141,40 @@ public class Boss2 : MonoBehaviour
 
         // 範囲の削除
         StartCoroutine(AcidAttackField(field));
-
     }
 
     // 攻撃範囲削除
     IEnumerator AcidAttackField(GameObject field)
     {
-        // 攻撃範囲が表示されて1.5秒経過したら
-        yield return new WaitForSeconds(1.5f);
+        // 攻撃範囲が表示されて1.8秒経過したら
+        yield return new WaitForSeconds(1.8f);
         // 攻撃範囲を削除
         Destroy(field);
+    }
 
-        if(bField)
+    // ダメージ処理
+    void Boss2Attack()
+    {
+        // ボスの位置
+        Vector3 enemypos = this.transform.position;
+        // プレイヤーの位置
+        Vector3 playerpos = player.transform.position;
+
+        // ボスとプレイヤーの位置が交差してるならダメージ処理
+        if (InSphere(enemypos, Radius, playerpos))
         {
             player.GetComponent<PlayerHP>().OnDamage(30);
         }
-        bField = false;
-
     }
 
-    private void OnTriggerStay(Collider other)
+    // Aoeが消える時の判定取得用
+    public static bool InSphere(Vector3 p, float r, Vector3 c)
     {
-        if (other.tag == "Player")
+        var sum = 0f;
+        for (var i = 0; i < 3; i++)
         {
-            bField = true;
+            sum += Mathf.Pow(p[i] - c[i], 2);
         }
-
+        return sum <= Mathf.Pow(r, 2f);
     }
 }
