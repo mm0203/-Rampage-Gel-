@@ -327,7 +327,7 @@ GameObject:
   - component: {fileID: 5863549464275163825}
   m_Layer: 0
   m_Name: BBByByn
-  m_TagString: Enemy
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -375,7 +375,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.68
+  m_Radius: 1
   m_Height: 5
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
@@ -432,15 +432,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08078a4c26305824f98bb609d7e873d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< HEAD
-  player: {fileID: 0}
-  DivisionEnemy: {fileID: 7785710047647153494, guid: 0a3f955af5600e342bceb8ac27ced102, type: 3}
-  AttackField: {fileID: 5477982483691435718, guid: 2f2fac0baee509e4dbcb8b8e17b3ce6a, type: 3}
-=======
   enemyData: {fileID: 0}
   DivisionEnemy: {fileID: 7785710047647153494, guid: 0a3f955af5600e342bceb8ac27ced102, type: 3}
   AttackField: {fileID: 1567581828387049091, guid: 44b55e868d11eb84e903048b711a6bd2, type: 3}
->>>>>>> e149a8a258c01acb2fb151b6a78849217cd509b0
   Radius: 5
 --- !u!114 &4246263011771263441
 MonoBehaviour:
@@ -485,8 +479,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyData: {fileID: 11400000, guid: c4597ceb02028824bbea076e5e4653ba, type: 2}
   DeathSE: {fileID: 8300000, guid: da24daa9fcff69c4d884496fda891063, type: 3}
-  fAttackDis: 10
-  fAttackTime: 10
+  fAttackDis: 3
+  fAttackTime: 3
   bBoss: 1
   bNavOn: 1
   Marker: {fileID: 1745901886875421882, guid: 51a17eb9e33794a4eab9304a26a60304, type: 3}
