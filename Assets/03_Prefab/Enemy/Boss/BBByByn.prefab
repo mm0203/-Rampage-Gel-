@@ -432,9 +432,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08078a4c26305824f98bb609d7e873d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
   player: {fileID: 0}
   DivisionEnemy: {fileID: 7785710047647153494, guid: 0a3f955af5600e342bceb8ac27ced102, type: 3}
   AttackField: {fileID: 5477982483691435718, guid: 2f2fac0baee509e4dbcb8b8e17b3ce6a, type: 3}
+=======
+  enemyData: {fileID: 0}
+  DivisionEnemy: {fileID: 7785710047647153494, guid: 0a3f955af5600e342bceb8ac27ced102, type: 3}
+  AttackField: {fileID: 1567581828387049091, guid: 44b55e868d11eb84e903048b711a6bd2, type: 3}
+>>>>>>> e149a8a258c01acb2fb151b6a78849217cd509b0
   Radius: 5
 --- !u!114 &4246263011771263441
 MonoBehaviour:
