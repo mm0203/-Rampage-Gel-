@@ -15,29 +15,29 @@ using UnityEngine.AI;
 
 public class Boss2 : MonoBehaviour
 {
-    // プレイヤー情報
-    [Header("プレイヤーオブジェクト")]
-    [SerializeField] private GameObject player;
+    // ボスの情報
+    [Header("ボスの情報")]
+    public EnemyData enemyData;
     // 分裂する雑魚敵
     [Header("雑魚的オブジェクト")]
     public GameObject DivisionEnemy;
+    // 攻撃範囲の表示用オブジェクト
+    [Header("攻撃範囲表示用オブジェクト")]
+    public GameObject AttackField;
+    // ボスの攻撃範囲
+    [Header("攻撃範囲")]
+    public float Radius = 5.0f;
+
+    // プレイヤー情報
+    private GameObject player;
     // アニメーション
     private Animator animation;
     // ボスの基底クラス
     private EnemyBase BossBase;
-    // 攻撃範囲の表示用オブジェクト
-    [Header("攻撃範囲表示用オブジェクト")]
-    public GameObject AttackField;
-
     // ボスの最大HP
     private int nMaxHp;
-    // ボスに接触したかどうか
-    private bool bHit = false;
     // 雑魚的生成の半径
     private float distance = 5.0f;
-    // ボスの攻撃範囲
-    [Header("攻撃範囲")]
-    public float Radius = 5.0f;
     // 雑魚敵が生成から消えるまでの時間
     private float fTime = 2.0f;
 
@@ -46,35 +46,26 @@ public class Boss2 : MonoBehaviour
         player = GameObject.FindWithTag("Player").gameObject;
 
         animation = GetComponent<Animator>();
-
         BossBase = GetComponent<EnemyBase>();
-
-        nMaxHp = BossBase.enemyData.BossHp;
+        // ボスの最大HP設定
+        nMaxHp = enemyData.BossHp;
     }
 
     void Update()
     {
-        if(bHit)
-        {
-            fTime -= Time.deltaTime;
 
-            if(fTime <= 0.0f)
-            {
-                fTime = 2.0f;
-                bHit = false;
-            }
-        }
     }
 
     private void OnTriggerEnter(Collider other) // 竹尾：CollisionからTriggerへ仮変更、プレイヤーを何とかしたら戻す
     {
-        if (other.gameObject.tag == "Player" && !bHit)
+        if (other.gameObject.tag == "Player")
         {
-            bHit = true;
+            //bHit = true;
 
             // ボスのHPを取得
             int nDivisionCnt = OnDamegeHp();
 
+            // 雑魚敵の生成
             CreateDivision(DivisionEnemy,    // 生成するオブジェクト
                            nDivisionCnt * 2, // 生成する数
                            this.gameObject,  // 中心のオブジェクト
@@ -163,18 +154,18 @@ public class Boss2 : MonoBehaviour
         // ボスとプレイヤーの位置が交差してるならダメージ処理
         if (InSphere(enemypos, Radius, playerpos))
         {
-            player.GetComponent<PlayerHP>().OnDamage(30);
+            player.GetComponent<PlayerHP>().OnDamage(enemyData.BossAttack);
         }
     }
 
     // Aoeが消える時の判定取得用
-    public static bool InSphere(Vector3 p, float r, Vector3 c)
+    public static bool InSphere(Vector3 pos, float rad, Vector3 center)
     {
         var sum = 0f;
         for (var i = 0; i < 3; i++)
         {
-            sum += Mathf.Pow(p[i] - c[i], 2);
+            sum += Mathf.Pow(pos[i] - center[i], 2);
         }
-        return sum <= Mathf.Pow(r, 2f);
+        return sum <= Mathf.Pow(rad, 2f);
     }
 }
