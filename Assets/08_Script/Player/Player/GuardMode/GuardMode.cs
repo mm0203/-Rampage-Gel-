@@ -160,7 +160,7 @@ public class GuardMode : MonoBehaviour
                 soundManager.Play_PlayerBurst(this.gameObject);
             }
 
-            Debug.Log(transform.forward * fStockBurst);
+            
             // ”š”­
             burst.Explode(fStockBurst);
             // uŠÔ“I‚É—Í‚ğ‰Á‚¦‚Ä‚Í‚¶‚­
