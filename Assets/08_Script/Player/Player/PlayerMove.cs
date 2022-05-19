@@ -225,7 +225,7 @@ public class PlayerMove : MonoBehaviour
         float y = Input.GetAxis("Vertical");
 
         // スティックを倒してるなら
-        if (Mathf.Abs(x) >= 0.5f || Mathf.Abs(y) >= 0.5f)
+        if (Mathf.Abs(x) >= 1.0f || Mathf.Abs(y) >= 1.0f)
         {
             if (bPlatOneshot_pull == false)
             {
@@ -248,9 +248,13 @@ public class PlayerMove : MonoBehaviour
             Direction.SetPosition(1, rb.position - vCurrentForce.normalized * 2);
 
             fStockPower += Time.deltaTime;
-            if (fStockPower < 2)
+            if (fStockPower < fInputTime)
             {
                 fStockPower += Time.deltaTime;
+            }
+            else
+            {
+                fStockPower = fInputTime;
             }
         }
         else if (bShot == true)

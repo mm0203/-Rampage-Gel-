@@ -20,7 +20,7 @@ public class PlayerStatus : MonoBehaviour
     private int nMaxHp = 100;
     private int nMaxStamina = 450;
     private int nMaxAttack = 22;
-    private int nMaxExp = 10;
+    private int nMaxExp = 100;
     private float fMaxBurstPower = 3000;
     private float fMaxBurstRadius = 5;
 
@@ -47,7 +47,7 @@ public class PlayerStatus : MonoBehaviour
     private int nUpHP = 1;
     private int nUpStamina = 10;
     private float fUpSpeed = 5.0f;
-    private int nUpExp = 20;
+    private int nUpExp = 50;
     private int nHeal = 1;
     private int nUpAttack = 6;
 

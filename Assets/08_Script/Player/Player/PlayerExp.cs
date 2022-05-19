@@ -54,7 +54,9 @@ public class PlayerExp : MonoBehaviour
         // 現在Expを0にする
         status.Exp = 0;
         // 次のレベルアップまでの経験値量を増やす
-        status.MaxExp += status.UpExp;
-        
+        //status.MaxExp += status.UpExp;
+        status.MaxExp = (int)(status.MaxExp * 1.2f);
+
+
     }
 }

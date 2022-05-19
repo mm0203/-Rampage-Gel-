@@ -44,6 +44,7 @@ public class PlayerState : MonoBehaviour
 
     // 硬化フラグ
     public bool bGuard = false;
+    public bool bPadGuard = false;
 
     // 現在モード取得
     public bool IsNormal => eState == StateEnum.eNormal;
@@ -83,24 +84,23 @@ public class PlayerState : MonoBehaviour
         //***********************************************************
 
         // XBox操作 ************************************************* 
-        if (IsDoubleTrigger(Input.GetKeyDown("joystick button 4"), Input.GetKeyDown("joystick button 5")))
+        //if (IsDoubleTrigger(Input.GetKeyDown("joystick button 4"), Input.GetKeyDown("joystick button 5")))
+        if(Input.GetAxis("LTrigger") >= 0.1f && Input.GetAxis("RTrigger") >= 0.1f)
         {
-            if (!guardMode.bGuardPenalty)
-            {
-                
-                GotoHardState();
-            }
-            
+            GotoHardState();
+            bPadGuard = true;
         }
 
         // バースト移行
-        if (IsDoubleTrigger(Input.GetKeyUp("joystick button 4"), Input.GetKeyUp("joystick button 5")))
+        //if (IsDoubleTrigger(Input.GetKeyUp("joystick button 4"), Input.GetKeyUp("joystick button 5")))
+        if (Input.GetAxis("LTrigger") <= 0.1f && Input.GetAxis("RTrigger") <= 0.1f)
         {
-            if (bGuard)
+            if (bPadGuard)
             {
                 // 一定量振動させる
                 StartCoroutine("StartVibation");
                 GotoBurstState();
+                bPadGuard = false;
             }
         }
         //***********************************************************
@@ -320,7 +320,6 @@ public class PlayerState : MonoBehaviour
     public void GotoBurstState()
     {
         if (!IsHard) return;
-        
         eState = StateEnum.eBurst;
     }
 

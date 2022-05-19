@@ -99,9 +99,14 @@ public class EnemyDamageBase : MonoBehaviour
         // プレイヤーとの衝突時ダメージ
         if (other.CompareTag("Player"))
         {
+            
             // ダメージ処理
             int n = (int)((player.GetComponent<PlayerStatus>().Attack * (int)player.GetComponent<Rigidbody>().velocity.magnitude) * fSpeedtoDamage);
+            if (n <= 0) return;
+
             gameObject.GetComponent<EnemyBase>().nHp -= n;
+            
+            
             ViewDamage(n);
 
             // 一瞬色を変える
@@ -116,6 +121,7 @@ public class EnemyDamageBase : MonoBehaviour
     //----------------------------
     public void IsDamage(int damage)
     {
+        if (damage <= 0) return;
         // ダメージ処理
         gameObject.GetComponent<EnemyBase>().nHp -= damage;
         ViewDamage(damage);

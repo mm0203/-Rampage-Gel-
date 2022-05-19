@@ -95,6 +95,7 @@ public class GuardMode : MonoBehaviour
                 fGuardPenaltyTime += Time.deltaTime;
                 if(fGuardPenaltyTime >= status.fGuardPenalty)
                 {
+                    soundManager.Play_PlayerGuardBreak(this.gameObject);
                     fGuardPenaltyTime = 0.0f;
                     bGuardPenalty = false;
                 }
@@ -152,14 +153,18 @@ public class GuardMode : MonoBehaviour
         // バーストモードなら
         if (state.IsBurst)
         {
-            //*応急*
-            effect.StartEffect(1, this.gameObject, 1.0f);
-            soundManager.Play_PlayerBurst(this.gameObject);
+            if(fStockBurst > 0)
+            {
+                //*応急*
+                effect.StartEffect(1, this.gameObject, 1.0f);
+                soundManager.Play_PlayerBurst(this.gameObject);
+            }
 
+            Debug.Log(transform.forward * fStockBurst);
             // 爆発
             burst.Explode(fStockBurst);
             // 瞬間的に力を加えてはじく
-            rb.AddForce(transform.forward * fStockBurst, ForceMode.Impulse);
+            rb.AddForce(vCurrentForce.normalized * fStockBurst * 50, ForceMode.Impulse);
             Direction.enabled = false;
             status.bArmor = true;
             status.fBreakTime = 0.0f;
@@ -208,7 +213,7 @@ public class GuardMode : MonoBehaviour
         {
             status.Stamina = 0;
             // ガードペナルティ発生
-            soundManager.Play_PlayerGuardBreak(this.gameObject);
+            
             bGuardPenalty = true;
         }
     }
