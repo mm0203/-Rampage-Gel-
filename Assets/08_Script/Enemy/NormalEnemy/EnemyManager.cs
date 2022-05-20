@@ -67,7 +67,7 @@ public class EnemyManager : MonoBehaviour
     {
         player = GameObject.Find("Player");
         fLevelUpCount = fLevelUpTime;
-        bBoss = false;
+        
 
         // “G‰Šú‰»
         InitEnemy();
@@ -179,6 +179,8 @@ public class EnemyManager : MonoBehaviour
     //-----------------------
     private void InitEnemy()
     {
+        bBoss = false;
+
         // Œ»İƒV[ƒ“‚Ìæ“¾
         Scene scene = SceneManager.GetActiveScene();
 
