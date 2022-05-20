@@ -775,8 +775,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyData: {fileID: 11400000, guid: a750798941019324fae1ec33edf59be0, type: 2}
   DeathSE: {fileID: 8300000, guid: da24daa9fcff69c4d884496fda891063, type: 3}
-  fAttackDis: 5
-  fAttackTime: 1
+  fAttackDis: 3
+  fAttackTime: 2
   bBoss: 0
   bNavOn: 1
   Marker: {fileID: 0}

@@ -146,8 +146,6 @@ public class EnemyBase : MonoBehaviour
     //----------------------------
     private void Death()
     {
-        
-
         // HP0à»â∫Ç≈è¡ñ≈
         if (nHp <= 0)
         {
@@ -199,7 +197,7 @@ public class EnemyBase : MonoBehaviour
     {
         // ìÆÇ´Çé~ÇﬂÇÈ
         myAgent.speed = 0.0f;
-        myAgent.velocity = Vector3.zero;
+        //myAgent.velocity = Vector3.zero;
 
         // çUåÇäJénÇ©îªíË or çUåÇîÕàÕÇ…ì¸Ç¡ÇƒÇ©ÇÁÅAç≈èâÇÃçUåÇÇÃéû
         if (IsAttack() || !bFirstAttack)
@@ -234,8 +232,6 @@ public class EnemyBase : MonoBehaviour
     {
         if (bNavOn == true)
         {
-
-
             // ìÆÇ¢ÇƒÇ¢ÇÈÇ©
             if ((vOldPos.x == transform.position.x || vOldPos.z == transform.position.z))
             {
@@ -294,13 +290,10 @@ public class EnemyBase : MonoBehaviour
             // 2ïbå„Ç…ÅAï®óùââéZOFFÇ…Ç∑ÇÈ(âº)
             fBurstTime -= Time.deltaTime;
             if (fBurstTime < 0.0)
-            {
-                
+            {          
                 fBurstTime = fSetOldBurstTime;
                 
-                rb.isKinematic = true;
-                
-                
+                rb.isKinematic = true;         
             }
         }
         else

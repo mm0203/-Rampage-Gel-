@@ -29,7 +29,7 @@ public class Rush : MonoBehaviour
         }
 
         // 突進処理
-        enemy.transform.position += enemy.transform.forward * (Time.deltaTime * 5.0f);
+        enemy.transform.position += enemy.transform.forward * (Time.deltaTime * 3.0f);
 
         // 当たり判定キューブも敵と一緒に動く
         transform.position = new Vector3(enemy.transform.position.x + enemy.transform.forward.x,
@@ -47,6 +47,8 @@ public class Rush : MonoBehaviour
         {
             // ダメージ処理
             player.GetComponent<PlayerHP>().OnDamage(enemy.GetComponent<EnemyBase>().GetEnemyData.nAttack);
+
+            player.GetComponent<Rigidbody>().AddForce(this.transform.forward * 1500);
 
             Destroy(gameObject);
         }
