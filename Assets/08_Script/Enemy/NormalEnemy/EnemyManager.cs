@@ -59,6 +59,8 @@ public class EnemyManager : MonoBehaviour
 
     [Header("ジェネレートデータ")]
     [SerializeField] GenerateEnemyData GenerateEnemyData;
+    [SerializeField] GameObject Sou;
+
 
     //---------------
     // 初期化
@@ -107,7 +109,7 @@ public class EnemyManager : MonoBehaviour
     //---------------
     private void CreateEnemy()
     {
-        if (bBoss) return;
+        if(Sou.GetComponent<BossDirection>().bDirection) return;
 
         // 敵情報取得
         enemy = Instantiate(EnemyList[Random.Range(0, EnemyList.Count)], CreatePos(), Quaternion.identity);

@@ -30,6 +30,9 @@ public class BossDirection : MonoBehaviour
     int nShowTime = 2;
     int nReturnTime = 1;
 
+    // 演出中か
+    public bool bDirection = false;
+
     private void Update()
     {
         setBossPosition();
@@ -37,6 +40,9 @@ public class BossDirection : MonoBehaviour
 
     public void StartDirection(int bgmNumber)
     {
+        // 演出開始
+        bDirection = true;
+
         // シーンから必要なデータを取得
         Cameraobj = GameObject.FindWithTag("MainCamera");
         Bossobj = GameObject.FindWithTag("DirectionPoint");
@@ -120,6 +126,9 @@ public class BossDirection : MonoBehaviour
         }
         Cameraobj.GetComponent<CameraController>().bOnDirection = false; // プレイヤーへのカメラ追従有効化
         UIobj.SetActive(true);
+
+        // 演出終了
+        bDirection = false;
     }
 
     // 動くボスをずっと捉えておく

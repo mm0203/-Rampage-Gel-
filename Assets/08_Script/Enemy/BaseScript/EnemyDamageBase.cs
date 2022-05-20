@@ -69,6 +69,7 @@ public class EnemyDamageBase : MonoBehaviour
         {
             player = this.gameObject.GetComponent<EnemyBase>().player;
         }
+
         
         // ダメージを受けていなければスキップ
         if (!bDamage) return;
