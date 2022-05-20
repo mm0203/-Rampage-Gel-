@@ -150,7 +150,7 @@ public class GuardMode : MonoBehaviour
             // ”š”­
             burst.Explode(fStockBurst);
             // uŠÔ“I‚É—Í‚ğ‰Á‚¦‚Ä‚Í‚¶‚­
-            rb.AddForce(transform.forward * fStockBurst, ForceMode.Impulse);
+            rb.AddForce(transform.forward * fStockBurst * status.Speed, ForceMode.Impulse);
             Direction.enabled = false;
             status.bArmor = true;
             status.fBreakTime = 0.0f;
