@@ -23,8 +23,9 @@ public class Boss05 : MonoBehaviour
     GameObject objEffect;
 
     int nPatarn = 2;
-    float fTimer = 0;
-    
+    public  float fTimer = 0;
+    public bool bAttack = true;
+
     [Header("攻撃頻度")]
     [SerializeField, Range(0.0f, 20.0f)] private float fAttackTime = 10.0f;
     
@@ -50,17 +51,18 @@ public class Boss05 : MonoBehaviour
         // エフェクト取得
         enemyEffect = GetComponent<EnemyEffectBase>().GetEffect;
 
-        nPatarn = 2;
+        nPatarn = 1;
     }
 
 
 
-    void Update()
+    void FixedUpdate()
     {
         fTimer += Time.deltaTime;
 
-        if(fTimer > fAttackTime)
+        if(fTimer > fAttackTime && bAttack == true)
         {
+            
             switch(nPatarn)
             {
                 case 1:
@@ -72,7 +74,7 @@ public class Boss05 : MonoBehaviour
                     break;
             }
 
-            fTimer = 0;
+            bAttack = false;
         }
         
     }
@@ -122,7 +124,9 @@ public class Boss05 : MonoBehaviour
             {
                 yield return null;
             }
-        }        
+        }
+        bAttack = true;
+        fTimer = 0;
     }
     //**********************************************************
 

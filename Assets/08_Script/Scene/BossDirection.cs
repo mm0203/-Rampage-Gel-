@@ -15,7 +15,7 @@ public class BossDirection : MonoBehaviour
 {
     // 必要オブジェクトデータ
     GameObject Cameraobj = null;
-    GameObject Bossobj = null;
+    public GameObject Bossobj = null;
     GameObject UIobj = null;
     EffectPlayer effectPlayer = null;
     BGMPlayer BGMPlayer = null;
@@ -42,6 +42,11 @@ public class BossDirection : MonoBehaviour
     {
         // 演出開始
         bDirection = true;
+
+        nToFlame = 60;
+        nZoomTime = 3;
+        nShowTime = 2;
+        nReturnTime = 1;
 
         // シーンから必要なデータを取得
         Cameraobj = GameObject.FindWithTag("MainCamera");

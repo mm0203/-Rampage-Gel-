@@ -75,6 +75,9 @@ public class PincerLazer : MonoBehaviour
             bHit = obj.GetComponent<HitLazer>().bInArea;
         }
 
+        enemy.GetComponent<Boss05>().fTimer = 0;
+        enemy.GetComponent<Boss05>().bAttack = true ;
+
         Destroy(obj);
         Destroy(this.gameObject);
     }

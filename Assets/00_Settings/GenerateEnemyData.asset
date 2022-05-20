@@ -15,7 +15,7 @@ MonoBehaviour:
   Planet1:
   - MaxEnemy: 10
     EnemyList:
-    - {fileID: 5907127726947567017, guid: c17ea0a5e4553d442a00ef739f20f9e5, type: 3}
+    - {fileID: 8943500349344443402, guid: a59efd64dfbd53648987faa568a42eea, type: 3}
     BossEnemy: {fileID: 6487413376399020312, guid: e2c45aa15f48323458543eb32c886719, type: 3}
   - MaxEnemy: 15
     EnemyList:

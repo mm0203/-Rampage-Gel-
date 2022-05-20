@@ -164,11 +164,10 @@ public class GuardMode : MonoBehaviour
             // ”š”­
             burst.Explode(fStockBurst);
             // uŠÔ“I‚É—Í‚ğ‰Á‚¦‚Ä‚Í‚¶‚­
-<<<<<<< HEAD
+
             rb.AddForce(vCurrentForce.normalized * fStockBurst * 50, ForceMode.Impulse);
-=======
-            rb.AddForce(transform.forward * fStockBurst * status.Speed, ForceMode.Impulse);
->>>>>>> 1936a1fd3a56067108a7fad1ddfc3078fb65c403
+
+
             Direction.enabled = false;
             status.bArmor = true;
             status.fBreakTime = 0.0f;

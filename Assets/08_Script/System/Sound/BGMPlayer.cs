@@ -22,7 +22,7 @@ public class BGMPlayer : MonoBehaviour
     public AudioSource EnvSound_L;
     public AudioSource EnvSound_R;
 
-    [SerializeField]BossDirection BossDirection = null;
+    
 
 
     private void Awake()

@@ -34,6 +34,7 @@ public class Boss_03 : MonoBehaviour
     // 衝撃波サイズ
     [Header("衝撃波最小サイズ")] [SerializeField] private Vector3 vBurstMinSize = new Vector3(0.1f, 0.1f, 0.1f);
     [Header("衝撃波最大サイズ")] [SerializeField] private Vector3 vBurstMaxSize = new Vector3(20.0f, 0.1f, 20.0f);
+    public bool IsBurst = false;
 
     public int nCircleInterval = 45;
 
@@ -47,11 +48,7 @@ public class Boss_03 : MonoBehaviour
         BurstCircle.SetActive(false);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 
     // 連続火柱 ************************************************
     // アニメーションイベントをつけまくる
@@ -99,7 +96,13 @@ public class Boss_03 : MonoBehaviour
     // 連続衝撃波 **********************************************
     void StartBurst()
     {
-        StartCoroutine(BurstWave(3));
+        if(IsBurst == false)
+        {
+            IsBurst = true;
+            StartCoroutine(BurstWave(1));
+            Debug.Log("発動");
+        }
+        
     }
 
     private IEnumerator BurstWave(int atkCount)
@@ -136,7 +139,7 @@ public class Boss_03 : MonoBehaviour
             }
 
             // 余韻
-            for (int i = 0; i <= 1; i++)
+            for (int i = 0; i <= 20; i++)
             {
                 yield return null;
 
@@ -144,8 +147,15 @@ public class Boss_03 : MonoBehaviour
 
             Destroy(circle);
         }
-        
 
+        // 余韻
+        for (int i = 0; i <=　60; i++)
+        {
+            yield return null;
+
+        }
+
+        IsBurst = false;
     }
     //**********************************************************
 }

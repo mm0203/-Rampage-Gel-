@@ -19,7 +19,7 @@ public class PlayerStatus : MonoBehaviour
     private int nMaxLevel = 1;
     private int nMaxHp = 100;
     private int nMaxStamina = 450;
-    private int nMaxAttack = 22;
+    private int nMaxAttack = 2200;
     private int nMaxExp = 100;
     private float fMaxBurstPower = 3000;
     private float fMaxBurstRadius = 5;
@@ -28,7 +28,7 @@ public class PlayerStatus : MonoBehaviour
     private int nLevel = 1;
     private int nHp = 100;
     private int nStamina = 450;
-    private int nAttack = 22;
+    private int nAttack = 2200;
     private float fSpeed = 100.0f;
     private int nExp = 0;
     private float fBurstStock = 5.0f;
