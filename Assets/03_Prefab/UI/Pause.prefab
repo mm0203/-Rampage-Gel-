@@ -110,7 +110,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4649678159389943206}
   - component: {fileID: 1615056791119920606}
-  - component: {fileID: 765226796313141434}
   m_Layer: 0
   m_Name: Pause
   m_TagString: Untagged
@@ -163,30 +162,11 @@ MonoBehaviour:
   - {fileID: 8402864643912817729}
   - {fileID: 7987304609535158060}
   - {fileID: 4072148674418421997}
-  itemManager: {fileID: 765226796313141434}
+  itemManager: {fileID: 0}
   SelectItemIcon_L: {fileID: 6046123112783814954}
   SelectItemIcon_C: {fileID: 8060267611814804548}
   SelectItemIcon_R: {fileID: 7016190341876702894}
---- !u!114 &765226796313141434
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1615056791119920592}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 729ef9686800b804dbac726e597e4a61, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  InstantiateX: 5
-  InstantiateZ: 5
-  ItemObjectList: []
-  CountList: 
-  DrawItemList: 
-  nStatus: 0
-  itemImage: {fileID: 11400000, guid: aa14647cd2d203b4cab02fc233a1648c, type: 2}
-  imageObject: {fileID: 7460424698554833366}
+  soundManager: {fileID: 0}
 --- !u!1001 &1615056791362589102
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -319,11 +299,6 @@ PrefabInstance:
 --- !u!224 &7519956544476877735 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 9094339099872248329, guid: fe132237624fea5449305ef9c2279e2b, type: 3}
-  m_PrefabInstance: {fileID: 1615056791362589102}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &7460424698554833366 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8205863241412675704, guid: fe132237624fea5449305ef9c2279e2b, type: 3}
   m_PrefabInstance: {fileID: 1615056791362589102}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &4815052427366213894 stripped

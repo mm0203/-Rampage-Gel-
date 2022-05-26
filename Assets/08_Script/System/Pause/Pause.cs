@@ -12,6 +12,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using System.Collections;
 
 public class Pause : MonoBehaviour
 {
@@ -31,6 +32,8 @@ public class Pause : MonoBehaviour
     public Image SelectItemIcon_L, SelectItemIcon_C, SelectItemIcon_R;
     int setItem_L = 0, setItem_C = 0, setItem_R = 0;
     bool bLotteryComp = false;
+
+    bool nowExecCoroutine_ = false;
 
     [SerializeField] SoundManager soundManager;
 
@@ -154,51 +157,57 @@ public class Pause : MonoBehaviour
     //ポーズメニュー
     public void PauseMenu(bool b)
     {
+        
         gPauseMenu.SetActive(b);
-        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetAxis("Vertical") > 0 )
+        if (b == true)
         {
-            soundManager.Play_SystemSelect(this.gameObject);
-            nMenuFrame++;
-            if (nMenuFrame > 1)
-                nMenuFrame = 0;
-        }
-        if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetAxis("Vertical") < 0)
-        {
-            soundManager.Play_SystemSelect(this.gameObject);
-            nMenuFrame--;
-            if (nMenuFrame < 0)
-                nMenuFrame = 1;
-        }
-        if (nMenuFrame == 0)
-        {
-            gPauseMenuChoice[nMenuFrame].SetActive(true);
-            gPauseMenuChoice[nMenuFrame + 1].SetActive(false);
-            if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 0"))
+            if ((Input.GetKeyDown(KeyCode.UpArrow) || Input.GetAxis("XBox_Dpad_Vertical") > 0) && nMenuFrame == 1)
             {
-                soundManager.Play_SystemDecide(this.gameObject);
-                SetbPause(false);               
+                soundManager.Play_SystemSelect(this.gameObject);
+                nMenuFrame++;
+                if (nMenuFrame > 1)
+                    nMenuFrame = 0;
+            }
+            if ((Input.GetKeyDown(KeyCode.DownArrow) || Input.GetAxis("XBox_Dpad_Vertical") < 0) && nMenuFrame == 0)
+            {
+                soundManager.Play_SystemSelect(this.gameObject);
+                nMenuFrame--;
+                if (nMenuFrame < 0)
+                    nMenuFrame = 1;
+            }
+            if (nMenuFrame == 0)
+            {
+                gPauseMenuChoice[nMenuFrame].SetActive(true);
+                gPauseMenuChoice[nMenuFrame + 1].SetActive(false);
+                if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 0"))
+                {
+                    soundManager.Play_SystemDecide(this.gameObject);
+                    SetbPause(false);
+                }
+            }
+            if (nMenuFrame == 1)
+            {
+                if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 0"))
+                {
+                    Debug.Log("ゲームやめますか？");
+                    soundManager.Play_SystemDecide(this.gameObject);
+                    Application.Quit();
+                }
+                gPauseMenuChoice[nMenuFrame].SetActive(true);
+                gPauseMenuChoice[nMenuFrame - 1].SetActive(false);
             }
         }
-        if (nMenuFrame == 1)
-        {
-            if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 0"))
-            {
-                Debug.Log("ゲームやめますか？");
-                soundManager.Play_SystemDecide(this.gameObject);
-                Application.Quit();
-            }
-            gPauseMenuChoice[nMenuFrame].SetActive(true);
-            gPauseMenuChoice[nMenuFrame - 1].SetActive(false);
-        }
+        
     }
     //レヴェルアップしたときに呼んでね(テストで一応Lキー押したら動くようにしときます)
     //レベルアップメニュー
     public void levelUpPause(bool b)
     {
+        
         gLevelUpPause.SetActive(b);
-
+        if (b == false) return;
         // LVUPしなくてもずっと呼ばれるためif追加（竹尾）
-        if(b)
+        if (b)
         {
             // アイテム番号割り当て（竹尾）
             if(bLotteryComp == false)
@@ -215,15 +224,17 @@ public class Pause : MonoBehaviour
             }
             // ****************************
 
-            if (Input.GetKeyDown(KeyCode.RightArrow))
+            if ((Input.GetKeyDown(KeyCode.RightArrow) || Input.GetAxis("XBox_Dpad_Horizon") > 0) && nowExecCoroutine_ == false)
             {
+                StartCoroutine(SelectIconMove());
                 soundManager.Play_SystemSelect(this.gameObject);
                 nMenuFrame++;
                 if (nMenuFrame > 2)
                     nMenuFrame = 0;
             }
-            if (Input.GetKeyDown(KeyCode.LeftArrow))
+            if ((Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetAxis("XBox_Dpad_Horizon") < 0)&& nowExecCoroutine_ == false)
             {
+                StartCoroutine(SelectIconMove());
                 soundManager.Play_SystemSelect(this.gameObject);
                 nMenuFrame--;
                 if (nMenuFrame < 0)
@@ -238,7 +249,7 @@ public class Pause : MonoBehaviour
                 gLevelUpMenuChoice[nMenuFrame + 2].SetActive(false);
 
                 //決定処理（竹尾）
-                if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
+                if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 0"))
                 {
                     soundManager.Play_SystemDecide(this.gameObject);
                     itemManager.nItemCount(setItem_L);
@@ -255,7 +266,7 @@ public class Pause : MonoBehaviour
                 gLevelUpMenuChoice[nMenuFrame + 1].SetActive(false);
 
                 //決定処理（竹尾）
-                if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
+                if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 0"))
                 {
                     soundManager.Play_SystemDecide(this.gameObject);
                     itemManager.nItemCount(setItem_C);
@@ -272,7 +283,7 @@ public class Pause : MonoBehaviour
                 gLevelUpMenuChoice[nMenuFrame - 2].SetActive(false);
 
                 //決定処理（竹尾）
-                if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
+                if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 0"))
                 {
                     soundManager.Play_SystemDecide(this.gameObject);
                     itemManager.nItemCount(setItem_R);
@@ -280,7 +291,22 @@ public class Pause : MonoBehaviour
                     bLotteryComp = false;
                 }
             }
+
         }
-       
+
+        IEnumerator SelectIconMove()
+        {
+            
+            nowExecCoroutine_ = true;
+            for(int i = 0; i <= 30; i++)
+            {
+                yield return null;
+            }
+
+            
+            nowExecCoroutine_ = false;
+            
+        }
+
     }
 }

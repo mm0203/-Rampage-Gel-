@@ -32,7 +32,7 @@ public class Title : MonoBehaviour
     //タイトルメニュー
     public void TitleMenu()
     {
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetAxis("XBox_Dpad_Vertical") > 0 && nTitleFrame == 2)
         {
             soundManager.Play_SystemSelect(this.gameObject);
             //nTitleFrame++;
@@ -40,7 +40,7 @@ public class Title : MonoBehaviour
             //    nTitleFrame = 0;
             nTitleFrame = 1;
         }
-        if (Input.GetKeyDown(KeyCode.DownArrow))
+        if ((Input.GetKeyDown(KeyCode.DownArrow) || Input.GetAxis("XBox_Dpad_Vertical") < 0) && nTitleFrame == 1)
         {
             soundManager.Play_SystemSelect(this.gameObject);
             //nTitleFrame--;
@@ -72,7 +72,7 @@ public class Title : MonoBehaviour
         switch(nTitleFrame)
         {
             case 1:
-                if (Input.GetKeyDown(KeyCode.Return))
+                if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 0"))
                 {
                     soundManager.Play_SystemDecide(this.gameObject);
                     ChangeScene();
@@ -82,7 +82,7 @@ public class Title : MonoBehaviour
                 gTitleMenuChoice[1].SetActive(false);
                 break;
             case 2:
-                if (Input.GetKeyDown(KeyCode.Return))
+                if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 0"))
                 {
                     soundManager.Play_SystemDecide(this.gameObject);
                     Application.Quit();
