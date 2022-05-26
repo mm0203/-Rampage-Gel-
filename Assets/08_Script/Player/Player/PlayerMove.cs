@@ -280,8 +280,10 @@ public class PlayerMove : MonoBehaviour
         }
         else
         {
-            bPlatOneshot_pull = false;
+            bPlatOneshot_pull = false;           
         }
+
+        
     }
     //**********************************************************
 

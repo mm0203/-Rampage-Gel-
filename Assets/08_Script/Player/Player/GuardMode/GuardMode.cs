@@ -83,6 +83,7 @@ public class GuardMode : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         if (!state.IsHard)
         {
             // ゲージ回復
@@ -110,6 +111,7 @@ public class GuardMode : MonoBehaviour
                 vStartPos = GetMousePosition();
                 bGuardStart = true;
             }
+
             // パッド
             float x = Input.GetAxis("Horizontal");
             float y = Input.GetAxis("Vertical");
@@ -135,13 +137,19 @@ public class GuardMode : MonoBehaviour
             vCurrentForce = vStartPos - position;
 
             // ガード中にダメージが当たったら
-            if (fStockBurst >= 0.01f)
+            if (fStockBurst >= 0.01f && ((x >= 0.1 || x <= -0.1) || (y >= 0.1 || y <= -0.1)))
             {
+                Debug.Log(x +"/"+ y);
                 // 矢印の引っ張り処理
                 Direction.enabled = true;
                 // 動く方向と逆に矢印が出るように
                 Direction.SetPosition(0, rb.position);
                 Direction.SetPosition(1, rb.position - transform.forward * 2);
+            }
+
+            if(!((x >= 0.1 || x <= -0.1) || (y >= 0.1 || y <= -0.1)))
+            {
+                Direction.enabled = false;
             }
 
             // 動く方向を見る
@@ -164,11 +172,18 @@ public class GuardMode : MonoBehaviour
             // 爆発
             burst.Explode(fStockBurst);
             // 瞬間的に力を加えてはじく
-
-            rb.AddForce(vCurrentForce.normalized * fStockBurst * 50, ForceMode.Impulse);
-
-
+            float x = Input.GetAxis("Horizontal");
+            float y = Input.GetAxis("Vertical");
+            
+            if (Mathf.Abs(x) >= 1.0f || Mathf.Abs(y) >= 1.0f)
+            {
+                
+                rb.AddForce(transform.forward * fStockBurst * 50, ForceMode.Impulse);
+            }
+            
             Direction.enabled = false;
+            
+            
             status.bArmor = true;
             status.fBreakTime = 0.0f;
             state.GotoNormalState();

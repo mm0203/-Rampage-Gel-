@@ -49,7 +49,7 @@ public class Pause : MonoBehaviour
     {
         //Pキー押したら
         //===============================
-        if (Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.P)||(Input.GetKeyDown("joystick button 7")))
         {
             if (bResume)
             {
@@ -155,14 +155,14 @@ public class Pause : MonoBehaviour
     public void PauseMenu(bool b)
     {
         gPauseMenu.SetActive(b);
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetAxis("Vertical") > 0 )
         {
             soundManager.Play_SystemSelect(this.gameObject);
             nMenuFrame++;
             if (nMenuFrame > 1)
                 nMenuFrame = 0;
         }
-        if (Input.GetKeyDown(KeyCode.DownArrow))
+        if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetAxis("Vertical") < 0)
         {
             soundManager.Play_SystemSelect(this.gameObject);
             nMenuFrame--;
@@ -173,7 +173,7 @@ public class Pause : MonoBehaviour
         {
             gPauseMenuChoice[nMenuFrame].SetActive(true);
             gPauseMenuChoice[nMenuFrame + 1].SetActive(false);
-            if (Input.GetKeyDown(KeyCode.Return))
+            if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 0"))
             {
                 soundManager.Play_SystemDecide(this.gameObject);
                 SetbPause(false);               
@@ -181,7 +181,7 @@ public class Pause : MonoBehaviour
         }
         if (nMenuFrame == 1)
         {
-            if (Input.GetKeyDown(KeyCode.Return))
+            if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 0"))
             {
                 Debug.Log("ゲームやめますか？");
                 soundManager.Play_SystemDecide(this.gameObject);
@@ -238,7 +238,7 @@ public class Pause : MonoBehaviour
                 gLevelUpMenuChoice[nMenuFrame + 2].SetActive(false);
 
                 //決定処理（竹尾）
-                if (Input.GetKeyDown(KeyCode.Return))
+                if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
                 {
                     soundManager.Play_SystemDecide(this.gameObject);
                     itemManager.nItemCount(setItem_L);
@@ -255,7 +255,7 @@ public class Pause : MonoBehaviour
                 gLevelUpMenuChoice[nMenuFrame + 1].SetActive(false);
 
                 //決定処理（竹尾）
-                if (Input.GetKeyDown(KeyCode.Return))
+                if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
                 {
                     soundManager.Play_SystemDecide(this.gameObject);
                     itemManager.nItemCount(setItem_C);
@@ -272,7 +272,7 @@ public class Pause : MonoBehaviour
                 gLevelUpMenuChoice[nMenuFrame - 2].SetActive(false);
 
                 //決定処理（竹尾）
-                if (Input.GetKeyDown(KeyCode.Return))
+                if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
                 {
                     soundManager.Play_SystemDecide(this.gameObject);
                     itemManager.nItemCount(setItem_R);
