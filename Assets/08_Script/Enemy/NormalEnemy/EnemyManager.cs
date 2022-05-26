@@ -79,6 +79,8 @@ public class EnemyManager : MonoBehaviour
 
 
         DontDestroyOnLoad(this.gameObject);
+
+        
     }
 
     //---------------
@@ -86,7 +88,10 @@ public class EnemyManager : MonoBehaviour
     //---------------
     void Update()
     {
-
+        if (SceneManager.GetActiveScene().name == "Title")
+        {
+            Destroy(gameObject);
+        }
         // “G‚ÌÅ‘å”‚Ì‘Œ¸
         ChangeNum();
 

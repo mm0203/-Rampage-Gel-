@@ -19,6 +19,8 @@ public class Boss_03 : MonoBehaviour
     private EnemyBase BossBase;
     // FireWallの範囲オブジェクト
     public GameObject BurstCircle;
+    //衝撃波の見た目
+    public Material Burstmat;
     // エフェクト関連
     EnemyEffect enemyEffect;
     GameObject objEffect;
@@ -119,6 +121,7 @@ public class Boss_03 : MonoBehaviour
             circle.transform.rotation = this.transform.rotation;
             circle.transform.position = this.transform.position;
             circle.GetComponent<CapsuleCollider>().isTrigger = true;
+            circle.GetComponent<Renderer>().material = Burstmat;
 
             // BurstCircle追加、情報セット
             circle.AddComponent<BurstCircle>();

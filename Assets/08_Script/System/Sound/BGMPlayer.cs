@@ -49,7 +49,10 @@ public class BGMPlayer : MonoBehaviour
 
     private void Update()
     {
-        
+        if (SceneManager.GetActiveScene().name == "Title")
+        {
+            Destroy(gameObject);
+        }
     }
 
     // 特定シーンの切り替えを検知しBGMを変更 *******************

@@ -11,6 +11,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerState : MonoBehaviour
 {
@@ -326,6 +327,7 @@ public class PlayerState : MonoBehaviour
     public void GotoDieState()
     {
         eState = StateEnum.eDie;
+        FadeManager.Instance.LoadScene("Title", 1.0f);
     }
 
     // 振動コルーチン(バースト)

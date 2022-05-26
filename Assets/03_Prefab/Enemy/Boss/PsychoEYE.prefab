@@ -1450,8 +1450,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5968849370331518749}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 6.18, y: 2.5, z: 4.7}
-  m_LocalScale: {x: 5, y: 4.5, z: 5}
+  m_LocalPosition: {x: 6.18, y: 1.5, z: 4.7}
+  m_LocalScale: {x: 5, y: 3, z: 5}
   m_Children:
   - {fileID: 7834537379211387904}
   - {fileID: 5772974071808676147}
@@ -1583,6 +1583,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd11e8bf694e56149816e97c08d007ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fTimer: 0
+  bAttack: 1
   fAttackTime: 3
   fSpeed: 5
   Mazzles:

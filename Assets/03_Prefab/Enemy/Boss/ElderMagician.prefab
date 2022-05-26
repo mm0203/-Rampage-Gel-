@@ -979,11 +979,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BurstCircle: {fileID: 5277344584087820814, guid: 7d5b80c962d07ed46ab5468dabe75869, type: 3}
+  Burstmat: {fileID: 2100000, guid: 643e78d88a3f6194599581284ec5990c, type: 2}
   Circle: {fileID: 1567581828387049091, guid: 44b55e868d11eb84e903048b711a6bd2, type: 3}
   vCircleSize: {x: 0.75, y: 0.75, z: 0.75}
   vFireSize: {x: 0.75, y: 3, z: 0.75}
   vBurstMinSize: {x: 0.1, y: 0.1, z: 0.1}
   vBurstMaxSize: {x: 30, y: 0.1, z: 30}
+  IsBurst: 0
   nCircleInterval: 45
 --- !u!195 &4982153935012257390
 NavMeshAgent:
