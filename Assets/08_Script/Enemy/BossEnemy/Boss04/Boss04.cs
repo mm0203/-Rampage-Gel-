@@ -17,6 +17,8 @@ public class Boss04 : MonoBehaviour
     private GameObject player;
     // ボスの基底クラス
     private EnemyBase BossBase;
+    // 射出口
+    [SerializeField] GameObject Mazzle;
     // FireWallの範囲オブジェクト
     public GameObject WallCircle;
     // エフェクト関連
@@ -38,7 +40,7 @@ public class Boss04 : MonoBehaviour
     private float fAttackCount;
     private int nSetAttack;
     private int nFireDamageCol = 10;
-    private int nWallTime = 10;
+    private int nWallTime = 180;
 
 
     void Start()
@@ -73,8 +75,8 @@ public class Boss04 : MonoBehaviour
 
         // 弾のサイズ、座標、角度設定
         Sphere.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
-        Sphere.transform.rotation = this.transform.rotation;
-        Sphere.transform.position = new Vector3(transform.position.x + transform.forward.x, transform.position.y, transform.position.z + transform.forward.z);
+        Sphere.transform.rotation = Mazzle.transform.rotation;
+        Sphere.transform.position = new Vector3(Mazzle.transform.position.x + Mazzle.transform.forward.x, Mazzle.transform.position.y, Mazzle.transform.position.z + Mazzle.transform.forward.z);
 
         // 弾にコンポーネント追加
         Sphere.AddComponent<Bullet>();
@@ -143,6 +145,7 @@ public class Boss04 : MonoBehaviour
     // タイミングよくアニメーションつけて、しばらく残す
     void StartFireWall()
     {
+        Debug.Log("a");
         StartCoroutine(FireWall());
     }
 

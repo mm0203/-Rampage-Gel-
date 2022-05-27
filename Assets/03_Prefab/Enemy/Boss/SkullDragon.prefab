@@ -1484,7 +1484,7 @@ GameObject:
   - component: {fileID: 8589682909820711295}
   m_Layer: 0
   m_Name: SkullDragon
-  m_TagString: Boss
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1504,6 +1504,7 @@ Transform:
   - {fileID: 5297704622523092913}
   - {fileID: 8779790487834589502}
   - {fileID: 8478976325485142031}
+  - {fileID: 3910692244731909745}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1547,7 +1548,7 @@ Animator:
   m_GameObject: {fileID: 4412046828561782980}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 397b13820d7fcc2448eda207832964ae, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1590,7 +1591,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 224e9f08c45d40b4fa33f05ca405bc64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effect: {fileID: 0}
+  effect: {fileID: 4654835053005618983, guid: 8ad696e21e4db31429ba8402a66d472b, type: 3}
 --- !u!114 &7623887342525744548
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1621,7 +1622,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyData: {fileID: 11400000, guid: 0cc4f103ada229246ba73aa0ecfccf2c, type: 2}
   DeathSE: {fileID: 8300000, guid: da24daa9fcff69c4d884496fda891063, type: 3}
-  fAttackDis: 3
+  fAttackDis: 8
   fAttackTime: 3
   bBoss: 1
   bNavOn: 1
@@ -1639,6 +1640,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e304d50724d5b8543bc6ecf5cecf7210, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Mazzle: {fileID: 8512026519071442524}
   WallCircle: {fileID: 8478976325485142030}
   fAttackTime: 10
   fSpeed: 5
@@ -2836,6 +2838,36 @@ Transform:
   m_Father: {fileID: 521646164595322788}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8512026519071442524
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3910692244731909745}
+  m_Layer: 0
+  m_Name: Mazzle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3910692244731909745
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8512026519071442524}
+  m_LocalRotation: {x: 0, y: 0, z: 0.9844879, w: 0.17545278}
+  m_LocalPosition: {x: 0.18, y: 0.54, z: 3.97}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3923037260594807422}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 159.79}
 --- !u!1 &8816201348637574702
 GameObject:
   m_ObjectHideFlags: 0

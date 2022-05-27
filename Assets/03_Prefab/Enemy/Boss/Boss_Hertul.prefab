@@ -669,7 +669,7 @@ GameObject:
   - component: {fileID: 3592692138821317791}
   m_Layer: 0
   m_Name: Boss_Hertul
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
