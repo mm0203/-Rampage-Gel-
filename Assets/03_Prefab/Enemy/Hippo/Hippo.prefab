@@ -1994,6 +1994,7 @@ GameObject:
   - component: {fileID: -1397723110066720571}
   - component: {fileID: 1713520527945441316}
   - component: {fileID: -1992909595752355033}
+  - component: {fileID: -5837535684060329010}
   m_Layer: 0
   m_Name: Hippo
   m_TagString: Untagged
@@ -2137,6 +2138,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &-5837535684060329010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8619992380607629353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3896b730feee94c4eaa1f2230b850398, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8790149815691020791
 GameObject:
   m_ObjectHideFlags: 0
