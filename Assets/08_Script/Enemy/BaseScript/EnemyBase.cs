@@ -197,7 +197,7 @@ public class EnemyBase : MonoBehaviour
     {
         // “®‚«‚ğ~‚ß‚é
         myAgent.speed = 0.0f;
-        //myAgent.velocity = Vector3.zero;
+        myAgent.velocity = Vector3.zero;
 
         // UŒ‚ŠJn‚©”»’è or UŒ‚”ÍˆÍ‚É“ü‚Á‚Ä‚©‚çAÅ‰‚ÌUŒ‚‚Ì
         if (IsAttack() || !bFirstAttack)
@@ -220,6 +220,7 @@ public class EnemyBase : MonoBehaviour
         if (fAttackCount < 0.0f)
         {
             fAttackCount = fAttackTime;
+            Debug.Log("go");
             return true;
         }
         return false;

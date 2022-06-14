@@ -16,7 +16,7 @@ MonoBehaviour:
   - MaxEnemy: 10
     EnemyList:
     - {fileID: 8943500349344443402, guid: a59efd64dfbd53648987faa568a42eea, type: 3}
-    BossEnemy: {fileID: 6487413376399020312, guid: e2c45aa15f48323458543eb32c886719, type: 3}
+    BossEnemy: {fileID: 8619992380607629353, guid: bd5891d1105d74243a8ce4eac001c9f9, type: 3}
   - MaxEnemy: 15
     EnemyList:
     - {fileID: 8943500349344443402, guid: a59efd64dfbd53648987faa568a42eea, type: 3}
