@@ -220,7 +220,6 @@ public class EnemyBase : MonoBehaviour
         if (fAttackCount < 0.0f)
         {
             fAttackCount = fAttackTime;
-            Debug.Log("go");
             return true;
         }
         return false;

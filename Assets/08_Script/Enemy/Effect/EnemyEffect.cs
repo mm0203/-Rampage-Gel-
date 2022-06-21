@@ -25,6 +25,8 @@ public class EnemyEffect : MonoBehaviour
         eScratch,
         eFirePiller,
         eIcePiller,
+        eWave01,
+        eWave02,
 
         eMax_Effect
     }

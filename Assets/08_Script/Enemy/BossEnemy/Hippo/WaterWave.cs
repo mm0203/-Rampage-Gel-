@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FireWave : MonoBehaviour
+public class WaterWave : MonoBehaviour
 {
 
     // ダメージを与える間隔
@@ -37,7 +37,9 @@ public class FireWave : MonoBehaviour
         if (other.tag == "Player")
         {
             // ダメージ処理
-            player.GetComponent<PlayerHP>().OnDamage(enemy.GetComponent<EnemyBase>().GetEnemyData.nAttack);
+            player.GetComponent<PlayerHP>().OnDamage(enemy.GetComponent<EnemyBase>().GetEnemyData.nAttack / 2);
+
+            player.GetComponent<Rigidbody>().AddForce(this.transform.forward * 2500);
         }
     }
 
@@ -53,11 +55,12 @@ public class FireWave : MonoBehaviour
             if (fTime < 0.0f)
             {
                 // ダメージ処理
-                player.GetComponent<PlayerHP>().OnDamage(enemy.GetComponent<EnemyBase>().GetEnemyData.nAttack / 10);
+                player.GetComponent<PlayerHP>().OnDamage(enemy.GetComponent<EnemyBase>().GetEnemyData.nAttack / 20);
 
                 fTime = fInterval;
-            }
 
+                player.GetComponent<Rigidbody>().AddForce(this.transform.forward * 2500);
+            }
         }
     }
 }
